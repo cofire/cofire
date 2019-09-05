@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cofire.dao.mapper.custom.SystemCustomMapper">
+	<!-- 获取系统自定义参数 -->
+	<select id="getSysparamsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT CONCAT(GROUP_ID,'|',PARAM_ID) AS PK_ID ,GROUP_ID, PARAM_ID, PARAM_VAL, PARAM_NAME, REMARK, IF_CANMODIFY 
+    	FROM sys_params
+	</select>
+	
+	<!-- 获取系统数据字典 -->
+	<select id="getDictList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			CONCAT (GROUP_ID, '|', DICT_VALUE) AS PK_ID,
+			GROUP_ID,
+			CASE
+		WHEN DICT_VALUE IS NOT NULL THEN
+			CONCAT (DICT_VALUE, '-', DICT_NAME)
+		ELSE
+			DICT_NAME
+		END DICT_NAME,
+		DICT_VALUE,
+		 GROUP_NAME
+		FROM
+			sys_dict
+	</select>
+</mapper>

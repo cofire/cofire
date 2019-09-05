@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动包位置 -->
+    <!-- <classPathEntry location="D:\work\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar" />  -->
+    <classPathEntry location="D:\work\repository\com\microsoft\sqlserver\mssql-jdbc\6.2.2.jre8\mssql-jdbc-6.2.2.jre8.jar" />
+    <context id="DB2Tables" defaultModelType="flat" targetRuntime="MyBatis3">
+    
+    	<property name="javaFileEncoding" value="UTF-8" />
+    
+    	<plugin type="com.cf.common.utils.mybatis.plugin.mutiDatasource.MutiDatasourcePaginationPlugin" />
+    	
+        <commentGenerator type="com.cf.common.utils.mybatis.plugin.RemarksCommentGenerator">
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 -->
+         <!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/kufuwangzhan?characterEncoding=utf8" userId="root" password="root">  -->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" connectionURL="jdbc:sqlserver://192.168.100.115:1433;database=merck" userId="sa" password="123">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.cf.dao.model.business" targetProject="dao/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="mapper.business" targetProject="dao/src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.cf.dao.mapper.business" targetProject="dao/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+		<!-- <table tableName="tb_contractor" domainObjectName="Contractor" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="tb_exit_order" domainObjectName="ExitOrder" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="tb_parking" domainObjectName="Parking" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" /> -->
+		<table tableName="tb_dock" domainObjectName="Dock" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />	
+    </context>
+</generatorConfiguration>
