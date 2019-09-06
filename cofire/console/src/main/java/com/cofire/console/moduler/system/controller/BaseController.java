@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cofire.console.common.impl.SystemService;
+import com.cofire.common.result.SystemUtil;
 import com.cofire.console.config.log.BussinessLog;
 
 @RestController
@@ -36,8 +36,8 @@ public class BaseController {
     @RequestMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getImage(String path) throws FileNotFoundException, IOException {
         logger.info("图片路径为：" + path);
-        String imgPath = SystemService.getParamVal("0001", "1");
-        String img404 = SystemService.getParamVal("0001", "3");
+        String imgPath = SystemUtil.getParamVal("0001", "1");
+        String img404 = SystemUtil.getParamVal("0001", "3");
         if (StringUtils.isEmpty(path)) {
             imgPath = img404;
         } else {

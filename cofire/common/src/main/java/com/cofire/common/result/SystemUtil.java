@@ -9,15 +9,39 @@ import org.apache.commons.lang.StringUtils;
 
 public class SystemUtil {
     // 系统参数列表
-    public static List<Map<String, String>> sysParamList;
+    private static List<Map<String, String>> sysParamList;
     // 系统参数Map
-    public static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
+    private static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
     // 数据字典列表
-    public static List<Map<String, String>> dictList = new ArrayList<Map<String, String>>();
+    private static List<Map<String, String>> dictList = new ArrayList<Map<String, String>>();
     // 数据字典分组
-    public static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
+    private static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
     // 数据字典
-    public static Map<String, Map<String, String>> dtDictMap = new HashMap<String, Map<String, String>>();
+    private static Map<String, Map<String, String>> dtDictMap = new HashMap<String, Map<String, String>>();
+
+    public static Map<String, Map<String, String>> getSysParamMap() {
+        return sysParamMap;
+    }
+
+    public static void setSysParamMap(Map<String, Map<String, String>> sysParamMap) {
+        SystemUtil.sysParamMap = sysParamMap;
+    }
+
+    public static Map<String, List<Map<String, String>>> getDictGroupMap() {
+        return dictGroupMap;
+    }
+
+    public static void setDictGroupMap(Map<String, List<Map<String, String>>> dictGroupMap) {
+        SystemUtil.dictGroupMap = dictGroupMap;
+    }
+
+    public static Map<String, Map<String, String>> getDtDictMap() {
+        return dtDictMap;
+    }
+
+    public static void setDtDictMap(Map<String, Map<String, String>> dtDictMap) {
+        SystemUtil.dtDictMap = dtDictMap;
+    }
 
     /**
      * 

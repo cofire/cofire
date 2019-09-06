@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cofire.common.result.Result;
+import com.cofire.common.result.SystemUtil;
 import com.cofire.common.utils.constant.CodeEnum;
 import com.cofire.common.utils.file.FileUtil;
 import com.cofire.common.utils.file.ImageMarkUtil;
 import com.cofire.common.utils.file.ImageZoomUtil;
 import com.cofire.common.utils.security.Util;
-import com.cofire.console.common.impl.SystemService;
 
 /**
  * 
@@ -35,8 +35,6 @@ import com.cofire.console.common.impl.SystemService;
 public class UploadController {
 
     private final static Logger logger = LoggerFactory.getLogger(UploadController.class);
-
-
 
     /**
      * 
@@ -62,13 +60,13 @@ public class UploadController {
             result.setSuc(false, CodeEnum.E_0000000014);
             return result;
         }
-        String path = SystemService.getParamVal("0001", "1");
+        String path = SystemUtil.getParamVal("0001", "1");
         if (StringUtils.isEmpty(path)) {
             logger.info("图片存储路径系统参数丢失");
             result.setSuc(false, CodeEnum.E_0000000000);
             return result;
         }
-        String markText = SystemService.getParamVal("0001", "2");
+        String markText = SystemUtil.getParamVal("0001", "2");
         if (StringUtils.isEmpty(markText)) {
             markText = "默克审核专用，禁止泄露或转作它用";
         }
@@ -100,6 +98,5 @@ public class UploadController {
         result.setData(relateUrl);
         return result;
     }
-
 
 }

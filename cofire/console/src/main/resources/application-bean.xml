@@ -17,5 +17,5 @@
             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
             
      	<!-- 使用 annotation 自动注册bean,并检查@Controller, @Service, @Repository注解已被注入 -->
- 	<context:component-scan base-package="com.cofire.*,gneit.ivyreport.*,gneit.cube.platplatform.*" />
+ 	<!-- <context:component-scan base-package="com.cofire.*,gneit.ivyreport.*,gneit.cube.platplatform.*" /> -->
 </beans>
