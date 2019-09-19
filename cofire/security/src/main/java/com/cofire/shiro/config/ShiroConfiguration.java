@@ -74,6 +74,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/ipad/static/**", "anon");
         filterChainDefinitionMap.put("/mobile", "anon");
         filterChainDefinitionMap.put("/mobile/static/**", "anon");
+        filterChainDefinitionMap.put("/test/**", "anon");
 
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

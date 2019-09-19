@@ -69,6 +69,22 @@ public class QuartzJobConfig {
 
     /**
      * 
+     * @Title: standbyQuartzJob
+     * @Description:暂停且清除所有的定时任务
+     * @return void 返回类型
+     */
+    public static void standbyQuartzJob() {
+        try {
+            scheduler.standby();
+            scheduler.clear();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            logger.error("关闭QuartzJob异常");
+        }
+    }
+
+    /**
+     * 
      * @Title: getCronExpression
      * @Description:组装cron表达式
      * @param job
