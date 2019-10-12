@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cofire.common.utils.constant.Constants;
-import com.cofire.dao.model.system.User;
+import com.cofire.dao.model.system.SysUser;
 import com.cofire.shiro.service.IUserPermissionService;
 
 public class UserRealm extends AuthorizingRealm {
@@ -49,7 +49,7 @@ public class UserRealm extends AuthorizingRealm {
         String userId = (String) authcToken.getPrincipal();
         // 获取用户密码
         String password = new String((char[]) authcToken.getCredentials());
-        User user = userPermissionService.getUserByIdAndPwd(userId, password);
+        SysUser user = userPermissionService.getUserByIdAndPwd(userId, password);
         if (user == null) {
             // 没找到帐号
             throw new UnknownAccountException();

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cofire.dao.mapper.system.SysLoginAuditMapper">
+  <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysLoginAudit">
+    <id column="sid" jdbcType="BIGINT" property="sid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="session_id" jdbcType="VARCHAR" property="sessionId" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="audit_type" jdbcType="VARCHAR" property="auditType" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="filler1" jdbcType="VARCHAR" property="filler1" />
+    <result column="filler2" jdbcType="VARCHAR" property="filler2" />
+    <result column="filler3" jdbcType="VARCHAR" property="filler3" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cofire.dao.model.system.SysLoginAudit">
+    <result column="message" jdbcType="LONGVARCHAR" property="message" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sid, user_id, ip, session_id, create_time, audit_type, source_type, filler1, filler2, 
+    filler3
+  </sql>
+  <sql id="Blob_Column_List">
+    message
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.cofire.dao.model.system.SysLoginAuditExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_login_audit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysLoginAuditExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_login_audit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_login_audit
+    where sid = #{sid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_login_audit
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cofire.dao.model.system.SysLoginAuditExample">
+    delete from sys_login_audit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cofire.dao.model.system.SysLoginAudit">
+    insert into sys_login_audit (sid, user_id, ip, 
+      session_id, create_time, audit_type, 
+      source_type, filler1, filler2, 
+      filler3, message)
+    values (#{sid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{sessionId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{auditType,jdbcType=VARCHAR}, 
+      #{sourceType,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
+      #{filler3,jdbcType=VARCHAR}, #{message,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysLoginAudit">
+    insert into sys_login_audit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="sessionId != null">
+        session_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="auditType != null">
+        audit_type,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="filler1 != null">
+        filler1,
+      </if>
+      <if test="filler2 != null">
+        filler2,
+      </if>
+      <if test="filler3 != null">
+        filler3,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null">
+        #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="filler1 != null">
+        #{filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="filler2 != null">
+        #{filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="filler3 != null">
+        #{filler3,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cofire.dao.model.system.SysLoginAuditExample" resultType="java.lang.Long">
+    select count(*) from sys_login_audit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_login_audit
+    <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionId != null">
+        session_id = #{record.sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditType != null">
+        audit_type = #{record.auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceType != null">
+        source_type = #{record.sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler1 != null">
+        filler1 = #{record.filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler2 != null">
+        filler2 = #{record.filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler3 != null">
+        filler3 = #{record.filler3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.message != null">
+        message = #{record.message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sys_login_audit
+    set sid = #{record.sid,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      session_id = #{record.sessionId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      audit_type = #{record.auditType,jdbcType=VARCHAR},
+      source_type = #{record.sourceType,jdbcType=VARCHAR},
+      filler1 = #{record.filler1,jdbcType=VARCHAR},
+      filler2 = #{record.filler2,jdbcType=VARCHAR},
+      filler3 = #{record.filler3,jdbcType=VARCHAR},
+      message = #{record.message,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_login_audit
+    set sid = #{record.sid,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      session_id = #{record.sessionId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      audit_type = #{record.auditType,jdbcType=VARCHAR},
+      source_type = #{record.sourceType,jdbcType=VARCHAR},
+      filler1 = #{record.filler1,jdbcType=VARCHAR},
+      filler2 = #{record.filler2,jdbcType=VARCHAR},
+      filler3 = #{record.filler3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cofire.dao.model.system.SysLoginAudit">
+    update sys_login_audit
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionId != null">
+        session_id = #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null">
+        audit_type = #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="filler1 != null">
+        filler1 = #{filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="filler2 != null">
+        filler2 = #{filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="filler3 != null">
+        filler3 = #{filler3,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cofire.dao.model.system.SysLoginAudit">
+    update sys_login_audit
+    set user_id = #{userId,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      session_id = #{sessionId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      audit_type = #{auditType,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      filler1 = #{filler1,jdbcType=VARCHAR},
+      filler2 = #{filler2,jdbcType=VARCHAR},
+      filler3 = #{filler3,jdbcType=VARCHAR},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysLoginAudit">
+    update sys_login_audit
+    set user_id = #{userId,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      session_id = #{sessionId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      audit_type = #{auditType,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      filler1 = #{filler1,jdbcType=VARCHAR},
+      filler2 = #{filler2,jdbcType=VARCHAR},
+      filler3 = #{filler3,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <sql id="OracleDialectPrefix">
+    <if test="page != null and databaseId == 'oracle'">
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix">
+    <if test="page != null and databaseId == 'oracle'">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <=#{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="MssqlDialectPrefix">
+    <if test="page != null and databaseId == 'mssql'">
+      select * from ( select row_number() over (order by ${orderByClause}) as R, p.* from ( 
+    </if>
+  </sql>
+  <sql id="MssqlDialectSuffix">
+    <if test="page != null and databaseId == 'mssql'">
+      <![CDATA[ ) p ) p2 where R > #{page.begin} and R <= #{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="MysqlDialect">
+    <if test="page != null and databaseId == 'mysql'">
+      limit #{page.begin} , #{page.length}
+    </if>
+  </sql>
+  <select id="selectPageByExample" parameterType="com.cofire.dao.model.system.SysLoginAuditExample" resultMap="BaseResultMap">
+    <include refid="OracleDialectPrefix" />
+    <include refid="MssqlDialectPrefix" />
+    select 
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID, 
+    <include refid="Base_Column_List" />
+    from sys_login_audit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null and (databaseId == 'mysql' or databaseId == 'oracle') ">
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+    <include refid="MssqlDialectSuffix" />
+    <include refid="MysqlDialect" />
+  </select>
+</mapper>

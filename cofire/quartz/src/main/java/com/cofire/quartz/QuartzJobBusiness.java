@@ -12,17 +12,17 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.cofire.common.utils.spring.SpringContextUtils;
 import com.cofire.common.utils.string.DateUtils;
-import com.cofire.dao.mapper.system.JobLogMapper;
-import com.cofire.dao.mapper.system.JobMapper;
-import com.cofire.dao.model.system.Job;
-import com.cofire.dao.model.system.JobLog;
+import com.cofire.dao.mapper.system.QtzJobLogMapper;
+import com.cofire.dao.mapper.system.QtzJobMapper;
+import com.cofire.dao.model.system.QtzJob;
+import com.cofire.dao.model.system.QtzJobLog;
 import com.cofire.quartz.service.TestQtz;
 
 public class QuartzJobBusiness extends QuartzJobBean {
 
     private final static Logger logger = LoggerFactory.getLogger(QuartzJobBusiness.class);
-    private final static JobMapper jobMapper = SpringContextUtils.getBean(JobMapper.class);
-    private final static JobLogMapper jobLogMapper = SpringContextUtils.getBean(JobLogMapper.class);
+    private final static QtzJobMapper jobMapper = SpringContextUtils.getBean(QtzJobMapper.class);
+    private final static QtzJobLogMapper jobLogMapper = SpringContextUtils.getBean(QtzJobLogMapper.class);
 
     @SuppressWarnings("unused")
     @Override
@@ -45,7 +45,7 @@ public class QuartzJobBusiness extends QuartzJobBean {
         // TB_JOB表ID作为Trigger的key名称
         String jobId = context.getTrigger().getKey().getName();
         logger.info("定时任务id：" + jobId);
-        Job job = null;
+        QtzJob job = null;
         String errorMsg = "";
 
         try {
@@ -58,7 +58,7 @@ public class QuartzJobBusiness extends QuartzJobBean {
         if (null == job) {
             logger.info("没有找到id为:" + jobId + "的任务");
         } else {
-            if (!"1".equals(job.getDel())) {
+            if (!"1".equals(job.getIsDel())) {
                 logger.info("开始执行名为:" + job.getJobName() + "的任务");
                 try {
                     execute(job);
@@ -73,7 +73,7 @@ public class QuartzJobBusiness extends QuartzJobBean {
             }
         }
 
-        JobLog jobLog = new JobLog();
+        QtzJobLog jobLog = new QtzJobLog();
         jobLog.setIp(localip);
         jobLog.setJobId(jobId);
         jobLog.setRunTime(DateUtils.dataTimeToNumber(new Date()));
@@ -81,7 +81,7 @@ public class QuartzJobBusiness extends QuartzJobBean {
             jobLog.setIsSuccess("1");
         } else {
             jobLog.setIsSuccess("0");
-            jobLog.setErrorMessage(errorMsg);
+            jobLog.setMessage(errorMsg);
         }
         try {
             jobLogMapper.insert(jobLog);
@@ -90,10 +90,10 @@ public class QuartzJobBusiness extends QuartzJobBean {
         }
     }
 
-    private void execute(Job job) throws Exception {
-        String jobType = job.getJobType();
-        switch (jobType) {
-            case ("01"):
+    private void execute(QtzJob job) throws Exception {
+        String jobId = job.getJobId();
+        switch (jobId) {
+            case ("test"):
                 TestQtz testQtz = SpringContextUtils.getBean(TestQtz.class);
                 testQtz.execute();
                 break;

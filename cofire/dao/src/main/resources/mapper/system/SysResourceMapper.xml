@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cofire.dao.mapper.system.SysResourceMapper">
+  <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysResource">
+    <id column="resource_id" jdbcType="VARCHAR" property="resourceId" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="parent_resource_id" jdbcType="VARCHAR" property="parentResourceId" />
+    <result column="is_leaf" jdbcType="VARCHAR" property="isLeaf" />
+    <result column="morder" jdbcType="INTEGER" property="morder" />
+    <result column="enabled" jdbcType="VARCHAR" property="enabled" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="filler1" jdbcType="VARCHAR" property="filler1" />
+    <result column="filler2" jdbcType="VARCHAR" property="filler2" />
+    <result column="filler3" jdbcType="VARCHAR" property="filler3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    resource_id, resource_name, url, parent_resource_id, is_leaf, morder, enabled, creator, 
+    create_time, icon, filler1, filler2, filler3
+  </sql>
+  <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cofire.dao.model.system.SysResourceExample">
+    delete from sys_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cofire.dao.model.system.SysResource">
+    insert into sys_resource (resource_id, resource_name, url, 
+      parent_resource_id, is_leaf, morder, 
+      enabled, creator, create_time, 
+      icon, filler1, filler2, 
+      filler3)
+    values (#{resourceId,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{parentResourceId,jdbcType=VARCHAR}, #{isLeaf,jdbcType=VARCHAR}, #{morder,jdbcType=INTEGER}, 
+      #{enabled,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
+      #{filler3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysResource">
+    insert into sys_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="resourceName != null">
+        resource_name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="parentResourceId != null">
+        parent_resource_id,
+      </if>
+      <if test="isLeaf != null">
+        is_leaf,
+      </if>
+      <if test="morder != null">
+        morder,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="filler1 != null">
+        filler1,
+      </if>
+      <if test="filler2 != null">
+        filler2,
+      </if>
+      <if test="filler3 != null">
+        filler3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null">
+        #{parentResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        #{isLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="morder != null">
+        #{morder,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="filler1 != null">
+        #{filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="filler2 != null">
+        #{filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="filler3 != null">
+        #{filler3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cofire.dao.model.system.SysResourceExample" resultType="java.lang.Long">
+    select count(*) from sys_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_resource
+    <set>
+      <if test="record.resourceId != null">
+        resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceName != null">
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentResourceId != null">
+        parent_resource_id = #{record.parentResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLeaf != null">
+        is_leaf = #{record.isLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.morder != null">
+        morder = #{record.morder,jdbcType=INTEGER},
+      </if>
+      <if test="record.enabled != null">
+        enabled = #{record.enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler1 != null">
+        filler1 = #{record.filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler2 != null">
+        filler2 = #{record.filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filler3 != null">
+        filler3 = #{record.filler3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_resource
+    set resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      parent_resource_id = #{record.parentResourceId,jdbcType=VARCHAR},
+      is_leaf = #{record.isLeaf,jdbcType=VARCHAR},
+      morder = #{record.morder,jdbcType=INTEGER},
+      enabled = #{record.enabled,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      filler1 = #{record.filler1,jdbcType=VARCHAR},
+      filler2 = #{record.filler2,jdbcType=VARCHAR},
+      filler3 = #{record.filler3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cofire.dao.model.system.SysResource">
+    update sys_resource
+    <set>
+      <if test="resourceName != null">
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null">
+        parent_resource_id = #{parentResourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        is_leaf = #{isLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="morder != null">
+        morder = #{morder,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="filler1 != null">
+        filler1 = #{filler1,jdbcType=VARCHAR},
+      </if>
+      <if test="filler2 != null">
+        filler2 = #{filler2,jdbcType=VARCHAR},
+      </if>
+      <if test="filler3 != null">
+        filler3 = #{filler3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysResource">
+    update sys_resource
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      parent_resource_id = #{parentResourceId,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=VARCHAR},
+      morder = #{morder,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      filler1 = #{filler1,jdbcType=VARCHAR},
+      filler2 = #{filler2,jdbcType=VARCHAR},
+      filler3 = #{filler3,jdbcType=VARCHAR}
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+  <sql id="OracleDialectPrefix">
+    <if test="page != null and databaseId == 'oracle'">
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix">
+    <if test="page != null and databaseId == 'oracle'">
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <=#{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="MssqlDialectPrefix">
+    <if test="page != null and databaseId == 'mssql'">
+      select * from ( select row_number() over (order by ${orderByClause}) as R, p.* from ( 
+    </if>
+  </sql>
+  <sql id="MssqlDialectSuffix">
+    <if test="page != null and databaseId == 'mssql'">
+      <![CDATA[ ) p ) p2 where R > #{page.begin} and R <= #{page.end} ]]>
+    </if>
+  </sql>
+  <sql id="MysqlDialect">
+    <if test="page != null and databaseId == 'mysql'">
+      limit #{page.begin} , #{page.length}
+    </if>
+  </sql>
+  <select id="selectPageByExample" parameterType="com.cofire.dao.model.system.SysResourceExample" resultMap="BaseResultMap">
+    <include refid="OracleDialectPrefix" />
+    <include refid="MssqlDialectPrefix" />
+    select 
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID, 
+    <include refid="Base_Column_List" />
+    from sys_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null and (databaseId == 'mysql' or databaseId == 'oracle') ">
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+    <include refid="MssqlDialectSuffix" />
+    <include refid="MysqlDialect" />
+  </select>
+</mapper>

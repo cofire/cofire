@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 
 import com.cofire.common.utils.spring.SpringContextUtils;
-import com.cofire.dao.mapper.system.LoginAuditsMapper;
-import com.cofire.dao.mapper.system.OperateAuditsMapper;
-import com.cofire.dao.model.system.LoginAudits;
-import com.cofire.dao.model.system.OperateAudits;
+import com.cofire.dao.mapper.system.SysLoginAuditMapper;
+import com.cofire.dao.mapper.system.SysOperateAuditMapper;
+import com.cofire.dao.model.system.SysLoginAudit;
+import com.cofire.dao.model.system.SysOperateAudit;
 
 /**
  * 
@@ -22,15 +22,15 @@ import com.cofire.dao.model.system.OperateAudits;
 @DependsOn("springContextUtils")
 public class LogTaskFactory {
     private static Logger logger = LoggerFactory.getLogger(LogTaskFactory.class);
-    private static OperateAuditsMapper operationLogMapper = SpringContextUtils.getBean(OperateAuditsMapper.class);
-    private static LoginAuditsMapper loginAuditsMapper = SpringContextUtils.getBean(LoginAuditsMapper.class);
+    private static SysOperateAuditMapper operationLogMapper = SpringContextUtils.getBean(SysOperateAuditMapper.class);
+    private static SysLoginAuditMapper loginAuditsMapper = SpringContextUtils.getBean(SysLoginAuditMapper.class);
 
     public static TimerTask bussinessLog(String ip, String sessionId, String reqUrl, String userId, String description, String requestdPara) {
         return new TimerTask() {
             @Override
             public void run() {
                 try {
-                    OperateAudits operateAudit = LogFactory.createOperateAudits(ip, sessionId, reqUrl, userId, description, requestdPara);
+                    SysOperateAudit operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqUrl, userId, description, requestdPara);
                     operationLogMapper.insert(operateAudit);
                 } catch (Exception e) {
                     logger.error("创建业务日志异常!", e);
@@ -44,7 +44,7 @@ public class LogTaskFactory {
             @Override
             public void run() {
                 try {
-                    LoginAudits loginAudits = LogFactory.createLoginAudits(ip, sessionId, auditType, userId, sourceType);
+                    SysLoginAudit loginAudits = LogFactory.createLoginAudit(ip, sessionId, auditType, userId, sourceType);
                     loginAuditsMapper.insert(loginAudits);
                 } catch (Exception e) {
                     logger.error("创建业务日志异常!", e);
@@ -53,7 +53,7 @@ public class LogTaskFactory {
         };
     }
 
-    public static TimerTask bussinessLog(OperateAudits operateAudit) {
+    public static TimerTask bussinessLog(SysOperateAudit operateAudit) {
         return new TimerTask() {
             @Override
             public void run() {

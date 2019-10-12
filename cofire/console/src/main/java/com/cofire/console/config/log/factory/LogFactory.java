@@ -3,8 +3,8 @@ package com.cofire.console.config.log.factory;
 import java.util.Date;
 
 import com.cofire.common.utils.string.DateUtils;
-import com.cofire.dao.model.system.LoginAudits;
-import com.cofire.dao.model.system.OperateAudits;
+import com.cofire.dao.model.system.SysLoginAudit;
+import com.cofire.dao.model.system.SysOperateAudit;
 
 public class LogFactory {
 
@@ -15,9 +15,9 @@ public class LogFactory {
      * @return
      * @return OperateAudits 返回类型
      */
-    public static OperateAudits createOperateAudits(String ip, String sessionId, String reqUrl, String userId, String description, String requestdPara)
+    public static SysOperateAudit createOperateAudit(String ip, String sessionId, String reqUrl, String userId, String description, String requestdPara)
             throws Exception {
-        OperateAudits operateAudits = new OperateAudits();
+        SysOperateAudit operateAudits = new SysOperateAudit();
         operateAudits.setIp(ip);
         operateAudits.setSessionId(sessionId);
         operateAudits.setRequestUrl(reqUrl);
@@ -43,8 +43,8 @@ public class LogFactory {
         return operateAudits;
     }
 
-    public static LoginAudits createLoginAudits(String ip, String sessionId, String auditType, String userId, String sourceType) throws Exception {
-        LoginAudits loginAudits = new LoginAudits();
+    public static SysLoginAudit createLoginAudit(String ip, String sessionId, String auditType, String userId, String sourceType) throws Exception {
+        SysLoginAudit loginAudits = new SysLoginAudit();
         loginAudits.setIp(ip);
         loginAudits.setSessionId(sessionId);
         loginAudits.setCreateTime(DateUtils.dataTimeToNumber(new Date()));

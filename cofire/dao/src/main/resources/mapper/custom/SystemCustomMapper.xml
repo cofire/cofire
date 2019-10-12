@@ -3,8 +3,8 @@
 <mapper namespace="com.cofire.dao.mapper.custom.SystemCustomMapper">
 	<!-- 获取系统自定义参数 -->
 	<select id="getSysparamsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT CONCAT(GROUP_ID,'|',PARAM_ID) AS PK_ID ,GROUP_ID, PARAM_ID, PARAM_VAL, PARAM_NAME, REMARK, IF_CANMODIFY 
-    	FROM sys_params
+		SELECT CONCAT(GROUP_ID,'|',PARAM_ID) AS PK_ID ,GROUP_ID, PARAM_ID, PARAM_VAL, PARAM_NAME, REMARK
+    	FROM sys_param
 	</select>
 	
 	<!-- 获取系统数据字典 -->

@@ -21,8 +21,8 @@ import com.cofire.common.utils.constant.Constants;
 import com.cofire.common.utils.context.HttpContext;
 import com.cofire.console.config.log.factory.LogFactory;
 import com.cofire.console.config.log.factory.LogTaskFactory;
-import com.cofire.dao.model.system.OperateAudits;
-import com.cofire.dao.model.system.User;
+import com.cofire.dao.model.system.SysOperateAudit;
+import com.cofire.dao.model.system.SysUser;
 
 /**
  * 
@@ -37,8 +37,8 @@ public class LogAop {
 
     private Logger logger = LoggerFactory.getLogger(LogAop.class);
 
-    ThreadLocal<OperateAudits> aopLog = new ThreadLocal<>();
-    OperateAudits operateAudit = new OperateAudits();
+    ThreadLocal<SysOperateAudit> aopLog = new ThreadLocal<>();
+    SysOperateAudit operateAudit = new SysOperateAudit();
 
     @Pointcut(value = "@annotation(com.cofire.console.config.log.BussinessLog)")
     public void cutService() {
@@ -49,7 +49,7 @@ public class LogAop {
         logger.info("调用前");
         // 获取当前用户
         Session session = SecurityUtils.getSubject().getSession();
-        User user = (User) session.getAttribute(Constants.SESSION_USER_INFO);
+        SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER_INFO);
         String userId = "";
         String sessionId = "";
         // 用户为空时，不记日志
@@ -84,7 +84,7 @@ public class LogAop {
         logger.info("请求方法：" + className + "." + methodName);
         logger.info("请求Ip：" + ip);
         logger.info("请求URI：" + reqURI);
-        operateAudit = LogFactory.createOperateAudits(ip, sessionId, reqURI, userId, bussinessName, obj2.toString());
+        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, obj2.toString());
         aopLog.set(operateAudit);
     }
 
@@ -94,7 +94,7 @@ public class LogAop {
         if (result.length() > 1000) {
             result = result.substring(0, 1000);
         }
-        OperateAudits operateAudit = aopLog.get();
+        SysOperateAudit operateAudit = aopLog.get();
         operateAudit.setFiller1(result);
         LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
     }

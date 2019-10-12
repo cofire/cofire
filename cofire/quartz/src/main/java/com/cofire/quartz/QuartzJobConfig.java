@@ -13,19 +13,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cofire.common.utils.spring.SpringContextUtils;
-import com.cofire.dao.mapper.system.JobMapper;
-import com.cofire.dao.model.system.Job;
-import com.cofire.dao.model.system.JobExample;
+import com.cofire.dao.mapper.system.QtzJobMapper;
+import com.cofire.dao.model.system.QtzJob;
+import com.cofire.dao.model.system.QtzJobExample;
 
 public class QuartzJobConfig {
     // 常量
     private static Scheduler scheduler = SpringContextUtils.getBean(Scheduler.class);;
     private final static String JOB_GROUP = "jobGroup";
-    private final static String TRIGGER_GROUP = "triggerGroup";
-    private final static String TRIGGER_IDENTITY = "trigger";
     private final static Logger logger = LoggerFactory.getLogger(QuartzJobConfig.class);
 
-    private final static JobMapper jobMapper = SpringContextUtils.getBean(JobMapper.class);
+    private final static QtzJobMapper jobMapper = SpringContextUtils.getBean(QtzJobMapper.class);
 
     /**
      * 
@@ -37,26 +35,26 @@ public class QuartzJobConfig {
      */
     public static void registerQuartzJob() throws Exception {
         logger.info("准备注册定时任务");
-        JobExample jobExample = new JobExample();
-        JobExample.Criteria criteria = jobExample.createCriteria();
-        criteria.andDelEqualTo("0");
-        List<Job> jobList = jobMapper.selectByExample(jobExample);
+        QtzJobExample jobExample = new QtzJobExample();
+        QtzJobExample.Criteria criteria = jobExample.createCriteria();
+        criteria.andIsDelEqualTo("0");
+        List<QtzJob> jobList = jobMapper.selectByExample(jobExample);
         logger.info("总共有" + jobList.size() + "个定时任务");
         if (jobList != null && jobList.size() > 0) {
-            for (Job job : jobList) {
+            for (QtzJob job : jobList) {
                 try {
                     String cronExpression = getCronExpression(job);
                     JobDetail jobDetail = JobBuilder.newJob(QuartzJobBusiness.class).withIdentity(job.getJobName(), JOB_GROUP).withDescription(job.getJobDesc())
                             .build();
                     // 触发时间点
                     CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
-                    Trigger trigger = TriggerBuilder.newTrigger().withIdentity(job.getId(), JOB_GROUP).startNow().withSchedule(cronScheduleBuilder).build();
+                    Trigger trigger = TriggerBuilder.newTrigger().withIdentity(job.getJobId(), JOB_GROUP).startNow().withSchedule(cronScheduleBuilder).build();
                     // 交由Scheduler安排触发
                     scheduler.scheduleJob(jobDetail, trigger);
-                    logger.info("注册名为" + job.getJobName() + ",ID为" + job.getId() + "的任务成功");
+                    logger.info("注册名为" + job.getJobName() + ",ID为" + job.getJobId() + "的任务成功");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    logger.error("注册名为" + job.getJobName() + ",ID为" + job.getId() + "的任务失败");
+                    logger.error("注册名为" + job.getJobName() + ",ID为" + job.getJobId() + "的任务失败");
                 }
             }
         }
@@ -105,7 +103,7 @@ public class QuartzJobConfig {
      * @return
      * @return String 返回类型
      */
-    public static String getCronExpression(Job job) {
+    public static String getCronExpression(QtzJob job) {
         String cronExpression = null;
 
         // CronExpression格式：秒 分钟 小时 天数 月 星期 年份 详细说明 http://www.iteye.com/topic/582119
