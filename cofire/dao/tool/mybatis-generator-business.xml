@@ -9,7 +9,7 @@
     	<property name="javaFileEncoding" value="UTF-8" />
     
     	<plugin type="com.cf.common.utils.mybatis.plugin.mutiDatasource.MutiDatasourcePaginationPlugin" />
-    	
+    	<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <commentGenerator type="com.cf.common.utils.mybatis.plugin.RemarksCommentGenerator">
             <property name="suppressAllComments" value="true" />
         </commentGenerator>

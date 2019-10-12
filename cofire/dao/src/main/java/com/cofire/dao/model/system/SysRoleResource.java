@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_role_resource
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysRoleResource {
+public class SysRoleResource implements Serializable {
     /** 角色id (主健ID)(必填项) (无默认值) */
     private String roleId;
 
@@ -26,6 +28,8 @@ public class SysRoleResource {
 
     /** 预留字段3 (无默认值) */
     private String filler3;
+
+    private static final long serialVersionUID = 1L;
 
     public String getRoleId() {
         return roleId;

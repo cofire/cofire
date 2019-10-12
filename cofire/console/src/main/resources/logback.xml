@@ -48,7 +48,7 @@
         </filter>
         <!-- 可让每天产生一个日志文件，最多 180 个，自动回滚 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM,aux}/merck-%d{yyyy-MM-dd}.log
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM,aux}/business-%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <!-- keep 180 days' worth of history capped at 50GB total size -->
             <maxHistory>180</maxHistory>
@@ -106,8 +106,8 @@
     <logger name="org.springframework" level="INFO" />
     <logger name="org.apache" level="INFO" />
     <!--如果需要打印SQL,可以把下面的级别设置为DEBUG -->
-    <logger name="com.cf.dao.mapper" level="DEBUG" />
-    <logger name="com.cf.quartz" level="DEBUG">
+    <logger name="com.cofire.dao.mapper" level="DEBUG" />
+    <logger name="com.cofire.quartz" level="DEBUG">
       <appender-ref ref="quartzFile" />  
 	</logger>
 </configuration>

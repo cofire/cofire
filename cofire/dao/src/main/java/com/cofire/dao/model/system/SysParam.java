@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_param
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysParam {
+public class SysParam implements Serializable {
     /** 组号 (主健ID)(必填项) (无默认值) */
     private String groupId;
 
@@ -41,6 +43,8 @@ public class SysParam {
 
     /** 预留字段4 (无默认值) */
     private String filler4;
+
+    private static final long serialVersionUID = 1L;
 
     public String getGroupId() {
         return groupId;

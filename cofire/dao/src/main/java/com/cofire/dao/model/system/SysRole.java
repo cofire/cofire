@@ -1,15 +1,14 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_role
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysRole {
-    /** 自增主键 (主健ID) (无默认值) */
-    private Long sid;
-
-    /** 角色id(必填项) (无默认值) */
+public class SysRole implements Serializable {
+    /** 角色id (主健ID) (无默认值) */
     private String roleId;
 
     /** 角色名称 (无默认值) */
@@ -42,13 +41,7 @@ public class SysRole {
     /** 预留字段3 (无默认值) */
     private String filler3;
 
-    public Long getSid() {
-        return sid;
-    }
-
-    public void setSid(Long sid) {
-        this.sid = sid;
-    }
+    private static final long serialVersionUID = 1L;
 
     public String getRoleId() {
         return roleId;

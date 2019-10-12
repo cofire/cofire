@@ -16,8 +16,8 @@ public interface UserPermissionCustomMapper {
      * @return
      * @return List<UserPermissionCustom> 返回类型
      */
-    Set<String> getUserPermission(@Param("USER_ID") String p_userId);
+    Set<String> getUserPermission(@Param("user_id") String p_userId);
 
-    List<Map<String, String>> getUserResource(@Param("USER_ID") String userId);
+    List<Map<String, String>> getUserResource(@Param("user_id") String userId);
 
 }

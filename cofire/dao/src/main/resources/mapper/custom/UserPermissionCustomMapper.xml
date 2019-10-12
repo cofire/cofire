@@ -3,32 +3,35 @@
 <mapper namespace="com.cofire.dao.mapper.custom.UserPermissionCustomMapper">
 	<!-- 获取用户权限 -->
 	<select id="getUserPermission" parameterType="java.lang.String" resultType="java.lang.String">
-        SELECT DISTINCT URL FROM sys_resource A
-            INNER JOIN sys_role_resource B ON A.RES_ID=B.RES_ID
-            INNER JOIN sys_user_role C ON B.ROLE_ID=C.ROLE_ID
-        WHERE C.USER_ID= #{USER_ID}
+        SELECT DISTINCT
+			url
+		FROM
+			sys_resource A
+		INNER JOIN sys_role_resource B ON A.resource_id = B.resource_id
+		INNER JOIN sys_user_role C ON B.role_id = C.role_id
+        WHERE C.user_id= #{user_id}
     </select>
     
     <select id="getUserResource" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT
             DISTINCT
-            sys_user.USER_ID,
-            sys_resource.RES_ID AS "id",
+            sys_user.user_id,
+            sys_resource.resource_id AS "id",
             '' AS "iconCls",
-            sys_resource.PARENT_ID AS parentId,
-            sys_resource.URL AS url,
-            sys_resource.RES_NAME AS "text",
-            sys_resource.ISLEAF AS leaf,
-            sys_resource.MORDER
+            sys_resource.parent_resource_id AS parentId,
+            sys_resource.url AS url,
+            sys_resource.resource_name AS "text",
+            sys_resource.is_leaf AS leaf,
+            sys_resource.morder
         FROM
             sys_resource
-        LEFT JOIN sys_role_resource ON sys_role_resource.RES_ID = sys_resource.RES_ID
-        LEFT JOIN sys_role ON sys_role.ROLE_ID = sys_role_resource.ROLE_ID
-        LEFT JOIN sys_user_role ON sys_user_role.ROLE_ID = sys_role.ROLE_ID
-        LEFT JOIN sys_user ON sys_user.USER_ID = sys_user_role.USER_ID
+        LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
+        LEFT JOIN sys_role ON sys_role.role_id = sys_role_resource.role_id
+        LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.role_id
+        LEFT JOIN sys_user ON sys_user.user_id = sys_user_role.user_id
         WHERE
-            sys_user.USER_ID = #{USER_ID}
+            sys_user.user_id = #{user_id}
         ORDER BY
-            MORDER
+            morder
 	</select>
 </mapper>

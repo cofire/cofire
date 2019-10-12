@@ -1,4 +1,4 @@
-package com.cofire.console.moduler.base.controller;
+package com.cofire.console.controller.base;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

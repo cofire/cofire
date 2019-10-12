@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_dept
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysDept {
+public class SysDept implements Serializable {
     /** 部门编号 (主健ID) (无默认值) */
     private String deptCode;
 
@@ -40,6 +42,8 @@ public class SysDept {
 
     /** 预留字段3 (无默认值) */
     private String filler3;
+
+    private static final long serialVersionUID = 1L;
 
     public String getDeptCode() {
         return deptCode;

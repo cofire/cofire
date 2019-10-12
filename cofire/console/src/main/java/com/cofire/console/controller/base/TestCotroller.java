@@ -1,4 +1,4 @@
-package com.cofire.console.moduler.base.controller;
+package com.cofire.console.controller.base;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

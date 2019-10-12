@@ -95,7 +95,7 @@ public class LogAop {
             result = result.substring(0, 1000);
         }
         SysOperateAudit operateAudit = aopLog.get();
-        operateAudit.setFiller1(result);
+        operateAudit.setResult(result);
         LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
     }
 

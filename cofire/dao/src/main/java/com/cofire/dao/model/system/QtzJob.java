@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 qtz_job
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class QtzJob {
+public class QtzJob implements Serializable {
     /** 定时任务id (主健ID) (无默认值) */
     private String jobId;
 
@@ -59,6 +61,8 @@ public class QtzJob {
 
     /** 附加参数5 (无默认值) */
     private String param5;
+
+    private static final long serialVersionUID = 1L;
 
     public String getJobId() {
         return jobId;

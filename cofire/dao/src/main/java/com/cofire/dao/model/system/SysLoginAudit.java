@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_login_audit
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysLoginAudit {
+public class SysLoginAudit implements Serializable {
     /** 自增id (主健ID) (无默认值) */
     private Long sid;
 
@@ -38,6 +40,8 @@ public class SysLoginAudit {
 
     /** 消息 (无默认值) */
     private String message;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getSid() {
         return sid;

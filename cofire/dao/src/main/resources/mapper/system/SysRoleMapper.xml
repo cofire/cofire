@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cofire.dao.mapper.system.SysRoleMapper">
   <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysRole">
-    <id column="sid" jdbcType="BIGINT" property="sid" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="enabled" jdbcType="VARCHAR" property="enabled" />
@@ -74,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sid, role_id, role_name, description, enabled, creator, create_time, checker, check_time, 
+    role_id, role_name, description, enabled, creator, create_time, checker, check_time, 
     filler1, filler2, filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysRoleExample" resultMap="BaseResultMap">
@@ -92,15 +91,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role
-    where sid = #{sid,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role
-    where sid = #{sid,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.cofire.dao.model.system.SysRoleExample">
     delete from sys_role
@@ -109,23 +108,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysRole">
-    insert into sys_role (sid, role_id, role_name, 
-      description, enabled, creator, 
-      create_time, checker, check_time, 
-      filler1, filler2, filler3
-      )
-    values (#{sid,jdbcType=BIGINT}, #{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{enabled,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
-      #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}
-      )
+    insert into sys_role (role_id, role_name, description, 
+      enabled, creator, create_time, 
+      checker, check_time, filler1, 
+      filler2, filler3)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, 
+      #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysRole">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sid != null">
-        sid,
-      </if>
       <if test="roleId != null">
         role_id,
       </if>
@@ -161,9 +155,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sid != null">
-        #{sid,jdbcType=BIGINT},
-      </if>
       <if test="roleId != null">
         #{roleId,jdbcType=VARCHAR},
       </if>
@@ -208,9 +199,6 @@
   <update id="updateByExampleSelective" parameterType="map">
     update sys_role
     <set>
-      <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=BIGINT},
-      </if>
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
@@ -251,8 +239,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_role
-    set sid = #{record.sid,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=VARCHAR},
+    set role_id = #{record.roleId,jdbcType=VARCHAR},
       role_name = #{record.roleName,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=VARCHAR},
@@ -270,9 +257,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cofire.dao.model.system.SysRole">
     update sys_role
     <set>
-      <if test="roleId != null">
-        role_id = #{roleId,jdbcType=VARCHAR},
-      </if>
       <if test="roleName != null">
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
@@ -304,12 +288,11 @@
         filler3 = #{filler3,jdbcType=VARCHAR},
       </if>
     </set>
-    where sid = #{sid,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysRole">
     update sys_role
-    set role_id = #{roleId,jdbcType=VARCHAR},
-      role_name = #{roleName,jdbcType=VARCHAR},
+    set role_name = #{roleName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
@@ -319,7 +302,7 @@
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},
       filler3 = #{filler3,jdbcType=VARCHAR}
-    where sid = #{sid,jdbcType=BIGINT}
+    where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
   <sql id="OracleDialectPrefix">
     <if test="page != null and databaseId == 'oracle'">

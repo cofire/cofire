@@ -1,11 +1,13 @@
 package com.cofire.dao.model.system;
 
+import java.io.Serializable;
+
 /**
  * @数表名称 sys_user
  * @开发日期 2019-10-12
  * @开发作者 by:ly 
  */
-public class SysUser {
+public class SysUser implements Serializable {
     /** 自增id (主健ID) (无默认值) */
     private Long sid;
 
@@ -62,6 +64,8 @@ public class SysUser {
 
     /** 预留字段3 (无默认值) */
     private String filler3;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getSid() {
         return sid;
