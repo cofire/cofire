@@ -27,6 +27,14 @@ public class QuartzJobConfig {
 
     private final static JobMapper jobMapper = SpringContextUtils.getBean(JobMapper.class);
 
+    /**
+     * 
+     * @Title: registerQuartzJob
+     * @author ly
+     * @Description:定时任务注册
+     * @param @throws Exception 参数
+     * @return void 返回类型
+     */
     public static void registerQuartzJob() throws Exception {
         logger.info("准备注册定时任务");
         JobExample jobExample = new JobExample();
@@ -56,6 +64,12 @@ public class QuartzJobConfig {
         logger.info("Quartz任务注册成功");
     }
 
+    /**
+     * 
+     * @Title: shutdownQuartzJob
+     * @Description:关闭所有定时任务，且不可重新注册
+     * @return void 返回类型
+     */
     public static void shutdownQuartzJob() {
         try {
             if (!scheduler.isShutdown()) {
