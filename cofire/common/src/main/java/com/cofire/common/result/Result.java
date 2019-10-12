@@ -39,7 +39,7 @@ public class Result {
         this.message = message;
     }
 
-    public void setSuc (boolean success, CodeEnum codeEnum){
+    public void setSuccess(boolean success, CodeEnum codeEnum) {
         setSuccess(success);
         setCode(codeEnum.getCode());
         setMessage(codeEnum.getMessage());

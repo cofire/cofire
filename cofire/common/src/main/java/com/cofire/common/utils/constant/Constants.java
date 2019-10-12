@@ -15,14 +15,5 @@ public class Constants {
      */
     public static final String SESSION_USER_INFO = "userInfo";
     public static final String SESSION_USER_PERMISSION = "userPermission";
-    /**
-     * @Author yongLiangMa
-     * @Description //TODO 消防点名中的 安全区名称和是否已到安全区
-     * @Date 09:49 2019-07-31
-     **/
-    public static final String eastSafeArea = "Emergencypoint E";
-    public static final String westSafeArea = "EmergencyPoint_W";
-    public static final String arriveSafeArea = "已到安全区";
-    public static final String notArriveSafeArea = "未到安全区";
 
 }

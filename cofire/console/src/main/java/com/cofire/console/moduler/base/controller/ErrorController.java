@@ -19,7 +19,7 @@ public class ErrorController {
      */
     @RequestMapping("/sessionTimeOut")
     public Result sessionTimeOut() {
-        Result result = new Result(false, CodeEnum.E_0000000004);
+        Result result = new Result(false, CodeEnum.E_402);
         return result;
     }
 
@@ -32,7 +32,7 @@ public class ErrorController {
      */
     @RequestMapping("/unauth")
     public Result unauth() {
-        Result result = new Result(false, CodeEnum.E_0000000003);
+        Result result = new Result(false, CodeEnum.E_401);
         return result;
     }
 

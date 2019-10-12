@@ -50,20 +50,20 @@ public class UploadController {
         Result result = new Result();
         if (file == null || file.isEmpty()) {
             logger.info("图片不存在");
-            result.setSuc(false, CodeEnum.E_0000000013);
+            result.setSuccess(false);
             return result;
         }
         String oriFileName = file.getOriginalFilename();
         String suffix = FileUtil.getSuffix(oriFileName);
         if (null == suffix) {
             logger.info("图片格式不正确");
-            result.setSuc(false, CodeEnum.E_0000000014);
+            result.setSuccess(false, CodeEnum.E_400);
             return result;
         }
         String path = SystemUtil.getParamVal("0001", "1");
         if (StringUtils.isEmpty(path)) {
             logger.info("图片存储路径系统参数丢失");
-            result.setSuc(false, CodeEnum.E_0000000000);
+            result.setSuccess(false, CodeEnum.E_500);
             return result;
         }
         String markText = SystemUtil.getParamVal("0001", "2");
@@ -83,7 +83,7 @@ public class UploadController {
             file.transferTo(dest);
         } catch (IOException e) {
             logger.error("IO异常：" + e.getMessage());
-            result.setSuc(false, CodeEnum.E_0000000014);
+            result.setSuccess(false);
             return result;
         }
         try {
@@ -94,7 +94,7 @@ public class UploadController {
         } catch (Exception e) {
             logger.error("图片处理失败：" + e.getMessage());
         }
-        result.setSuc(true, CodeEnum.E_0000000011);
+        result.setSuccess(true, CodeEnum.E_200);
         result.setData(relateUrl);
         return result;
     }
