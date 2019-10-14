@@ -6,6 +6,11 @@ package com.cofire.common.utils.constant;
  * @date: 2017/10/24 10:15
  */
 public class Constants {
+    public static final String MYSQL = "mysql";
+
+    public static final String FLAG_ADD = "add";
+    public static final String FLAG_UPDATE = "update";
+
     /**
      * session中存放用户信息的key值
      */

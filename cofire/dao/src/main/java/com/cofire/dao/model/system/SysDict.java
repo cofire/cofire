@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_dict
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class SysDict implements Serializable {

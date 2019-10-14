@@ -15,6 +15,8 @@
     <result column="active_dt" jdbcType="VARCHAR" property="activeDt" />
     <result column="expiry_dt" jdbcType="VARCHAR" property="expiryDt" />
     <result column="is_del" jdbcType="VARCHAR" property="isDel" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="param1" jdbcType="VARCHAR" property="param1" />
     <result column="param2" jdbcType="VARCHAR" property="param2" />
     <result column="param3" jdbcType="VARCHAR" property="param3" />
@@ -81,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List">
     job_id, job_name, job_desc, year, month, date, day, hour, minute, second, active_dt, 
-    expiry_dt, is_del, param1, param2, param3, param4, param5
+    expiry_dt, is_del, modifier, modify_time, param1, param2, param3, param4, param5
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.QtzJobExample" resultMap="BaseResultMap">
     select
@@ -119,16 +121,16 @@
       year, month, date, 
       day, hour, minute, 
       second, active_dt, expiry_dt, 
-      is_del, param1, param2, 
-      param3, param4, param5
-      )
+      is_del, modifier, modify_time, 
+      param1, param2, param3, 
+      param4, param5)
     values (#{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobDesc,jdbcType=VARCHAR}, 
       #{year,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
       #{day,jdbcType=VARCHAR}, #{hour,jdbcType=VARCHAR}, #{minute,jdbcType=VARCHAR}, 
       #{second,jdbcType=VARCHAR}, #{activeDt,jdbcType=VARCHAR}, #{expiryDt,jdbcType=VARCHAR}, 
-      #{isDel,jdbcType=VARCHAR}, #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, 
-      #{param3,jdbcType=VARCHAR}, #{param4,jdbcType=VARCHAR}, #{param5,jdbcType=VARCHAR}
-      )
+      #{isDel,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, #{param3,jdbcType=VARCHAR}, 
+      #{param4,jdbcType=VARCHAR}, #{param5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.QtzJob">
     insert into qtz_job
@@ -171,6 +173,12 @@
       </if>
       <if test="isDel != null">
         is_del,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
       </if>
       <if test="param1 != null">
         param1,
@@ -227,6 +235,12 @@
       </if>
       <if test="isDel != null">
         #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="param1 != null">
         #{param1,jdbcType=VARCHAR},
@@ -293,6 +307,12 @@
       <if test="record.isDel != null">
         is_del = #{record.isDel,jdbcType=VARCHAR},
       </if>
+      <if test="record.modifier != null">
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
+      </if>
       <if test="record.param1 != null">
         param1 = #{record.param1,jdbcType=VARCHAR},
       </if>
@@ -328,6 +348,8 @@
       active_dt = #{record.activeDt,jdbcType=VARCHAR},
       expiry_dt = #{record.expiryDt,jdbcType=VARCHAR},
       is_del = #{record.isDel,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       param1 = #{record.param1,jdbcType=VARCHAR},
       param2 = #{record.param2,jdbcType=VARCHAR},
       param3 = #{record.param3,jdbcType=VARCHAR},
@@ -376,6 +398,12 @@
       <if test="isDel != null">
         is_del = #{isDel,jdbcType=VARCHAR},
       </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
+      </if>
       <if test="param1 != null">
         param1 = #{param1,jdbcType=VARCHAR},
       </if>
@@ -408,6 +436,8 @@
       active_dt = #{activeDt,jdbcType=VARCHAR},
       expiry_dt = #{expiryDt,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       param1 = #{param1,jdbcType=VARCHAR},
       param2 = #{param2,jdbcType=VARCHAR},
       param3 = #{param3,jdbcType=VARCHAR},

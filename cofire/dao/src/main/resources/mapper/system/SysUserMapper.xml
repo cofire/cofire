@@ -5,18 +5,9 @@
     <id column="sid" jdbcType="BIGINT" property="sid" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="dept_code" jdbcType="VARCHAR" property="deptCode" />
     <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
-    <result column="last_ip" jdbcType="VARCHAR" property="lastIp" />
-    <result column="last_date" jdbcType="VARCHAR" property="lastDate" />
-    <result column="wrong_pwd_count" jdbcType="DECIMAL" property="wrongPwdCount" />
-    <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="check_status" jdbcType="VARCHAR" property="checkStatus" />
-    <result column="checker" jdbcType="VARCHAR" property="checker" />
-    <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
-    <result column="change_pwd_flag" jdbcType="VARCHAR" property="changePwdFlag" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
     <result column="filler2" jdbcType="VARCHAR" property="filler2" />
     <result column="filler3" jdbcType="VARCHAR" property="filler3" />
@@ -80,9 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sid, user_id, user_name, dept_code, pass_word, last_ip, last_date, wrong_pwd_count, 
-    creator, create_time, status, check_status, checker, check_time, change_pwd_flag, 
-    filler1, filler2, filler3
+    sid, user_id, user_name, pass_word, modifier, modify_time, filler1, filler2, filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysUserExample" resultMap="BaseResultMap">
     select
@@ -117,17 +106,11 @@
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysUser">
     insert into sys_user (sid, user_id, user_name, 
-      dept_code, pass_word, last_ip, 
-      last_date, wrong_pwd_count, creator, 
-      create_time, status, check_status, 
-      checker, check_time, change_pwd_flag, 
+      pass_word, modifier, modify_time, 
       filler1, filler2, filler3
       )
     values (#{sid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{deptCode,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{lastIp,jdbcType=VARCHAR}, 
-      #{lastDate,jdbcType=VARCHAR}, #{wrongPwdCount,jdbcType=DECIMAL}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{checkStatus,jdbcType=VARCHAR}, 
-      #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, #{changePwdFlag,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}
       )
   </insert>
@@ -143,41 +126,14 @@
       <if test="userName != null">
         user_name,
       </if>
-      <if test="deptCode != null">
-        dept_code,
-      </if>
       <if test="passWord != null">
         pass_word,
       </if>
-      <if test="lastIp != null">
-        last_ip,
+      <if test="modifier != null">
+        modifier,
       </if>
-      <if test="lastDate != null">
-        last_date,
-      </if>
-      <if test="wrongPwdCount != null">
-        wrong_pwd_count,
-      </if>
-      <if test="creator != null">
-        creator,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="checkStatus != null">
-        check_status,
-      </if>
-      <if test="checker != null">
-        checker,
-      </if>
-      <if test="checkTime != null">
-        check_time,
-      </if>
-      <if test="changePwdFlag != null">
-        change_pwd_flag,
+      <if test="modifyTime != null">
+        modify_time,
       </if>
       <if test="filler1 != null">
         filler1,
@@ -199,41 +155,14 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="deptCode != null">
-        #{deptCode,jdbcType=VARCHAR},
-      </if>
       <if test="passWord != null">
         #{passWord,jdbcType=VARCHAR},
       </if>
-      <if test="lastIp != null">
-        #{lastIp,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="lastDate != null">
-        #{lastDate,jdbcType=VARCHAR},
-      </if>
-      <if test="wrongPwdCount != null">
-        #{wrongPwdCount,jdbcType=DECIMAL},
-      </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="checkStatus != null">
-        #{checkStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checker != null">
-        #{checker,jdbcType=VARCHAR},
-      </if>
-      <if test="checkTime != null">
-        #{checkTime,jdbcType=VARCHAR},
-      </if>
-      <if test="changePwdFlag != null">
-        #{changePwdFlag,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         #{filler1,jdbcType=VARCHAR},
@@ -264,41 +193,14 @@
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.deptCode != null">
-        dept_code = #{record.deptCode,jdbcType=VARCHAR},
-      </if>
       <if test="record.passWord != null">
         pass_word = #{record.passWord,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastIp != null">
-        last_ip = #{record.lastIp,jdbcType=VARCHAR},
+      <if test="record.modifier != null">
+        modifier = #{record.modifier,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastDate != null">
-        last_date = #{record.lastDate,jdbcType=VARCHAR},
-      </if>
-      <if test="record.wrongPwdCount != null">
-        wrong_pwd_count = #{record.wrongPwdCount,jdbcType=DECIMAL},
-      </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkStatus != null">
-        check_status = #{record.checkStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checker != null">
-        checker = #{record.checker,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkTime != null">
-        check_time = #{record.checkTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.changePwdFlag != null">
-        change_pwd_flag = #{record.changePwdFlag,jdbcType=VARCHAR},
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="record.filler1 != null">
         filler1 = #{record.filler1,jdbcType=VARCHAR},
@@ -319,18 +221,9 @@
     set sid = #{record.sid,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=VARCHAR},
       user_name = #{record.userName,jdbcType=VARCHAR},
-      dept_code = #{record.deptCode,jdbcType=VARCHAR},
       pass_word = #{record.passWord,jdbcType=VARCHAR},
-      last_ip = #{record.lastIp,jdbcType=VARCHAR},
-      last_date = #{record.lastDate,jdbcType=VARCHAR},
-      wrong_pwd_count = #{record.wrongPwdCount,jdbcType=DECIMAL},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      check_status = #{record.checkStatus,jdbcType=VARCHAR},
-      checker = #{record.checker,jdbcType=VARCHAR},
-      check_time = #{record.checkTime,jdbcType=VARCHAR},
-      change_pwd_flag = #{record.changePwdFlag,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
       filler2 = #{record.filler2,jdbcType=VARCHAR},
       filler3 = #{record.filler3,jdbcType=VARCHAR}
@@ -347,41 +240,14 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="deptCode != null">
-        dept_code = #{deptCode,jdbcType=VARCHAR},
-      </if>
       <if test="passWord != null">
         pass_word = #{passWord,jdbcType=VARCHAR},
       </if>
-      <if test="lastIp != null">
-        last_ip = #{lastIp,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="lastDate != null">
-        last_date = #{lastDate,jdbcType=VARCHAR},
-      </if>
-      <if test="wrongPwdCount != null">
-        wrong_pwd_count = #{wrongPwdCount,jdbcType=DECIMAL},
-      </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="checkStatus != null">
-        check_status = #{checkStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="checker != null">
-        checker = #{checker,jdbcType=VARCHAR},
-      </if>
-      <if test="checkTime != null">
-        check_time = #{checkTime,jdbcType=VARCHAR},
-      </if>
-      <if test="changePwdFlag != null">
-        change_pwd_flag = #{changePwdFlag,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         filler1 = #{filler1,jdbcType=VARCHAR},
@@ -399,18 +265,9 @@
     update sys_user
     set user_id = #{userId,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
-      dept_code = #{deptCode,jdbcType=VARCHAR},
       pass_word = #{passWord,jdbcType=VARCHAR},
-      last_ip = #{lastIp,jdbcType=VARCHAR},
-      last_date = #{lastDate,jdbcType=VARCHAR},
-      wrong_pwd_count = #{wrongPwdCount,jdbcType=DECIMAL},
-      creator = #{creator,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      check_status = #{checkStatus,jdbcType=VARCHAR},
-      checker = #{checker,jdbcType=VARCHAR},
-      check_time = #{checkTime,jdbcType=VARCHAR},
-      change_pwd_flag = #{changePwdFlag,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},
       filler3 = #{filler3,jdbcType=VARCHAR}

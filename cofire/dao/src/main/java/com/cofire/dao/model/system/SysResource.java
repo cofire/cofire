@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_resource
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class SysResource implements Serializable {
@@ -29,11 +29,11 @@ public class SysResource implements Serializable {
     /** 是否可用(必填项) (无默认值) */
     private String enabled;
 
-    /** 创建人 (无默认值) */
-    private String creator;
+    /** 最后修改人 (无默认值) */
+    private String modifier;
 
-    /** 创建时间 (无默认值) */
-    private String createTime;
+    /** 最后修改时间 (无默认值) */
+    private String modifyTime;
 
     /** 小图标 (无默认值) */
     private String icon;
@@ -105,20 +105,20 @@ public class SysResource implements Serializable {
         this.enabled = enabled == null ? null : enabled.trim();
     }
 
-    public String getCreator() {
-        return creator;
+    public String getModifier() {
+        return modifier;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getModifyTime() {
+        return modifyTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
     }
 
     public String getIcon() {

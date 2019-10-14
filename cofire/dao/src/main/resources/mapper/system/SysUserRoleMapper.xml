@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysUserRole">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <id column="role_id" jdbcType="VARCHAR" property="roleId" />
-    <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
     <result column="filler2" jdbcType="VARCHAR" property="filler2" />
     <result column="filler3" jdbcType="VARCHAR" property="filler3" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, role_id, creator, create_time, filler1, filler2, filler3
+    user_id, role_id, modifier, modify_time, filler1, filler2, filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysUserRoleExample" resultMap="BaseResultMap">
     select
@@ -105,11 +105,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysUserRole">
-    insert into sys_user_role (user_id, role_id, creator, 
-      create_time, filler1, filler2, 
+    insert into sys_user_role (user_id, role_id, modifier, 
+      modify_time, filler1, filler2, 
       filler3)
-    values (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
       #{filler3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysUserRole">
@@ -121,11 +121,11 @@
       <if test="roleId != null">
         role_id,
       </if>
-      <if test="creator != null">
-        creator,
+      <if test="modifier != null">
+        modifier,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="modifyTime != null">
+        modify_time,
       </if>
       <if test="filler1 != null">
         filler1,
@@ -144,11 +144,11 @@
       <if test="roleId != null">
         #{roleId,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         #{filler1,jdbcType=VARCHAR},
@@ -176,11 +176,11 @@
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=VARCHAR},
       </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=VARCHAR},
+      <if test="record.modifier != null">
+        modifier = #{record.modifier,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="record.filler1 != null">
         filler1 = #{record.filler1,jdbcType=VARCHAR},
@@ -200,8 +200,8 @@
     update sys_user_role
     set user_id = #{record.userId,jdbcType=VARCHAR},
       role_id = #{record.roleId,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
       filler2 = #{record.filler2,jdbcType=VARCHAR},
       filler3 = #{record.filler3,jdbcType=VARCHAR}
@@ -212,11 +212,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cofire.dao.model.system.SysUserRole">
     update sys_user_role
     <set>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         filler1 = #{filler1,jdbcType=VARCHAR},
@@ -233,8 +233,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysUserRole">
     update sys_user_role
-    set creator = #{creator,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
+    set modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},
       filler3 = #{filler3,jdbcType=VARCHAR}

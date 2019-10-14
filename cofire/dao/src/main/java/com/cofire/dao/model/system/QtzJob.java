@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 qtz_job
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class QtzJob implements Serializable {
@@ -46,6 +46,12 @@ public class QtzJob implements Serializable {
 
     /** 逻辑删除标识:0-未删除；1-已删除(必填项) (无默认值) */
     private String isDel;
+
+    /** 最后修改人 (无默认值) */
+    private String modifier;
+
+    /** 最后修改时间 (无默认值) */
+    private String modifyTime;
 
     /** 附加参数1 (无默认值) */
     private String param1;
@@ -166,6 +172,22 @@ public class QtzJob implements Serializable {
 
     public void setIsDel(String isDel) {
         this.isDel = isDel == null ? null : isDel.trim();
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
+    }
+
+    public String getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
     }
 
     public String getParam1() {

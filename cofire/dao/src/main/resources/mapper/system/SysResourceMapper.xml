@@ -9,8 +9,8 @@
     <result column="is_leaf" jdbcType="VARCHAR" property="isLeaf" />
     <result column="morder" jdbcType="INTEGER" property="morder" />
     <result column="enabled" jdbcType="VARCHAR" property="enabled" />
-    <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
     <result column="filler2" jdbcType="VARCHAR" property="filler2" />
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    resource_id, resource_name, url, parent_resource_id, is_leaf, morder, enabled, creator, 
-    create_time, icon, filler1, filler2, filler3
+    resource_id, resource_name, url, parent_resource_id, is_leaf, morder, enabled, modifier, 
+    modify_time, icon, filler1, filler2, filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysResourceExample" resultMap="BaseResultMap">
     select
@@ -112,12 +112,12 @@
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysResource">
     insert into sys_resource (resource_id, resource_name, url, 
       parent_resource_id, is_leaf, morder, 
-      enabled, creator, create_time, 
+      enabled, modifier, modify_time, 
       icon, filler1, filler2, 
       filler3)
     values (#{resourceId,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{parentResourceId,jdbcType=VARCHAR}, #{isLeaf,jdbcType=VARCHAR}, #{morder,jdbcType=INTEGER}, 
-      #{enabled,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{icon,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
       #{filler3,jdbcType=VARCHAR})
   </insert>
@@ -145,11 +145,11 @@
       <if test="enabled != null">
         enabled,
       </if>
-      <if test="creator != null">
-        creator,
+      <if test="modifier != null">
+        modifier,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="modifyTime != null">
+        modify_time,
       </if>
       <if test="icon != null">
         icon,
@@ -186,11 +186,11 @@
       <if test="enabled != null">
         #{enabled,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
@@ -236,11 +236,11 @@
       <if test="record.enabled != null">
         enabled = #{record.enabled,jdbcType=VARCHAR},
       </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=VARCHAR},
+      <if test="record.modifier != null">
+        modifier = #{record.modifier,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="record.icon != null">
         icon = #{record.icon,jdbcType=VARCHAR},
@@ -268,8 +268,8 @@
       is_leaf = #{record.isLeaf,jdbcType=VARCHAR},
       morder = #{record.morder,jdbcType=INTEGER},
       enabled = #{record.enabled,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
       filler2 = #{record.filler2,jdbcType=VARCHAR},
@@ -299,11 +299,11 @@
       <if test="enabled != null">
         enabled = #{enabled,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="icon != null">
         icon = #{icon,jdbcType=VARCHAR},
@@ -328,8 +328,8 @@
       is_leaf = #{isLeaf,jdbcType=VARCHAR},
       morder = #{morder,jdbcType=INTEGER},
       enabled = #{enabled,jdbcType=VARCHAR},
-      creator = #{creator,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},

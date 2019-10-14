@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_login_audit
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class SysLoginAudit implements Serializable {

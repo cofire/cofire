@@ -6,10 +6,8 @@
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="enabled" jdbcType="VARCHAR" property="enabled" />
-    <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="checker" jdbcType="VARCHAR" property="checker" />
-    <result column="check_time" jdbcType="VARCHAR" property="checkTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
     <result column="filler2" jdbcType="VARCHAR" property="filler2" />
     <result column="filler3" jdbcType="VARCHAR" property="filler3" />
@@ -73,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    role_id, role_name, description, enabled, creator, create_time, checker, check_time, 
-    filler1, filler2, filler3
+    role_id, role_name, description, enabled, modifier, modify_time, filler1, filler2, 
+    filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysRoleExample" resultMap="BaseResultMap">
     select
@@ -109,13 +107,13 @@
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysRole">
     insert into sys_role (role_id, role_name, description, 
-      enabled, creator, create_time, 
-      checker, check_time, filler1, 
-      filler2, filler3)
+      enabled, modifier, modify_time, 
+      filler1, filler2, filler3
+      )
     values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{enabled,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, 
-      #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR})
+      #{enabled,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysRole">
     insert into sys_role
@@ -132,17 +130,11 @@
       <if test="enabled != null">
         enabled,
       </if>
-      <if test="creator != null">
-        creator,
+      <if test="modifier != null">
+        modifier,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="checker != null">
-        checker,
-      </if>
-      <if test="checkTime != null">
-        check_time,
+      <if test="modifyTime != null">
+        modify_time,
       </if>
       <if test="filler1 != null">
         filler1,
@@ -167,17 +159,11 @@
       <if test="enabled != null">
         #{enabled,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null">
-        #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="checker != null">
-        #{checker,jdbcType=VARCHAR},
-      </if>
-      <if test="checkTime != null">
-        #{checkTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         #{filler1,jdbcType=VARCHAR},
@@ -211,17 +197,11 @@
       <if test="record.enabled != null">
         enabled = #{record.enabled,jdbcType=VARCHAR},
       </if>
-      <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=VARCHAR},
+      <if test="record.modifier != null">
+        modifier = #{record.modifier,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checker != null">
-        checker = #{record.checker,jdbcType=VARCHAR},
-      </if>
-      <if test="record.checkTime != null">
-        check_time = #{record.checkTime,jdbcType=VARCHAR},
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="record.filler1 != null">
         filler1 = #{record.filler1,jdbcType=VARCHAR},
@@ -243,10 +223,8 @@
       role_name = #{record.roleName,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       enabled = #{record.enabled,jdbcType=VARCHAR},
-      creator = #{record.creator,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=VARCHAR},
-      checker = #{record.checker,jdbcType=VARCHAR},
-      check_time = #{record.checkTime,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
       filler2 = #{record.filler2,jdbcType=VARCHAR},
       filler3 = #{record.filler3,jdbcType=VARCHAR}
@@ -266,17 +244,11 @@
       <if test="enabled != null">
         enabled = #{enabled,jdbcType=VARCHAR},
       </if>
-      <if test="creator != null">
-        creator = #{creator,jdbcType=VARCHAR},
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
-      </if>
-      <if test="checker != null">
-        checker = #{checker,jdbcType=VARCHAR},
-      </if>
-      <if test="checkTime != null">
-        check_time = #{checkTime,jdbcType=VARCHAR},
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         filler1 = #{filler1,jdbcType=VARCHAR},
@@ -295,10 +267,8 @@
     set role_name = #{roleName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       enabled = #{enabled,jdbcType=VARCHAR},
-      creator = #{creator,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      checker = #{checker,jdbcType=VARCHAR},
-      check_time = #{checkTime,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},
       filler3 = #{filler3,jdbcType=VARCHAR}

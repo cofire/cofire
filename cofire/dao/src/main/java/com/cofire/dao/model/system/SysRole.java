@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_role
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class SysRole implements Serializable {
@@ -20,17 +20,11 @@ public class SysRole implements Serializable {
     /** 是否可用 (无默认值) */
     private String enabled;
 
-    /** 创建人 (无默认值) */
-    private String creator;
+    /** 最后修改人 (无默认值) */
+    private String modifier;
 
-    /** 创建时间 (无默认值) */
-    private String createTime;
-
-    /** 审核人 (无默认值) */
-    private String checker;
-
-    /** 审核时间,格式yyyymmddhh24miss (无默认值) */
-    private String checkTime;
+    /** 最后修改时间 (无默认值) */
+    private String modifyTime;
 
     /** 预留字段1 (无默认值) */
     private String filler1;
@@ -75,36 +69,20 @@ public class SysRole implements Serializable {
         this.enabled = enabled == null ? null : enabled.trim();
     }
 
-    public String getCreator() {
-        return creator;
+    public String getModifier() {
+        return modifier;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getModifyTime() {
+        return modifyTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
-    }
-
-    public String getChecker() {
-        return checker;
-    }
-
-    public void setChecker(String checker) {
-        this.checker = checker == null ? null : checker.trim();
-    }
-
-    public String getCheckTime() {
-        return checkTime;
-    }
-
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime == null ? null : checkTime.trim();
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
     }
 
     public String getFiller1() {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_role_resource
- * @开发日期 2019-10-12
+ * @开发日期 2019-10-14
  * @开发作者 by:ly 
  */
 public class SysRoleResource implements Serializable {
@@ -14,11 +14,11 @@ public class SysRoleResource implements Serializable {
     /** 资源id(必填项) (主健ID) (无默认值) */
     private String resourceId;
 
-    /** 创建人 (无默认值) */
-    private String creator;
+    /** 最后修改人 (无默认值) */
+    private String modifier;
 
-    /** 创建时间 (无默认值) */
-    private String createTime;
+    /** 最后修改时间 (无默认值) */
+    private String modifyTime;
 
     /** 预留字段1 (无默认值) */
     private String filler1;
@@ -47,20 +47,20 @@ public class SysRoleResource implements Serializable {
         this.resourceId = resourceId == null ? null : resourceId.trim();
     }
 
-    public String getCreator() {
-        return creator;
+    public String getModifier() {
+        return modifier;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setModifier(String modifier) {
+        this.modifier = modifier == null ? null : modifier.trim();
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getModifyTime() {
+        return modifyTime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setModifyTime(String modifyTime) {
+        this.modifyTime = modifyTime == null ? null : modifyTime.trim();
     }
 
     public String getFiller1() {
