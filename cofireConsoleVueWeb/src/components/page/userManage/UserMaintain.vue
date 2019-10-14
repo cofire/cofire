@@ -44,26 +44,8 @@
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="userId" :label="$t('user.label.userId')" width="200"></el-table-column>
         <el-table-column property="userName" :label="$t('user.label.userName')" width="200"></el-table-column>
-        <el-table-column property="deptCode" :label="$t('user.label.deptCode')" width="200"></el-table-column>
-        <el-table-column property="passWord" :label="$t('user.label.passWord')" width="200"></el-table-column>
-        <el-table-column property="lastIp" :label="$t('user.label.lastIp')" width="200"></el-table-column>
-        <el-table-column property="lastDate" :label="$t('user.label.lastDate')" width="200"></el-table-column>
-        <el-table-column
-          property="wrongPwdCount"
-          :label="$t('user.label.wrongPwdCount')"
-          width="200"
-        ></el-table-column>
-        <el-table-column property="creator" :label="$t('user.label.creator')" width="200"></el-table-column>
-        <el-table-column property="createTime" :label="$t('user.label.createTime')" width="200"></el-table-column>
-        <el-table-column property="status" :label="$t('user.label.status')" width="200"></el-table-column>
-        <el-table-column property="checkStatus" :label="$t('user.label.checkStatus')" width="200"></el-table-column>
-        <el-table-column property="checker" :label="$t('user.label.checker')" width="200"></el-table-column>
-        <el-table-column property="checkTime" :label="$t('user.label.checkTime')" width="200"></el-table-column>
-        <el-table-column
-          property="changePwdFlag"
-          :label="$t('user.label.changePwdFlag')"
-          width="200"
-        ></el-table-column>
+        <el-table-column property="modifier" :label="$t('user.label.modifier')" width="200"></el-table-column>
+        <el-table-column property="modifyTime" :label="$t('user.label.modifyTime')" width="200"></el-table-column>
       </el-table>
       <el-pagination
         background=""
@@ -144,7 +126,7 @@ export default {
       queryUser(this.queryUser).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
-          this.tableData = res.dataList;
+          this.tableData = res.data;
         } else {
           this.$message({
             type: "error",
@@ -173,7 +155,7 @@ export default {
       }
       this.disabled = true;
       this.editUser = copyObject(this.currentRow, this.editUser);
-      this.editUser.saveFlag = "mod";
+      this.editUser.saveFlag = "update";
       this.title = "用户编辑";
       this.editVisible = true;
       if (this.$refs["editForm"] != undefined) {

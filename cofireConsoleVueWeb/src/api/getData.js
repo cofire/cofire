@@ -11,15 +11,13 @@ export const getUserDetail = () => fetch('/getUserDetail', {}, 'POST');
 
 /** 用户管理 */
 /** 获取用户列表 */
-export const queryUser = data => fetch('/console/user/queryUser', data, 'POST');
+export const queryUser = data => fetch('/console/user/query', data, 'POST');
 /** 保存用户信息 */
-export const saveUser = data => fetch('/console/user/saveUser', data, 'POST');
+export const saveUser = data => fetch('/console/user/save', data, 'POST');
 /**删除用户信息 */
-export const deleteUser = data => fetch('/console/user/deleteUser', data, 'POST');
+export const deleteUser = data => fetch('/console/user/delete', data, 'POST');
 /**密码重置 */
 export const resetPassword = data => fetch('/console/user/resetPassword', data, 'POST');
-/**用户审核 */
-export const auditUser = data => fetch('/console/user/auditUser', data, 'POST');
 /**角色设置 */
 export const saveUserRole = data => fetch('/console/user/saveUserRole', data, 'POST');
 /**查询选中用户已经存在的角色 */

@@ -3,7 +3,7 @@ import {
 } from "../common/CommonModel";
 
 export class QtzJobModel extends CommonModel {
-	/** 定时任务id (主健ID) (无默认值) */
+  /** 定时任务id (主健ID) (无默认值) */
   jobId = '';
 
   /** 任务名称(必填项) (无默认值) */
@@ -41,6 +41,12 @@ export class QtzJobModel extends CommonModel {
 
   /** 逻辑删除标识:0-未删除；1-已删除(必填项) (无默认值) */
   isDel = '';
+
+  /** 最后修改人 (无默认值) */
+  modifier = '';
+
+  /** 最后修改时间 (无默认值) */
+  modifyTime = '';
 
   /** 附加参数1 (无默认值) */
   param1 = '';

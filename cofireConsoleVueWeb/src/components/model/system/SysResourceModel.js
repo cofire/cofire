@@ -24,11 +24,11 @@ export class SysResourceModel extends CommonModel {
   /** 是否可用(必填项) (无默认值) */
   enabled = '';
 
-  /** 创建人 (无默认值) */
-  creator = '';
+  /** 最后修改人 (无默认值) */
+  modifier = '';
 
-  /** 创建时间 (无默认值) */
-  createTime = '';
+  /** 最后修改时间 (无默认值) */
+  modifyTime = '';
 
   /** 小图标 (无默认值) */
   icon = '';

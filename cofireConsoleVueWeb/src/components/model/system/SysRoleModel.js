@@ -15,17 +15,11 @@ export class SysRoleModel extends CommonModel {
   /** 是否可用 (无默认值) */
   enabled = '';
 
-  /** 创建人 (无默认值) */
-  creator = '';
+  /** 最后修改人 (无默认值) */
+  modifier = '';
 
-  /** 创建时间 (无默认值) */
-  createTime = '';
-
-  /** 审核人 (无默认值) */
-  checker = '';
-
-  /** 审核时间,格式yyyymmddhh24miss (无默认值) */
-  checkTime = '';
+  /** 最后修改时间 (无默认值) */
+  modifyTime = '';
 
   /** 预留字段1 (无默认值) */
   filler1 = '';
