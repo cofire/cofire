@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_param
- * @开发日期 2019-10-14
+ * @开发日期 2019-10-15
  * @开发作者 by:ly 
  */
 public class SysParam implements Serializable {
@@ -15,7 +15,7 @@ public class SysParam implements Serializable {
     private String paramId;
 
     /** 参数值(必填项)(必填项) (无默认值) */
-    private String paramVal;
+    private String paramValue;
 
     /** 参数名(必填项)(必填项) (无默认值) */
     private String paramName;
@@ -62,12 +62,12 @@ public class SysParam implements Serializable {
         this.paramId = paramId == null ? null : paramId.trim();
     }
 
-    public String getParamVal() {
-        return paramVal;
+    public String getParamValue() {
+        return paramValue;
     }
 
-    public void setParamVal(String paramVal) {
-        this.paramVal = paramVal == null ? null : paramVal.trim();
+    public void setParamValue(String paramValue) {
+        this.paramValue = paramValue == null ? null : paramValue.trim();
     }
 
     public String getParamName() {

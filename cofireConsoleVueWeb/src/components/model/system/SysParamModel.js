@@ -10,7 +10,7 @@ export class SysParamModel extends CommonModel {
   paramId = '';
 
   /** 参数值(必填项)(必填项) (无默认值) */
-  paramVal = '';
+  paramValue = '';
 
   /** 参数名(必填项)(必填项) (无默认值) */
   paramName = '';

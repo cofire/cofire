@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysParam">
     <id column="group_id" jdbcType="VARCHAR" property="groupId" />
     <id column="param_id" jdbcType="VARCHAR" property="paramId" />
-    <result column="param_val" jdbcType="VARCHAR" property="paramVal" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
     <result column="param_name" jdbcType="VARCHAR" property="paramName" />
     <result column="can_delete" jdbcType="VARCHAR" property="canDelete" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    group_id, param_id, param_val, param_name, can_delete, remark, modifier, modify_time, 
+    group_id, param_id, param_value, param_name, can_delete, remark, modifier, modify_time, 
     filler1, filler2, filler3, filler4
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysParamExample" resultMap="BaseResultMap">
@@ -111,12 +111,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysParam">
-    insert into sys_param (group_id, param_id, param_val, 
+    insert into sys_param (group_id, param_id, param_value, 
       param_name, can_delete, remark, 
       modifier, modify_time, filler1, 
       filler2, filler3, filler4
       )
-    values (#{groupId,jdbcType=VARCHAR}, #{paramId,jdbcType=VARCHAR}, #{paramVal,jdbcType=VARCHAR}, 
+    values (#{groupId,jdbcType=VARCHAR}, #{paramId,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, 
       #{paramName,jdbcType=VARCHAR}, #{canDelete,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, 
       #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}, #{filler4,jdbcType=VARCHAR}
@@ -131,8 +131,8 @@
       <if test="paramId != null">
         param_id,
       </if>
-      <if test="paramVal != null">
-        param_val,
+      <if test="paramValue != null">
+        param_value,
       </if>
       <if test="paramName != null">
         param_name,
@@ -169,8 +169,8 @@
       <if test="paramId != null">
         #{paramId,jdbcType=VARCHAR},
       </if>
-      <if test="paramVal != null">
-        #{paramVal,jdbcType=VARCHAR},
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
       </if>
       <if test="paramName != null">
         #{paramName,jdbcType=VARCHAR},
@@ -216,8 +216,8 @@
       <if test="record.paramId != null">
         param_id = #{record.paramId,jdbcType=VARCHAR},
       </if>
-      <if test="record.paramVal != null">
-        param_val = #{record.paramVal,jdbcType=VARCHAR},
+      <if test="record.paramValue != null">
+        param_value = #{record.paramValue,jdbcType=VARCHAR},
       </if>
       <if test="record.paramName != null">
         param_name = #{record.paramName,jdbcType=VARCHAR},
@@ -255,7 +255,7 @@
     update sys_param
     set group_id = #{record.groupId,jdbcType=VARCHAR},
       param_id = #{record.paramId,jdbcType=VARCHAR},
-      param_val = #{record.paramVal,jdbcType=VARCHAR},
+      param_value = #{record.paramValue,jdbcType=VARCHAR},
       param_name = #{record.paramName,jdbcType=VARCHAR},
       can_delete = #{record.canDelete,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
@@ -272,8 +272,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.cofire.dao.model.system.SysParam">
     update sys_param
     <set>
-      <if test="paramVal != null">
-        param_val = #{paramVal,jdbcType=VARCHAR},
+      <if test="paramValue != null">
+        param_value = #{paramValue,jdbcType=VARCHAR},
       </if>
       <if test="paramName != null">
         param_name = #{paramName,jdbcType=VARCHAR},
@@ -308,7 +308,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysParam">
     update sys_param
-    set param_val = #{paramVal,jdbcType=VARCHAR},
+    set param_value = #{paramValue,jdbcType=VARCHAR},
       param_name = #{paramName,jdbcType=VARCHAR},
       can_delete = #{canDelete,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
