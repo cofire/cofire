@@ -22,7 +22,7 @@ public class UserController extends SystemBaseController {
 
     @BussinessLog("查询用户信息")
     @RequestMapping(value = "/user/query", method = { RequestMethod.POST })
-    public Result query(ParamItem paramItem, SysUser user) {
+    public Result queryRole(ParamItem paramItem, SysUser user) {
         return userService.query(paramItem, user);
     }
 
