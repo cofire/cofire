@@ -1,18 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/layout/Home'
-import Dashboard from '@/components/page/Dashboard'
-import Login from '@/components/page/Login'
-import P404 from '@/components/page/404'
-import P403 from '@/components/page/404'
-import UserMaintain from '@/components/page/userManage/UserMaintain'
-// import LoginLog from '@/components/page/logManage/LoginLog'
-// import OpeLog from '@/components/page/logManage/OpeLog'
-// import Depart from '@/components/page/departManage/Depart'
-// import RoleMaintain from '@/components/page/roleManage/RoleMaintain'
-// import DictMaintain from '@/components/page/dictManage/DictMaintain'
-// import ParamsMaintain from '@/components/page/paramsManage/ParamsMaintain'
-// import RichTextMaintain from '@/components/page/richTextManage/RichTextMaintain'
+import Home from '../components/layout/Home'
+import Dashboard from '../components/page/Dashboard'
+import Login from '../components/page/Login'
+import P404 from '../components/page/404'
+import P403 from '../components/page/404'
+import UserMaintain from '../components/page/system/UserMaintain'
+import RoleMaintain from '../components/page/system/RoleMaintain'
+// import LoginLog from '../components/page/logManage/LoginLog'
+// import OpeLog from '../components/page/logManage/OpeLog'
+// import Depart from '../components/page/departManage/Depart'
+// import RoleMaintain from '../components/page/system/RoleMaintain'
+// import DictMaintain from '../components/page/dictManage/DictMaintain'
+// import ParamsMaintain from '../components/page/paramsManage/ParamsMaintain'
+// import RichTextMaintain from '../components/page/richTextManage/RichTextMaintain'
 Vue.use(Router);
 
 export default new Router({
@@ -38,6 +39,13 @@ export default new Router({
                     component: UserMaintain,
                     meta: {
                         title: 'common.route.R11'
+                    }
+                },
+                {
+                    path: '/role',
+                    component: RoleMaintain,
+                    meta: {
+                        title: 'common.route.R12'
                     }
                 },
                 {

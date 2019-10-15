@@ -73,7 +73,7 @@
   import bus from '../common/bus'
   import {loginOut} from '@/api/getData'
   import {userPswModel} from '../model/userPsw/userPswModel'
-  import {confirmUpdatePsw} from '../../api/getData'
+  // import {confirmUpdatePsw} from '../../api/getData'
   import {baseImgPath} from '@/config/env.js'
 
   export default {

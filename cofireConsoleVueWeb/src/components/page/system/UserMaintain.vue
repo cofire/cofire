@@ -13,7 +13,7 @@
       <el-form :inline="true" :model="queryUser" ref="queryForm">
         <el-col :span="6">
           <el-form-item :label="$t('user.label.userId')">
-            <el-input v-model="queryUser.userId" placeholder="用户代码"></el-input>
+            <el-input v-model="queryUser.userId" :placeholder="$t('user.label.userId')"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6">
@@ -29,13 +29,13 @@
       <el-button type="primary" icon="el-icon-lx-edit" @click="edit()">修改</el-button>
       <el-button type="primary" icon="el-icon-lx-settings">角色设置</el-button>
       <el-button type="primary" icon="el-icon-lx-refresh">密码重置</el-button>
-      <el-button type="primary" icon="el-icon-lx-hot">用户激活</el-button>
       <el-button type="primary" icon="el-icon-lx-roundclose">用户注销</el-button>
     </el-row>
     <el-row class="table-result">
       <el-table
         ref="singleTable"
         border=""
+        highlight-current-row
         :data="tableData"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
@@ -89,7 +89,7 @@ import { pageSizes, pageSize } from "../../common/global";
 import { queryUser, saveUser } from "@/api/getData";
 import { copyObject } from "../../common/util";
 export default {
-  name: "userMaintain",
+  name: "UserMaintain",
   data() {
     return {
       queryUser: new SysUserModel(),
