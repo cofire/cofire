@@ -68,7 +68,7 @@ public class DictServiceImpl implements IDictService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 dictExample.setDatabaseId(Constants.MYSQL);
-                dictExample.setOrderByClause("dict_id DESC");
+                dictExample.setOrderByClause("group_id,dict_value");
                 dictExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }

@@ -72,7 +72,7 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 operateAuditExample.setDatabaseId(Constants.MYSQL);
-                operateAuditExample.setOrderByClause("operateAudit_id DESC");
+                operateAuditExample.setOrderByClause("sid DESC");
                 operateAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }

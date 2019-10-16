@@ -62,7 +62,7 @@ public class JobLogServiceImpl implements IJobLogService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 jobLogExample.setDatabaseId(Constants.MYSQL);
-                jobLogExample.setOrderByClause("jobLog_id DESC");
+                jobLogExample.setOrderByClause("sid DESC");
                 jobLogExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }

@@ -7,13 +7,9 @@ import P404 from '../components/page/404'
 import P403 from '../components/page/404'
 import UserMaintain from '../components/page/system/UserMaintain'
 import RoleMaintain from '../components/page/system/RoleMaintain'
-// import LoginLog from '../components/page/logManage/LoginLog'
-// import OpeLog from '../components/page/logManage/OpeLog'
-// import Depart from '../components/page/departManage/Depart'
-// import RoleMaintain from '../components/page/system/RoleMaintain'
-// import DictMaintain from '../components/page/dictManage/DictMaintain'
-// import ParamsMaintain from '../components/page/paramsManage/ParamsMaintain'
-// import RichTextMaintain from '../components/page/richTextManage/RichTextMaintain'
+import DictMaintain from '../components/page/system/DictMaintain'
+import ParamMaintain from '../components/page/system/ParamMaintain'
+import JobLogMaintain from '../components/page/log/JobLogMaintain'
 Vue.use(Router);
 
 export default new Router({
@@ -46,6 +42,27 @@ export default new Router({
                     component: RoleMaintain,
                     meta: {
                         title: 'common.route.R12'
+                    }
+                },
+                {
+                    path: '/dict',
+                    component: DictMaintain,
+                    meta: {
+                        title: 'common.route.R22'
+                    }
+                },
+                {
+                    path: '/param',
+                    component: ParamMaintain,
+                    meta: {
+                        title: 'common.route.R21'
+                    }
+                },
+                {
+                    path: '/jobLog',
+                    component: JobLogMaintain,
+                    meta: {
+                        title: 'common.route.R33'
                     }
                 },
                 {

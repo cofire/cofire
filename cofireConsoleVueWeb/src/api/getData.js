@@ -29,3 +29,25 @@ export const saveRole = data => fetch('/console/role/save', data, 'POST');
 /**删除角色信息 */
 export const deleteRole = data => fetch('/console/role/delete', data, 'POST');
 
+/** 数据字典管理 */
+/** 获取数据字典列表 */
+export const queryDict = data => fetch('/console/dict/query', data, 'POST');
+/** 保存数据字典信息 */
+export const saveDict = data => fetch('/console/dict/save', data, 'POST');
+/**删除数据字典信息 */
+export const deleteDict = data => fetch('/console/dict/delete', data, 'POST');
+
+/** 系统参数管理 */
+/** 获取系统参数列表 */
+export const queryParam = data => fetch('/console/param/query', data, 'POST');
+/** 保存系统参数信息 */
+export const saveParam = data => fetch('/console/param/save', data, 'POST');
+/**删除系统参数信息 */
+export const deleteParam = data => fetch('/console/param/delete', data, 'POST');
+
+/** 查询定时任务日志 */
+export const queryJobLog = data => fetch('/console/jobLog/query', data, 'POST');
+/** 获取登录登出日志列表 */
+export const queryLoginAudit = data => fetch('/console/loginAudit/query', data, 'POST');
+/** 获取操作日志列表 */
+export const queryOperateAudit = data => fetch('/console/operateAudit/query', data, 'POST');

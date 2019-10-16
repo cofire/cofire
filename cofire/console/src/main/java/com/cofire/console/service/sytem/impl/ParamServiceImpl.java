@@ -70,7 +70,7 @@ public class ParamServiceImpl implements IParamService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 paramExample.setDatabaseId(Constants.MYSQL);
-                paramExample.setOrderByClause("param_id DESC");
+                paramExample.setOrderByClause("group_id,param_id");
                 paramExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }
@@ -168,7 +168,7 @@ public class ParamServiceImpl implements IParamService {
         try {
             logger.info("开始删除系统参数信息");
             // 根据主键删除对应记录
-            paramMapper.deleteByPrimaryKey(param.getGroupId(), param.getParamValue());
+            paramMapper.deleteByPrimaryKey(param.getGroupId(), param.getParamId());
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("删除系统参数信息失败:" + e.getMessage());

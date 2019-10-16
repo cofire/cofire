@@ -68,7 +68,7 @@ public class JobServiceImpl implements IJobService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 jobExample.setDatabaseId(Constants.MYSQL);
-                jobExample.setOrderByClause("job_id DESC");
+                jobExample.setOrderByClause("job_id");
                 jobExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }

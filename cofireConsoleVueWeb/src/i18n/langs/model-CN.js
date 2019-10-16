@@ -54,7 +54,7 @@ exports.default = {
     label: {
       'groupId': '组号',
       'paramId': '参数id',
-      'paramVal': '参数值',
+      'paramValue': '参数值',
       'paramName': '参数名',
       'canDelete': '是否可修改',
       'remark': '备注',

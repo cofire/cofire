@@ -71,7 +71,7 @@ public class LoginAuditServiceImpl implements ILoginAuditService {
         if (null != paramItem) {
             if (null != paramItem.getPage() && null != paramItem.getLength()) {
                 loginAuditExample.setDatabaseId(Constants.MYSQL);
-                loginAuditExample.setOrderByClause("loginAudit_id DESC");
+                loginAuditExample.setOrderByClause("sid DESC");
                 loginAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
             }
         }
