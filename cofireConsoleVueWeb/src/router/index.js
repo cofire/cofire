@@ -10,6 +10,8 @@ import RoleMaintain from '../components/page/system/RoleMaintain'
 import DictMaintain from '../components/page/system/DictMaintain'
 import ParamMaintain from '../components/page/system/ParamMaintain'
 import JobLogMaintain from '../components/page/log/JobLogMaintain'
+import LoginAuditMaintain from '../components/page/log/LoginAuditMaintain'
+import OperateAuditMaintain from '../components/page/log/OperateAuditMaintain'
 Vue.use(Router);
 
 export default new Router({
@@ -63,6 +65,20 @@ export default new Router({
                     component: JobLogMaintain,
                     meta: {
                         title: 'common.route.R33'
+                    }
+                },
+                {
+                    path: '/loginAudit',
+                    component: LoginAuditMaintain,
+                    meta: {
+                        title: 'common.route.R31'
+                    }
+                },
+                {
+                    path: '/oprateAudit',
+                    component: OperateAuditMaintain,
+                    meta: {
+                        title: 'common.route.R32'
                     }
                 },
                 {

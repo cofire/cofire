@@ -1,6 +1,7 @@
 package com.cofire.console.config.log;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.cofire.common.utils.constant.Constants;
 import com.cofire.common.utils.context.HttpContext;
+import com.cofire.common.utils.string.DateUtils;
 import com.cofire.console.config.log.factory.LogFactory;
 import com.cofire.console.config.log.factory.LogTaskFactory;
 import com.cofire.dao.model.system.SysOperateAudit;
@@ -96,6 +98,7 @@ public class LogAop {
         }
         SysOperateAudit operateAudit = aopLog.get();
         operateAudit.setResult(result);
+        operateAudit.setReturnTime(DateUtils.dataTimeToNumber(new Date()));
         LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
     }
 
