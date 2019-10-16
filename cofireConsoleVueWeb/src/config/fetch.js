@@ -5,7 +5,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
     url = baseUrl + url;
     let dataStr = ''; //数据拼接字符串
     Object.keys(data).forEach(key => {
-        if(data[key] !== undefined && data[key] !== null){
+        if(data[key] !== undefined && data[key] !== null && data[key] !== ""){
             dataStr += key + '=' + encodeURIComponent(data[key]) + '&';
         }
     })

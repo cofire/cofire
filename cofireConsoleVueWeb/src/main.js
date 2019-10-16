@@ -11,6 +11,7 @@ import './components/common/directives';
 import "babel-polyfill";
 // vuei18n 
 import i18n from './i18n/i18n';
+import BaseUtil from './BaseUtil'
 
 import {getUserDetail} from '@/api/getData'
 import {loginUserDetailStore} from '@/components/store/common/loginUserDetailStore';
@@ -23,6 +24,9 @@ Vue.use(ElementUI, {
     size: 'small',
     i18n: (key, value) => i18n.t(key, value)
 });
+
+Vue.use(BaseUtil);
+
 Vue.prototype.$axios = axios;
 axios.defaults.withCredentials = true
 

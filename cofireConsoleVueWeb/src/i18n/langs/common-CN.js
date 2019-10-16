@@ -52,8 +52,8 @@ exports.default = {
       'prompt': '提示',
       'index': '序号',
       'dateto': '至',
-      'dateStr': '开始日期',
-      'dateEnd': '结束日期',
+      'startTime': '开始日期',
+      'endTime': '结束日期',
     }
   }
 }
