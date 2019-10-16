@@ -17,11 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cofire.common.constant.CodeEnum;
+import com.cofire.common.constant.Constants;
 import com.cofire.common.result.Result;
 import com.cofire.common.result.SystemUtil;
 import com.cofire.common.utils.bean.BeanUtil;
-import com.cofire.common.utils.constant.CodeEnum;
-import com.cofire.common.utils.constant.Constants;
 import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.model.custom.Menu;

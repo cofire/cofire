@@ -1,6 +1,6 @@
 package com.cofire.common.result;
 
-import com.cofire.common.utils.constant.CodeEnum;
+import com.cofire.common.constant.CodeEnum;
 
 public class Result {
     private boolean success = false;

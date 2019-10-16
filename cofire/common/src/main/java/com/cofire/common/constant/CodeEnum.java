@@ -1,4 +1,4 @@
-package com.cofire.common.utils.constant;
+package com.cofire.common.constant;
 
 /**
  * 

@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cofire.common.utils.constant.Constants;
+import com.cofire.common.constant.Constants;
 import com.cofire.dao.model.system.SysUser;
 import com.cofire.shiro.service.IUserPermissionService;
 

@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.cofire.common.utils.constant.Constants;
+import com.cofire.common.constant.Constants;
 import com.cofire.common.utils.context.HttpContext;
 import com.cofire.common.utils.string.DateUtils;
 import com.cofire.console.config.log.factory.LogFactory;

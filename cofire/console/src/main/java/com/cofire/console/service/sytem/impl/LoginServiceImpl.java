@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.cofire.common.constant.CodeEnum;
+import com.cofire.common.constant.Constants;
 import com.cofire.common.result.Result;
-import com.cofire.common.utils.constant.CodeEnum;
-import com.cofire.common.utils.constant.Constants;
 import com.cofire.common.utils.context.HttpContext;
 import com.cofire.common.utils.security.DESCrypto;
 import com.cofire.common.utils.security.MD5Crypto;

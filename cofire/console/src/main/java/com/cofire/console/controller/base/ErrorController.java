@@ -3,8 +3,8 @@ package com.cofire.console.controller.base;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.result.Result;
-import com.cofire.common.utils.constant.CodeEnum;
 
 @RestController
 @RequestMapping("/error")

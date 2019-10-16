@@ -3,7 +3,7 @@ package com.cofire.console.common;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
-import com.cofire.common.utils.constant.Constants;
+import com.cofire.common.constant.Constants;
 import com.cofire.dao.model.system.SysUser;
 
 public class CurrentUserUtil {

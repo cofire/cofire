@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.result.Result;
 import com.cofire.common.result.SystemUtil;
-import com.cofire.common.utils.constant.CodeEnum;
 import com.cofire.common.utils.file.FileUtil;
 import com.cofire.common.utils.file.ImageMarkUtil;
 import com.cofire.common.utils.file.ImageZoomUtil;

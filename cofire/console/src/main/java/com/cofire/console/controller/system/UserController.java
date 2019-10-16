@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cofire.common.constant.CodeEnum;
+import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
-import com.cofire.common.utils.constant.CodeEnum;
-import com.cofire.common.utils.constant.Constants;
 import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.model.system.SysUser;
