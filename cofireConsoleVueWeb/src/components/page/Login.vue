@@ -1,11 +1,13 @@
 <template>
-  <div class="login-wrap"               
-   v-loading="loading"
-              :element-loading-text="this.$t('common.message.loggingIn')"
-              element-loading-spinner="el-icon-loading"
-             element-loading-background="rgba(0, 0, 0, 0.8)">
+  <div
+    class="login-wrap"
+    v-loading="loading"
+    :element-loading-text="$t('common.message.loginLoading')"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <div class="ms-login">
-      <div class="ms-title">{{this.$t('common.label.platformTitle')}}</div>
+      <div class="ms-title">{{$t('common.label.platformTitle')}}</div>
       <el-form
         :model="loginForm"
         :rules="rules"
@@ -14,21 +16,23 @@
         class="ms-content"
       >
         <el-form-item prop="userId">
-          <el-input v-model="loginForm.userId" prefix-icon="el-icon-lx-people" :placeholder="this.$t('login.userId')">
-          </el-input>
+          <el-input
+            v-model="loginForm.userId"
+            prefix-icon="el-icon-lx-people"
+            :placeholder="$t('login.userId')"
+          ></el-input>
         </el-form-item>
         <el-form-item prop="passWord">
           <el-input
             type="passWord"
-            :placeholder="this.$t('login.passWord')"
+            :placeholder="$t('login.passWord')"
             v-model="loginForm.passWord"
             @keyup.enter.native="submitForm('loginForm')"
             prefix-icon="el-icon-lx-lock"
-          >
-          </el-input>
+          ></el-input>
         </el-form-item>
         <div class="lang">
-          <label class="lang-label">{{this.$t('common.label.selectLang')}}：</label>
+          <label class="lang-label">{{$t('common.label.selectLang')}}：</label>
           <el-radio-group v-model="lang" @change="langChangeHandler">
             <el-radio label="cn">中文</el-radio>
             <el-radio label="en">English</el-radio>
@@ -38,7 +42,7 @@
           <el-button
             type="primary"
             @click="submitForm('loginForm')"
-          >{{this.$t('common.button.login')}}</el-button>
+          >{{$t('common.button.login')}}</el-button>
         </div>
       </el-form>
     </div>
@@ -49,33 +53,19 @@
 import { login, getUserDetail } from "@/api/getData";
 import { encrypt } from "@/components/common/3des";
 import { loginUserDetailStore } from "../store/common/loginUserDetailStore";
+import { Rules} from "../rules/Rules";
 
 export default {
   inject: ["reload"],
   data: function() {
     return {
-      loading:false,
+      loading: false,
       loginForm: {
         userId: "",
         passWord: ""
       },
       lang: "cn",
-      rules: {
-        userId: [
-          {
-            required: true,
-            message: this.$t("login.rule.userId"),
-            trigger: "blur"
-          }
-        ],
-        passWord: [
-          {
-            required: true,
-            message: this.$t("login.rule.passWord"),
-            trigger: "blur"
-          }
-        ]
-      }
+      rules: Rules.LoginRules
     };
   },
   methods: {
@@ -85,7 +75,7 @@ export default {
       this.reload();
     },
     submitForm(formName) {
-        this.loading=true;
+      this.loading = true;
       this.$refs[formName].validate(valid => {
         if (valid) {
           login({
@@ -94,37 +84,39 @@ export default {
             filler1: "console"
           }).then(res => {
             if (res.success || res.success == "true") {
-              this.loading=true;
+              this.loading = true;
               getUserDetail().then(re => {
                 if (re.success || re.success == "true") {
                   loginUserDetailStore.dispatch("set", re.data.menuList);
                   loginUserDetailStore.dispatch("setUserId", re.data.userId);
-                  localStorage.setItem('common', JSON.stringify(re.data.common));
+                  localStorage.setItem(
+                    "common",
+                    JSON.stringify(re.data.common)
+                  );
                   console.log("加载菜单成功");
                 } else {
                   console.log("加载菜单失败");
                 }
                 this.$message({
                   type: "success",
-                  message: this.$t("common.code." + res.code)
+                  message: this.$t("code." + res.code)
                 });
-                this.loading=false;
+                this.loading = false;
                 this.$router.replace("/dashboard");
               });
             } else {
               this.$message({
                 type: "error",
-                message: this.$t("common.code." + res.code)
+                message: this.$t("code." + res.code)
               });
-                 this.loading=false;
+              this.loading = false;
             }
           });
         } else {
           console.log("error submit!!");
           return false;
-             this.loading=false;
+          this.loading = false;
         }
-
       });
     }
   },

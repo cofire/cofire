@@ -233,13 +233,13 @@ export default {
             if (res.success || res.success == "true") {
               this.$message({
                 type: "success",
-                message: this.$t("common.code." + res.code)
+                message: this.$t("code." + res.code)
               });
               this.search();
             } else {
               this.$message({
                 type: "error",
-                message: this.$t("common.code." + res.code)
+                message: this.$t("code." + res.code)
               });
             }
           });

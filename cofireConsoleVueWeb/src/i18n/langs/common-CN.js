@@ -54,6 +54,9 @@ exports.default = {
       'dateto': '至',
       'startTime': '开始日期',
       'endTime': '结束日期',
+    },
+    message: {
+      loginLoading: "正在登陆",
     }
   }
 }
