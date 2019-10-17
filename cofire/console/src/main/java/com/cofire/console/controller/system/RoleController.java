@@ -12,6 +12,7 @@ import com.cofire.common.result.Result;
 import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IRoleService;
 import com.cofire.dao.model.system.SysRole;
+import com.cofire.dao.model.system.SysUser;
 
 @RestController
 public class RoleController extends SystemBaseController {
@@ -45,4 +46,9 @@ public class RoleController extends SystemBaseController {
         return roleService.delete(role);
     }
 
+    @BussinessLog("查询用户角色信息")
+    @RequestMapping(value = "/role/queryUserRoleList", method = { RequestMethod.POST })
+    public Result queryUserRoleList(SysUser user) {
+        return roleService.queryUserRoleList(user);
+    }
 }

@@ -17,5 +17,28 @@ export const Rules = {
         trigger: "blur"
       }
     ]
+  },
+  UserRules: {
+    userId: [
+      {
+        required: true,
+        message:  i18n.t('user.rule.userId'),
+        trigger: 'blur'
+      }
+    ],
+    userName: [
+      {
+        required: true,
+        message:  i18n.t('user.rule.userName'),
+        trigger: 'blur'
+      },
+    ],
+    passWord: [
+      {
+        required: true,
+        message:  i18n.t('user.rule.password'),
+        trigger: 'blur'
+      }
+    ],
   }
 }

@@ -42,8 +42,19 @@ public class UserController extends SystemBaseController {
 
     @BussinessLog("删除用户信息")
     @RequestMapping(value = "/user/delete", method = { RequestMethod.POST })
-    public Result deleteUser(SysUser user) {
-        return userService.delete(user);
+    public Result deleteUser(String userId) {
+        return userService.delete(userId);
     }
 
+    @BussinessLog("用户角色设置")
+    @RequestMapping(value = "/user/saveUserRole", method = { RequestMethod.POST })
+    public Result saveUserRole(String userId, String roleIds) {
+        return userService.saveUserRole(userId, roleIds);
+    }
+
+    @BussinessLog("用户重置密码")
+    @RequestMapping(value = "/user/restPassWord", method = { RequestMethod.POST })
+    public Result restPassWord(String userId) {
+        return userService.restPassWord(userId);
+    }
 }

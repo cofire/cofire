@@ -16,5 +16,9 @@ public interface IUserService {
 
     Result upadte(SysUser user);
 
-    Result delete(SysUser user);
+    Result delete(String userId);
+
+    Result saveUserRole(String userId, String roleIds);
+
+    Result restPassWord(String userId);
 }

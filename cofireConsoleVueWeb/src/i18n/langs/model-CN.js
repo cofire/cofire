@@ -21,6 +21,23 @@ exports.default = {
       'filler1': '预留字段1',
       'filler2': '预留字段2',
       'filler3': '预留字段3'
+    },
+    rule: {
+      'userId': '用户账号不能为空',
+      'userName': '用户姓名不能为空',
+    },
+    title: {
+      'add': '用户新增',
+      'edit': '用户编辑',
+      'detail': '用户信息详情',
+      'roleSet': '角色设置'
+    },
+    message: {
+      "edit": "请选中需要编辑的用户信息",
+      "roleSet":"请选中需要角色设置的用户信息",
+      "restPassWord": "请选中需要重置密码的用户信息",
+      "restPassWordPrompt": "正在重置该用户密码，是否继续？",
+      "returnNewPasswInfo": "用户新密码为："
     }
   },
   role: {

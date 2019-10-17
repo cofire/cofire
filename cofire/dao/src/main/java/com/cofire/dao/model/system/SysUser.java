@@ -4,14 +4,11 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_user
- * @开发日期 2019-10-14
+ * @开发日期 2019-10-17
  * @开发作者 by:ly 
  */
 public class SysUser implements Serializable {
-    /** 自增id (主健ID) (无默认值) */
-    private Long sid;
-
-    /** 用户账号(必填项) (无默认值) */
+    /** 用户账号 (主健ID) (无默认值) */
     private String userId;
 
     /** 用户姓名 (无默认值) */
@@ -36,14 +33,6 @@ public class SysUser implements Serializable {
     private String filler3;
 
     private static final long serialVersionUID = 1L;
-
-    public Long getSid() {
-        return sid;
-    }
-
-    public void setSid(Long sid) {
-        this.sid = sid;
-    }
 
     public String getUserId() {
         return userId;

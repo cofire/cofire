@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
 /**
@@ -19,11 +20,29 @@ import org.springframework.util.Assert;
 public class ParamValidator {
 
     /**
+     * 
+     * @Title: checkParamsHasEmpty
+     * @author ly
+     * @Description:检测参数是否为空
+     * @param @param values
+     * @param @return false：参数信息完整 true：参数信息不完整
+     * @return boolean 返回类型
+     */
+    public static boolean checkParamsHasEmpty(String... values) {
+        for (int i = 0; i < values.length; i++) {
+            if (StringUtils.isEmpty(values[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 校验参数中是否有为空的属性
      *
      * @param paramObj 参数对象
      * @param checkProperties 需要校验的参数
-     * @return true：参数信息完整 false：参数信息不完整
+     * @return false：参数信息完整 true：参数信息不完整
      * @throws IllegalAccessException
      */
     @SuppressWarnings("unlikely-arg-type")

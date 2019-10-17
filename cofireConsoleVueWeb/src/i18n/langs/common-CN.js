@@ -56,7 +56,8 @@ exports.default = {
       'endTime': '结束日期',
     },
     message: {
-      loginLoading: "正在登陆",
+      'loginLoading': "正在登陆",
+      'paramInvalid': "参数无效"
     }
   }
 }

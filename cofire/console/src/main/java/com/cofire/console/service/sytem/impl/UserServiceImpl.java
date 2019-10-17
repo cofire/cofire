@@ -1,8 +1,11 @@
 package com.cofire.console.service.sytem.impl;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +21,16 @@ import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.MD5Crypto;
 import com.cofire.common.utils.security.Util;
+import com.cofire.common.utils.string.DateUtils;
 import com.cofire.common.utils.validate.ParamValidator;
+import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.mapper.custom.UserPermissionCustomMapper;
 import com.cofire.dao.mapper.system.SysUserMapper;
 import com.cofire.dao.mapper.system.SysUserRoleMapper;
 import com.cofire.dao.model.system.SysUser;
 import com.cofire.dao.model.system.SysUserExample;
+import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 
 @Service
@@ -133,6 +139,8 @@ public class UserServiceImpl implements IUserService {
         try {
             user.setModifyTime(Util.getCurrentDateTimeString());
             user.setPassWord(MD5Crypto.encrypt(user.getUserId(), user.getUserId()));
+            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.insert(user);
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
@@ -159,6 +167,8 @@ public class UserServiceImpl implements IUserService {
             SysUserExample userExample = new SysUserExample();
             SysUserExample.Criteria userCriteria = userExample.createCriteria();
             userCriteria.andUserIdEqualTo(user.getUserId());
+            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.updateByExample(user, userExample);
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
@@ -179,16 +189,15 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result delete(SysUser user) {
+    public Result delete(String userId) {
         logger.info("正在删除用户信息");
         Result result = new Result();
-        String userId = user.getUserId();
         try {
             logger.info("开始删除用户信息");
             // 根据主键删除对应记录
             SysUserExample userExample = new SysUserExample();
             SysUserExample.Criteria userCriteria = userExample.createCriteria();
-            userCriteria.andUserIdEqualTo(user.getUserId());
+            userCriteria.andUserIdEqualTo(userId);
             userMapper.deleteByExample(userExample);
             SysUserRoleExample example = new SysUserRoleExample();
             SysUserRoleExample.Criteria criteria = example.createCriteria();
@@ -199,6 +208,82 @@ public class UserServiceImpl implements IUserService {
             logger.error("删除用户信息失败:" + e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return result;
+        }
+        return result;
+    }
+
+    /**
+     * 
+     * @Title: saveUserRole
+     * @author ly
+     * @Description:保存用户角色信息
+     * @param @param userId
+     * @param @param roleIds
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Result saveUserRole(String userId, String roleIds) {
+        Result result = new Result();
+        if (ParamValidator.checkParamsHasEmpty(userId)) {
+            result.setSuccess(false, CodeEnum.E_400);
+            return result;
+        }
+        try {
+            SysUserRoleExample example = new SysUserRoleExample();
+            SysUserRoleExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(userId);
+            userRoleMapper.deleteByExample(example);
+            if (StringUtils.isNotEmpty(roleIds)) {
+                String[] roleIdArray = roleIds.split(",");
+                HashSet<String> roleIdSet = new HashSet<>();
+                CollectionUtils.addAll(roleIdSet, roleIdArray);
+                for (String roleId : roleIdSet) {
+                    SysUserRole userRole = new SysUserRole();
+                    userRole.setRoleId(roleId);
+                    userRole.setUserId(userId);
+                    userRole.setModifier(CurrentUserUtil.getCurentUserId());
+                    userRole.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
+                    userRoleMapper.insertSelective(userRole);
+                }
+            }
+            result.setSuccess(true, CodeEnum.E_700);
+        } catch (Exception e) {
+            logger.error("保存用户角色信息失败:" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            result.setSuccess(false, CodeEnum.E_500);
+        }
+        return result;
+    }
+
+    /**
+     * 
+     * @Title: restPassWord
+     * @author ly
+     * @Description:重置用户密码
+     * @param @param userId
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @Override
+    public Result restPassWord(String userId) {
+        logger.info("正在进行重置密码");
+        Result result = new Result();
+        if (ParamValidator.checkParamsHasEmpty(userId)) {
+            result.setSuccess(false, CodeEnum.E_400);
+            return result;
+        }
+        try {
+            SysUser user = new SysUser();
+            user.setUserId(userId);
+            user.setPassWord(MD5Crypto.encrypt(userId, userId));
+            userMapper.updateByPrimaryKeySelective(user);
+            result.setSuccess(true, CodeEnum.E_700);
+            result.setData(userId);
+        } catch (Exception e) {
+            logger.error("重置密码失败" + e.getMessage());
+            result.setSuccess(false, CodeEnum.E_500);
         }
         return result;
     }

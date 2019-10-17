@@ -20,8 +20,12 @@ import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IRoleService;
 import com.cofire.dao.mapper.system.SysRoleMapper;
+import com.cofire.dao.mapper.system.SysUserRoleMapper;
 import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysRoleExample;
+import com.cofire.dao.model.system.SysUser;
+import com.cofire.dao.model.system.SysUserRole;
+import com.cofire.dao.model.system.SysUserRoleExample;
 
 @Service
 public class RoleServiceImpl implements IRoleService {
@@ -29,6 +33,8 @@ public class RoleServiceImpl implements IRoleService {
     private final static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
     @Autowired
     private SysRoleMapper roleMapper;
+    @Autowired
+    private SysUserRoleMapper userRoleMapper;
 
     /**
      * 
@@ -179,6 +185,33 @@ public class RoleServiceImpl implements IRoleService {
             logger.error("删除角色信息失败:" + e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return result;
+        }
+        return result;
+    }
+
+    /**
+     * 
+     * @Title: queryUserRoleList
+     * @author ly
+     * @Description:查询用户角色列表，用户已有的角色 checked为 true
+     * @param @param role
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @Override
+    public Result queryUserRoleList(SysUser user) {
+        logger.info("正在查询用户的角色信息:" + user.getUserId());
+        Result result = new Result();
+        try {
+            SysUserRoleExample example = new SysUserRoleExample();
+            SysUserRoleExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(user.getUserId());
+            List<SysUserRole> userRoleList = userRoleMapper.selectByExample(example);
+            result.setData(userRoleList);
+            result.setSuccess(true, CodeEnum.E_600);
+        } catch (Exception e) {
+            logger.error("删除角色信息失败:" + e.getMessage());
+            result.setSuccess(true, CodeEnum.E_601);
         }
         return result;
     }

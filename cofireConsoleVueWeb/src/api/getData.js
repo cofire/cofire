@@ -17,8 +17,9 @@ export const saveUser = data => fetch('/console/user/save', data, 'POST');
 /**删除用户信息 */
 export const deleteUser = data => fetch('/console/user/delete', data, 'POST');
 /**密码重置 */
-export const resetPassword = data => fetch('/console/user/resetPassword', data, 'POST');
-/**角色设置 */
+export const restPassWord = data => fetch('/console/user/restPassWord', data, 'POST');
+/** 保存用户的角色信息 */
+export const saveUserRole = data => fetch('/console/user/saveUserRole', data, 'POST');
 
 /** 角色管理 */
 /** 获取角色列表 */
@@ -28,6 +29,9 @@ export const queryRole = data => fetch('/console/role/query', data, 'POST');
 export const saveRole = data => fetch('/console/role/save', data, 'POST');
 /**删除角色信息 */
 export const deleteRole = data => fetch('/console/role/delete', data, 'POST');
+/**查询用户角色信息 */
+export const queryUserRoleList = data => fetch('/console/role/queryUserRoleList', data, 'POST');
+
 
 /** 数据字典管理 */
 /** 获取数据字典列表 */
