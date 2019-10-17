@@ -3,23 +3,30 @@
 <mapper namespace="com.cofire.dao.mapper.custom.SystemCustomMapper">
 	<!-- 获取系统自定义参数 -->
 	<select id="getSysparamsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT CONCAT(GROUP_ID,'|',PARAM_ID) AS PK_ID ,GROUP_ID, PARAM_ID, PARAM_VAL, PARAM_NAME, REMARK
-    	FROM sys_param
+		SELECT
+			concat(group_id, '|', param_id) AS pk_id,
+			group_id,
+			param_id,
+			param_value,
+			param_name,
+			remark
+		FROM
+			sys_param
 	</select>
 	
 	<!-- 获取系统数据字典 -->
 	<select id="getDictList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT
-			CONCAT (GROUP_ID, '|', DICT_VALUE) AS PK_ID,
-			GROUP_ID,
+			concat(group_id, '|', dict_value) AS pk_id,
+			group_id,
 			CASE
-		WHEN DICT_VALUE IS NOT NULL THEN
-			CONCAT (DICT_VALUE, '-', DICT_NAME)
+		WHEN dict_value IS NOT NULL THEN
+			concat(dict_value, '-', dict_name)
 		ELSE
-			DICT_NAME
-		END DICT_NAME,
-		DICT_VALUE,
-		 GROUP_NAME
+			dict_name
+		END dict_name,
+		 dict_value,
+		 group_name
 		FROM
 			sys_dict
 	</select>

@@ -76,7 +76,7 @@ public class SystemUtil {
         if (null == paramMap) {
             return "";
         }
-        return paramMap.get("PARAM_VAL");
+        return paramMap.get("param_value");
     }
 
     /**
@@ -101,6 +101,6 @@ public class SystemUtil {
         if (dictMap == null || dictMap.isEmpty() || dictMap.size() <= 0) {
             return "";
         }
-        return dictMap.get("DICT_NAME");
+        return dictMap.get("dict_name");
     }
 }

@@ -48,7 +48,7 @@ public class SystemService {
         try {
             sysParamList = systemCustomMapper.getSysparamsList();
             if (!CollectionUtils.isEmpty(sysParamList)) {
-                sysParamMap = MapUtil.list2Map(sysParamList, "PK_ID");
+                sysParamMap = MapUtil.list2Map(sysParamList, "pk_id");
                 SystemUtil.setSysParamMap(sysParamMap);
                 logger.info("系统参数：" + sysParamMap);
             } else {
@@ -74,9 +74,9 @@ public class SystemService {
         try {
             dictList = systemCustomMapper.getDictList();
             if (!CollectionUtils.isEmpty(dictList)) {
-                MapUtil.list2Map(dictList, "PK_ID");
-                dictGroupMap = MapUtil.listGroup2Map(dictList, "GROUP_ID");
-                dtDictMap = MapUtil.list2Map(dictList, "PK_ID");
+                MapUtil.list2Map(dictList, "pk_id");
+                dictGroupMap = MapUtil.listGroup2Map(dictList, "group_id");
+                dtDictMap = MapUtil.list2Map(dictList, "pk_id");
                 SystemUtil.setDictGroupMap(dictGroupMap);
                 SystemUtil.setDtDictMap(dtDictMap);
                 logger.info("数据字典列表：：" + dtDictMap);
