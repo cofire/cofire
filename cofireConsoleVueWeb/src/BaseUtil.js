@@ -1,6 +1,10 @@
 export default {
   install(Vue)  {
-    // 日期格式格式化
+    /**
+     * 日期格式格式化 
+     * 请求示例 formatDate('20190519101010')
+     * 方法可根据实际情况扩展
+     */
     Vue.prototype.formatDate = (timeString)=>{//全局函数1
       let year = '';
       let month = '';
@@ -26,20 +30,33 @@ export default {
         return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + second;
       } else {
         return null;
-      } //  其余格式视为不合法数据，不显示
+      } 
     };
-    // 表格中时间格式化
+    /** 
+     * 表格中时间格式化  
+     * 请求示例 :formatter="formatTableTime"
+     */
     Vue.prototype.formatTableTime = (row, column)=>{
       return Vue.prototype.formatDate(row[column.property]);
     }
-  // 修改查询条件中的时间
+
+    /** 
+     * 修改查询条件中的时间 
+     * queryTimeList 格式例如： ['20191017','20191018']
+     */
     Vue.prototype.getQueryTimeBeginAndEnd =(queryTimeList) =>{
       if(queryTimeList == undefined || queryTimeList == null || queryTimeList.length < 2){
         return "";
       }
       return [queryTimeList[0]+"000000", queryTimeList[1]+"235959"]
     }
-
+    /**
+     *  获取当天的起始时间和结束时间
+     * formate 值 类似于 yyyyMMdd yyyy-MM-dd 等常见的日期格式
+     * 根据不同的格式 返回不同的值 可扩展
+     * 请求示例 this.getCurrentDayStartAndEndTime("yyyyMMdd")
+     * formate 为空时 默认为 yyyyMMdd
+     */
     Vue.prototype.getCurrentDayStartAndEndTime =(formate) =>{
       var date = new Date();
       var year = date.getFullYear();
@@ -53,6 +70,9 @@ export default {
       }
       if (day >= 0 && day <= 9) {
         day = "0" + day;
+      }
+      if(formate === undefined || formate === null || formate == ""){
+        formate = "yyyyMMdd";
       }
     
       switch (formate){
@@ -73,11 +93,13 @@ export default {
             end =  "" + year + "-" + month + "-" + day + " " + "23:59:59";;
             break;
         default:
-            begin = "" + year + month + day;
-            end = "" + year + month + day;
             break;
       }
       return [begin,end]
      }
+    /**重置表单 请求示例 @click="resetForm($refs['queryForm'])" */
+     Vue.prototype.resetForm = (form) => {
+      form.resetFields();
+    }
   }
 };

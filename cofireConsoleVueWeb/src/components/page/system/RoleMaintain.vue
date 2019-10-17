@@ -40,7 +40,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-refresh"
-        @click="resetForm('queryForm')"
+        @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>
     <el-row class="table-result">
@@ -66,10 +66,8 @@
           property="modifyTime"
           :label="this.$t('role.label.modifyTime')"
           width="200"
+          :formatter="formatTableTime"
         ></el-table-column>
-        <el-table-column property="filler1" :label="this.$t('role.label.filler1')" width="200"></el-table-column>
-        <el-table-column property="filler2" :label="this.$t('role.label.filler2')" width="200"></el-table-column>
-        <el-table-column property="filler3" :label="this.$t('role.label.filler3')" width="200"></el-table-column>
       </el-table>
       <el-pagination
         background=""
