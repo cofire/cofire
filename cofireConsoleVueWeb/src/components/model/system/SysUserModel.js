@@ -3,9 +3,6 @@ import {
 } from "../common/CommonModel";
 
 export class SysUserModel extends CommonModel {
-  /** 自增id (主健ID) (无默认值) */
-  sid = '';
-
   /** 用户名-即用户登录时使用的名称(必填项) (无默认值) */
   userId = '';
 

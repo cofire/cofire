@@ -75,7 +75,7 @@
   import {userPswModel} from '../model/userPsw/userPswModel'
   // import {confirmUpdatePsw} from '../../api/getData'
   import {baseImgPath} from '@/config/env.js'
-
+  import { CurrentUserStore } from "../store/common/CurrentUserStore";
   export default {
     inject: ['reload'],
     data () {
@@ -142,14 +142,8 @@
     },
     computed: {
       username () {
-        let username = localStorage.getItem("userName")
+        let username = CurrentUserStore.state.user.userName;
         return username ? username : this.name
-      },
-       common () {
-        return JSON.parse(localStorage.getItem('common'))
-      },
-      avatorUrl(){
-        return baseImgPath + "?path=" + encodeURIComponent(this.common.avator)
       }
     },
     methods: {

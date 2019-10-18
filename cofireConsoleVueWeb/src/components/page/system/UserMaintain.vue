@@ -31,8 +31,7 @@
         type="primary"
         icon="el-icon-lx-delete"
         @click="deleteUser()"
-      >{{this.$t('common.button.delete')}}
-      </el-button>
+      >{{this.$t('common.button.delete')}}</el-button>
       <el-button type="primary" icon="el-icon-lx-settings" @click="roleSet()">角色设置</el-button>
       <el-button type="primary" icon="el-icon-lx-refresh" @click="confirmRestPassWord()">密码重置</el-button>
       <el-button
@@ -333,7 +332,7 @@ export default {
         }
       )
         .then(() => {
-          restPassWord({userId: this.currentRow.userId}).then(res => {
+          restPassWord({ userId: this.currentRow.userId }).then(res => {
             if (res.success || res.success == "true") {
               this.$alert(
                 this.$t("user.message.returnNewPasswInfo") + res.data,
@@ -354,17 +353,17 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: this.$t("user.message.cancelResetPaw")
+            message: this.$t("user.message.cancelPassWordPrompt")
           });
         });
     },
     deleteUser() {
       if (this.currentRow == undefined || this.currentRow == null) {
-        this.$message.warning(this.$t("user.message.restPassWord"));
+        this.$message.warning(this.$t("user.message.delete"));
         return;
       }
       this.$confirm(
-        this.$t("user.message.restPassWordPrompt"),
+        this.$t("user.message.deletePrompt"),
         this.$t("common.label.prompt"),
         {
           confirmButtonText: this.$t("common.button.confirm"),
@@ -373,28 +372,19 @@ export default {
         }
       )
         .then(() => {
-          deleteUser({userId: this.currentRow.userId}).then(res => {
+          deleteUser({ userId: this.currentRow.userId }).then(res => {
             if (res.success || res.success == "true") {
-              this.$alert(
-                this.$t("user.message.returnNewPasswInfo") + res.data,
-                this.$t("common.label.prompt"),
-                {
-                  confirmButtonText: this.$t("common.button.confirm"),
-                  callback: action => {}
-                }
-              );
+              this.$message.success(this.$t("code." + res.code));
+              this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("common.code." + res.code)
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: this.$t("user.message.cancelResetPaw")
+            message: this.$t("user.message.cancelDeletePrompt")
           });
         });
     }

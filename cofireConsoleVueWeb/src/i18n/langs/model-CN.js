@@ -37,7 +37,11 @@ exports.default = {
       "roleSet":"请选中需要角色设置的用户信息",
       "restPassWord": "请选中需要重置密码的用户信息",
       "restPassWordPrompt": "正在重置该用户密码，是否继续？",
-      "returnNewPasswInfo": "用户新密码为："
+      "cancelPassWordPrompt": "已取消重置该用户密码",
+      "returnNewPasswInfo": "用户新密码为：",
+      "delete":"请选中需要删除的用户信息",
+      "deletePrompt":"正在重置该用户信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该用户信息",
     }
   },
   role: {

@@ -52,8 +52,8 @@
 <script>
 import { login, getUserDetail } from "@/api/getData";
 import { encrypt } from "@/components/common/3des";
-import { loginUserDetailStore } from "../store/common/loginUserDetailStore";
 import { Rules} from "../rules/Rules";
+import { CurrentUserStore } from "../store/common/CurrentUserStore";
 
 export default {
   inject: ["reload"],
@@ -64,14 +64,14 @@ export default {
         userId: "",
         passWord: ""
       },
-      lang: "cn",
+      lang: CurrentUserStore.state.lang,
       rules: Rules.LoginRules
     };
   },
   methods: {
     langChangeHandler(val) {
       this.$i18n.locale = val;
-      localStorage.setItem("lang", val);
+      CurrentUserStore.dispatch("setLang", val );
       this.reload();
     },
     submitForm(formName) {
@@ -87,8 +87,8 @@ export default {
               this.loading = true;
               getUserDetail().then(re => {
                 if (re.success || re.success == "true") {
-                  loginUserDetailStore.dispatch("set", re.data.menuList);
-                  loginUserDetailStore.dispatch("setUserId", re.data.userId);
+                  CurrentUserStore.dispatch("setMenuList", re.data.menuList);
+                  CurrentUserStore.dispatch("setUser", re.data.user);
                   localStorage.setItem(
                     "common",
                     JSON.stringify(re.data.common)

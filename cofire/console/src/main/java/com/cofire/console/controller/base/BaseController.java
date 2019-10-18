@@ -1,7 +1,6 @@
 package com.cofire.console.controller.base;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cofire.common.constant.CodeEnum;
-import com.cofire.common.constant.Constants;
 import com.cofire.common.result.Result;
 import com.cofire.common.result.SystemUtil;
 import com.cofire.common.utils.bean.BeanUtil;
+import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.model.custom.Menu;
@@ -40,20 +37,16 @@ public class BaseController {
     public Result getUserDetail(HttpServletRequest request) {
         logger.info("正在获取用户菜单");
         Result result = new Result();
-        UserDetailModel<Menu> userDetail = new UserDetailModel<Menu>();
+        UserDetailModel<SysUser, Menu> userDetail = new UserDetailModel<SysUser, Menu>();
         try {
             List<Menu> menus = new ArrayList<>(); // 菜单
             Menu nav = new Menu();
             nav.setText("导航");
             nav.setHeading(true);
 
-            Session session = SecurityUtils.getSubject().getSession();
-            SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER_INFO);
+            SysUser user = CurrentUserUtil.getCurentUser();
             String userId = user.getUserId();
             logger.info("当前登录用户的id：" + userId);
-            logger.info("当前登录用户的权限：" + session.getAttribute(Constants.SESSION_USER_PERMISSION));
-            userDetail.setUserId(userId);
-            userDetail.setUserName(user.getUserName());
             List<Map<String, String>> dataList = userService.getUserResource(userId);
             List<Map<String, String>> parent = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(dataList)) {
@@ -91,9 +84,7 @@ public class BaseController {
                     }
                 }
             }
-            // 公共设置
-            HashMap<String, String> commonMap = new HashMap<>();
-            userDetail.setCommon(commonMap);
+            userDetail.setUser(user);
             userDetail.setMenuList(menus);
             result.setSuccess(true);
             result.setData(userDetail);

@@ -33,7 +33,7 @@
 
 <script>
     import bus from '../common/bus';
-
+    import {CurrentUserStore} from '../store/common/CurrentUserStore';
     export default {
         data() {
             return {
@@ -45,7 +45,9 @@
                 return this.$route.path;
             },
             menuList(){
-                let menuList = JSON.parse(localStorage.getItem('menuList'));
+                // let menuList = JSON.parse(localStorage.getItem('menuList'));
+                let menuList = CurrentUserStore.state.menuList;
+
                 return menuList;
             }
         },

@@ -1,63 +1,27 @@
 package com.cofire.dao.model.custom;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class UserDetailModel<T> {
-    private String UserId;
-    private String UserName;
-    private String LastIp;
-    private String LastDate;
-    private List<T> menuList = new ArrayList<T>();
-    private HashMap common;
+public class UserDetailModel<T, V> {
+    private T user;
 
-    public String getUserId() {
-        return UserId;
+    public T getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        UserId = userId;
+    public void setUser(T user) {
+        this.user = user;
     }
 
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
-
-    public String getLastIp() {
-        return LastIp;
-    }
-
-    public void setLastIp(String lastIp) {
-        LastIp = lastIp;
-    }
-
-    public String getLastDate() {
-        return LastDate;
-    }
-
-    public void setLastDate(String lastDate) {
-        LastDate = lastDate;
-    }
-
-    public List<T> getMenuList() {
+    public List<V> getMenuList() {
         return menuList;
     }
 
-    public void setMenuList(List<T> menuList) {
+    public void setMenuList(List<V> menuList) {
         this.menuList = menuList;
     }
 
-    public HashMap getCommon() {
-        return common;
-    }
-
-    public void setCommon(HashMap common) {
-        this.common = common;
-    }
+    private List<V> menuList = new ArrayList<V>();
 
 }
