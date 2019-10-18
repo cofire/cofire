@@ -20,6 +20,8 @@ export const deleteUser = data => fetch('/console/user/delete', data, 'POST');
 export const restPassWord = data => fetch('/console/user/restPassWord', data, 'POST');
 /** 保存用户的角色信息 */
 export const saveUserRole = data => fetch('/console/user/saveUserRole', data, 'POST');
+/**修改密码 */
+export const changePassWord = data => fetch('/console/user/changePassWord', data, 'POST');
 
 /** 角色管理 */
 /** 获取角色列表 */

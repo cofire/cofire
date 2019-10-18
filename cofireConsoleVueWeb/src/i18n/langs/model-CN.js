@@ -10,6 +10,23 @@ exports.default = {
       'passWord': '请输入密码'
     }
   },
+  changePassWord: {
+    label: {
+      'currentPassWord': '原密码',
+      'newPassWord': '新密码',
+      'confirmNewPassWord': '确认密码'
+    },
+    rule: {
+      'currentPassWord': '请输入原密码',
+      'newPassWord': '请输入新密码',
+      'confirmNewPassWord': '请输入确认密码',
+      'passWordContainChinese': '密码不能包含中文字符'
+    },
+    title: {
+      'changePassWord': '修改密码'
+    },
+    message: {},
+  },
   user: {
     label: {
       'sid': '自增id',

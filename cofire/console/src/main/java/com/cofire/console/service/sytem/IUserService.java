@@ -21,4 +21,6 @@ public interface IUserService {
     Result saveUserRole(String userId, String roleIds);
 
     Result restPassWord(String userId);
+
+    Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord);
 }

@@ -38,7 +38,7 @@ public class LoginServiceImpl implements ILoginService {
         password = DESCrypto.JS3DESEncryption(userId, password);
         // // 明文密码MD5加密
         try {
-            password = MD5Crypto.encrypt(userId, password);
+            password = MD5Crypto.encrypt(password, userId);
             user.setPassWord(password);
         } catch (Exception e) {
             logger.error("用户密码加密失败：" + e.getMessage());

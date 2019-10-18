@@ -19,6 +19,7 @@ import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
+import com.cofire.common.utils.security.DESCrypto;
 import com.cofire.common.utils.security.MD5Crypto;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.string.DateUtils;
@@ -283,6 +284,61 @@ public class UserServiceImpl implements IUserService {
             result.setData(userId);
         } catch (Exception e) {
             logger.error("重置密码失败" + e.getMessage());
+            result.setSuccess(false, CodeEnum.E_500);
+        }
+        return result;
+    }
+
+    /**
+     * 
+     * @Title: changePassWord
+     * @author ly
+     * @Description:修改密码
+     * @param @param currentPassWord
+     * @param @param NewPassWord
+     * @param @param confirmNewPassWord
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    /**
+     * 
+     * @Title: changePassWord
+     * @author ly
+     * @Description:修改密码
+     * @param @param currentPassWord
+     * @param @param newPassWord
+     * @param @param confirmNewPassWord
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @Override
+    public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
+        logger.info("正在修改密码");
+        Result result = new Result();
+        if (ParamValidator.checkParamsHasEmpty(CurrentUserUtil.getCurentUserId(), currentPassWord, newPassWord, confirmNewPassWord)
+                || !newPassWord.equals(confirmNewPassWord)) {
+            result.setSuccess(false, CodeEnum.E_400);
+            return result;
+        }
+        try {
+            String oriPassWord = DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurentUserId(), currentPassWord);
+            String oriPassWordEncrypt = MD5Crypto.encrypt(oriPassWord, CurrentUserUtil.getCurentUserId());
+            SysUser user = userMapper.selectByPrimaryKey(CurrentUserUtil.getCurentUserId());
+            if (user == null) {
+                result.setSuccess(false, CodeEnum.E_500);
+                return result;
+            }
+            if (!oriPassWordEncrypt.equals(user.getPassWord())) {
+                result.setSuccess(false, CodeEnum.E_400);
+                return result;
+            }
+            user.setPassWord(MD5Crypto.encrypt(DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurentUserId(), newPassWord), CurrentUserUtil.getCurentUserId()));
+            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
+            userMapper.updateByPrimaryKey(user);
+            result.setSuccess(true, CodeEnum.E_700);
+        } catch (Exception e) {
+            logger.error("修改密码失败：" + e.getMessage());
             result.setSuccess(false, CodeEnum.E_500);
         }
         return result;

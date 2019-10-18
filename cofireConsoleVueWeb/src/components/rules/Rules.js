@@ -18,6 +18,32 @@ export const Rules = {
       }
     ]
   },
+  changePassWordRules:{
+    currentPassWord:[
+      {
+        required: true,
+        message: i18n.t("changePassWord.rule.currentPassWord"),
+        trigger: "blur"
+      },
+      {validator: validator.checkPassWordContainChinese, trigger: 'blur'}
+    ],
+    newPassWord:[
+      {
+        required: true,
+        message: i18n.t("changePassWord.rule.newPassWord"),
+        trigger: "blur"
+      },
+      {validator: validator.checkPassWordContainChinese, trigger: 'blur'}
+    ],
+    confirmNewPassWord:[
+      {
+        required: true,
+        message: i18n.t("changePassWord.rule.confirmNewPassWord"),
+        trigger: "blur"
+      },
+      {validator: validator.checkPassWordContainChinese, trigger: 'blur'},
+    ]
+  },
   UserRules: {
     userId: [
       {

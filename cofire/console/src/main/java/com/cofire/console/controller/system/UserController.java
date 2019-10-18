@@ -57,4 +57,10 @@ public class UserController extends SystemBaseController {
     public Result restPassWord(String userId) {
         return userService.restPassWord(userId);
     }
+
+    @BussinessLog("用户修改密码")
+    @RequestMapping(value = "/user/changePassWord", method = { RequestMethod.POST })
+    public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
+        return userService.changePassWord(currentPassWord, newPassWord, confirmNewPassWord);
+    }
 }

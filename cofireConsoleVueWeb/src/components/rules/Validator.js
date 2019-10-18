@@ -13,4 +13,12 @@ export class Validator {
       callback(new Error(i18n.t("validator.common.phoneRequired")));
     }
   }
+  checkPassWordContainChinese = (rule, value, callback) => {
+    var reg = /[\u4E00-\u9FA5]/
+    if (reg.test(value)) {
+      callback(new Error(i18n.t('validator.common.passWordContainChinese')))
+    } else {
+      callback()
+    }
+  }
 }
