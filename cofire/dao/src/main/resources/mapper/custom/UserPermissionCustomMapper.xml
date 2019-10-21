@@ -13,25 +13,24 @@
     </select>
     
     <select id="getUserResource" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT
-            DISTINCT
-            sys_user.user_id,
-            sys_resource.resource_id AS "id",
-            '' AS "iconCls",
-            sys_resource.parent_resource_id AS parentId,
-            sys_resource.url AS url,
-            sys_resource.resource_name AS "text",
-            sys_resource.is_leaf AS leaf,
-            sys_resource.morder
-        FROM
-            sys_resource
-        LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
-        LEFT JOIN sys_role ON sys_role.role_id = sys_role_resource.role_id
-        LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.role_id
-        LEFT JOIN sys_user ON sys_user.user_id = sys_user_role.user_id
-        WHERE
-            sys_user.user_id = #{user_id}
-        ORDER BY
-            morder
+		SELECT DISTINCT
+			sys_user.user_id,
+			sys_resource.resource_id AS "id",
+			icon,
+			sys_resource.parent_resource_id AS parentId,
+			sys_resource.url AS url,
+			sys_resource.resource_name AS "name",
+			sys_resource.is_leaf AS leaf,
+			sys_resource.morder
+		FROM
+			sys_resource
+		LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
+		LEFT JOIN sys_role ON sys_role.role_id = sys_role_resource.role_id
+		LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.role_id
+		LEFT JOIN sys_user ON sys_user.user_id = sys_user_role.user_id
+		WHERE
+			sys_user.user_id = #{user_id}
+		ORDER BY
+			id
 	</select>
 </mapper>

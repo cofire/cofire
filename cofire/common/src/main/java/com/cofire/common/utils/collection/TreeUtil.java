@@ -3,9 +3,14 @@ package com.cofire.common.utils.collection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.cofire.common.result.TreeNode;
 
 public class TreeUtil {
+
+    public static final String ROOT = "root";
+
     /**
      * 两层循环实现建树
      * 
@@ -18,7 +23,7 @@ public class TreeUtil {
 
         for (TreeNode treeNode : treeNodes) {
 
-            if ("0".equals(treeNode.getParentId())) {
+            if (StringUtils.isBlank(treeNode.getParentId()) || ROOT.equals(treeNode.getParentId())) {
                 trees.add(treeNode);
             }
 
@@ -43,7 +48,7 @@ public class TreeUtil {
     public static List<TreeNode> buildByRecursive(List<TreeNode> treeNodes) {
         List<TreeNode> trees = new ArrayList<TreeNode>();
         for (TreeNode treeNode : treeNodes) {
-            if ("0".equals(treeNode.getParentId())) {
+            if (StringUtils.isBlank(treeNode.getParentId()) || ROOT.equals(treeNode.getParentId())) {
                 trees.add(findChildren(treeNode, treeNodes));
             }
         }

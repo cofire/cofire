@@ -1,35 +1,35 @@
 package com.cofire.dao.model.custom;
 
 public class Menu {
-    private String data;
-    private String text;
-    private String link;
+    private String id;
+    private String name;
+    private String url;
     private String icon;
-    private Object submenu;
-    private boolean heading; // 导航
+    private String parentId;
+    private Object subMenu;
 
-    public String getData() {
-        return data;
+    public String getId() {
+        return id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getIcon() {
@@ -40,19 +40,20 @@ public class Menu {
         this.icon = icon;
     }
 
-    public Object getSubmenu() {
-        return submenu;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setSubmenu(Object submenu) {
-        this.submenu = submenu;
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
-    public boolean isHeading() {
-        return heading;
+    public Object getSubMenu() {
+        return subMenu;
     }
 
-    public void setHeading(boolean heading) {
-        this.heading = heading;
+    public void setSubMenu(Object subMenu) {
+        this.subMenu = subMenu;
     }
+
 }

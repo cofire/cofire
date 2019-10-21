@@ -40,10 +40,6 @@ public class BaseController {
         UserDetailModel<SysUser, Menu> userDetail = new UserDetailModel<SysUser, Menu>();
         try {
             List<Menu> menus = new ArrayList<>(); // 菜单
-            Menu nav = new Menu();
-            nav.setText("导航");
-            nav.setHeading(true);
-
             SysUser user = CurrentUserUtil.getCurentUser();
             String userId = user.getUserId();
             logger.info("当前登录用户的id：" + userId);
@@ -61,24 +57,27 @@ public class BaseController {
                 if (CollectionUtils.isNotEmpty(parent)) {
                     for (Map<String, String> par : parent) {
                         Menu menu = new Menu();
-                        menu.setData(par.get("id"));
-                        menu.setText(par.get("text"));
-                        menu.setLink(par.get("url"));
+                        menu.setId(par.get("id"));
+                        menu.setName(par.get("name"));
+                        menu.setUrl(par.get("url"));
+                        menu.setIcon(par.get("icon"));
                         List<Menu> childs = new ArrayList<>();
                         List<Map<String, String>> childrens = parentMap.get(par.get("id"));
                         if (CollectionUtils.isNotEmpty(childrens)) {
                             for (Map<String, String> child : childrens) {
-                                Menu ch = new Menu();
-                                ch.setData(child.get("id"));
-                                ch.setText(child.get("text"));
-                                ch.setLink(child.get("url"));
-                                childs.add(ch);
+                                Menu subMenu = new Menu();
+                                subMenu.setId(child.get("id"));
+                                subMenu.setName(child.get("name"));
+                                subMenu.setUrl(child.get("url"));
+                                subMenu.setIcon(child.get("icon"));
+                                subMenu.setParentId(child.get("parentId"));
+                                childs.add(subMenu);
                             }
                         }
                         if (CollectionUtils.isNotEmpty(childs)) {
-                            menu.setSubmenu(childs);
+                            menu.setSubMenu(childs);
                         } else {
-                            menu.setSubmenu("");
+                            menu.setSubMenu("");
                         }
                         menus.add(menu);
                     }
