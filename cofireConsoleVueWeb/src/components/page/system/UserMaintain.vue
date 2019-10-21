@@ -1,14 +1,5 @@
 <template>
   <el-row>
-    <el-row class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-lx-calendar"></i>
-          {{ $t('common.route.R1') }}
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>{{ $t('common.route.R11') }}</el-breadcrumb-item>
-      </el-breadcrumb>
-    </el-row>
     <el-row class="query-form">
       <el-form :inline="true" :model="queryUser" ref="queryForm">
         <el-col :span="6">

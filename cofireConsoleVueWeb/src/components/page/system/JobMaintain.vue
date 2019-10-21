@@ -1,14 +1,5 @@
 <template>
   <el-row>
-    <el-row class="crumbs">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-lx-calendar"></i>
-          {{ $t('common.route.R1') }}
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>{{ $t('common.route.R12') }}</el-breadcrumb-item>
-      </el-breadcrumb>
-    </el-row>
     <el-row class="query-form">
       <el-form :inline="true" :model="queryJob" ref="queryForm">
         <el-form-item :label="$t('job.label.jobId')" prop="jobId" class="queryCondition">
