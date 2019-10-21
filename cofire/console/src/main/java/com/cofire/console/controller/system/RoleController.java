@@ -28,14 +28,14 @@ public class RoleController extends SystemBaseController {
 
     @BussinessLog("保存角色信息")
     @RequestMapping(value = "/role/save", method = { RequestMethod.POST })
-    public Result saveRole(String saveFlag, SysRole role) {
+    public Result saveRole(String saveFlag, SysRole role, String permission) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
         if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
-            return roleService.add(role);
+            return roleService.add(role, permission);
         }
         if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
-            return roleService.upadte(role);
+            return roleService.upadte(role, permission);
         }
         return result;
     }
@@ -50,5 +50,11 @@ public class RoleController extends SystemBaseController {
     @RequestMapping(value = "/role/queryUserRoleList", method = { RequestMethod.POST })
     public Result queryUserRoleList(SysUser user) {
         return roleService.queryUserRoleList(user);
+    }
+
+    @BussinessLog("查询角色权限列表")
+    @RequestMapping(value = "/role/getRoleTree", method = { RequestMethod.POST })
+    public Result getRoleTree(String roleId) {
+        return roleService.getRoleTree(roleId);
     }
 }

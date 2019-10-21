@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 qtz_job
- * @开发日期 2019-10-14
+ * @开发日期 2019-10-21
  * @开发作者 by:ly 
  */
 public class QtzJob implements Serializable {
@@ -24,10 +24,10 @@ public class QtzJob implements Serializable {
     private String month;
 
     /** 日期(必填项) (无默认值) */
-    private String date;
+    private String day;
 
     /** 星期(必填项) (无默认值) */
-    private String day;
+    private String week;
 
     /** 小时(必填项) (无默认值) */
     private String hour;
@@ -39,12 +39,12 @@ public class QtzJob implements Serializable {
     private String second;
 
     /** 生效日期 (无默认值) */
-    private String activeDt;
+    private String activeDate;
 
     /** 失效日期 (无默认值) */
-    private String expiryDt;
+    private String expiryDate;
 
-    /** 逻辑删除标识:0-未删除；1-已删除(必填项) (无默认值) */
+    /** 逻辑删除标识:0-未删除；1-已删除(必填项)  (默认值为: 0) */
     private String isDel;
 
     /** 最后修改人 (无默认值) */
@@ -110,20 +110,20 @@ public class QtzJob implements Serializable {
         this.month = month == null ? null : month.trim();
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date == null ? null : date.trim();
-    }
-
     public String getDay() {
         return day;
     }
 
     public void setDay(String day) {
         this.day = day == null ? null : day.trim();
+    }
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week == null ? null : week.trim();
     }
 
     public String getHour() {
@@ -150,20 +150,20 @@ public class QtzJob implements Serializable {
         this.second = second == null ? null : second.trim();
     }
 
-    public String getActiveDt() {
-        return activeDt;
+    public String getActiveDate() {
+        return activeDate;
     }
 
-    public void setActiveDt(String activeDt) {
-        this.activeDt = activeDt == null ? null : activeDt.trim();
+    public void setActiveDate(String activeDate) {
+        this.activeDate = activeDate == null ? null : activeDate.trim();
     }
 
-    public String getExpiryDt() {
-        return expiryDt;
+    public String getExpiryDate() {
+        return expiryDate;
     }
 
-    public void setExpiryDt(String expiryDt) {
-        this.expiryDt = expiryDt == null ? null : expiryDt.trim();
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate == null ? null : expiryDate.trim();
     }
 
     public String getIsDel() {

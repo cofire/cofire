@@ -1,7 +1,13 @@
 package com.cofire.console.service.sytem.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +20,23 @@ import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
+import com.cofire.common.result.TreeNode;
+import com.cofire.common.utils.collection.TreeUtil;
 import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
+import com.cofire.common.utils.string.DateUtils;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IRoleService;
+import com.cofire.dao.mapper.system.SysResourceMapper;
 import com.cofire.dao.mapper.system.SysRoleMapper;
+import com.cofire.dao.mapper.system.SysRoleResourceMapper;
 import com.cofire.dao.mapper.system.SysUserRoleMapper;
+import com.cofire.dao.model.system.SysResource;
 import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysRoleExample;
+import com.cofire.dao.model.system.SysRoleResource;
+import com.cofire.dao.model.system.SysRoleResourceExample;
 import com.cofire.dao.model.system.SysUser;
 import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
@@ -35,6 +49,10 @@ public class RoleServiceImpl implements IRoleService {
     private SysRoleMapper roleMapper;
     @Autowired
     private SysUserRoleMapper userRoleMapper;
+    @Autowired
+    private SysResourceMapper resourceMapper;
+    @Autowired
+    private SysRoleResourceMapper roleResourceMapper;
 
     /**
      * 
@@ -97,7 +115,7 @@ public class RoleServiceImpl implements IRoleService {
      * 新增角色信息
      */
     @Override
-    public Result add(SysRole role) {
+    public Result add(SysRole role, String permission) {
         Result result = new Result();
         try {
             if (ParamValidator.checkParamsHasEmpty(role, "roleId", "roleNmae")) {
@@ -123,6 +141,23 @@ public class RoleServiceImpl implements IRoleService {
             role.setModifier(CurrentUserUtil.getCurentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
             roleMapper.insert(role);
+            SysRoleResourceExample example = new SysRoleResourceExample();
+            SysRoleResourceExample.Criteria roleResourcecriteria = example.createCriteria();
+            roleResourcecriteria.andRoleIdEqualTo(role.getRoleId());
+            roleResourceMapper.deleteByExample(example);
+            if (StringUtils.isNotBlank(permission)) {
+                String[] resouceArray = permission.split(",");
+                HashSet<String> resouceSet = new HashSet<>();
+                CollectionUtils.addAll(resouceSet, resouceArray);
+                for (String resouce : resouceSet) {
+                    SysRoleResource roleResource = new SysRoleResource();
+                    roleResource.setRoleId(role.getRoleId());
+                    roleResource.setResourceId(resouce);
+                    roleResource.setModifier(CurrentUserUtil.getCurentUserId());
+                    roleResource.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
+                    roleResourceMapper.insertSelective(roleResource);
+                }
+            }
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("新增角色信息失败：" + e.getMessage());
@@ -141,8 +176,20 @@ public class RoleServiceImpl implements IRoleService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysRole role) {
+    @Transactional(rollbackFor = Exception.class)
+    public Result upadte(SysRole role, String permission) {
         Result result = new Result();
+        try {
+            if (ParamValidator.checkParamsHasEmpty(role, "roleId", "roleNmae")) {
+                result.setSuccess(false, CodeEnum.E_400);
+                return result;
+            }
+        } catch (IllegalAccessException e) {
+            logger.error("参数校验失败, {}", e.getMessage());
+            e.printStackTrace();
+            result.setSuccess(false, CodeEnum.E_500);
+            return result;
+        }
         try {
             logger.info("正在修改角色信息");
             SysRoleExample roleExample = new SysRoleExample();
@@ -151,9 +198,27 @@ public class RoleServiceImpl implements IRoleService {
             role.setModifier(CurrentUserUtil.getCurentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
             roleMapper.updateByExample(role, roleExample);
+            SysRoleResourceExample example = new SysRoleResourceExample();
+            SysRoleResourceExample.Criteria criteria = example.createCriteria();
+            criteria.andRoleIdEqualTo(role.getRoleId());
+            roleResourceMapper.deleteByExample(example);
+            if (StringUtils.isNotBlank(permission)) {
+                String[] resouceArray = permission.split(",");
+                HashSet<String> resouceSet = new HashSet<>();
+                CollectionUtils.addAll(resouceSet, resouceArray);
+                for (String resouce : resouceSet) {
+                    SysRoleResource roleResource = new SysRoleResource();
+                    roleResource.setRoleId(role.getRoleId());
+                    roleResource.setResourceId(resouce);
+                    roleResource.setModifier(CurrentUserUtil.getCurentUserId());
+                    roleResource.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
+                    roleResourceMapper.insertSelective(roleResource);
+                }
+            }
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改角色信息失败：" + e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             result.setSuccess(false, CodeEnum.E_500);
         }
         return result;
@@ -180,6 +245,10 @@ public class RoleServiceImpl implements IRoleService {
             SysRoleExample.Criteria roleCriteria = roleExample.createCriteria();
             roleCriteria.andRoleIdEqualTo(role.getRoleId());
             roleMapper.deleteByExample(roleExample);
+            SysRoleResourceExample example = new SysRoleResourceExample();
+            SysRoleResourceExample.Criteria criteria = example.createCriteria();
+            criteria.andRoleIdEqualTo(role.getRoleId());
+            roleResourceMapper.deleteByExample(example);
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("删除角色信息失败:" + e.getMessage());
@@ -213,6 +282,49 @@ public class RoleServiceImpl implements IRoleService {
             logger.error("删除角色信息失败:" + e.getMessage());
             result.setSuccess(true, CodeEnum.E_601);
         }
+        return result;
+    }
+
+    /**
+     * 
+     * @Title: getRoleTree
+     * @author ly
+     * @Description:查询角色权限列表
+     * @param @param roleId
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @Override
+    public Result getRoleTree(String roleId) {
+        Result result = new Result();
+        Set<String> checkedSet = new HashSet<>();
+        List<TreeNode> treeList = new ArrayList<>();
+        try {
+            List<SysResource> resourceList = resourceMapper.selectByExample(null);
+            for (SysResource resource : resourceList) {
+                TreeNode node = new TreeNode(resource.getResourceId(), resource.getResourceName(), resource.getParentResourceId());
+                treeList.add(node);
+            }
+
+            if (StringUtils.isNotBlank(roleId)) {
+                SysRoleResourceExample example = new SysRoleResourceExample();
+                SysRoleResourceExample.Criteria criteria = example.createCriteria();
+                criteria.andRoleIdEqualTo(roleId);
+                List<SysRoleResource> checkedList = roleResourceMapper.selectByExample(example);
+                for (SysRoleResource roleResource : checkedList) {
+                    checkedSet.add(roleResource.getResourceId());
+                }
+            }
+            HashMap<String, Object> resultMap = new HashMap<>();
+            resultMap.put("resourceTree", TreeUtil.buildByRecursive(treeList));
+            resultMap.put("checked", checkedSet);
+            result.setData(resultMap);
+            result.setSuccess(true, CodeEnum.E_600);
+        } catch (Exception e) {
+            logger.error("查询菜单列表失败：" + e.getMessage());
+            result.setSuccess(false, CodeEnum.E_601);
+        }
+
         return result;
     }
 }

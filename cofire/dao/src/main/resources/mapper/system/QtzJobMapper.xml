@@ -7,13 +7,13 @@
     <result column="job_desc" jdbcType="VARCHAR" property="jobDesc" />
     <result column="year" jdbcType="VARCHAR" property="year" />
     <result column="month" jdbcType="VARCHAR" property="month" />
-    <result column="date" jdbcType="VARCHAR" property="date" />
     <result column="day" jdbcType="VARCHAR" property="day" />
+    <result column="week" jdbcType="VARCHAR" property="week" />
     <result column="hour" jdbcType="VARCHAR" property="hour" />
     <result column="minute" jdbcType="VARCHAR" property="minute" />
     <result column="second" jdbcType="VARCHAR" property="second" />
-    <result column="active_dt" jdbcType="VARCHAR" property="activeDt" />
-    <result column="expiry_dt" jdbcType="VARCHAR" property="expiryDt" />
+    <result column="active_date" jdbcType="VARCHAR" property="activeDate" />
+    <result column="expiry_date" jdbcType="VARCHAR" property="expiryDate" />
     <result column="is_del" jdbcType="VARCHAR" property="isDel" />
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
@@ -82,8 +82,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    job_id, job_name, job_desc, year, month, date, day, hour, minute, second, active_dt, 
-    expiry_dt, is_del, modifier, modify_time, param1, param2, param3, param4, param5
+    job_id, job_name, job_desc, year, month, day, week, hour, minute, second, active_date, 
+    expiry_date, is_del, modifier, modify_time, param1, param2, param3, param4, param5
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.QtzJobExample" resultMap="BaseResultMap">
     select
@@ -118,19 +118,19 @@
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.QtzJob">
     insert into qtz_job (job_id, job_name, job_desc, 
-      year, month, date, 
-      day, hour, minute, 
-      second, active_dt, expiry_dt, 
-      is_del, modifier, modify_time, 
-      param1, param2, param3, 
-      param4, param5)
+      year, month, day, week, 
+      hour, minute, second, 
+      active_date, expiry_date, is_del, 
+      modifier, modify_time, param1, 
+      param2, param3, param4, 
+      param5)
     values (#{jobId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobDesc,jdbcType=VARCHAR}, 
-      #{year,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
-      #{day,jdbcType=VARCHAR}, #{hour,jdbcType=VARCHAR}, #{minute,jdbcType=VARCHAR}, 
-      #{second,jdbcType=VARCHAR}, #{activeDt,jdbcType=VARCHAR}, #{expiryDt,jdbcType=VARCHAR}, 
-      #{isDel,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
-      #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, #{param3,jdbcType=VARCHAR}, 
-      #{param4,jdbcType=VARCHAR}, #{param5,jdbcType=VARCHAR})
+      #{year,jdbcType=VARCHAR}, #{month,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR}, #{week,jdbcType=VARCHAR}, 
+      #{hour,jdbcType=VARCHAR}, #{minute,jdbcType=VARCHAR}, #{second,jdbcType=VARCHAR}, 
+      #{activeDate,jdbcType=VARCHAR}, #{expiryDate,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{param1,jdbcType=VARCHAR}, 
+      #{param2,jdbcType=VARCHAR}, #{param3,jdbcType=VARCHAR}, #{param4,jdbcType=VARCHAR}, 
+      #{param5,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.QtzJob">
     insert into qtz_job
@@ -150,11 +150,11 @@
       <if test="month != null">
         month,
       </if>
-      <if test="date != null">
-        date,
-      </if>
       <if test="day != null">
         day,
+      </if>
+      <if test="week != null">
+        week,
       </if>
       <if test="hour != null">
         hour,
@@ -165,11 +165,11 @@
       <if test="second != null">
         second,
       </if>
-      <if test="activeDt != null">
-        active_dt,
+      <if test="activeDate != null">
+        active_date,
       </if>
-      <if test="expiryDt != null">
-        expiry_dt,
+      <if test="expiryDate != null">
+        expiry_date,
       </if>
       <if test="isDel != null">
         is_del,
@@ -212,11 +212,11 @@
       <if test="month != null">
         #{month,jdbcType=VARCHAR},
       </if>
-      <if test="date != null">
-        #{date,jdbcType=VARCHAR},
-      </if>
       <if test="day != null">
         #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null">
+        #{week,jdbcType=VARCHAR},
       </if>
       <if test="hour != null">
         #{hour,jdbcType=VARCHAR},
@@ -227,11 +227,11 @@
       <if test="second != null">
         #{second,jdbcType=VARCHAR},
       </if>
-      <if test="activeDt != null">
-        #{activeDt,jdbcType=VARCHAR},
+      <if test="activeDate != null">
+        #{activeDate,jdbcType=VARCHAR},
       </if>
-      <if test="expiryDt != null">
-        #{expiryDt,jdbcType=VARCHAR},
+      <if test="expiryDate != null">
+        #{expiryDate,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null">
         #{isDel,jdbcType=VARCHAR},
@@ -283,11 +283,11 @@
       <if test="record.month != null">
         month = #{record.month,jdbcType=VARCHAR},
       </if>
-      <if test="record.date != null">
-        date = #{record.date,jdbcType=VARCHAR},
-      </if>
       <if test="record.day != null">
         day = #{record.day,jdbcType=VARCHAR},
+      </if>
+      <if test="record.week != null">
+        week = #{record.week,jdbcType=VARCHAR},
       </if>
       <if test="record.hour != null">
         hour = #{record.hour,jdbcType=VARCHAR},
@@ -298,11 +298,11 @@
       <if test="record.second != null">
         second = #{record.second,jdbcType=VARCHAR},
       </if>
-      <if test="record.activeDt != null">
-        active_dt = #{record.activeDt,jdbcType=VARCHAR},
+      <if test="record.activeDate != null">
+        active_date = #{record.activeDate,jdbcType=VARCHAR},
       </if>
-      <if test="record.expiryDt != null">
-        expiry_dt = #{record.expiryDt,jdbcType=VARCHAR},
+      <if test="record.expiryDate != null">
+        expiry_date = #{record.expiryDate,jdbcType=VARCHAR},
       </if>
       <if test="record.isDel != null">
         is_del = #{record.isDel,jdbcType=VARCHAR},
@@ -340,13 +340,13 @@
       job_desc = #{record.jobDesc,jdbcType=VARCHAR},
       year = #{record.year,jdbcType=VARCHAR},
       month = #{record.month,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=VARCHAR},
       day = #{record.day,jdbcType=VARCHAR},
+      week = #{record.week,jdbcType=VARCHAR},
       hour = #{record.hour,jdbcType=VARCHAR},
       minute = #{record.minute,jdbcType=VARCHAR},
       second = #{record.second,jdbcType=VARCHAR},
-      active_dt = #{record.activeDt,jdbcType=VARCHAR},
-      expiry_dt = #{record.expiryDt,jdbcType=VARCHAR},
+      active_date = #{record.activeDate,jdbcType=VARCHAR},
+      expiry_date = #{record.expiryDate,jdbcType=VARCHAR},
       is_del = #{record.isDel,jdbcType=VARCHAR},
       modifier = #{record.modifier,jdbcType=VARCHAR},
       modify_time = #{record.modifyTime,jdbcType=VARCHAR},
@@ -374,11 +374,11 @@
       <if test="month != null">
         month = #{month,jdbcType=VARCHAR},
       </if>
-      <if test="date != null">
-        date = #{date,jdbcType=VARCHAR},
-      </if>
       <if test="day != null">
         day = #{day,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null">
+        week = #{week,jdbcType=VARCHAR},
       </if>
       <if test="hour != null">
         hour = #{hour,jdbcType=VARCHAR},
@@ -389,11 +389,11 @@
       <if test="second != null">
         second = #{second,jdbcType=VARCHAR},
       </if>
-      <if test="activeDt != null">
-        active_dt = #{activeDt,jdbcType=VARCHAR},
+      <if test="activeDate != null">
+        active_date = #{activeDate,jdbcType=VARCHAR},
       </if>
-      <if test="expiryDt != null">
-        expiry_dt = #{expiryDt,jdbcType=VARCHAR},
+      <if test="expiryDate != null">
+        expiry_date = #{expiryDate,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null">
         is_del = #{isDel,jdbcType=VARCHAR},
@@ -428,13 +428,13 @@
       job_desc = #{jobDesc,jdbcType=VARCHAR},
       year = #{year,jdbcType=VARCHAR},
       month = #{month,jdbcType=VARCHAR},
-      date = #{date,jdbcType=VARCHAR},
       day = #{day,jdbcType=VARCHAR},
+      week = #{week,jdbcType=VARCHAR},
       hour = #{hour,jdbcType=VARCHAR},
       minute = #{minute,jdbcType=VARCHAR},
       second = #{second,jdbcType=VARCHAR},
-      active_dt = #{activeDt,jdbcType=VARCHAR},
-      expiry_dt = #{expiryDt,jdbcType=VARCHAR},
+      active_date = #{activeDate,jdbcType=VARCHAR},
+      expiry_date = #{expiryDate,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=VARCHAR},
       modifier = #{modifier,jdbcType=VARCHAR},
       modify_time = #{modifyTime,jdbcType=VARCHAR},

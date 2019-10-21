@@ -112,22 +112,22 @@ public class QuartzJobConfig {
 
         String year = job.getYear();
         String month = job.getMonth();
-        String date = job.getDate();
+        String week = job.getWeek();
         String day = job.getDay();
         String hour = job.getHour();
         String minute = job.getMinute();
         String second = job.getSecond();
 
-        if (day == flag) {
-            day = replaceFlag;
+        if (week == flag) {
+            week = replaceFlag;
         } // 替换星期字符域
 
         // 如果星期字符域有数据，日期字符域替换为replaceFlag"?"
         if (!(day == flag || day == replaceFlag)) {
-            date = replaceFlag;
+            week = replaceFlag;
         }
 
-        cronExpression = second + " " + minute + " " + hour + " " + date + " " + month + " " + day + " " + year;
+        cronExpression = second + " " + minute + " " + hour + " " + day + " " + month + " " + week + " " + year;
 
         return cronExpression;
     }

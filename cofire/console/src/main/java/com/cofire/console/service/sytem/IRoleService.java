@@ -9,11 +9,13 @@ public interface IRoleService {
 
     Result query(ParamItem paramItem, SysRole role);
 
-    Result add(SysRole role);
+    Result add(SysRole role, String permission);
 
-    Result upadte(SysRole role);
+    Result upadte(SysRole role, String permission);
 
     Result delete(SysRole role);
 
     Result queryUserRoleList(SysUser user);
+
+    Result getRoleTree(String roleId);
 }

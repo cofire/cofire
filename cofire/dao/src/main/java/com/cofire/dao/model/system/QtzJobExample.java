@@ -475,76 +475,6 @@ public class QtzJobExample {
             return (Criteria) this;
         }
 
-        public Criteria andDateIsNull() {
-            addCriterion("date is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateIsNotNull() {
-            addCriterion("date is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateEqualTo(String value) {
-            addCriterion("date =", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotEqualTo(String value) {
-            addCriterion("date <>", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateGreaterThan(String value) {
-            addCriterion("date >", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateGreaterThanOrEqualTo(String value) {
-            addCriterion("date >=", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLessThan(String value) {
-            addCriterion("date <", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLessThanOrEqualTo(String value) {
-            addCriterion("date <=", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateLike(String value) {
-            addCriterion("date like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotLike(String value) {
-            addCriterion("date not like", value, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateIn(List<String> values) {
-            addCriterion("date in", values, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotIn(List<String> values) {
-            addCriterion("date not in", values, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateBetween(String value1, String value2) {
-            addCriterion("date between", value1, value2, "date");
-            return (Criteria) this;
-        }
-
-        public Criteria andDateNotBetween(String value1, String value2) {
-            addCriterion("date not between", value1, value2, "date");
-            return (Criteria) this;
-        }
-
         public Criteria andDayIsNull() {
             addCriterion("day is null");
             return (Criteria) this;
@@ -612,6 +542,76 @@ public class QtzJobExample {
 
         public Criteria andDayNotBetween(String value1, String value2) {
             addCriterion("day not between", value1, value2, "day");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekIsNull() {
+            addCriterion("week is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekIsNotNull() {
+            addCriterion("week is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekEqualTo(String value) {
+            addCriterion("week =", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekNotEqualTo(String value) {
+            addCriterion("week <>", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekGreaterThan(String value) {
+            addCriterion("week >", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekGreaterThanOrEqualTo(String value) {
+            addCriterion("week >=", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekLessThan(String value) {
+            addCriterion("week <", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekLessThanOrEqualTo(String value) {
+            addCriterion("week <=", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekLike(String value) {
+            addCriterion("week like", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekNotLike(String value) {
+            addCriterion("week not like", value, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekIn(List<String> values) {
+            addCriterion("week in", values, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekNotIn(List<String> values) {
+            addCriterion("week not in", values, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekBetween(String value1, String value2) {
+            addCriterion("week between", value1, value2, "week");
+            return (Criteria) this;
+        }
+
+        public Criteria andWeekNotBetween(String value1, String value2) {
+            addCriterion("week not between", value1, value2, "week");
             return (Criteria) this;
         }
 
@@ -825,143 +825,143 @@ public class QtzJobExample {
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtIsNull() {
-            addCriterion("active_dt is null");
+        public Criteria andActiveDateIsNull() {
+            addCriterion("active_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtIsNotNull() {
-            addCriterion("active_dt is not null");
+        public Criteria andActiveDateIsNotNull() {
+            addCriterion("active_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtEqualTo(String value) {
-            addCriterion("active_dt =", value, "activeDt");
+        public Criteria andActiveDateEqualTo(String value) {
+            addCriterion("active_date =", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtNotEqualTo(String value) {
-            addCriterion("active_dt <>", value, "activeDt");
+        public Criteria andActiveDateNotEqualTo(String value) {
+            addCriterion("active_date <>", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtGreaterThan(String value) {
-            addCriterion("active_dt >", value, "activeDt");
+        public Criteria andActiveDateGreaterThan(String value) {
+            addCriterion("active_date >", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtGreaterThanOrEqualTo(String value) {
-            addCriterion("active_dt >=", value, "activeDt");
+        public Criteria andActiveDateGreaterThanOrEqualTo(String value) {
+            addCriterion("active_date >=", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtLessThan(String value) {
-            addCriterion("active_dt <", value, "activeDt");
+        public Criteria andActiveDateLessThan(String value) {
+            addCriterion("active_date <", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtLessThanOrEqualTo(String value) {
-            addCriterion("active_dt <=", value, "activeDt");
+        public Criteria andActiveDateLessThanOrEqualTo(String value) {
+            addCriterion("active_date <=", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtLike(String value) {
-            addCriterion("active_dt like", value, "activeDt");
+        public Criteria andActiveDateLike(String value) {
+            addCriterion("active_date like", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtNotLike(String value) {
-            addCriterion("active_dt not like", value, "activeDt");
+        public Criteria andActiveDateNotLike(String value) {
+            addCriterion("active_date not like", value, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtIn(List<String> values) {
-            addCriterion("active_dt in", values, "activeDt");
+        public Criteria andActiveDateIn(List<String> values) {
+            addCriterion("active_date in", values, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtNotIn(List<String> values) {
-            addCriterion("active_dt not in", values, "activeDt");
+        public Criteria andActiveDateNotIn(List<String> values) {
+            addCriterion("active_date not in", values, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtBetween(String value1, String value2) {
-            addCriterion("active_dt between", value1, value2, "activeDt");
+        public Criteria andActiveDateBetween(String value1, String value2) {
+            addCriterion("active_date between", value1, value2, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andActiveDtNotBetween(String value1, String value2) {
-            addCriterion("active_dt not between", value1, value2, "activeDt");
+        public Criteria andActiveDateNotBetween(String value1, String value2) {
+            addCriterion("active_date not between", value1, value2, "activeDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtIsNull() {
-            addCriterion("expiry_dt is null");
+        public Criteria andExpiryDateIsNull() {
+            addCriterion("expiry_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtIsNotNull() {
-            addCriterion("expiry_dt is not null");
+        public Criteria andExpiryDateIsNotNull() {
+            addCriterion("expiry_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtEqualTo(String value) {
-            addCriterion("expiry_dt =", value, "expiryDt");
+        public Criteria andExpiryDateEqualTo(String value) {
+            addCriterion("expiry_date =", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtNotEqualTo(String value) {
-            addCriterion("expiry_dt <>", value, "expiryDt");
+        public Criteria andExpiryDateNotEqualTo(String value) {
+            addCriterion("expiry_date <>", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtGreaterThan(String value) {
-            addCriterion("expiry_dt >", value, "expiryDt");
+        public Criteria andExpiryDateGreaterThan(String value) {
+            addCriterion("expiry_date >", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtGreaterThanOrEqualTo(String value) {
-            addCriterion("expiry_dt >=", value, "expiryDt");
+        public Criteria andExpiryDateGreaterThanOrEqualTo(String value) {
+            addCriterion("expiry_date >=", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtLessThan(String value) {
-            addCriterion("expiry_dt <", value, "expiryDt");
+        public Criteria andExpiryDateLessThan(String value) {
+            addCriterion("expiry_date <", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtLessThanOrEqualTo(String value) {
-            addCriterion("expiry_dt <=", value, "expiryDt");
+        public Criteria andExpiryDateLessThanOrEqualTo(String value) {
+            addCriterion("expiry_date <=", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtLike(String value) {
-            addCriterion("expiry_dt like", value, "expiryDt");
+        public Criteria andExpiryDateLike(String value) {
+            addCriterion("expiry_date like", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtNotLike(String value) {
-            addCriterion("expiry_dt not like", value, "expiryDt");
+        public Criteria andExpiryDateNotLike(String value) {
+            addCriterion("expiry_date not like", value, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtIn(List<String> values) {
-            addCriterion("expiry_dt in", values, "expiryDt");
+        public Criteria andExpiryDateIn(List<String> values) {
+            addCriterion("expiry_date in", values, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtNotIn(List<String> values) {
-            addCriterion("expiry_dt not in", values, "expiryDt");
+        public Criteria andExpiryDateNotIn(List<String> values) {
+            addCriterion("expiry_date not in", values, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtBetween(String value1, String value2) {
-            addCriterion("expiry_dt between", value1, value2, "expiryDt");
+        public Criteria andExpiryDateBetween(String value1, String value2) {
+            addCriterion("expiry_date between", value1, value2, "expiryDate");
             return (Criteria) this;
         }
 
-        public Criteria andExpiryDtNotBetween(String value1, String value2) {
-            addCriterion("expiry_dt not between", value1, value2, "expiryDt");
+        public Criteria andExpiryDateNotBetween(String value1, String value2) {
+            addCriterion("expiry_date not between", value1, value2, "expiryDate");
             return (Criteria) this;
         }
 

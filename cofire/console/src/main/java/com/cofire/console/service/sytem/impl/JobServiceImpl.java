@@ -22,6 +22,7 @@ import com.cofire.console.service.sytem.IJobService;
 import com.cofire.dao.mapper.system.QtzJobMapper;
 import com.cofire.dao.model.system.QtzJob;
 import com.cofire.dao.model.system.QtzJobExample;
+import com.cofire.quartz.QuartzJobConfig;
 
 @Service
 public class JobServiceImpl implements IJobService {
@@ -93,10 +94,11 @@ public class JobServiceImpl implements IJobService {
      * 新增定时任务信息
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result add(QtzJob job) {
         Result result = new Result();
         try {
-            if (ParamValidator.checkParamsHasEmpty(job, "jobId", "jobNmae")) {
+            if (ParamValidator.checkParamsHasEmpty(job, "jobId", "jobName")) {
                 result.setSuccess(false, CodeEnum.E_400);
                 return result;
             }
@@ -115,7 +117,9 @@ public class JobServiceImpl implements IJobService {
         try {
             job.setModifier(CurrentUserUtil.getCurentUserId());
             job.setModifyTime(Util.getCurrentDateTimeString());
-            jobMapper.insert(job);
+            jobMapper.insertSelective(job);
+            QuartzJobConfig.standbyQuartzJob();
+            QuartzJobConfig.registerQuartzJob();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("新增定时任务信息失败：" + e.getMessage());
@@ -134,6 +138,7 @@ public class JobServiceImpl implements IJobService {
      * @return Result 返回类型
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result upadte(QtzJob job) {
         Result result = new Result();
         try {
@@ -141,6 +146,8 @@ public class JobServiceImpl implements IJobService {
             job.setModifier(CurrentUserUtil.getCurentUserId());
             job.setModifyTime(Util.getCurrentDateTimeString());
             jobMapper.updateByPrimaryKeySelective(job);
+            QuartzJobConfig.standbyQuartzJob();
+            QuartzJobConfig.registerQuartzJob();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改定时任务信息失败：" + e.getMessage());
