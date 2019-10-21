@@ -3,27 +3,27 @@
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#333333"
             text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
             <template v-for="item in menuList">
-                <template v-if="item.submenu">
-                    <el-submenu :index="item.index" :key="item.index">
+                <template v-if="item.subMenu">
+                    <el-submenu :index="item.url" :key="item.url">
                         <template slot="title">
-                            <i :class="item.icon"></i><span slot="title">{{ $t(item.title) }}</span>
+                            <i :class="item.icon"></i><span slot="title">{{ $t('common.route.R' + item.id) }}</span>
                         </template>
-                        <template v-for="subItem in item.submenu">
-                            <el-submenu v-if="subItem.submenu" :index="subItem.index" :key="subItem.index">
-                                <template slot="title">{{ $t(subItem.title) }}</template>
-                                <el-menu-item v-for="(threeItem,i) in subItem.submenu" :key="i" :index="threeItem.index">
-                                    {{ $t(threeItem.title) }}
+                        <template v-for="subItem in item.subMenu">
+                            <el-submenu v-if="subItem.subMenu" :index="subItem.url" :key="subItem.url">
+                                <template slot="title">{{ $t('common.route.R' + subItem.id) }}</template>
+                                <el-menu-item v-for="(threeItem,i) in subItem.subMenu" :key="i" :index="threeItem.url">
+                                    {{ $t('common.route.R' + threeItem.id) }}
                                 </el-menu-item>
                             </el-submenu>
-                            <el-menu-item v-else :index="subItem.index" :key="subItem.index">
-                                {{ $t(subItem.title) }}
+                            <el-menu-item v-else :index="subItem.url" :key="subItem.url">
+                                {{$t('common.route.R' + subItem.id) }}
                             </el-menu-item>
                         </template>
                     </el-submenu>
                 </template>
                 <template v-else>
-                    <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i><span slot="title">{{ $t(item.title) }}</span>
+                    <el-menu-item :index="item.url" :key="item.url">
+                        <i :class="item.icon"></i><span slot="title">{{ $t('common.route.R' + item.id) }}</span>
                     </el-menu-item>
                 </template>
             </template>
@@ -45,9 +45,7 @@
                 return this.$route.path;
             },
             menuList(){
-                // let menuList = JSON.parse(localStorage.getItem('menuList'));
                 let menuList = CurrentUserStore.state.menuList;
-
                 return menuList;
             }
         },

@@ -93,14 +93,14 @@ export default new Router({
                     path: '/404',
                     component: P404,
                     meta: {
-                        title: '404'
+                        title: 'common.route.404'
                     }
                 },
                 {
                     path: '/403',
                     component: P403,
                     meta: {
-                        title: '403'
+                        title: 'common.route.403'
                     }
                 }
             ]
