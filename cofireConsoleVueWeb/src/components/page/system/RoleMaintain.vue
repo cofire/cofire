@@ -82,7 +82,7 @@
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="30%">
+      <el-dialog :title="title" :visible.sync="editVisible" width="40%">
         <el-form
           ref="editForm"
           :rules="rules"
@@ -99,6 +99,20 @@
           <el-form-item :label="$t('role.label.description')" prop="description">
             <el-input v-model="editRole.description"></el-input>
           </el-form-item>
+          <el-form-item :label="$t('role.label.permission')" prop="permission">
+            <!--树形结构                               :check-strictly="checkStrictly"-->
+            <div class="el-dialog-div" style="height: 300px">
+              <el-tree
+                ref="tree"
+                :data="resourceTree"
+                show-checkbox
+                node-key="id"
+                :default-checked-keys="treeChecked"
+                :props="treeNode"
+                highlight-current
+              />
+            </div>
+          </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editVisible = false">取 消</el-button>
@@ -111,7 +125,7 @@
 <script>
 import { SysRoleModel } from "../../model/system/SysRoleModel";
 import { pageSizes, pageSize } from "../../common/global";
-import { queryRole, saveRole, deleteRole } from "@/api/getData";
+import { queryRole, saveRole, deleteRole, getRoleTree } from "@/api/getData";
 import { copyObject } from "../../common/util";
 export default {
   name: "RoleMaintain",
@@ -127,9 +141,15 @@ export default {
       title: "角色新增",
       formDisabled: false /** 为true时，整个表单不可编辑 */,
       disabled: false /** 为true时，编辑时某些字段不可编辑 */,
+      resourceTree: [],
+      treeChecked: [],
       rules: {
         roleId: [{ required: true, message: "角色代码", trigger: "blur" }],
         roleName: [{ required: true, message: "角色名称", trigger: "blur" }]
+      },
+      treeNode: {
+        children: "children",
+        label: "name"
       }
     };
   },
@@ -170,6 +190,7 @@ export default {
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
+      this.getRoleTree();
     },
     edit() {
       if (this.currentRow == null || this.currentRow == undefined) {
@@ -183,14 +204,17 @@ export default {
       this.editRole = copyObject(this.currentRow, this.editRole);
       this.editRole.saveFlag = "update";
       this.title = "角色编辑";
-      this.editVisible = true;
+
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
+      this.editVisible = true;
+      this.getRoleTree();
     },
     save(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.editRole.permission = this.$refs.tree.getCheckedKeys();
           saveRole(this.editRole).then(res => {
             if (res.success || res.success == "true") {
               this.editVisible = false;
@@ -213,7 +237,7 @@ export default {
     },
     //删除角色信息
     deleteRole() {
-      debugger
+      debugger;
       if (this.currentRow == null || this.currentRow == undefined) {
         this.$message({
           type: "warning",
@@ -231,7 +255,10 @@ export default {
         }
       )
         .then(() => {
-          this.deleteRoleModel = copyObject(this.currentRow, this.deleteRoleModel);
+          this.deleteRoleModel = copyObject(
+            this.currentRow,
+            this.deleteRoleModel
+          );
           deleteRole(this.deleteRoleModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message({
@@ -253,6 +280,24 @@ export default {
             message: this.$t("role.message.cancelDelete")
           });
         });
+    },
+    getRoleTree() {
+      var roleId = "";
+      if (this.currentRow != undefined && this.currentRow != null) {
+        roleId = this.currentRow.roleId;
+      }
+      getRoleTree({ roleId: roleId }).then(res => {
+        if (res.success) {
+          this.resourceTree = res.data.resourceTree;
+          this.treeChecked = res.data.checked;
+          console.log(this.resourceTree);
+        } else {
+          this.$message({
+            type: "error",
+            message: this.$t("common.code." + res.code)
+          });
+        }
+      });
     }
   },
   mounted() {

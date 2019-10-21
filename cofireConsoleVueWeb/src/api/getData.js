@@ -33,7 +33,8 @@ export const saveRole = data => fetch('/console/role/save', data, 'POST');
 export const deleteRole = data => fetch('/console/role/delete', data, 'POST');
 /**查询用户角色信息 */
 export const queryUserRoleList = data => fetch('/console/role/queryUserRoleList', data, 'POST');
-
+/**查询角色菜单树 */
+export const getRoleTree = data => fetch('/console/role/getRoleTree', data, 'POST');
 
 /** 数据字典管理 */
 /** 获取数据字典列表 */
@@ -57,3 +58,11 @@ export const queryJobLog = data => fetch('/console/jobLog/query', data, 'POST');
 export const queryLoginAudit = data => fetch('/console/loginAudit/query', data, 'POST');
 /** 获取操作日志列表 */
 export const queryOperateAudit = data => fetch('/console/operateAudit/query', data, 'POST');
+
+/** 定时任务管理 */ 
+/** 获取定时任务列表 */
+export const queryJob = data => fetch('/console/job/query', data, 'POST');
+/** 保存定时任务信息 */
+export const saveJob = data => fetch('/console/job/save', data, 'POST');
+/**删除定时任务信息 */
+export const deleteJob = data => fetch('/console/job/delete', data, 'POST');

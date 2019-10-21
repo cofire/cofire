@@ -98,7 +98,6 @@ export default {
   data() {
     return {
       editVisible: false, //控制弹出框是否显示的问题
-      title: this.$t("common.title.resetPswTitle"),
       lang: "cn",
       collapse: false,
       fullscreen: false,

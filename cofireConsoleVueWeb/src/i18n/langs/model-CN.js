@@ -72,6 +72,7 @@ exports.default = {
       'filler1': '预留字段1',
       'filler2': '预留字段2',
       'filler3': '预留字段3',
+      'permission': '角色权限'
     }
   },
   dict:{
@@ -111,13 +112,13 @@ exports.default = {
       'jobDesc': '任务描述',
       'year': '年',
       'month': '月',
-      'date': '日期',
-      'day': '星期',
+      'day': '日期',
+      'week': '星期',
       'hour': '小时',
       'minute': '分',
       'second': '秒',
-      'activeDt': '生效日期',
-      'expiryDt': '失效日期',
+      'activeDate': '生效日期',
+      'expiryDate': '失效日期',
       'isDel': '逻辑删除标识',
       'modifier': '最后修改人',
       'modifyTime': '最后修改时间',
