@@ -117,6 +117,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.getDictByGroup("0001"))
     this.queryJobLog.runTimeList = this.getCurrentDayStartAndEndTime();
     this.search();
   }

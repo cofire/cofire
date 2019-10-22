@@ -19,16 +19,21 @@
             :end-placeholder="this.$t('common.label.endTime')"
           ></el-date-picker>
         </el-form-item>
-        <el-form-item
+         <el-form-item
           :label="$t('loginAudit.label.auditType')"
           prop="auditType"
           class="queryCondition"
         >
-          <el-input
-            :placeholder="$t('loginAudit.label.auditType')"
-            v-model="queryLoginAudit.auditType"
-          ></el-input>
+          <el-select v-model="queryLoginAudit.auditType" clearable>
+            <el-option
+              v-for="item in this.auditTypeDict"
+              :key="item.dict_value"
+              :label="item.dict_name"
+              :value="item.dict_value"
+            ></el-option>
+          </el-select>
         </el-form-item>
+
         <el-form-item
           :label="$t('loginAudit.label.sourceType')"
           prop="sourceType"
@@ -81,6 +86,7 @@
           property="auditType"
           :label="this.$t('loginAudit.label.auditType')"
           width="100"
+          :formatter="formatAuditType"
         ></el-table-column>
         <el-table-column
           property="sourceType"
@@ -118,6 +124,7 @@ export default {
     return {
       queryLoginAudit: new SysLoginAuditModel(),
       pageSizes: pageSizes,
+      auditTypeDict: this.getDictByGroup("0002"),
       total: 0,
       tableData: []
     };
@@ -152,6 +159,11 @@ export default {
           });
         }
       });
+    },
+    formatAuditType(row, column){
+      // return this.getDictName(this.auditTypeDict,row[column.property])
+      return this.auditTypeDict.formateTableDict(row, column)
+
     }
   },
   mounted() {

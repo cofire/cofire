@@ -103,4 +103,29 @@ public class SystemUtil {
         }
         return dictMap.get("dict_name");
     }
+
+    /**
+     * 
+     * @Title: getDictOriName
+     * @author ly
+     * @Description:获取数据字典原始名称
+     * @param @param groupCode
+     * @param @param dictVal
+     * @param @return 参数
+     * @return String 返回类型
+     */
+    public static String getDictOriName(String groupCode, String dictVal) {
+        if (StringUtils.isEmpty(groupCode)) {
+            return "";
+        }
+        if (StringUtils.isEmpty(dictVal)) {
+            dictVal = "";
+        }
+        String pkId = groupCode + "|" + dictVal;
+        Map<String, String> dictMap = dtDictMap.get(pkId);
+        if (dictMap == null || dictMap.isEmpty() || dictMap.size() <= 0) {
+            return "";
+        }
+        return dictMap.get("ori_dict_name");
+    }
 }

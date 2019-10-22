@@ -99,12 +99,10 @@ export default {
   mounted() {
     const path = this.$route.fullPath;
     this.pathNavFull = this.getMenuParents(this.menuList, path);
-    console.log(this.pathNavFull)
     if (this.pathNavFull.length > 0) {
       this.parentPath = this.pathNavFull[0];
       this.pathNav = this.pathNavFull.slice(1);
     }
-    console.log(this.pathNav);
   }
 };
 </script>

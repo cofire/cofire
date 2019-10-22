@@ -85,11 +85,12 @@ public class BaseController {
             }
             userDetail.setUser(user);
             userDetail.setMenuList(menus);
+            userDetail.setDictList(SystemUtil.getDictGroupMap());
             result.setSuccess(true);
             result.setData(userDetail);
         } catch (Exception e) {
             logger.error("获取用户信息异常：" + e);
-            result.setMessage("服务器忙!!请稍后再试");
+            result.setMessage("服务器忙!请稍后再试");
             result.setSuccess(false);
         }
         return result;

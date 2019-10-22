@@ -87,12 +87,7 @@ export default {
               this.loading = true;
               getUserDetail().then(re => {
                 if (re.success || re.success == "true") {
-                  CurrentUserStore.dispatch("setMenuList", re.data.menuList);
-                  CurrentUserStore.dispatch("setUser", re.data.user);
-                  localStorage.setItem(
-                    "common",
-                    JSON.stringify(re.data.common)
-                  );
+                  CurrentUserStore.dispatch("set", re.data);
                   console.log("加载菜单成功");
                 } else {
                   console.log("加载菜单失败");

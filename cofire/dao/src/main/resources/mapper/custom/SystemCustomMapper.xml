@@ -26,6 +26,7 @@
 			dict_name
 		END dict_name,
 		 dict_value,
+		 dict_name AS ori_dict_name,
 		 group_name
 		FROM
 			sys_dict

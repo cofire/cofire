@@ -33,21 +33,15 @@ axios.defaults.withCredentials = true
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const userId = CurrentUserStore.state.user.userId;
-    // if((userId == undefined || userId == null || userId == "") &&  to.path !== '/login'){
-    //     next('/login');
-    //     return;
-    // }
     if(to.path !== '/login'){
         getUserDetail().then((re) => {
             if (re.success || re.success == "true") {
-                CurrentUserStore.dispatch("setMenuList", re.data.menuList);
-                CurrentUserStore.dispatch("setUser", re.data.user);
+                CurrentUserStore.dispatch("set", re.data);
                 console.log("加载菜单成功");
                 next();
             }else{
                 console.log("加载菜单失败"); 
-                CurrentUserStore.dispatch("clearUser");
-                CurrentUserStore.dispatch("clearMenuList");
+                CurrentUserStore.dispatch("clear");
                 next('/login');
             }
         });
@@ -56,7 +50,6 @@ router.beforeEach((to, from, next) => {
     }
     
 })
-
 
 new Vue({
     router,

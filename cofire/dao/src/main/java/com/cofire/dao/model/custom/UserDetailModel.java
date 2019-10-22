@@ -5,6 +5,8 @@ import java.util.List;
 
 public class UserDetailModel<T, V> {
     private T user;
+    private List<V> menuList = new ArrayList<V>();
+    private Object dictList;
 
     public T getUser() {
         return user;
@@ -22,6 +24,12 @@ public class UserDetailModel<T, V> {
         this.menuList = menuList;
     }
 
-    private List<V> menuList = new ArrayList<V>();
+    public Object getDictList() {
+        return dictList;
+    }
+
+    public void setDictList(Object dictList) {
+        this.dictList = dictList;
+    }
 
 }

@@ -142,6 +142,7 @@ export default {
                 type: "success",
                 message: res.message
               });
+              CurrentUserStore.dispatch("clear");
             } else {
               this.$message({
                 type: "error",
@@ -149,8 +150,6 @@ export default {
               });
             }
           });
-          localStorage.removeItem("userName");
-          localStorage.removeItem("menuList");
           this.$router.replace("/login");
         });
       }

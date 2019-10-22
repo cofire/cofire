@@ -1,3 +1,5 @@
+import { CurrentUserStore } from "./components/store/common/CurrentUserStore";
+
 export default {
   install(Vue)  {
     /**
@@ -101,5 +103,26 @@ export default {
      Vue.prototype.resetForm = (form) => {
       form.resetFields();
     }
+
+    /** 根据数据字典组号，获取数据字典列表 */
+    Vue.prototype.getDictByGroup = (groupCode) =>{
+      return CurrentUserStore.state.dictList[groupCode];
+    }
+
+    Vue.prototype.getDictName = (dictList, value) =>{
+      if (dictList === undefined || dictList === null || !(dictList instanceof Array)) {
+        return value;
+      }
+      for (let index in dictList) {
+        if (dictList[index].dict_value === value) {
+          return dictList[index]['dict_name'];
+        }
+      }
+      return value;
+    }
+
+    Array.prototype.formateTableDict = function (row, column) {
+      return Vue.prototype.getDictName(this, row[column.property]);
+    };
   }
 };

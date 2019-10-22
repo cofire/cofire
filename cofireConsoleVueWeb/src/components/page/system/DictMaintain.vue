@@ -54,7 +54,7 @@
         <el-table-column property="dictValue" :label="this.$t('dict.label.dictValue')" width="250"></el-table-column>
         <el-table-column property="dictName" :label="this.$t('dict.label.dictName')" width="200"></el-table-column>
         <el-table-column property="modifyUser" :label="this.$t('dict.label.modifier')" width="200"></el-table-column>
-        <el-table-column property="modifyTime" :label="this.$t('dict.label.modifyTime')" width="200"></el-table-column>
+        <el-table-column property="modifyTime" :label="this.$t('dict.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
       </el-table>
       <el-pagination
         background=""

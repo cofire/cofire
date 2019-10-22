@@ -9,6 +9,7 @@ const CurrentUserStore = new Vuex.Store({
   state: {
       user: new SysUserModel(),
       menuList: [],
+      dictList: [],
       lang: 'cn'
   },
   // 修改全局变量必须通过mutations中的方法
@@ -30,6 +31,17 @@ const CurrentUserStore = new Vuex.Store({
         state.lang = data;
       },
       clearLang (state) {
+        state.lang = 'cn';
+      },
+      set(state, data) {
+        state.menuList = data.menuList;
+        state.user = data.user;
+        state.dictList = data.dictList;
+      },
+      clear(state){
+        state.menuList = [];
+        state.user = new SysUserModel();
+        state.dictList = [];
         state.lang = 'cn';
       }
   },
@@ -53,6 +65,12 @@ const CurrentUserStore = new Vuex.Store({
       },
       clearLang (context) {
         context.commit('clearLang')
+      },
+      set(context, data) {
+        context.commit('set', data)
+      },
+      clear(context, data){
+        context.commit('clear');
       }
   }
 })
