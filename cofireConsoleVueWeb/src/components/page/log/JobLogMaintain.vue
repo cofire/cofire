@@ -24,7 +24,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -61,7 +61,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryJobLog.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryJobLog.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -71,15 +71,13 @@
 </template>
 <script>
 import { QtzJobLogModel } from "../../model/system/QtzJobLogModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryJobLog } from "../../../api/getData";
-import { copyObject } from "../../common/util";
+
 export default {
   name: "JobLogMaintain",
   data() {
     return {
       queryJobLog: new QtzJobLogModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: []
     };
@@ -99,7 +97,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryJobLog.page = 1;
+      }
       this.queryJobLog.runTime = this.getQueryTimeBeginAndEnd(
         this.queryJobLog.runTimeList
       );

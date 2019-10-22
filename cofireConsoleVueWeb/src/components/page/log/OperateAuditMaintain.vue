@@ -38,7 +38,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -103,7 +103,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryOperateAudit.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryOperateAudit.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -113,15 +113,12 @@
 </template>
 <script>
 import { SysOperateAuditModel } from "../../model/system/SysOperateAuditModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryOperateAudit } from "../../../api/getData";
-import { copyObject } from "../../common/util";
 export default {
   name: "OperateAuditMaintain",
   data() {
     return {
       queryOperateAudit: new SysOperateAuditModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: []
     };
@@ -141,7 +138,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryOperateAudit.page = 1;
+      }
       this.queryOperateAudit.requestTime = this.getQueryTimeBeginAndEnd(
         this.queryOperateAudit.requestTimeList
       );

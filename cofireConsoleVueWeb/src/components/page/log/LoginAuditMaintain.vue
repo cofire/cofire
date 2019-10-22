@@ -19,7 +19,7 @@
             :end-placeholder="this.$t('common.label.endTime')"
           ></el-date-picker>
         </el-form-item>
-         <el-form-item
+        <el-form-item
           :label="$t('loginAudit.label.auditType')"
           prop="auditType"
           class="queryCondition"
@@ -33,7 +33,6 @@
             ></el-option>
           </el-select>
         </el-form-item>
-
         <el-form-item
           :label="$t('loginAudit.label.sourceType')"
           prop="sourceType"
@@ -50,7 +49,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -62,6 +61,7 @@
       <el-table
         ref="singleTable"
         border=""
+        v-loading="loading"
         highlight-current-row
         :data="tableData"
         @current-change="handleCurrentChange"
@@ -104,9 +104,9 @@
         background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
-        :current-page="queryLoginAudit.page"
-        :page-sizes="pageSizes"
-        :page-size="queryLoginAudit.limit"
+        :current-page.sync="queryLoginAudit.page"
+        :page-sizes="GLOBAL.pageSizes"
+        :page-size="queryLoginAudit.length"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       ></el-pagination>
@@ -115,16 +115,14 @@
 </template>
 <script>
 import { SysLoginAuditModel } from "../../model/system/SysLoginAuditModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryLoginAudit } from "../../../api/getData";
-import { copyObject } from "../../common/util";
 export default {
   name: "LoginAuditMaintain",
   data() {
     return {
       queryLoginAudit: new SysLoginAuditModel(),
-      pageSizes: pageSizes,
       auditTypeDict: this.getDictByGroup("0002"),
+      loading: false,
       total: 0,
       tableData: []
     };
@@ -132,9 +130,10 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.currentRow = val;
+      this.search();
     },
     handleSizeChange(val) {
-      this.queryLoginAudit.limit = val;
+      this.queryLoginAudit.length = val;
       this.search();
     },
     handlePageChange(val) {
@@ -144,7 +143,11 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryLoginAudit.page = 1;
+      }
+      this.loading = true;
       this.queryLoginAudit.createTime = this.getQueryTimeBeginAndEnd(
         this.queryLoginAudit.createTimeList
       );
@@ -152,18 +155,19 @@ export default {
         if (res.success || res.success == "true") {
           this.total = res.total;
           this.tableData = res.data;
+          //  this.queryLoginAudit.page = val;
         } else {
           this.$message({
             type: "error",
             message: res.msg
           });
         }
+        this.loading = false;
       });
     },
-    formatAuditType(row, column){
-      // return this.getDictName(this.auditTypeDict,row[column.property])
-      return this.auditTypeDict.formateTableDict(row, column)
-
+    formatAuditType(row, column) {
+      return this.getDictName(this.auditTypeDict, row[column.property]);
+      // return this.auditTypeDict.formateTableDict(row, column)
     }
   },
   mounted() {

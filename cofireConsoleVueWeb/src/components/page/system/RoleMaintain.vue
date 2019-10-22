@@ -15,7 +15,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -65,7 +65,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryRole.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryRole.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -115,9 +115,8 @@
 </template>
 <script>
 import { SysRoleModel } from "../../model/system/SysRoleModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryRole, saveRole, deleteRole, getRoleTree } from "@/api/getData";
-import { copyObject } from "../../common/util";
+
 export default {
   name: "RoleMaintain",
   data() {
@@ -125,7 +124,6 @@ export default {
       queryRole: new SysRoleModel(),
       editRole: new SysRoleModel(),
       deleteRoleModel: new SysRoleModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: [],
       editVisible: false,
@@ -159,7 +157,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryRole.page = 1;
+      }
       queryRole(this.queryRole).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -192,7 +193,7 @@ export default {
         return;
       }
       this.disabled = true;
-      this.editRole = copyObject(this.currentRow, this.editRole);
+      this.editRole = this.copyObject(this.currentRow, this.editRole);
       this.editRole.saveFlag = "update";
       this.title = "角色编辑";
 
@@ -246,7 +247,7 @@ export default {
         }
       )
         .then(() => {
-          this.deleteRoleModel = copyObject(
+          this.deleteRoleModel = this.copyObject(
             this.currentRow,
             this.deleteRoleModel
           );

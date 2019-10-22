@@ -15,7 +15,7 @@
       </el-form>
     </el-row>
     <el-row class="table-operations">
-      <el-button type="primary" icon="el-icon-lx-search" @click="search()">查询</el-button>
+      <el-button type="primary" icon="el-icon-lx-search" @click="search('click')">查询</el-button>
       <el-button type="primary" icon="el-icon-lx-roundadd" @click="add()">新增</el-button>
       <el-button type="primary" icon="el-icon-lx-edit" @click="edit()">修改</el-button>
       <el-button
@@ -57,7 +57,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryUser.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryUser.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -151,7 +151,6 @@
 <script>
 import { SysUserModel } from "../../model/system/SysUserModel";
 import { SysRoleModel } from "../../model/system/SysRoleModel";
-import { pageSizes, pageSize } from "../../common/global";
 import {
   queryUser,
   saveUser,
@@ -161,8 +160,8 @@ import {
   restPassWord,
   deleteUser
 } from "../../../api/getData";
-import { copyObject } from "../../common/util";
 import { Rules } from "../../rules/Rules";
+
 export default {
   name: "UserMaintain",
   data() {
@@ -172,7 +171,6 @@ export default {
       queryRoleModel: new SysRoleModel(),
       roleSetUser: new SysUserModel(),
       userRoleList: [],
-      pageSizes: pageSizes,
       total: 0,
       tableData: [],
       roleTableData: [],
@@ -203,7 +201,10 @@ export default {
     handleSelectionChange(val) {
       this.userRoleList = val;
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryUser.page = 1;
+      }
       queryUser(this.queryUser).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -229,7 +230,7 @@ export default {
         return;
       }
       this.disabled = true;
-      this.editUser = copyObject(this.currentRow, this.editUser);
+      this.editUser = this.copyObject(this.currentRow, this.editUser);
       this.editUser.saveFlag = "update";
       this.title = this.$t("user.title.edit");
       this.editVisible = true;
@@ -259,7 +260,7 @@ export default {
         this.$message.warning(this.$t("user.message.roleSet"));
         return;
       }
-      this.roleSetUser = copyObject(this.currentRow, this.roleSetUser);
+      this.roleSetUser = this.copyObject(this.currentRow, this.roleSetUser);
       this.title = this.$t("user.label.roleSet");
       this.roleSetVisible = true;
       this.queryRole();

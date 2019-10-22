@@ -1,7 +1,9 @@
 import { CurrentUserStore } from "./components/store/common/CurrentUserStore";
+import  GlobalData  from "./components/common/GlobalData"
 
 export default {
   install(Vue)  {
+    Vue.prototype.GLOBAL = GlobalData;
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')
@@ -109,6 +111,7 @@ export default {
       return CurrentUserStore.state.dictList[groupCode];
     }
 
+    /**获取数据字典名称*/ 
     Vue.prototype.getDictName = (dictList, value) =>{
       if (dictList === undefined || dictList === null || !(dictList instanceof Array)) {
         return value;
@@ -121,8 +124,26 @@ export default {
       return value;
     }
 
+    /**table中数据字典格式化---暂时不用 */ 
     Array.prototype.formateTableDict = function (row, column) {
       return Vue.prototype.getDictName(this, row[column.property]);
     };
+
+    /** js对象深度复制 */
+    Vue.prototype.copyObject = (source, dest) => {
+      Object.keys(dest).forEach(key => {
+        if (source[key] !== undefined) {
+          dest[key] = source[key];
+        }
+      })
+      return dest;
+    }
+
+    Vue.prototype.isBlank = (value) =>{
+      if(value == undefined || value == null || value == ""){
+        return true;
+      }
+      return false;
+    }
   }
 };

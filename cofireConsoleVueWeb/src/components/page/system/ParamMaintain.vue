@@ -17,7 +17,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -59,7 +59,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryParam.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryParam.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -98,9 +98,8 @@
 </template>
 <script>
 import { SysParamModel } from "../../model/system/SysParamModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryParam, saveParam, deleteParam } from "../../../api/getData";
-import { copyObject } from "../../common/util";
+
 export default {
   name: "ParamMaintain",
   data() {
@@ -108,7 +107,6 @@ export default {
       queryParam: new SysParamModel(),
       editParam: new SysParamModel(),
       deleteParamModel: new SysParamModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: [],
       editVisible: false,
@@ -136,7 +134,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryParam.page = 1;
+      }
       queryParam(this.queryParam).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -168,7 +169,7 @@ export default {
         return;
       }
       this.disabled = true;
-      this.editParam = copyObject(this.currentRow, this.editParam);
+      this.editParam = this.copyObject(this.currentRow, this.editParam);
       this.editParam.saveFlag = "update";
       this.title = "系统参数编辑";
       this.editVisible = true;
@@ -219,7 +220,7 @@ export default {
         }
       )
         .then(() => {
-          this.deleteParamModel = copyObject(this.currentRow, this.deleteParamModel);
+          this.deleteParamModel = this.copyObject(this.currentRow, this.deleteParamModel);
           deleteParam(this.deleteParamModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message({

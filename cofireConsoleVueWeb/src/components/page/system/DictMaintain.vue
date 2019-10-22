@@ -19,7 +19,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -61,7 +61,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryDict.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryDict.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -100,9 +100,7 @@
 </template>
 <script>
 import { SysDictModel } from "../../model/system/SysDictModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryDict, saveDict, deleteDict } from "../../../api/getData";
-import { copyObject } from "../../common/util";
 export default {
   name: "DictMaintain",
   data() {
@@ -110,7 +108,6 @@ export default {
       queryDict: new SysDictModel(),
       editDict: new SysDictModel(),
       deleteDictModel: new SysDictModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: [],
       editVisible: false,
@@ -138,7 +135,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryDict.page = 1;
+      }
       queryDict(this.queryDict).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -170,7 +170,7 @@ export default {
         return;
       }
       this.disabled = true;
-      this.editDict = copyObject(this.currentRow, this.editDict);
+      this.editDict = this.copyObject(this.currentRow, this.editDict);
       this.editDict.saveFlag = "update";
       this.title = "数据字典编辑";
       this.editVisible = true;
@@ -221,7 +221,7 @@ export default {
         }
       )
         .then(() => {
-          this.deleteDictModel = copyObject(this.currentRow, this.deleteDictModel);
+          this.deleteDictModel = this.copyObject(this.currentRow, this.deleteDictModel);
           deleteDict(this.deleteDictModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message({

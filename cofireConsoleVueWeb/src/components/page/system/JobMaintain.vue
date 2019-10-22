@@ -17,7 +17,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search()"
+        @click="search('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -68,7 +68,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryJob.page"
-        :page-sizes="pageSizes"
+        :page-sizes="GLOBAL.pageSizes"
         :page-size="queryJob.limit"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -167,9 +167,8 @@
 </template>
 <script>
 import { QtzJobModel } from "../../model/system/QtzJobModel";
-import { pageSizes, pageSize } from "../../common/global";
 import { queryJob, saveJob, deleteJob } from "../../../api/getData";
-import { copyObject } from "../../common/util";
+
 export default {
   name: "JobMaintain",
   data() {
@@ -177,7 +176,6 @@ export default {
       queryJob: new QtzJobModel(),
       editJob: new QtzJobModel(),
       deleteJobModel: new QtzJobModel(),
-      pageSizes: pageSizes,
       total: 0,
       tableData: [],
       editVisible: false,
@@ -205,7 +203,10 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
-    search() {
+    search(type) {
+      if (!this.isBlank(type)) {
+        this.queryJob.page = 1;
+      }
       queryJob(this.queryJob).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -237,7 +238,7 @@ export default {
         return;
       }
       this.disabled = true;
-      this.editJob = copyObject(this.currentRow, this.editJob);
+      this.editJob = this.copyObject(this.currentRow, this.editJob);
       this.editJob.saveFlag = "update";
       this.title = "定时任务编辑";
       this.editVisible = true;
@@ -284,7 +285,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          this.deleteJobModel = copyObject(
+          this.deleteJobModel = this.copyObject(
             this.currentRow,
             this.deleteJobModel
           );
