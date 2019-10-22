@@ -2,15 +2,22 @@
   <el-row>
     <el-row class="query-form">
       <el-form :inline="true" :model="queryJobLog" ref="queryForm">
-          <el-form-item :label="$t('jobLog.label.jobId')" prop="jobId" class='queryCondition'>
-            <el-input :placeholder="$t('jobLog.label.jobId')" v-model="queryJobLog.jobId"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('jobLog.label.runTime')" prop="runTime" class='queryCondition'>
-            <el-input :placeholder="$t('jobLog.label.runTime')" v-model="queryJobLog.runTime"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('jobLog.label.isSuccess')" prop="isSuccess" class='queryCondition'>
-            <el-input :placeholder="$t('jobLog.label.isSuccess')" v-model="queryJobLog.isSuccess"></el-input>
-          </el-form-item>
+        <el-form-item :label="$t('jobLog.label.jobId')" prop="jobId" class="queryCondition">
+          <el-input :placeholder="$t('jobLog.label.jobId')" v-model="queryJobLog.jobId"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('jobLog.label.runTime')" prop="runTimeList" class="queryCondition">
+          <el-date-picker
+            v-model.trim="queryJobLog.runTimeList"
+            type="daterange"
+            value-format="yyyyMMdd"
+            :range-separator="this.$t('common.label.dateto')"
+            :start-placeholder="this.$t('common.label.startTime')"
+            :end-placeholder="this.$t('common.label.endTime')"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item :label="$t('jobLog.label.isSuccess')" prop="isSuccess" class="queryCondition">
+          <el-input :placeholder="$t('jobLog.label.isSuccess')" v-model="queryJobLog.isSuccess"></el-input>
+        </el-form-item>
       </el-form>
     </el-row>
     <el-row class="table-operations">
@@ -22,7 +29,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-refresh"
-        @click="resetForm('queryForm')"
+        @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>
     <el-row class="table-result">
@@ -37,9 +44,13 @@
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="jobId" :label="this.$t('jobLog.label.jobId')" width="200"></el-table-column>
-        <el-table-column property="runTime" :label="this.$t('jobLog.label.runTime')" width="200"></el-table-column>
+        <el-table-column property="runTime" :label="this.$t('jobLog.label.runTime')" width="200" :formatter="formatTableTime"></el-table-column>
         <el-table-column property="ip" :label="this.$t('jobLog.label.ip')" width="200"></el-table-column>
-        <el-table-column property="isSuccess" :label="this.$t('jobLog.label.isSuccess')" width="200"></el-table-column>
+        <el-table-column
+          property="isSuccess"
+          :label="this.$t('jobLog.label.isSuccess')"
+          width="200"
+        ></el-table-column>
         <el-table-column property="message" :label="this.$t('jobLog.label.message')" width="200"></el-table-column>
         <el-table-column property="filler1" :label="this.$t('jobLog.label.filler1')" width="200"></el-table-column>
         <el-table-column property="filler2" :label="this.$t('jobLog.label.filler2')" width="200"></el-table-column>
@@ -70,7 +81,7 @@ export default {
       queryJobLog: new QtzJobLogModel(),
       pageSizes: pageSizes,
       total: 0,
-      tableData: [],
+      tableData: []
     };
   },
   methods: {
@@ -89,6 +100,9 @@ export default {
       this.edit();
     },
     search() {
+      this.queryJobLog.runTime = this.getQueryTimeBeginAndEnd(
+        this.queryJobLog.runTimeList
+      );
       queryJobLog(this.queryJobLog).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -103,6 +117,7 @@ export default {
     }
   },
   mounted() {
+    this.queryJobLog.runTimeList = this.getCurrentDayStartAndEndTime();
     this.search();
   }
 };

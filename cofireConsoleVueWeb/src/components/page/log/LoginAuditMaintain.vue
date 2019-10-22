@@ -2,18 +2,43 @@
   <el-row>
     <el-row class="query-form">
       <el-form :inline="true" :model="queryLoginAudit" ref="queryForm">
-          <el-form-item :label="$t('loginAudit.label.userId')" prop="userId" class='queryCondition'>
-            <el-input :placeholder="$t('loginAudit.label.userId')" v-model="queryLoginAudit.userId"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('loginAudit.label.createTime')" prop="createTime" class='queryCondition'>
-            <el-input :placeholder="$t('loginAudit.label.createTime')" v-model="queryLoginAudit.createTime"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('loginAudit.label.auditType')" prop="auditType" class='queryCondition'>
-            <el-input :placeholder="$t('loginAudit.label.auditType')" v-model="queryLoginAudit.auditType"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('loginAudit.label.sourceType')" prop="sourceType" class='queryCondition'>
-            <el-input :placeholder="$t('loginAudit.label.sourceType')" v-model="queryLoginAudit.sourceType"></el-input>
-          </el-form-item>
+        <el-form-item :label="$t('loginAudit.label.userId')" prop="userId" class="queryCondition">
+          <el-input :placeholder="$t('loginAudit.label.userId')" v-model="queryLoginAudit.userId"></el-input>
+        </el-form-item>
+        <el-form-item
+          :label="$t('loginAudit.label.createTime')"
+          prop="createTimeList"
+          class="queryCondition"
+        >
+          <el-date-picker
+            v-model.trim="queryLoginAudit.createTimeList"
+            type="daterange"
+            value-format="yyyyMMdd"
+            :range-separator="this.$t('common.label.dateto')"
+            :start-placeholder="this.$t('common.label.startTime')"
+            :end-placeholder="this.$t('common.label.endTime')"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item
+          :label="$t('loginAudit.label.auditType')"
+          prop="auditType"
+          class="queryCondition"
+        >
+          <el-input
+            :placeholder="$t('loginAudit.label.auditType')"
+            v-model="queryLoginAudit.auditType"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          :label="$t('loginAudit.label.sourceType')"
+          prop="sourceType"
+          class="queryCondition"
+        >
+          <el-input
+            :placeholder="$t('loginAudit.label.sourceType')"
+            v-model="queryLoginAudit.sourceType"
+          ></el-input>
+        </el-form-item>
       </el-form>
     </el-row>
     <el-row class="table-operations">
@@ -25,7 +50,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-refresh"
-        @click="resetForm('queryForm')"
+        @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>
     <el-row class="table-result">
@@ -39,13 +64,35 @@
         style="width: 100%"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="userId" :label="this.$t('loginAudit.label.userId')" width="200"></el-table-column>
+        <el-table-column property="userId" :label="this.$t('loginAudit.label.userId')" width="100"></el-table-column>
         <el-table-column property="ip" :label="this.$t('loginAudit.label.ip')" width="200"></el-table-column>
-        <el-table-column property="sessionId" :label="this.$t('loginAudit.label.sessionId')" width="200"></el-table-column>
-        <el-table-column property="createTime" :label="this.$t('loginAudit.label.createTime')" width="200"></el-table-column>
-        <el-table-column property="auditType" :label="this.$t('loginAudit.label.auditType')" width="200"></el-table-column>
-        <el-table-column property="sourceType" :label="this.$t('loginAudit.label.sourceType')" width="200"></el-table-column>
-        <el-table-column property="message" :label="this.$t('loginAudit.label.message')" width="200"></el-table-column>
+        <el-table-column
+          property="sessionId"
+          :label="this.$t('loginAudit.label.sessionId')"
+          width="300"
+        ></el-table-column>
+        <el-table-column
+          property="createTime"
+          :label="this.$t('loginAudit.label.createTime')"
+          width="200"
+          :formatter="formatTableTime"
+        ></el-table-column>
+        <el-table-column
+          property="auditType"
+          :label="this.$t('loginAudit.label.auditType')"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          property="sourceType"
+          :label="this.$t('loginAudit.label.sourceType')"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          property="message"
+          :label="this.$t('loginAudit.label.message')"
+          width="400"
+          :show-overflow-tooltip="true"
+        ></el-table-column>
       </el-table>
       <el-pagination
         background=""
@@ -72,7 +119,7 @@ export default {
       queryLoginAudit: new SysLoginAuditModel(),
       pageSizes: pageSizes,
       total: 0,
-      tableData: [],
+      tableData: []
     };
   },
   methods: {
@@ -91,6 +138,9 @@ export default {
       this.edit();
     },
     search() {
+      this.queryLoginAudit.createTime = this.getQueryTimeBeginAndEnd(
+        this.queryLoginAudit.createTimeList
+      );
       queryLoginAudit(this.queryLoginAudit).then(res => {
         if (res.success || res.success == "true") {
           this.total = res.total;
@@ -105,6 +155,7 @@ export default {
     }
   },
   mounted() {
+    this.queryLoginAudit.createTimeList = this.getCurrentDayStartAndEndTime();
     this.search();
   }
 };

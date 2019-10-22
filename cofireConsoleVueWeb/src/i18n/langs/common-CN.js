@@ -4,8 +4,8 @@ exports.__esModule = true;
 exports.default = {
   common: {
     route: {
-      "403": "403",
-      "404": "404",
+      "R403": "403",
+      "R404": "404",
       "R0": "首页",
       "R1": "用户管理",
       "R11": "用户信息管理",

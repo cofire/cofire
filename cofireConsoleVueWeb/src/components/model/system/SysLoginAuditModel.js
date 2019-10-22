@@ -35,4 +35,6 @@ export class SysLoginAuditModel extends CommonModel {
 
   /** 消息 (无默认值) */
   message = '';
+
+  createTimeList = [];
 }

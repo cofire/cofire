@@ -5,7 +5,7 @@
         <div class="content-box" :class="{'content-collapse':collapse}">
             <v-tags></v-tags>
             <div class="content">
-                <el-row class="crumbs" v-if="pathNavFull">
+                <el-row class="crumbs" v-if="pathNavFull.length > 0">
                     <el-breadcrumb separator="/">
                         <el-breadcrumb-item>
                             <i class="el-icon-lx-calendar"></i>
@@ -99,6 +99,7 @@ export default {
   mounted() {
     const path = this.$route.fullPath;
     this.pathNavFull = this.getMenuParents(this.menuList, path);
+    console.log(this.pathNavFull)
     if (this.pathNavFull.length > 0) {
       this.parentPath = this.pathNavFull[0];
       this.pathNav = this.pathNavFull.slice(1);

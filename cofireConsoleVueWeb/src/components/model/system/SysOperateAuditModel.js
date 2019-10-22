@@ -41,4 +41,6 @@ export class SysOperateAuditModel extends CommonModel {
 
   /** 预留字段3 (无默认值) */
   filler3 = '';
+
+  requestTimeList = [];
 }
