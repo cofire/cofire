@@ -158,7 +158,7 @@ export default {
           this.tableData = res.data.list;
         });
     },
-    search() {
+    query() {
       this.is_search = true;
     },
     formatter(row, column) {

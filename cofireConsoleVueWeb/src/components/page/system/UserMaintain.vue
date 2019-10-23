@@ -15,16 +15,32 @@
       </el-form>
     </el-row>
     <el-row class="table-operations">
-      <el-button type="primary" icon="el-icon-lx-search" @click="search('click')">查询</el-button>
-      <el-button type="primary" icon="el-icon-lx-roundadd" @click="add()">新增</el-button>
-      <el-button type="primary" icon="el-icon-lx-edit" @click="edit()">修改</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-lx-search"
+        @click="query('click')"
+      >{{$t('common.button.query')}}</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-lx-roundadd"
+        @click="add()"
+      >{{$t('common.button.add')}}</el-button>
+      <el-button type="primary" icon="el-icon-lx-edit" @click="edit()">{{$t('common.button.edit')}}</el-button>
       <el-button
         type="primary"
         icon="el-icon-lx-delete"
         @click="deleteUser()"
       >{{this.$t('common.button.delete')}}</el-button>
-      <el-button type="primary" icon="el-icon-lx-settings" @click="roleSet()">角色设置</el-button>
-      <el-button type="primary" icon="el-icon-lx-refresh" @click="confirmRestPassWord()">密码重置</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-lx-settings"
+        @click="roleSet()"
+      >{{$t('common.button.roleSet')}}</el-button>
+      <el-button
+        type="primary"
+        icon="el-icon-lx-refresh"
+        @click="confirmRestPassWord()"
+      >{{$t('common.button.confirmRestPassWord')}}</el-button>
       <el-button
         type="primary"
         icon="el-icon-lx-refresh"
@@ -36,7 +52,7 @@
         ref="singleTable"
         border=""
         highlight-current-row
-        :data="tableData"
+        :data="userTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
         style="width: 100%"
@@ -57,15 +73,20 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryUser.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="userTable.pageSizes"
         :page-size="queryUser.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="userTable.layout"
+        :total="userTable.total"
       ></el-pagination>
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="30%">
+      <el-dialog
+        :title="editDialog.title"
+        :visible.sync="editDialog.visible"
+        :close-on-click-modal="editDialog.close_on_click_modal"
+        width="30%"
+      >
         <el-form
           ref="editForm"
           :rules="rules"
@@ -81,7 +102,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editVisible = false">取 消</el-button>
+          <el-button @click="editDialog.visible = false">取 消</el-button>
           <el-button type="primary" @click="save('editForm')">确 定</el-button>
         </span>
       </el-dialog>
@@ -90,8 +111,8 @@
     <el-row>
       <el-dialog
         :title="$t('user.title.roleSet')"
-        :visible.sync="roleSetVisible"
-        :close-on-click-modal="false"
+        :visible.sync="roleSetDialog.visible"
+        :close-on-click-modal="roleSetDialog.close_on_click_modal"
         width="60%"
       >
         <el-row class="query-form">
@@ -116,7 +137,7 @@
           <el-button type="primary" @click="queryRole()">{{$t('common.button.query')}}</el-button>
           <el-button
             type="primary"
-            @click="roleSetVisible = false"
+            @click="roleSetDialog.visible = false"
           >{{this.$t('common.button.cancel')}}</el-button>
           <el-button type="primary" @click="saveUserRole()">{{this.$t('common.button.save')}}</el-button>
           <el-button
@@ -127,7 +148,7 @@
         <el-row class="table-result">
           <el-table
             ref="userRoleTable"
-            :data="roleTableData"
+            :data="userRoleTable.data"
             tooltip-effect="dark"
             style="width: 100%"
             height="400"
@@ -171,12 +192,11 @@ export default {
       queryRoleModel: new SysRoleModel(),
       roleSetUser: new SysUserModel(),
       userRoleList: [],
-      total: 0,
-      tableData: [],
-      roleTableData: [],
-      editVisible: false,
-      roleSetVisible: false,
-      title: "$t('user.title.add')",
+      userTable: new this.TableModel(),
+      userRoleTable: new this.TableModel(),
+      editDialog: new this.DialogModel(),
+      roleSetDialog: new this.DialogModel(),
+      title: this.$t("user.title.add"),
       formDisabled: false /** 为true时，整个表单不可编辑 */,
       disabled: false /** 为true时，编辑时某些字段不可编辑 */,
       multipleSelection: [],
@@ -189,11 +209,11 @@ export default {
     },
     handleSizeChange(val) {
       this.queryUser.limit = val;
-      this.search();
+      this.query();
     },
     handlePageChange(val) {
       this.queryUser.page = val;
-      this.search();
+      this.query();
     },
     handleDblclick(val) {
       this.edit();
@@ -201,39 +221,41 @@ export default {
     handleSelectionChange(val) {
       this.userRoleList = val;
     },
-    search(type) {
+    query(type) {
       if (!this.isBlank(type)) {
         this.queryUser.page = 1;
       }
+      this.userTable.loading = true;
       queryUser(this.queryUser).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.userTable.total = res.total;
+          this.userTable.data = res.data;
         } else {
           this.$message.error(res.msg);
         }
+        this.userTable.loading = false;
       });
     },
     add() {
       this.editUser = new SysUserModel();
       this.editUser.saveFlag = "add";
-      this.title = this.$t("user.title.add");
-      this.editVisible = true;
+      this.editDialog.title = this.$t("user.title.add");
+      this.editDialog.visible = true;
       this.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
     },
     edit() {
-      if (this.currentRow == undefined || this.currentRow == null) {
+      if (this.isBlank(this.currentRow)) {
         this.$message.warning(this.$t("user.message.edit"));
         return;
       }
       this.disabled = true;
       this.editUser = this.copyObject(this.currentRow, this.editUser);
       this.editUser.saveFlag = "update";
-      this.title = this.$t("user.title.edit");
-      this.editVisible = true;
+      this.editDialog.title = this.$t("user.title.edit");
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -243,9 +265,9 @@ export default {
         if (valid) {
           saveUser(this.editUser).then(res => {
             if (res.success || res.success == "true") {
-              this.editVisible = false;
+              this.editDialog.visible = false;
               this.$message.success(this.$t("code." + res.code));
-              this.search();
+              this.query();
             } else {
               this.$message.error(this.$t("code." + res.code));
             }
@@ -256,19 +278,19 @@ export default {
       });
     },
     roleSet() {
-      if (this.currentRow == undefined || this.currentRow == null) {
+      if (this.isBlank(this.currentRow)) {
         this.$message.warning(this.$t("user.message.roleSet"));
         return;
       }
       this.roleSetUser = this.copyObject(this.currentRow, this.roleSetUser);
-      this.title = this.$t("user.label.roleSet");
-      this.roleSetVisible = true;
+      this.roleSetDialog.title = this.$t("user.label.roleSet");
+      this.roleSetDialog.visible = true;
       this.queryRole();
     },
     queryRole() {
       queryRole(this.queryRoleModel).then(res => {
         if (res.success || res.success == "true") {
-          this.roleTableData = res.data;
+          this.userRoleTable.data = res.data;
           this.queryUserRole();
         } else {
           this.$message.error(this.$t("code." + res.code));
@@ -279,7 +301,7 @@ export default {
       queryUserRoleList(this.roleSetUser).then(res => {
         if (res.success || res.success == "true") {
           var userRoleList = res.data;
-          this.roleTableData.forEach(data1 => {
+          this.userRoleTable.data.forEach(data1 => {
             userRoleList.forEach(data2 => {
               if (data1.roleId == data2.roleId) {
                 this.$refs["userRoleTable"].toggleRowSelection(data1, true);
@@ -301,7 +323,7 @@ export default {
         roleIds: roleIdList
       }).then(res => {
         if (res.success || res.success == "true") {
-          this.roleSetVisible = false;
+          this.roleSetDialog.visible = false;
           this.$message.success(this.$t("code." + res.code));
         } else {
           this.$message.error(this.$t("code." + res.code));
@@ -382,7 +404,7 @@ export default {
     }
   },
   mounted() {
-    this.search();
+    this.query();
   }
 };
 </script>

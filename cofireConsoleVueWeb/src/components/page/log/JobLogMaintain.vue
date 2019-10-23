@@ -24,7 +24,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search('click')"
+        @click="query('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -88,16 +88,16 @@ export default {
     },
     handleSizeChange(val) {
       this.queryJobLog.limit = val;
-      this.search();
+      this.query();
     },
     handlePageChange(val) {
       this.queryJobLog.page = val;
-      this.search();
+      this.query();
     },
     handleDblclick(val) {
       this.edit();
     },
-    search(type) {
+    query(type) {
       if (!this.isBlank(type)) {
         this.queryJobLog.page = 1;
       }
@@ -120,7 +120,7 @@ export default {
   mounted() {
     console.log(this.getDictByGroup("0001"))
     this.queryJobLog.runTimeList = this.getCurrentDayStartAndEndTime();
-    this.search();
+    this.query();
   }
 };
 </script>

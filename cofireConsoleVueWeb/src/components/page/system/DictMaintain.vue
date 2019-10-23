@@ -19,7 +19,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search('click')"
+        @click="query('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -126,16 +126,16 @@ export default {
     },
     handleSizeChange(val) {
       this.queryDict.limit = val;
-      this.search();
+      this.query();
     },
     handlePageChange(val) {
       this.queryDict.page = val;
-      this.search();
+      this.query();
     },
     handleDblclick(val) {
       this.edit();
     },
-    search(type) {
+    query(type) {
       if (!this.isBlank(type)) {
         this.queryDict.page = 1;
       }
@@ -188,7 +188,7 @@ export default {
                 type: "success",
                 message: res.retMessage
               });
-              this.search();
+              this.query();
             } else {
               this.$message({
                 type: "error",
@@ -228,7 +228,7 @@ export default {
                 type: "success",
                 message: this.$t("code." + res.code)
               });
-              this.search();
+              this.query();
             } else {
               this.$message({
                 type: "error",
@@ -246,7 +246,7 @@ export default {
     }
   },
   mounted() {
-    this.search();
+    this.query();
   }
 };
 </script>

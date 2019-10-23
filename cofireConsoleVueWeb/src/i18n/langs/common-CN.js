@@ -35,10 +35,8 @@ exports.default = {
       'loginOut': '退出登录',
       'confirm': '确认',
       'selectFile': '选择文件',
-      'enter': '进场',
-      'out': '离场',
-      'refuse': '拒绝',
-      'addVipCard': '新增VIP卡号'
+      "roleSet": '角色设置', 
+      'confirmRestPassWord': '密码重置'
     },
 
     label: {
@@ -58,6 +56,7 @@ exports.default = {
       'endTime': '结束日期',
     },
     message: {
+      'loadingText': 'loading',
       'loginLoading': "正在登陆",
       'paramInvalid': "参数无效"
     }

@@ -1,9 +1,14 @@
 import { CurrentUserStore } from "./components/store/common/CurrentUserStore";
 import  GlobalData  from "./components/common/GlobalData"
+import TableModel from "./components/model/common/TableModel"
+import DialogModel from "./components/model/common/DialogModel"
+
 
 export default {
   install(Vue)  {
     Vue.prototype.GLOBAL = GlobalData;
+    Vue.prototype.TableModel = TableModel;
+    Vue.prototype.DialogModel = DialogModel;
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')

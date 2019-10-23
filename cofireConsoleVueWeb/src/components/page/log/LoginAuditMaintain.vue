@@ -49,7 +49,7 @@
       <el-button
         type="primary"
         icon="el-icon-lx-search"
-        @click="search('click')"
+        @click="query('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
@@ -130,20 +130,20 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.currentRow = val;
-      this.search();
+      this.query();
     },
     handleSizeChange(val) {
       this.queryLoginAudit.length = val;
-      this.search();
+      this.query();
     },
     handlePageChange(val) {
       this.queryLoginAudit.page = val;
-      this.search();
+      this.query();
     },
     handleDblclick(val) {
       this.edit();
     },
-    search(type) {
+    query(type) {
       if (!this.isBlank(type)) {
         this.queryLoginAudit.page = 1;
       }
@@ -172,7 +172,7 @@ export default {
   },
   mounted() {
     this.queryLoginAudit.createTimeList = this.getCurrentDayStartAndEndTime();
-    this.search();
+    this.query();
   }
 };
 </script>

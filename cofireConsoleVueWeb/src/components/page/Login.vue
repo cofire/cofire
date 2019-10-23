@@ -50,9 +50,9 @@
 </template>
 
 <script>
-import { login, getUserDetail } from "@/api/getData";
-import { encrypt } from "@/components/common/3des";
-import { Rules} from "../rules/Rules";
+import { login, getUserDetail } from "../../api/getData";
+import { encrypt } from "../common/3des";
+import { Rules } from "../rules/Rules";
 import { CurrentUserStore } from "../store/common/CurrentUserStore";
 
 export default {
@@ -75,16 +75,15 @@ export default {
       this.reload();
     },
     submitForm(formName) {
-      this.loading = true;
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.loading = true;
           login({
             userId: this.loginForm.userId,
             passWord: encrypt(this.loginForm.userId, this.loginForm.passWord),
             filler1: "console"
           }).then(res => {
             if (res.success || res.success == "true") {
-              this.loading = true;
               getUserDetail().then(re => {
                 if (re.success || re.success == "true") {
                   CurrentUserStore.dispatch("set", re.data);
@@ -92,25 +91,18 @@ export default {
                 } else {
                   console.log("加载菜单失败");
                 }
-                this.$message({
-                  type: "success",
-                  message: this.$t("code." + res.code)
-                });
-                this.loading = false;
+                this.$message.success(this.$t("code." + res.code));
                 this.$router.replace("/dashboard");
               });
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
-              this.loading = false;
+              this.$message.error(this.$t("code." + res.code));
             }
+            this.loading = false;
           });
         } else {
           console.log("error submit!!");
-          return false;
           this.loading = false;
+          return false;
         }
       });
     }

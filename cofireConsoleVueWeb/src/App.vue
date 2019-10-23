@@ -24,6 +24,9 @@ export default {
         this.isRouterAlive = true;
       });
     }
+  },
+  mounted() {
+    console.log("当前版本号：" + this.GLOBAL.version);
   }
 };
 </script>

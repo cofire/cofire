@@ -57,7 +57,7 @@ exports.default = {
       "cancelPassWordPrompt": "已取消重置该用户密码",
       "returnNewPasswInfo": "用户新密码为：",
       "delete":"请选中需要删除的用户信息",
-      "deletePrompt":"正在重置该用户信息，是否继续？",
+      "deletePrompt":"正在删除该用户信息，是否继续？",
       "cancelDeletePrompt": "已取消删除该用户信息",
     }
   },
