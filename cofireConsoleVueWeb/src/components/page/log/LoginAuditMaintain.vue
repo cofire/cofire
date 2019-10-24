@@ -38,10 +38,14 @@
           prop="sourceType"
           class="queryCondition"
         >
-          <el-input
-            :placeholder="$t('loginAudit.label.sourceType')"
-            v-model="queryLoginAudit.sourceType"
-          ></el-input>
+          <el-select v-model="queryLoginAudit.sourceType" clearable>
+            <el-option
+              v-for="item in this.sourceTypeDict"
+              :key="item.dict_value"
+              :label="item.dict_name"
+              :value="item.dict_value"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
     </el-row>
@@ -60,13 +64,12 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
-        v-loading="loading"
+        :data="loginAuditTable.data"
         highlight-current-row
-        :data="tableData"
-        @current-change="handleCurrentChange"
-        @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="loginAuditTable.loading"
+        :element-loading-text="loginAuditTable.text"
+        :element-loading-spinner="loginAuditTable.spinner"
+        :element-loading-background="loginAuditTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="userId" :label="this.$t('loginAudit.label.userId')" width="100"></el-table-column>
@@ -92,6 +95,7 @@
           property="sourceType"
           :label="this.$t('loginAudit.label.sourceType')"
           width="100"
+          :formatter="formatSourceType"
         ></el-table-column>
         <el-table-column
           property="message"
@@ -101,14 +105,13 @@
         ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
-        :current-page.sync="queryLoginAudit.page"
-        :page-sizes="GLOBAL.pageSizes"
-        :page-size="queryLoginAudit.length"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :current-page="queryLoginAudit.page"
+        :page-sizes="loginAuditTable.pageSizes"
+        :page-size="queryLoginAudit.limit"
+        :layout="loginAuditTable.layout"
+        :total="loginAuditTable.total"
       ></el-pagination>
     </el-row>
   </el-row>
@@ -122,9 +125,8 @@ export default {
     return {
       queryLoginAudit: new SysLoginAuditModel(),
       auditTypeDict: this.getDictByGroup("0002"),
-      loading: false,
-      total: 0,
-      tableData: []
+      sourceTypeDict: this.getDictByGroup("0005"),
+      loginAuditTable: new this.TableModel()
     };
   },
   methods: {
@@ -147,27 +149,25 @@ export default {
       if (!this.isBlank(type)) {
         this.queryLoginAudit.page = 1;
       }
-      this.loading = true;
+      this.loginAuditTable.loading = false;
       this.queryLoginAudit.createTime = this.getQueryTimeBeginAndEnd(
         this.queryLoginAudit.createTimeList
       );
       queryLoginAudit(this.queryLoginAudit).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
-          //  this.queryLoginAudit.page = val;
+          this.loginAuditTable.total = res.total;
+          this.loginAuditTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
-        this.loading = false;
+        this.loginAuditTable.loading = false;
       });
     },
     formatAuditType(row, column) {
       return this.getDictName(this.auditTypeDict, row[column.property]);
-      // return this.auditTypeDict.formateTableDict(row, column)
+    },
+    formatSourceType(row, column) {
+      return this.getDictName(this.sourceTypeDict, row[column.property]);
     }
   },
   mounted() {

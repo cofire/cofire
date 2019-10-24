@@ -71,5 +71,54 @@ export const Rules = {
       message: i18n.t('role.rule.roleName'),
       trigger: 'blur'
     }, ]
+  },
+  DictRules: {
+    groupId: [{
+      required: true,
+      message: i18n.t('dict.rule.groupId'),
+      trigger: 'blur'
+    }],
+    dictValue: [{
+      required: true,
+      message: i18n.t('dict.rule.dictValue'),
+      trigger: 'blur'
+    }],
+    groupName: [{
+      required: true,
+      message: i18n.t('dict.rule.groupName'),
+      trigger: 'blur'
+    }],
+    dictName: [{
+      required: true,
+      message: i18n.t('dict.rule.dictName'),
+      trigger: 'blur'
+    }]
+  },
+  ParamRules: {
+    groupId: [{
+      required: true,
+      message: i18n.t('param.rule.groupId'),
+      trigger: 'blur'
+    }],
+    paramValue: [{
+      required: true,
+      message: i18n.t('param.rule.paramValue'),
+      trigger: 'blur'
+    }],
+    paramId: [{
+      required: true,
+      message: i18n.t('param.rule.paramId'),
+      trigger: 'blur'
+    }],
+    paramName: [{
+      required: true,
+      message: i18n.t('param.rule.paramName'),
+      trigger: 'blur'
+    }],
+    canDelete: [{
+      required: true,
+      message: i18n.t('param.rule.canDelete'),
+      trigger: 'blur'
+    }]
   }
 }

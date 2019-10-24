@@ -158,5 +158,14 @@ export default {
       return !Vue.prototype.isBlank(value);
     }
 
+    Vue.prototype.isFalse = (value) =>{
+      if(Vue.prototype.isBlank(value)){
+        return true;
+      }
+      if(value == "0" || value == "false" || value == "no"){
+        return true;
+      }
+      return false;
+    }
   }
 };

@@ -129,7 +129,7 @@ exports.default = {
       'paramId': '参数id',
       'paramValue': '参数值',
       'paramName': '参数名',
-      'canDelete': '是否可修改',
+      'canDelete': '是否可删除',
       'remark': '备注',
       'modifier': '最后修改人',
       'modifyTime': '最后修改时间',
@@ -143,7 +143,7 @@ exports.default = {
       'paramId': '参数id不能为空',
       'paramValue': '参数值不能为空',
       'paramName': '参数名不能为空',
-
+      'canDelete': '是否可删除不能为空',
     },
     title: {
       'add': '系统参数新增',
@@ -155,6 +155,7 @@ exports.default = {
       "delete":"请选中需要删除的系统参数信息",
       "deletePrompt":"正在删除该系统参数信息，是否继续？",
       "cancelDeletePrompt": "已取消删除该系统参数信息",
+      "canNotDeletePrompt": "不可删除删除该系统参数信息",
     }
   },
   job:{

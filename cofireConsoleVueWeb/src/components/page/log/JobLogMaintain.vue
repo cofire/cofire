@@ -16,7 +16,14 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item :label="$t('jobLog.label.isSuccess')" prop="isSuccess" class="queryCondition">
-          <el-input :placeholder="$t('jobLog.label.isSuccess')" v-model="queryJobLog.isSuccess"></el-input>
+          <el-select v-model="queryJobLog.isSuccess" clearable>
+            <el-option
+              v-for="item in this.isSuccessDict"
+              :key="item.dict_value"
+              :label="item.dict_name"
+              :value="item.dict_value"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
     </el-row>
@@ -35,36 +42,45 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
-        :data="tableData"
+        :data="joblogTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="joblogTable.loading"
+        :element-loading-text="joblogTable.text"
+        :element-loading-spinner="joblogTable.spinner"
+        :element-loading-background="joblogTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="jobId" :label="this.$t('jobLog.label.jobId')" width="200"></el-table-column>
-        <el-table-column property="runTime" :label="this.$t('jobLog.label.runTime')" width="200" :formatter="formatTableTime"></el-table-column>
+        <el-table-column
+          property="runTime"
+          :label="this.$t('jobLog.label.runTime')"
+          width="200"
+          :formatter="formatTableTime"
+        ></el-table-column>
         <el-table-column property="ip" :label="this.$t('jobLog.label.ip')" width="200"></el-table-column>
         <el-table-column
           property="isSuccess"
           :label="this.$t('jobLog.label.isSuccess')"
           width="200"
+          :formatter="formatIsSuccess"
         ></el-table-column>
-        <el-table-column property="message" :label="this.$t('jobLog.label.message')" width="200"></el-table-column>
-        <el-table-column property="filler1" :label="this.$t('jobLog.label.filler1')" width="200"></el-table-column>
-        <el-table-column property="filler2" :label="this.$t('jobLog.label.filler2')" width="200"></el-table-column>
-        <el-table-column property="filler3" :label="this.$t('jobLog.label.filler3')" width="200"></el-table-column>
+        <el-table-column
+          property="message"
+          :label="$t('jobLog.label.message')"
+          width="300"
+          :show-overflow-tooltip="true"
+        ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryJobLog.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="joblogTable.pageSizes"
         :page-size="queryJobLog.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="joblogTable.layout"
+        :total="joblogTable.total"
       ></el-pagination>
     </el-row>
   </el-row>
@@ -78,8 +94,8 @@ export default {
   data() {
     return {
       queryJobLog: new QtzJobLogModel(),
-      total: 0,
-      tableData: []
+      joblogTable: new this.TableModel(),
+      isSuccessDict: this.getDictByGroup("0004")
     };
   },
   methods: {
@@ -97,6 +113,9 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
+    formatIsSuccess(row, column) {
+      return this.getDictName(this.isSuccessDict, row[column.property]);
+    },
     query(type) {
       if (!this.isBlank(type)) {
         this.queryJobLog.page = 1;
@@ -104,21 +123,19 @@ export default {
       this.queryJobLog.runTime = this.getQueryTimeBeginAndEnd(
         this.queryJobLog.runTimeList
       );
+      this.joblogTable.loading = true;
       queryJobLog(this.queryJobLog).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.joblogTable.total = res.total;
+          this.joblogTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.joblogTable.loading = false;
       });
     }
   },
   mounted() {
-    console.log(this.getDictByGroup("0001"))
     this.queryJobLog.runTimeList = this.getCurrentDayStartAndEndTime();
     this.query();
   }

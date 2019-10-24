@@ -2,17 +2,15 @@
   <el-row>
     <el-row class="query-form">
       <el-form :inline="true" :model="queryDict" ref="queryForm">
-        <el-form-item :label="$t('dict.label.groupId')" prop="groupId" class='queryCondition'>
-            <el-input v-model="queryDict.groupId"  :placeholder="$t('dict.label.groupId')"  ></el-input>
-          </el-form-item>
- 
-          <el-form-item :label="$t('dict.label.dictValue')" prop="dictValue" class='queryCondition'>
-            <el-input v-model="queryDict.dictValue" :placeholder="$t('dict.label.dictValue')" ></el-input>
-          </el-form-item>
-
-          <el-form-item :label="$t('dict.label.dictName')" prop="dictName" class='queryCondition'>
-            <el-input v-model="queryDict.dictName" :placeholder="$t('dict.label.dictName')" ></el-input>
-          </el-form-item>
+        <el-form-item :label="$t('dict.label.groupId')" prop="groupId" class="queryCondition">
+          <el-input v-model="queryDict.groupId" :placeholder="$t('dict.label.groupId')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('dict.label.dictValue')" prop="dictValue" class="queryCondition">
+          <el-input v-model="queryDict.dictValue" :placeholder="$t('dict.label.dictValue')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('dict.label.dictName')" prop="dictName" class="queryCondition">
+          <el-input v-model="queryDict.dictName" :placeholder="$t('dict.label.dictName')"></el-input>
+        </el-form-item>
       </el-form>
     </el-row>
     <el-row class="table-operations">
@@ -35,18 +33,20 @@
       <el-button
         type="primary"
         icon="el-icon-lx-refresh"
-        @click="resetForm('queryForm')"
+        @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
-        :data="tableData"
+        :data="dictTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="dictTable.loading"
+        :element-loading-text="dictTable.text"
+        :element-loading-spinner="dictTable.spinner"
+        :element-loading-background="dictTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="groupId" :label="this.$t('dict.label.groupId')" width="200"></el-table-column>
@@ -54,37 +54,46 @@
         <el-table-column property="dictValue" :label="this.$t('dict.label.dictValue')" width="250"></el-table-column>
         <el-table-column property="dictName" :label="this.$t('dict.label.dictName')" width="200"></el-table-column>
         <el-table-column property="modifyUser" :label="this.$t('dict.label.modifier')" width="200"></el-table-column>
-        <el-table-column property="modifyTime" :label="this.$t('dict.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
+        <el-table-column
+          property="modifyTime"
+          :label="this.$t('dict.label.modifyTime')"
+          width="200"
+          :formatter="formatTableTime"
+        ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryDict.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="dictTable.pageSizes"
         :page-size="queryDict.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="dictTable.layout"
+        :total="dictTable.total"
       ></el-pagination>
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="30%">
+      <el-dialog
+        :title="editDialog.title"
+        :visible.sync="editDialog.visible"
+        :close-on-click-modal="editDialog.close_on_click_modal"
+        width="30%"
+      >
         <el-form
           ref="editForm"
           :rules="rules"
           :model="editDict"
-          label-width="100px"
-          :disabled="formDisabled"
+          label-width="120px"
+          :disabled="editDialog.formDisabled"
         >
           <el-form-item :label="this.$t('dict.label.groupId')" prop="groupId">
-            <el-input v-model="editDict.groupId" :disabled="disabled"></el-input>
+            <el-input v-model="editDict.groupId" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('dict.label.groupName')" prop="groupName">
-            <el-input v-model="editDict.groupName" :disabled="disabled"></el-input>
+            <el-input v-model="editDict.groupName" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('dict.label.dictValue')" prop="dictValue">
-            <el-input v-model="editDict.dictValue" :disabled="disabled"></el-input>
+            <el-input v-model="editDict.dictValue" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('dict.label.dictName')" prop="dictName">
             <el-input v-model="editDict.dictName"></el-input>
@@ -92,7 +101,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editVisible = false">{{this.$t('common.button.cancel')}}</el-button>
-          <el-button type="primary" @click="save('editForm')">确定</el-button>
+          <el-button type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -101,6 +110,8 @@
 <script>
 import { SysDictModel } from "../../model/system/SysDictModel";
 import { queryDict, saveDict, deleteDict } from "../../../api/getData";
+import { Rules } from "../../rules/Rules";
+
 export default {
   name: "DictMaintain",
   data() {
@@ -108,16 +119,9 @@ export default {
       queryDict: new SysDictModel(),
       editDict: new SysDictModel(),
       deleteDictModel: new SysDictModel(),
-      total: 0,
-      tableData: [],
-      editVisible: false,
-      title: "数据字典新增",
-      formDisabled: false /** 为true时，整个表单不可编辑 */,
-      disabled: false /** 为true时，编辑时某些字段不可编辑 */,
-      rules: {
-        dictId: [{ required: true, message: "数据字典代码", trigger: "blur" }],
-        dictName: [{ required: true, message: "数据字典名称", trigger: "blur" }]
-      }
+      dictTable: new this.TableModel(),
+      editDialog: new this.DialogModel(),
+      rules: Rules.DictRules
     };
   },
   methods: {
@@ -139,41 +143,37 @@ export default {
       if (!this.isBlank(type)) {
         this.queryDict.page = 1;
       }
+      this.dictTable.loading = true;
       queryDict(this.queryDict).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.dictTable.total = res.total;
+          this.dictTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.dictTable.loading = false;
       });
     },
     add() {
       this.editDict = new SysDictModel();
       this.editDict.saveFlag = "add";
-      this.title = "数据字典新增";
-      this.editVisible = true;
-      this.disabled = false;
+      this.editDialog.title = this.$t("dict.title.add");
+      this.editDialog.visible = true;
+      this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
     },
     edit() {
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: "请选中需要修改的记录！"
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("dict.message.edit"));
         return;
       }
-      this.disabled = true;
+      this.editDialog.disabled = true;
       this.editDict = this.copyObject(this.currentRow, this.editDict);
       this.editDict.saveFlag = "update";
-      this.title = "数据字典编辑";
-      this.editVisible = true;
+      this.editDialog.title = this.$t("dict.title.edit");
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -183,17 +183,11 @@ export default {
         if (valid) {
           saveDict(this.editDict).then(res => {
             if (res.success || res.success == "true") {
-              this.editVisible = false;
-              this.$message({
-                type: "success",
-                message: res.retMessage
-              });
+              this.editDialog.visible = false;
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: res.retMessage
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         } else {
@@ -203,45 +197,35 @@ export default {
     },
     //删除数据字典信息
     deleteDict() {
-      debugger
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: this.$t("dict.message.deleteSelect")
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("dict.message.deleteSelect"));
         return;
       }
       this.$confirm(
-        this.$t("dict.label.deleteInfo"),
-        this.$t("dict.label.tip"),
+        this.$t("dict.message.deletePrompt"),
+        this.$t("common.label.prompt"),
         {
-          confirmButtonText: this.$t("dict.button.confirm"),
-          cancelButtonText: this.$t("dict.button.cancel"),
+          confirmButtonText: this.$t("common.button.confirm"),
+          cancelButtonText: this.$t("common.button.cancel"),
           type: "warning"
         }
       )
         .then(() => {
-          this.deleteDictModel = this.copyObject(this.currentRow, this.deleteDictModel);
+          this.deleteDictModel = this.copyObject(
+            this.currentRow,
+            this.deleteDictModel
+          );
           deleteDict(this.deleteDictModel).then(res => {
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         })
         .catch(() => {
-          this.$message({
-            type: "info",
-            message: this.$t("dict.message.cancelDelete")
-          });
+          this.$message.info(this.$t("dict.message.cancelDeletePrompt"));
         });
     }
   },

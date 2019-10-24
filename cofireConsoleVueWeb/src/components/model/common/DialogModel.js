@@ -9,6 +9,9 @@ export default class DialogModel {
   close_on_click_modal = false;
   /** 弹出层宽度 */
   width = "60%";
+
   /** 弹出层中form表单是否禁用 */
+  formDisabled = false;
+  /** 弹出层中form表单中的字段是否禁用 */
   disabled = false;
 }

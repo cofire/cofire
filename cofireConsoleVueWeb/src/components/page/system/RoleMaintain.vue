@@ -86,10 +86,10 @@
           :rules="rules"
           :model="editRole"
           label-width="100px"
-          :disabled="editDialog.disabled"
+          :disabled="editDialog.formDisabled"
         >
           <el-form-item :label="$t('role.label.roleId')" prop="roleId">
-            <el-input v-model="editRole.roleId" :disabled="disabled"></el-input>
+            <el-input v-model="editRole.roleId" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="$t('role.label.roleName')" prop="roleName">
             <el-input v-model="editRole.roleName"></el-input>
@@ -179,7 +179,7 @@ export default {
       this.editRole.saveFlag = "add";
       this.editDialog.title = this.$t("role.title.add");
       this.editDialog.visible = true;
-      this.disabled = false;
+      this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -190,7 +190,7 @@ export default {
         this.$message.warning(this.$t("role.message.edit"));
         return;
       }
-      this.disabled = true;
+      this.editDialog.disabled = true;
       this.editRole = this.copyObject(this.currentRow, this.editRole);
       this.editRole.saveFlag = "update";
       this.editDialog.title = this.$t("role.title.edit");
@@ -221,17 +221,16 @@ export default {
     },
     //删除角色信息
     deleteRole() {
-      debugger;
-      if (this.currentRow == null || this.currentRow == undefined) {
+      if (this.isBlank(this.currentRow)) {
         this.$message.warning(this.$t("role.message.deleteSelect"));
         return;
       }
       this.$confirm(
-        this.$t("role.label.deleteInfo"),
-        this.$t("role.label.tip"),
+        this.$t("role.message.deletePrompt"),
+       this.$t("common.label.prompt"),
         {
-          confirmButtonText: this.$t("role.button.confirm"),
-          cancelButtonText: this.$t("role.button.cancel"),
+          confirmButtonText: this.$t("common.button.confirm"),
+          cancelButtonText: this.$t("common.button.cancel"),
           type: "warning"
         }
       )
@@ -250,7 +249,7 @@ export default {
           });
         })
         .catch(() => {
-          this.$message.info(this.$t("role.message.cancelDelete"));
+          this.$message.info(this.$t("role.message.cancelDeletePrompt"));
         });
     },
     getRoleTree() {

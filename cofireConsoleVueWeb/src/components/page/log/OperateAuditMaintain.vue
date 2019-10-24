@@ -49,12 +49,12 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
+        :data="queryOperateTable.data"
         highlight-current-row
-        :data="tableData"
-        @current-change="handleCurrentChange"
-        @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="queryOperateTable.loading"
+        :element-loading-text="queryOperateTable.text"
+        :element-loading-spinner="queryOperateTable.spinner"
+        :element-loading-background="queryOperateTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column
@@ -99,14 +99,13 @@
         ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryOperateAudit.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="queryOperateTable.pageSizes"
         :page-size="queryOperateAudit.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="queryOperateTable.layout"
+        :total="queryOperateTable.total"
       ></el-pagination>
     </el-row>
   </el-row>
@@ -119,8 +118,7 @@ export default {
   data() {
     return {
       queryOperateAudit: new SysOperateAuditModel(),
-      total: 0,
-      tableData: []
+      queryOperateTable: new this.TableModel()
     };
   },
   methods: {
@@ -145,16 +143,15 @@ export default {
       this.queryOperateAudit.requestTime = this.getQueryTimeBeginAndEnd(
         this.queryOperateAudit.requestTimeList
       );
+      this.queryOperateTable.loading = true;
       queryOperateAudit(this.queryOperateAudit).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.queryOperateTable.total = res.total;
+          this.queryOperateTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.queryOperateTable.loading = false;
       });
     }
   },

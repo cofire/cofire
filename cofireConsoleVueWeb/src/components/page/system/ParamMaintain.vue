@@ -39,57 +39,65 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
-        :data="tableData"
+        :data="paramTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="paramTable.loading"
+        :element-loading-text="paramTable.text"
+        :element-loading-spinner="paramTable.spinner"
+        :element-loading-background="paramTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="groupId" :label="this.$t('param.label.groupId')" width="200"></el-table-column>
         <el-table-column property="paramId" :label="this.$t('param.label.paramId')" width="200"></el-table-column>
         <el-table-column property="paramValue" :label="this.$t('param.label.paramValue')" width="250"></el-table-column>
         <el-table-column property="paramName" :label="this.$t('param.label.paramName')" width="200"></el-table-column>
+         <el-table-column property="canDelete" :label="this.$t('param.label.canDelete')" width="200" :formatter="formatCanDelete"></el-table-column>
         <el-table-column property="modifier" :label="this.$t('param.label.modifier')" width="200"></el-table-column>
-        <el-table-column property="modifyTime" :label="this.$t('param.label.modifyTime')" width="200"></el-table-column>
+        <el-table-column property="modifyTime" :label="this.$t('param.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
       </el-table>
       <el-pagination
-        background=""
-        @size-change="handleSizeChange"
+       @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryParam.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="paramTable.pageSizes"
         :page-size="queryParam.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="paramTable.layout"
+        :total="paramTable.total"
       ></el-pagination>
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="30%">
+      <el-dialog :title="editDialog.title" :visible.sync="editDialog.visible" :close-on-click-modal="editDialog.close_on_click_modal" width="30%">
         <el-form
           ref="editForm"
           :rules="rules"
           :model="editParam"
           label-width="100px"
-          :disabled="formDisabled"
+          :disabled="editDialog.formDisabled"
         >
           <el-form-item :label="this.$t('param.label.groupId')" prop="groupId">
-            <el-input v-model="editParam.groupId" :disabled="disabled"></el-input>
+            <el-input v-model="editParam.groupId" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('param.label.paramId')" prop="paramId">
-            <el-input v-model="editParam.paramId" :disabled="disabled"></el-input>
+            <el-input v-model="editParam.paramId" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('param.label.paramValue')" prop="paramValue">
-            <el-input v-model="editParam.paramValue" :disabled="disabled"></el-input>
+            <el-input v-model="editParam.paramValue" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="this.$t('param.label.paramName')" prop="paramName">
             <el-input v-model="editParam.paramName"></el-input>
           </el-form-item>
+          <el-form-item :label="this.$t('param.label.canDelete')" prop="canDelete">
+            <el-radio-group v-model="editParam.canDelete">
+              <el-radio label="0">否</el-radio>
+              <el-radio label="1">是</el-radio>
+            </el-radio-group>
+          </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editVisible = false">{{this.$t('common.button.cancel')}}</el-button>
+          <el-button @click="editDialog.visible = false">{{this.$t('common.button.cancel')}}</el-button>
           <el-button type="primary" @click="save('editForm')">确定</el-button>
         </span>
       </el-dialog>
@@ -99,6 +107,7 @@
 <script>
 import { SysParamModel } from "../../model/system/SysParamModel";
 import { queryParam, saveParam, deleteParam } from "../../../api/getData";
+import { Rules } from "../../rules/Rules";
 
 export default {
   name: "ParamMaintain",
@@ -107,16 +116,10 @@ export default {
       queryParam: new SysParamModel(),
       editParam: new SysParamModel(),
       deleteParamModel: new SysParamModel(),
-      total: 0,
-      tableData: [],
-      editVisible: false,
-      title: "系统参数新增",
-      formDisabled: false /** 为true时，整个表单不可编辑 */,
-      disabled: false /** 为true时，编辑时某些字段不可编辑 */,
-      rules: {
-        paramId: [{ required: true, message: "系统参数代码", trigger: "blur" }],
-        paramName: [{ required: true, message: "系统参数名称", trigger: "blur" }]
-      }
+      paramTable: new this.TableModel(),
+      editDialog: new this.DialogModel(),
+      rules: Rules.ParamRules,
+      canDeleteDict: this.getDictByGroup("0003")
     };
   },
   methods: {
@@ -134,45 +137,44 @@ export default {
     handleDblclick(val) {
       this.edit();
     },
+    formatCanDelete(row, column) {
+      return this.getDictName(this.canDeleteDict, row[column.property]);
+    },
     query(type) {
       if (!this.isBlank(type)) {
         this.queryParam.page = 1;
       }
+      this.paramTable.loading = true;
       queryParam(this.queryParam).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.paramTable.total = res.total;
+          this.paramTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.paramTable.loading = false;
       });
     },
-    add() {
+     add() {
       this.editParam = new SysParamModel();
       this.editParam.saveFlag = "add";
-      this.title = "系统参数新增";
-      this.editVisible = true;
-      this.disabled = false;
+      this.editDialog.title = this.$t("param.title.add");
+      this.editDialog.visible = true;
+      this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
     },
     edit() {
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: "请选中需要修改的记录！"
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("param.message.edit"));
         return;
       }
-      this.disabled = true;
+      this.editDialog.disabled = true;
       this.editParam = this.copyObject(this.currentRow, this.editParam);
       this.editParam.saveFlag = "update";
-      this.title = "系统参数编辑";
-      this.editVisible = true;
+      this.editDialog.title = this.$t("param.title.edit");
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -182,17 +184,11 @@ export default {
         if (valid) {
           saveParam(this.editParam).then(res => {
             if (res.success || res.success == "true") {
-              this.editVisible = false;
-              this.$message({
-                type: "success",
-                message: res.retMessage
-              });
+              this.editDialog.visible = false;
+               this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: res.retMessage
-              });
+                this.$message.error(this.$t("code." + res.code));
             }
           });
         } else {
@@ -202,45 +198,39 @@ export default {
     },
     //删除系统参数信息
     deleteParam() {
-      debugger
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: this.$t("param.message.deleteSelect")
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("param.message.deleteSelect"));
+        return;
+      }
+      if(this.isFalse(this.currentRow.canDelete)){
+        this.$message.warning(this.$t("param.message.canNotDeletePrompt"));
         return;
       }
       this.$confirm(
-        this.$t("param.label.deleteInfo"),
-        this.$t("param.label.tip"),
+        this.$t("param.message.deletePrompt"),
+        this.$t("common.label.prompt"),
         {
-          confirmButtonText: this.$t("param.button.confirm"),
-          cancelButtonText: this.$t("param.button.cancel"),
+          confirmButtonText: this.$t("common.button.confirm"),
+          cancelButtonText: this.$t("common.button.cancel"),
           type: "warning"
         }
       )
         .then(() => {
-          this.deleteParamModel = this.copyObject(this.currentRow, this.deleteParamModel);
+          this.deleteParamModel = this.copyObject(
+            this.currentRow,
+            this.deleteParamModel
+          );
           deleteParam(this.deleteParamModel).then(res => {
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         })
         .catch(() => {
-          this.$message({
-            type: "info",
-            message: this.$t("param.message.cancelDelete")
-          });
+          this.$message.info(this.$t("param.message.cancelDeletePrompt"));
         });
     }
   },

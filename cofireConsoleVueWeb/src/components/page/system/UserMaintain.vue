@@ -151,10 +151,6 @@
           <el-table
             ref="userRoleTable"
             :data="userRoleTable.data"
-            tooltip-effect="dark"
-            style="width: 100%"
-            height="400"
-            border=""
             @selection-change="handleSelectionChange"
             v-loading="userRoleTable.loading"
             :element-loading-text="userRoleTable.text"
