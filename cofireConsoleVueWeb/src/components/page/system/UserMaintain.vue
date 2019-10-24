@@ -50,12 +50,15 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
         :data="userTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
         style="width: 100%"
+        v-loading="userRoleTable.loading"
+        :element-loading-text="userRoleTable.text"
+        :element-loading-spinner="userRoleTable.spinner"
+        :element-loading-background="userRoleTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="userId" :label="$t('user.label.userId')" width="200"></el-table-column>
@@ -69,7 +72,6 @@
         ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryUser.page"
@@ -102,8 +104,8 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editDialog.visible = false">取 消</el-button>
-          <el-button type="primary" @click="save('editForm')">确 定</el-button>
+          <el-button @click="editDialog.visible = false">{{$t("common.button.cancel")}}</el-button>
+          <el-button type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button></el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -154,6 +156,10 @@
             height="400"
             border=""
             @selection-change="handleSelectionChange"
+            v-loading="userRoleTable.loading"
+            :element-loading-text="userRoleTable.text"
+            :element-loading-spinner="userRoleTable.spinner"
+            :element-loading-background="userRoleTable.background"
           >
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="roleId" :label="$t('role.label.roleId')" width="200"></el-table-column>
@@ -222,6 +228,7 @@ export default {
       this.userRoleList = val;
     },
     query(type) {
+      this.userRoleTable.loading = true;
       if (!this.isBlank(type)) {
         this.queryUser.page = 1;
       }
@@ -233,7 +240,7 @@ export default {
         } else {
           this.$message.error(res.msg);
         }
-        this.userTable.loading = false;
+        this.userRoleTable.loading = false;
       });
     },
     add() {
@@ -283,7 +290,7 @@ export default {
         return;
       }
       this.roleSetUser = this.copyObject(this.currentRow, this.roleSetUser);
-      this.roleSetDialog.title = this.$t("user.label.roleSet");
+      this.roleSetDialog.title = this.$t("user.title.roleSet");
       this.roleSetDialog.visible = true;
       this.queryRole();
     },
@@ -396,10 +403,7 @@ export default {
           });
         })
         .catch(() => {
-          this.$message({
-            type: "info",
-            message: this.$t("user.message.cancelDeletePrompt")
-          });
+          this.$message.info(this.$t("user.message.cancelDeletePrompt"));
         });
     }
   },

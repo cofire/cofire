@@ -37,12 +37,15 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
-        :data="tableData"
+        :data="roleTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
         style="width: 100%"
+        v-loading="roleTable.loading"
+        :element-loading-text="roleTable.text"
+        :element-loading-spinner="roleTable.spinner"
+        :element-loading-background="roleTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="roleId" :label="this.$t('role.label.roleId')" width="200"></el-table-column>
@@ -61,25 +64,29 @@
         ></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryRole.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="roleTable.pageSizes"
         :page-size="queryRole.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="roleTable.layout"
+        :total="roleTable.total"
       ></el-pagination>
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="40%">
+      <el-dialog
+        :title="editDialog.title"
+        :visible.sync="editDialog.visible"
+        :close-on-click-modal="editDialog.close_on_click_modal"
+        width="40%"
+      >
         <el-form
           ref="editForm"
           :rules="rules"
           :model="editRole"
           label-width="100px"
-          :disabled="formDisabled"
+          :disabled="editDialog.disabled"
         >
           <el-form-item :label="$t('role.label.roleId')" prop="roleId">
             <el-input v-model="editRole.roleId" :disabled="disabled"></el-input>
@@ -91,7 +98,6 @@
             <el-input v-model="editRole.description"></el-input>
           </el-form-item>
           <el-form-item :label="$t('role.label.permission')" prop="permission">
-            <!--树形结构                               :check-strictly="checkStrictly"-->
             <div class="el-dialog-div" style="height: 300px">
               <el-tree
                 ref="tree"
@@ -106,8 +112,8 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editVisible = false">取 消</el-button>
-          <el-button type="primary" @click="save('editForm')">确 定</el-button>
+          <el-button @click="editDialog.visible = false">{{$t("common.button.cancel")}}</el-button>
+          <el-button type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -116,6 +122,7 @@
 <script>
 import { SysRoleModel } from "../../model/system/SysRoleModel";
 import { queryRole, saveRole, deleteRole, getRoleTree } from "@/api/getData";
+import { Rules } from "../../rules/Rules";
 
 export default {
   name: "RoleMaintain",
@@ -124,18 +131,13 @@ export default {
       queryRole: new SysRoleModel(),
       editRole: new SysRoleModel(),
       deleteRoleModel: new SysRoleModel(),
-      total: 0,
-      tableData: [],
-      editVisible: false,
-      title: "角色新增",
+      roleTable: new this.TableModel(),
+      editDialog: new this.DialogModel(),
       formDisabled: false /** 为true时，整个表单不可编辑 */,
       disabled: false /** 为true时，编辑时某些字段不可编辑 */,
       resourceTree: [],
       treeChecked: [],
-      rules: {
-        roleId: [{ required: true, message: "角色代码", trigger: "blur" }],
-        roleName: [{ required: true, message: "角色名称", trigger: "blur" }]
-      },
+      rules: Rules.RoleRules,
       treeNode: {
         children: "children",
         label: "name"
@@ -158,26 +160,25 @@ export default {
       this.edit();
     },
     query(type) {
+      this.roleTable.loading = true;
       if (!this.isBlank(type)) {
         this.queryRole.page = 1;
       }
       queryRole(this.queryRole).then(res => {
         if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+          this.roleTable.total = res.total;
+          this.roleTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.roleTable.loading = false;
       });
     },
     add() {
       this.editRole = new SysRoleModel();
       this.editRole.saveFlag = "add";
-      this.title = "角色新增";
-      this.editVisible = true;
+      this.editDialog.title = this.$t("role.title.add");
+      this.editDialog.visible = true;
       this.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
@@ -185,22 +186,19 @@ export default {
       this.getRoleTree();
     },
     edit() {
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: "请选中需要修改的记录！"
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("role.message.edit"));
         return;
       }
       this.disabled = true;
       this.editRole = this.copyObject(this.currentRow, this.editRole);
       this.editRole.saveFlag = "update";
-      this.title = "角色编辑";
+      this.editDialog.title = this.$t("role.title.edit");
 
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
-      this.editVisible = true;
+      this.editDialog.visible = true;
       this.getRoleTree();
     },
     save(formName) {
@@ -209,17 +207,11 @@ export default {
           this.editRole.permission = this.$refs.tree.getCheckedKeys();
           saveRole(this.editRole).then(res => {
             if (res.success || res.success == "true") {
-              this.editVisible = false;
-              this.$message({
-                type: "success",
-                message: res.retMessage
-              });
+              this.editDialog.visible = false;
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: res.retMessage
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         } else {
@@ -231,10 +223,7 @@ export default {
     deleteRole() {
       debugger;
       if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: this.$t("role.message.deleteSelect")
-        });
+        this.$message.warning(this.$t("role.message.deleteSelect"));
         return;
       }
       this.$confirm(
@@ -253,41 +242,28 @@ export default {
           );
           deleteRole(this.deleteRoleModel).then(res => {
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         })
         .catch(() => {
-          this.$message({
-            type: "info",
-            message: this.$t("role.message.cancelDelete")
-          });
+          this.$message.info(this.$t("role.message.cancelDelete"));
         });
     },
     getRoleTree() {
       var roleId = "";
-      if (this.currentRow != undefined && this.currentRow != null) {
+      if (this.isNotBlank(this.currentRow)) {
         roleId = this.currentRow.roleId;
       }
       getRoleTree({ roleId: roleId }).then(res => {
         if (res.success) {
           this.resourceTree = res.data.resourceTree;
           this.treeChecked = res.data.checked;
-          console.log(this.resourceTree);
         } else {
-          this.$message({
-            type: "error",
-            message: this.$t("common.code." + res.code)
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
       });
     }

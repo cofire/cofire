@@ -59,5 +59,17 @@ export const Rules = {
       message: i18n.t('user.rule.userName'),
       trigger: 'blur'
     }, ]
+  },
+  RoleRules: {
+    roleId: [{
+      required: true,
+      message: i18n.t('role.rule.roleId'),
+      trigger: 'blur'
+    }],
+    roleName: [{
+      required: true,
+      message: i18n.t('role.rule.roleName'),
+      trigger: 'blur'
+    }, ]
   }
 }

@@ -73,6 +73,22 @@ exports.default = {
       'filler2': '预留字段2',
       'filler3': '预留字段3',
       'permission': '角色权限'
+    },
+    rule: {
+      'roleId': '角色账号不能为空',
+      'roleName': '角色姓名不能为空',
+    },
+    title: {
+      'add': '角色新增',
+      'edit': '角色编辑',
+      'detail': '角色信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的角色信息",
+      "roleSet":"请选中需要角色设置的角色信息",
+      "delete":"请选中需要删除的角色信息",
+      "deletePrompt":"正在删除该角色信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该角色信息",
     }
   },
   dict:{
@@ -87,6 +103,24 @@ exports.default = {
       'filler2': '预留字段2',
       'filler3': '预留字段3',
       'filler4': '预留字段4',
+    },
+    rule: {
+      'groupId': '组号不能为空',
+      'dictValue': '数据字典值不能为空',
+      'groupName': '组名不能为空',
+      'dictName': '数据字典名称不能为空',
+      
+    },
+    title: {
+      'add': '数据字典新增',
+      'edit': '数据字典编辑',
+      'detail': '数据字典信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的数据字典信息",
+      "delete":"请选中需要删除的数据字典信息",
+      "deletePrompt":"正在删除该数据字典信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该数据字典信息",
     }
   },
   param:{
@@ -103,6 +137,24 @@ exports.default = {
       'filler2': '预留字段2',
       'filler3': '预留字段3',
       'filler4': '预留字段4',
+    },
+    rule: {
+      'groupId': '组号不能为空',
+      'paramId': '参数id不能为空',
+      'paramValue': '参数值不能为空',
+      'paramName': '参数名不能为空',
+
+    },
+    title: {
+      'add': '系统参数新增',
+      'edit': '系统参数编辑',
+      'detail': '系统参数信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的系统参数信息",
+      "delete":"请选中需要删除的系统参数信息",
+      "deletePrompt":"正在删除该系统参数信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该系统参数信息",
     }
   },
   job:{

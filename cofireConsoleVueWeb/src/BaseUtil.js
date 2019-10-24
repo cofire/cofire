@@ -2,6 +2,7 @@ import { CurrentUserStore } from "./components/store/common/CurrentUserStore";
 import  GlobalData  from "./components/common/GlobalData"
 import TableModel from "./components/model/common/TableModel"
 import DialogModel from "./components/model/common/DialogModel"
+import LoadingModel from './components/model/common/LoadingModel';
 
 
 export default {
@@ -9,6 +10,7 @@ export default {
     Vue.prototype.GLOBAL = GlobalData;
     Vue.prototype.TableModel = TableModel;
     Vue.prototype.DialogModel = DialogModel;
+    Vue.prototype.LoadingModel = LoadingModel;
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')
@@ -144,11 +146,17 @@ export default {
       return dest;
     }
 
+    /** 判断为空 */
     Vue.prototype.isBlank = (value) =>{
-      if(value == undefined || value == null || value == ""){
+      if(value == undefined || value == null || value == "" || value.length <= 0){
         return true;
       }
       return false;
     }
+    /** 判断不为空 */
+    Vue.prototype.isNotBlank = (value) =>{
+      return !Vue.prototype.isBlank(value);
+    }
+
   }
 };
