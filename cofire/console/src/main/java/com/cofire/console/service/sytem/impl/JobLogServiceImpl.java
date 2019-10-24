@@ -45,6 +45,9 @@ public class JobLogServiceImpl implements IJobLogService {
             if (StringUtils.isNotEmpty(jobLog.getJobId())) {
                 criteria.andJobIdLike("%" + jobLog.getJobId() + "%");
             }
+            if (StringUtils.isNotEmpty(jobLog.getIsSuccess())) {
+                criteria.andIsSuccessEqualTo(jobLog.getIsSuccess());
+            }
             if (StringUtils.isNotEmpty(jobLog.getRunTime())) {
                 String auditTime = jobLog.getRunTime();
                 String[] times = auditTime.split(",");

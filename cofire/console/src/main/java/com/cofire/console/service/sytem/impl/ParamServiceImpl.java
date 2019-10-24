@@ -18,6 +18,7 @@ import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
+import com.cofire.console.common.impl.SystemService;
 import com.cofire.console.service.sytem.IParamService;
 import com.cofire.dao.mapper.system.SysParamMapper;
 import com.cofire.dao.model.system.SysParam;
@@ -118,6 +119,7 @@ public class ParamServiceImpl implements IParamService {
             param.setModifier(CurrentUserUtil.getCurentUserId());
             param.setModifyTime(Util.getCurrentDateTimeString());
             paramMapper.insert(param);
+            SystemService.initSysParam();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("新增系统参数信息失败：" + e.getMessage());
@@ -143,6 +145,7 @@ public class ParamServiceImpl implements IParamService {
             param.setModifier(CurrentUserUtil.getCurentUserId());
             param.setModifyTime(Util.getCurrentDateTimeString());
             paramMapper.updateByPrimaryKeySelective(param);
+            SystemService.initSysParam();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改系统参数信息失败：" + e.getMessage());

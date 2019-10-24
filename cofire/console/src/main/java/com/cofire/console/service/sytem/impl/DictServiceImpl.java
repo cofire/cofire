@@ -18,6 +18,7 @@ import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
+import com.cofire.console.common.impl.SystemService;
 import com.cofire.console.service.sytem.IDictService;
 import com.cofire.dao.mapper.system.SysDictMapper;
 import com.cofire.dao.model.system.SysDict;
@@ -116,6 +117,7 @@ public class DictServiceImpl implements IDictService {
             dict.setModifier(CurrentUserUtil.getCurentUserId());
             dict.setModifyTime(Util.getCurrentDateTimeString());
             dictMapper.insert(dict);
+            SystemService.initSysDict();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("新增数据字典信息失败：" + e.getMessage());
@@ -141,6 +143,7 @@ public class DictServiceImpl implements IDictService {
             dict.setModifier(CurrentUserUtil.getCurentUserId());
             dict.setModifyTime(Util.getCurrentDateTimeString());
             dictMapper.updateByPrimaryKeySelective(dict);
+            SystemService.initSysDict();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改数据字典信息失败：" + e.getMessage());
