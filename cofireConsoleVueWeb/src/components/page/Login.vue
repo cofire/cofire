@@ -1,10 +1,10 @@
 <template>
   <div
     class="login-wrap"
-    v-loading="loading"
-    :element-loading-text="$t('common.message.loginLoading')"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)"
+    v-loading="loadingModel.loading"
+    :element-loading-text="loadingModel.text"
+    :element-loading-spinner="loadingModel.spinner"
+    :element-loading-background="loadingModel.background"
   >
     <div class="ms-login">
       <div class="ms-title">{{$t('common.label.platformTitle')}}</div>
@@ -59,7 +59,7 @@ export default {
   inject: ["reload"],
   data: function() {
     return {
-      loading: false,
+      loadingModel: new this.LoadingModel(),
       loginForm: {
         userId: "",
         passWord: ""
@@ -77,7 +77,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loading = true;
+          this.loadingModel.loading = true;
           login({
             userId: this.loginForm.userId,
             passWord: encrypt(this.loginForm.userId, this.loginForm.passWord),
@@ -97,7 +97,7 @@ export default {
             } else {
               this.$message.error(this.$t("code." + res.code));
             }
-            this.loading = false;
+            this.loadingModel.loading = false;
           });
         } else {
           console.log("error submit!!");

@@ -94,10 +94,10 @@
           :rules="rules"
           :model="editUser"
           label-width="100px"
-          :disabled="formDisabled"
+          :disabled="editDialog.formDisabled"
         >
           <el-form-item :label="$t('user.label.userId')" prop="userId">
-            <el-input v-model="editUser.userId" :disabled="disabled"></el-input>
+            <el-input v-model="editUser.userId" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
           <el-form-item :label="$t('user.label.userName')" prop="userName">
             <el-input v-model="editUser.userName"></el-input>
@@ -198,9 +198,6 @@ export default {
       userRoleTable: new this.TableModel(),
       editDialog: new this.DialogModel(),
       roleSetDialog: new this.DialogModel(),
-      title: this.$t("user.title.add"),
-      formDisabled: false /** 为true时，整个表单不可编辑 */,
-      disabled: false /** 为true时，编辑时某些字段不可编辑 */,
       multipleSelection: [],
       rules: Rules.UserRules
     };
@@ -244,7 +241,7 @@ export default {
       this.editUser.saveFlag = "add";
       this.editDialog.title = this.$t("user.title.add");
       this.editDialog.visible = true;
-      this.disabled = false;
+      this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -254,10 +251,10 @@ export default {
         this.$message.warning(this.$t("user.message.edit"));
         return;
       }
-      this.disabled = true;
       this.editUser = this.copyObject(this.currentRow, this.editUser);
       this.editUser.saveFlag = "update";
       this.editDialog.title = this.$t("user.title.edit");
+      this.editDialog.disabled = true;
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();

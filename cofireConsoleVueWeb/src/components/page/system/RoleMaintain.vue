@@ -133,8 +133,6 @@ export default {
       deleteRoleModel: new SysRoleModel(),
       roleTable: new this.TableModel(),
       editDialog: new this.DialogModel(),
-      formDisabled: false /** 为true时，整个表单不可编辑 */,
-      disabled: false /** 为true时，编辑时某些字段不可编辑 */,
       resourceTree: [],
       treeChecked: [],
       rules: Rules.RoleRules,
@@ -176,6 +174,7 @@ export default {
     },
     add() {
       this.editRole = new SysRoleModel();
+      this.treeChecked = [];
       this.editRole.saveFlag = "add";
       this.editDialog.title = this.$t("role.title.add");
       this.editDialog.visible = true;
@@ -199,7 +198,8 @@ export default {
         this.$refs["editForm"].clearValidate();
       }
       this.editDialog.visible = true;
-      this.getRoleTree();
+      const roleId = this.currentRow.roleId;
+      this.getRoleTree(roleId);
     },
     save(formName) {
       this.$refs[formName].validate(valid => {
@@ -252,11 +252,7 @@ export default {
           this.$message.info(this.$t("role.message.cancelDeletePrompt"));
         });
     },
-    getRoleTree() {
-      var roleId = "";
-      if (this.isNotBlank(this.currentRow)) {
-        roleId = this.currentRow.roleId;
-      }
+    getRoleTree(roleId) {
       getRoleTree({ roleId: roleId }).then(res => {
         if (res.success) {
           this.resourceTree = res.data.resourceTree;
