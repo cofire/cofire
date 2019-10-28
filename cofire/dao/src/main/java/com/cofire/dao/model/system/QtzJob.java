@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 qtz_job
- * @开发日期 2019-10-21
+ * @开发日期 2019-10-28
  * @开发作者 by:ly 
  */
 public class QtzJob implements Serializable {
@@ -37,12 +37,6 @@ public class QtzJob implements Serializable {
 
     /** 秒(必填项) (无默认值) */
     private String second;
-
-    /** 生效日期 (无默认值) */
-    private String activeDate;
-
-    /** 失效日期 (无默认值) */
-    private String expiryDate;
 
     /** 逻辑删除标识:0-未删除；1-已删除(必填项)  (默认值为: 0) */
     private String isDel;
@@ -148,22 +142,6 @@ public class QtzJob implements Serializable {
 
     public void setSecond(String second) {
         this.second = second == null ? null : second.trim();
-    }
-
-    public String getActiveDate() {
-        return activeDate;
-    }
-
-    public void setActiveDate(String activeDate) {
-        this.activeDate = activeDate == null ? null : activeDate.trim();
-    }
-
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate == null ? null : expiryDate.trim();
     }
 
     public String getIsDel() {
