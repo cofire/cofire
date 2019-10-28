@@ -66,6 +66,7 @@
         ref="singleTable"
         :data="loginAuditTable.data"
         highlight-current-row
+        :border = "loginAuditTable.border"
         v-loading="loginAuditTable.loading"
         :element-loading-text="loginAuditTable.text"
         :element-loading-spinner="loginAuditTable.spinner"

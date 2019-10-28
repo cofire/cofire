@@ -43,6 +43,7 @@
         :data="paramTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        :border = "paramTable.border"
         v-loading="paramTable.loading"
         :element-loading-text="paramTable.text"
         :element-loading-spinner="paramTable.spinner"

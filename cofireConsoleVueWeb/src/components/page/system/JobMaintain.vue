@@ -43,6 +43,7 @@
         :data="jobTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        :border = "jobTable.border"
         v-loading="jobTable.loading"
         :element-loading-text="jobTable.text"
         :element-loading-spinner="jobTable.spinner"

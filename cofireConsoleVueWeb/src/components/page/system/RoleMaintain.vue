@@ -41,7 +41,7 @@
         :data="roleTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
-        style="width: 100%"
+        :border = "roleTable.border"
         v-loading="roleTable.loading"
         :element-loading-text="roleTable.text"
         :element-loading-spinner="roleTable.spinner"

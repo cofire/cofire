@@ -46,6 +46,7 @@
         :data="joblogTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        :border = "joblogTable.border"
         v-loading="joblogTable.loading"
         :element-loading-text="joblogTable.text"
         :element-loading-spinner="joblogTable.spinner"

@@ -51,6 +51,7 @@
         ref="singleTable"
         :data="queryOperateTable.data"
         highlight-current-row
+        :border = "queryOperateTable.border"
         v-loading="queryOperateTable.loading"
         :element-loading-text="queryOperateTable.text"
         :element-loading-spinner="queryOperateTable.spinner"

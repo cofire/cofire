@@ -43,6 +43,7 @@
         :data="dictTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        :border = "dictTable.border"
         v-loading="dictTable.loading"
         :element-loading-text="dictTable.text"
         :element-loading-spinner="dictTable.spinner"

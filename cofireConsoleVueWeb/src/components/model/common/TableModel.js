@@ -3,6 +3,8 @@ import i18n from '../../../i18n/i18n';
 export default class TableModel {
   /** 表格数据 */
   data = [];
+  /**是否带有纵向边框 */
+  border = true;
 
   /** 以下为分页器属性*/
   /** 表格数据总数 */
