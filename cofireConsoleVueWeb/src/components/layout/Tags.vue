@@ -1,11 +1,13 @@
 <template>
   <div class="tags" v-if="showTags">
     <ul>
-      <li
-        class="tags-li"
-        :class="{'active': isActive(homeItem.path)}"
-      >
-        <router-link :to="homeItem.path" class="tags-li-title">{{$t(homeItem.title)}}</router-link>
+      <li class="tags-li" :class="{'active': isActive(homeItem.path)}">
+        <!-- <router-link :to="homeItem.path" class="tags-li-title">{{$t(homeItem.title)}}</router-link> -->
+        <span
+          :data-url="homeItem.path"
+          class="tags-li-title"
+          @click="$router.push({path: homeItem.path})"
+        >{{$t(homeItem.title)}}</span>
       </li>
       <li
         class="tags-li"
@@ -13,7 +15,12 @@
         :class="{'active': isActive(item.path)}"
         :key="index"
       >
-        <router-link :to="item.path" class="tags-li-title">{{$t(item.title)}}</router-link>
+        <!-- <router-link :to="item.path" class="tags-li-title">{{$t(item.title)}}</router-link> -->
+        <span
+          :data-url="item.path"
+          class="tags-li-title"
+          @click="$router.push({path: item.path})"
+        >{{$t(item.title)}}</span>
         <span class="tags-li-icon" @click="closeTags(index)">
           <i class="el-icon-close"></i>
         </span>
@@ -40,9 +47,9 @@ export default {
   data() {
     return {
       tagsList: [],
-      homeItem:{
+      homeItem: {
         path: "/dashboard",
-        title: "common.route.R0",
+        title: "common.route.R0"
       }
     };
   },
