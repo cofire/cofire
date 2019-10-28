@@ -113,7 +113,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialog.visible = false">{{$t("common.button.cancel")}}</el-button>
-          <el-button type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -155,7 +155,7 @@ export default {
       this.query();
     },
     handleDblclick(val) {
-      this.edit();
+      this.detail();
     },
     query(type) {
       this.roleTable.loading = true;
@@ -177,8 +177,10 @@ export default {
       this.treeChecked = [];
       this.editRole.saveFlag = "add";
       this.editDialog.title = this.$t("role.title.add");
-      this.editDialog.visible = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = false;
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -189,6 +191,8 @@ export default {
         this.$message.warning(this.$t("role.message.edit"));
         return;
       }
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
       this.editRole = this.copyObject(this.currentRow, this.editRole);
       this.editRole.saveFlag = "update";
@@ -198,6 +202,18 @@ export default {
         this.$refs["editForm"].clearValidate();
       }
       this.editDialog.visible = true;
+      const roleId = this.currentRow.roleId;
+      this.getRoleTree(roleId);
+    },
+    detail() {
+      this.editRole = this.currentRow;
+      this.editDialog.title = this.$t("role.title.detail");
+      this.editDialog.formDisabled = true;
+      this.editDialog.isDetail = true;
+      this.editDialog.visible = true;
+      if (this.$refs["editForm"] != undefined) {
+        this.$refs["editForm"].clearValidate();
+      }
       const roleId = this.currentRow.roleId;
       this.getRoleTree(roleId);
     },

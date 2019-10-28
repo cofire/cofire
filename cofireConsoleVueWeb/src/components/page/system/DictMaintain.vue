@@ -100,8 +100,8 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editVisible = false">{{this.$t('common.button.cancel')}}</el-button>
-          <el-button type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
+          <el-button @click="editDialog.visible = false">{{this.$t('common.button.cancel')}}</el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -137,7 +137,7 @@ export default {
       this.query();
     },
     handleDblclick(val) {
-      this.edit();
+      this.detail();
     },
     query(type) {
       if (!this.isBlank(type)) {
@@ -159,6 +159,8 @@ export default {
       this.editDict.saveFlag = "add";
       this.editDialog.title = this.$t("dict.title.add");
       this.editDialog.visible = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
@@ -170,9 +172,21 @@ export default {
         return;
       }
       this.editDialog.disabled = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDict = this.copyObject(this.currentRow, this.editDict);
       this.editDict.saveFlag = "update";
       this.editDialog.title = this.$t("dict.title.edit");
+      this.editDialog.visible = true;
+      if (this.$refs["editForm"] != undefined) {
+        this.$refs["editForm"].clearValidate();
+      }
+    },
+    detail() {
+      this.editDict = this.currentRow;
+      this.editDialog.title = this.$t("dict.title.detail");
+      this.editDialog.formDisabled = true;
+      this.editDialog.isDetail = true;
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();

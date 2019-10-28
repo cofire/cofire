@@ -105,7 +105,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialog.visible = false">{{$t("common.button.cancel")}}</el-button>
-          <el-button type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button></el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -215,7 +215,7 @@ export default {
       this.query();
     },
     handleDblclick(val) {
-      this.edit();
+      this.detail();
     },
     handleSelectionChange(val) {
       this.userRoleList = val;
@@ -240,8 +240,10 @@ export default {
       this.editUser = new SysUserModel();
       this.editUser.saveFlag = "add";
       this.editDialog.title = this.$t("user.title.add");
-      this.editDialog.visible = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = false;
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -254,7 +256,19 @@ export default {
       this.editUser = this.copyObject(this.currentRow, this.editUser);
       this.editUser.saveFlag = "update";
       this.editDialog.title = this.$t("user.title.edit");
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
+      this.editDialog.visible = true;
+      if (this.$refs["editForm"] != undefined) {
+        this.$refs["editForm"].clearValidate();
+      }
+    },
+    detail() {
+      this.editUser = this.currentRow;
+      this.editDialog.title = this.$t("user.title.detail");
+      this.editDialog.formDisabled = true;
+      this.editDialog.isDetail = true;
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();

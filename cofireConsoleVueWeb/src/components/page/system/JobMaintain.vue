@@ -39,55 +39,56 @@
     <el-row class="table-result">
       <el-table
         ref="singleTable"
-        border=""
         highlight-current-row
-        :data="tableData"
+        :data="jobTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
-        style="width: 100%"
+        v-loading="jobTable.loading"
+        :element-loading-text="jobTable.text"
+        :element-loading-spinner="jobTable.spinner"
+        :element-loading-background="jobTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="jobId" :label="this.$t('job.label.jobId')" width="200"></el-table-column>
-        <el-table-column property="jobName" :label="this.$t('job.label.jobName')" width="200"></el-table-column>
+        <el-table-column property="jobId" :label="this.$t('job.label.jobId')" width="100"></el-table-column>
+        <el-table-column property="jobName" :label="this.$t('job.label.jobName')" width="100"></el-table-column>
         <el-table-column property="jobDesc" :label="this.$t('job.label.jobDesc')" width="200"></el-table-column>
-        <el-table-column property="year" :label="this.$t('job.label.year')" width="200"></el-table-column>
-        <el-table-column property="month" :label="this.$t('job.label.month')" width="200"></el-table-column>
-        <el-table-column property="day" :label="this.$t('job.label.day')" width="200"></el-table-column>
-        <el-table-column property="week" :label="this.$t('job.label.week')" width="200"></el-table-column>
-        <el-table-column property="hour" :label="this.$t('job.label.hour')" width="200"></el-table-column>
-        <el-table-column property="minute" :label="this.$t('job.label.minute')" width="200"></el-table-column>
-        <el-table-column property="second" :label="this.$t('job.label.second')" width="200"></el-table-column>
-        <el-table-column property="activeDate" :label="this.$t('job.label.activeDate')" width="200"></el-table-column>
-        <el-table-column property="expiryDate" :label="this.$t('job.label.expiryDate')" width="200"></el-table-column>
-        <el-table-column property="isDel" :label="this.$t('job.label.isDel')" width="200"></el-table-column>
-        <el-table-column property="modifier" :label="this.$t('job.label.modifier')" width="200"></el-table-column>
-        <el-table-column property="modifyTime" :label="this.$t('job.label.modifyTime')" width="200"></el-table-column>
+        <el-table-column property="year" :label="this.$t('job.label.year')" width="90"></el-table-column>
+        <el-table-column property="month" :label="this.$t('job.label.month')" width="90"></el-table-column>
+        <el-table-column property="day" :label="this.$t('job.label.day')" width="90"></el-table-column>
+        <el-table-column property="week" :label="this.$t('job.label.week')" width="90"></el-table-column>
+        <el-table-column property="hour" :label="this.$t('job.label.hour')" width="90"></el-table-column>
+        <el-table-column property="minute" :label="this.$t('job.label.minute')" width="90"></el-table-column>
+        <el-table-column property="second" :label="this.$t('job.label.second')" width="90"></el-table-column>
+        <el-table-column property="isDel" :label="this.$t('job.label.isDel')" width="150" :formatter="formatCanDelete"></el-table-column>
+        <el-table-column property="modifier" :label="this.$t('job.label.modifier')" width="100"></el-table-column>
+        <el-table-column property="modifyTime" :label="this.$t('job.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
       </el-table>
       <el-pagination
-        background=""
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="queryJob.page"
-        :page-sizes="GLOBAL.pageSizes"
+        :page-sizes="jobTable.pageSizes"
         :page-size="queryJob.limit"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :layout="jobTable.layout"
+        :total="jobTable.total"
       ></el-pagination>
     </el-row>
     <!-- 编辑弹出框 -->
     <el-row>
-      <el-dialog :title="title" :visible.sync="editVisible" width="45%">
+      <el-dialog :title="editDialog.title"
+        :visible.sync="editDialog.visible"
+        :close-on-click-modal="editDialog.close_on_click_modal" width="45%">
         <el-form
           ref="editForm"
           :rules="rules"
           :model="editJob"
           label-width="100px"
-          :disabled="formDisabled"
+          :disabled="editDialog.formDisabled"
         >
           <el-row>
             <el-col :span="12">
               <el-form-item :label="this.$t('job.label.jobId')" prop="jobId">
-                <el-input v-model="editJob.jobId" :disabled="disabled"></el-input>
+                <el-input v-model="editJob.jobId" :disabled="editDialog.disabled"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -144,22 +145,10 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row>
-            <el-col :span="12">
-              <el-form-item :label="this.$t('job.label.activeDate')" prop="activeDate">
-                <el-input v-model="editJob.activeDate"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item :label="this.$t('job.label.expiryDate')" prop="expiryDate">
-                <el-input v-model="editJob.expiryDate"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="editVisible = false">{{this.$t('common.button.cancel')}}</el-button>
-          <el-button type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
+          <el-button @click="editDialog.visible = false">{{this.$t('common.button.cancel')}}</el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -168,7 +157,7 @@
 <script>
 import { QtzJobModel } from "../../model/system/QtzJobModel";
 import { queryJob, saveJob, deleteJob } from "../../../api/getData";
-
+import { Rules } from "../../rules/Rules";
 export default {
   name: "JobMaintain",
   data() {
@@ -176,16 +165,10 @@ export default {
       queryJob: new QtzJobModel(),
       editJob: new QtzJobModel(),
       deleteJobModel: new QtzJobModel(),
-      total: 0,
-      tableData: [],
-      editVisible: false,
-      title: "定时任务新增",
-      formDisabled: false /** 为true时，整个表单不可编辑 */,
-      disabled: false /** 为true时，编辑时某些字段不可编辑 */,
-      rules: {
-        jobId: [{ required: true, message: "定时任务代码", trigger: "blur" }],
-        jobName: [{ required: true, message: "定时任务名称", trigger: "blur" }]
-      }
+      jobTable: new this.TableModel(),
+      editDialog: new this.DialogModel(),
+      rules: Rules.JobRules,
+      canDeleteJob: this.getDictByGroup("0003")
     };
   },
   methods: {
@@ -201,47 +184,60 @@ export default {
       this.query();
     },
     handleDblclick(val) {
-      this.edit();
+      this.detail();
+    },
+    formatCanDelete(row, column) {
+      return this.getDictName(this.canDeleteJob, row[column.property]);
     },
     query(type) {
       if (!this.isBlank(type)) {
         this.queryJob.page = 1;
       }
+      this.jobTable.loading = true;
       queryJob(this.queryJob).then(res => {
-        if (res.success || res.success == "true") {
-          this.total = res.total;
-          this.tableData = res.data;
+       if (res.success || res.success == "true") {
+          this.jobTable.total = res.total;
+          this.jobTable.data = res.data;
         } else {
-          this.$message({
-            type: "error",
-            message: res.msg
-          });
+          this.$message.error(this.$t("code." + res.code));
         }
+        this.jobTable.loading = false;
       });
     },
     add() {
       this.editJob = new QtzJobModel();
       this.editJob.saveFlag = "add";
-      this.title = "定时任务新增";
-      this.editVisible = true;
-      this.disabled = false;
+      this.editDialog.title = this.$t("job.title.add");
+      this.editDialog.visible = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
+      this.editDialog.disabled = false;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
     },
     edit() {
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: "请选中需要修改的记录！"
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("job.message.edit"));
         return;
       }
-      this.disabled = true;
+      this.editDialog.disabled = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editJob = this.copyObject(this.currentRow, this.editJob);
       this.editJob.saveFlag = "update";
-      this.title = "定时任务编辑";
-      this.editVisible = true;
+      this.editDialog.title = this.$t("job.title.edit");
+      this.editDialog.visible = true;
+      if (this.$refs["editForm"] != undefined) {
+        this.$refs["editForm"].clearValidate();
+      }
+    },
+    detail() {
+      this.editJob = this.currentRow;
+      this.editDialog.title = this.$t("job.title.detail");
+      this.editDialog.formDisabled = true;
+      this.editDialog.isDetail = true;
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -251,17 +247,11 @@ export default {
         if (valid) {
           saveJob(this.editJob).then(res => {
             if (res.success || res.success == "true") {
-              this.editVisible = false;
-              this.$message({
-                type: "success",
-                message: res.retMessage
-              });
+              this.editDialog.visible = false;
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: res.retMessage
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         } else {
@@ -271,19 +261,19 @@ export default {
     },
     //删除定时任务信息
     deleteJob() {
-      debugger;
-      if (this.currentRow == null || this.currentRow == undefined) {
-        this.$message({
-          type: "warning",
-          message: this.$t("job.message.deleteSelect")
-        });
+      if (this.isBlank(this.currentRow)) {
+        this.$message.warning(this.$t("job.message.deleteSelect"));
         return;
       }
-      this.$confirm(this.$t("job.label.deleteInfo"), this.$t("job.label.tip"), {
-        confirmButtonText: this.$t("job.button.confirm"),
-        cancelButtonText: this.$t("job.button.cancel"),
-        type: "warning"
-      })
+      this.$confirm(
+        this.$t("job.message.deletePrompt"),
+        this.$t("common.label.prompt"),
+        {
+          confirmButtonText: this.$t("common.button.confirm"),
+          cancelButtonText: this.$t("common.button.cancel"),
+          type: "warning"
+        }
+      )
         .then(() => {
           this.deleteJobModel = this.copyObject(
             this.currentRow,
@@ -291,24 +281,15 @@ export default {
           );
           deleteJob(this.deleteJobModel).then(res => {
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.success(this.$t("code." + res.code));
               this.query();
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.error(this.$t("code." + res.code));
             }
           });
         })
         .catch(() => {
-          this.$message({
-            type: "info",
-            message: this.$t("job.message.cancelDelete")
-          });
+          this.$message.info(this.$t("job.message.cancelDeletePrompt"));
         });
     }
   },

@@ -180,6 +180,22 @@ exports.default = {
       'param3': '附加参数3',
       'param4': '附加参数4',
       'param5': '附加参数5'
+    },
+    rule: {
+      'jobId': '定时任务id不能为空',
+      'jobName': '任务名称不能为空'
+    },
+    title: {
+      'add': '定时任务新增',
+      'edit': '定时任务编辑',
+      'detail': '定时任务信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的定时任务信息",
+      "delete":"请选中需要删除的定时任务信息",
+      "deletePrompt":"正在删除该定时任务信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该定时任务信息",
+      "canNotDeletePrompt": "不可删除删除该定时任务信息",
     }
   },
   jobLog:{

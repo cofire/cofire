@@ -120,5 +120,17 @@ export const Rules = {
       message: i18n.t('param.rule.canDelete'),
       trigger: 'blur'
     }]
+  },
+  JobRules: {
+    jobId: [{
+      required: true,
+      message: i18n.t('job.rule.jobId'),
+      trigger: 'blur'
+    }],
+    jobName: [{
+      required: true,
+      message: i18n.t('job.rule.jobName'),
+      trigger: 'blur'
+    }]
   }
 }

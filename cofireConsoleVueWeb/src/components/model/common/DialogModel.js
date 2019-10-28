@@ -14,4 +14,7 @@ export default class DialogModel {
   formDisabled = false;
   /** 弹出层中form表单中的字段是否禁用 */
   disabled = false;
+
+  /** 是否是detail，查看详情时，部分按钮和部分字段需要显示 */
+  isDetail = false;
 }

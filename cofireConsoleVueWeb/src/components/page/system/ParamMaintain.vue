@@ -98,7 +98,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialog.visible = false">{{this.$t('common.button.cancel')}}</el-button>
-          <el-button type="primary" @click="save('editForm')">确定</el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{this.$t('common.button.save')}}</el-button>
         </span>
       </el-dialog>
     </el-row>
@@ -135,7 +135,7 @@ export default {
       this.query();
     },
     handleDblclick(val) {
-      this.edit();
+      this.detail();
     },
     formatCanDelete(row, column) {
       return this.getDictName(this.canDeleteDict, row[column.property]);
@@ -159,8 +159,10 @@ export default {
       this.editParam = new SysParamModel();
       this.editParam.saveFlag = "add";
       this.editDialog.title = this.$t("param.title.add");
-      this.editDialog.visible = true;
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = false;
+      this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();
       }
@@ -170,10 +172,22 @@ export default {
         this.$message.warning(this.$t("param.message.edit"));
         return;
       }
+      this.editDialog.formDisabled = false;
+      this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
       this.editParam = this.copyObject(this.currentRow, this.editParam);
       this.editParam.saveFlag = "update";
       this.editDialog.title = this.$t("param.title.edit");
+      this.editDialog.visible = true;
+      if (this.$refs["editForm"] != undefined) {
+        this.$refs["editForm"].clearValidate();
+      }
+    },
+    detail() {
+      this.editParam = this.currentRow;
+      this.editDialog.title = this.$t("param.title.detail");
+      this.editDialog.formDisabled = true;
+      this.editDialog.isDetail = true;
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {
         this.$refs["editForm"].clearValidate();

@@ -33,12 +33,6 @@ export class QtzJobModel extends CommonModel {
   /** 秒(必填项) (无默认值) */
   second = '';
 
-  /** 生效日期 (无默认值) */
-  activeDate = '';
-
-  /** 失效日期 (无默认值) */
-  expiryDate = '';
-
   /** 逻辑删除标识:0-未删除；1-已删除(必填项) (无默认值) */
   isDel = '';
 
