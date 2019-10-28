@@ -1,22 +1,37 @@
-import { CurrentUserStore } from "./components/store/common/CurrentUserStore";
-import  GlobalData  from "./components/common/GlobalData"
+import {
+  CurrentUserStore
+} from "./components/store/common/CurrentUserStore";
+import GlobalData from "./components/common/GlobalData"
 import TableModel from "./components/model/common/TableModel"
 import DialogModel from "./components/model/common/DialogModel"
 import LoadingModel from './components/model/common/LoadingModel';
 
 
 export default {
-  install(Vue)  {
+  install(Vue) {
     Vue.prototype.GLOBAL = GlobalData;
     Vue.prototype.TableModel = TableModel;
     Vue.prototype.DialogModel = DialogModel;
     Vue.prototype.LoadingModel = LoadingModel;
+    // 防重复点击(指令实现)
+    Vue.directive('preventReClick', {
+      inserted(el, binding) {
+        el.addEventListener('click', () => {
+          if (!el.disabled) {
+            el.disabled = true
+            setTimeout(() => {
+              el.disabled = false
+            }, binding.value || 1000)
+          }
+        })
+      }
+    });
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')
      * 方法可根据实际情况扩展
      */
-    Vue.prototype.formatDate = (timeString)=>{//全局函数1
+    Vue.prototype.formatDate = (timeString) => { //全局函数1
       let year = '';
       let month = '';
       let day = '';
@@ -41,13 +56,13 @@ export default {
         return year + '-' + month + '-' + day + ' ' + hour + ':' + min + ':' + second;
       } else {
         return null;
-      } 
+      }
     };
     /** 
      * 表格中时间格式化  
      * 请求示例 :formatter="formatTableTime"
      */
-    Vue.prototype.formatTableTime = (row, column)=>{
+    Vue.prototype.formatTableTime = (row, column) => {
       return Vue.prototype.formatDate(row[column.property]);
     }
 
@@ -55,11 +70,11 @@ export default {
      * 修改查询条件中的时间 
      * queryTimeList 格式例如： ['20191017','20191018']
      */
-    Vue.prototype.getQueryTimeBeginAndEnd =(queryTimeList) =>{
-      if(queryTimeList == undefined || queryTimeList == null || queryTimeList.length < 2){
+    Vue.prototype.getQueryTimeBeginAndEnd = (queryTimeList) => {
+      if (queryTimeList == undefined || queryTimeList == null || queryTimeList.length < 2) {
         return "";
       }
-      return [queryTimeList[0]+"000000", queryTimeList[1]+"235959"]
+      return [queryTimeList[0] + "000000", queryTimeList[1] + "235959"]
     }
     /**
      *  获取当天的起始时间和结束时间
@@ -68,7 +83,7 @@ export default {
      * 请求示例 this.getCurrentDayStartAndEndTime("yyyyMMdd")
      * formate 为空时 默认为 yyyyMMdd
      */
-    Vue.prototype.getCurrentDayStartAndEndTime =(formate) =>{
+    Vue.prototype.getCurrentDayStartAndEndTime = (formate) => {
       var date = new Date();
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
@@ -82,44 +97,44 @@ export default {
       if (day >= 0 && day <= 9) {
         day = "0" + day;
       }
-      if(formate === undefined || formate === null || formate == ""){
+      if (formate === undefined || formate === null || formate == "") {
         formate = "yyyyMMdd";
       }
-    
-      switch (formate){
+
+      switch (formate) {
         case "yyyyMMdd":
-            begin = "" + year + month + day;
-            end = "" + year + month + day;
-            break;
+          begin = "" + year + month + day;
+          end = "" + year + month + day;
+          break;
         case "yyyy-MM-dd":
-            begin = "" + year + "-" + month + "-" + day;
-            end =  "" + year + "-" + month + "-" + day;
-            break;
+          begin = "" + year + "-" + month + "-" + day;
+          end = "" + year + "-" + month + "-" + day;
+          break;
         case "yyyyMMddHHmmss":
-            begin = "" + year + month + day + "000000";
-            end =  "" + year + month + day + "235959";;
-            break;
+          begin = "" + year + month + day + "000000";
+          end = "" + year + month + day + "235959";;
+          break;
         case "yyyy-MM-dd HH:mm:ss":
-            begin = "" + year + "-" + month + "-" + day + " " + "00:00:00";
-            end =  "" + year + "-" + month + "-" + day + " " + "23:59:59";;
-            break;
+          begin = "" + year + "-" + month + "-" + day + " " + "00:00:00";
+          end = "" + year + "-" + month + "-" + day + " " + "23:59:59";;
+          break;
         default:
-            break;
+          break;
       }
-      return [begin,end]
-     }
+      return [begin, end]
+    }
     /**重置表单 请求示例 @click="resetForm($refs['queryForm'])" */
-     Vue.prototype.resetForm = (form) => {
+    Vue.prototype.resetForm = (form) => {
       form.resetFields();
     }
 
     /** 根据数据字典组号，获取数据字典列表 */
-    Vue.prototype.getDictByGroup = (groupCode) =>{
+    Vue.prototype.getDictByGroup = (groupCode) => {
       return CurrentUserStore.state.dictList[groupCode];
     }
 
-    /**获取数据字典名称*/ 
-    Vue.prototype.getDictName = (dictList, value) =>{
+    /**获取数据字典名称*/
+    Vue.prototype.getDictName = (dictList, value) => {
       if (dictList === undefined || dictList === null || !(dictList instanceof Array)) {
         return value;
       }
@@ -131,7 +146,7 @@ export default {
       return value;
     }
 
-    /**table中数据字典格式化---暂时不用 */ 
+    /**table中数据字典格式化---暂时不用 */
     Array.prototype.formateTableDict = function (row, column) {
       return Vue.prototype.getDictName(this, row[column.property]);
     };
@@ -147,22 +162,22 @@ export default {
     }
 
     /** 判断为空 */
-    Vue.prototype.isBlank = (value) =>{
-      if(value == undefined || value == null || value == "" || value.length <= 0){
+    Vue.prototype.isBlank = (value) => {
+      if (value == undefined || value == null || value == "" || value.length <= 0) {
         return true;
       }
       return false;
     }
     /** 判断不为空 */
-    Vue.prototype.isNotBlank = (value) =>{
+    Vue.prototype.isNotBlank = (value) => {
       return !Vue.prototype.isBlank(value);
     }
 
-    Vue.prototype.isFalse = (value) =>{
-      if(Vue.prototype.isBlank(value)){
+    Vue.prototype.isFalse = (value) => {
+      if (Vue.prototype.isBlank(value)) {
         return true;
       }
-      if(value == "0" || value == "false" || value == "no"){
+      if (value == "0" || value == "false" || value == "no") {
         return true;
       }
       return false;
