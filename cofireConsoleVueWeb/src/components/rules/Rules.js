@@ -72,6 +72,33 @@ export const Rules = {
       trigger: 'blur'
     }, ]
   },
+  ResourceRules: {
+    resourceId: [{
+      required: true,
+      message: i18n.t('resource.rule.resourceId'),
+      trigger: 'blur'
+    }],
+    resourceName: [{
+      required: true,
+      message: i18n.t('resource.rule.resourceName'),
+      trigger: 'blur'
+    }],
+    parentResourceId: [{
+      required: true,
+      message: i18n.t('resource.rule.parentResourceId'),
+      trigger: 'blur'
+    }],
+    enabled: [{
+      required: true,
+      message: i18n.t('resource.rule.enabled'),
+      trigger: 'blur'
+    }],
+    isLeaf: [{
+      required: true,
+      message: i18n.t('resource.rule.isLeaf'),
+      trigger: 'blur'
+    }]
+  },
   DictRules: {
     groupId: [{
       required: true,

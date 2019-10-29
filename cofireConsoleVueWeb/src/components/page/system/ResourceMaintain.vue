@@ -45,9 +45,9 @@
         <el-table-column property="url" :label="$t('resource.label.url')" width="200"></el-table-column>
         <el-table-column property="parentResourceId" :label="$t('resource.label.parentResourceId')" width="150"></el-table-column>
         <el-table-column property="icon" :label="$t('resource.label.icon')" width="200"></el-table-column>
-        <el-table-column property="isLeaf" :label="$t('resource.label.isLeaf')" width="100"></el-table-column>
+        <el-table-column property="isLeaf" :label="$t('resource.label.isLeaf')" width="100" :formatter="formatIsLeaf"></el-table-column>
         <el-table-column property="morder" :label="$t('resource.label.morder')" width="100"></el-table-column>
-        <el-table-column property="enabled" :label="$t('resource.label.enabled')" width="100"></el-table-column>
+        <el-table-column property="enabled" :label="$t('resource.label.enabled')" width="100" :formatter="formatEnabled"></el-table-column>
         <el-table-column property="modifier" :label="$t('resource.label.modifier')" width="100"></el-table-column>
         <el-table-column property="modifyTime" :label="$t('resource.label.modifyTime')" width="150"></el-table-column>
       </el-table>
@@ -83,14 +83,12 @@
           </el-form-item>
           <el-form-item :label="$t('resource.label.enabled')" prop="enabled">
             <el-radio-group v-model="editResource.enabled">
-              <el-radio label="0">否</el-radio>
-              <el-radio label="1">是</el-radio>
+              <el-radio v-for="(item,index) in enabledDict" :key="index" :label="item.dict_value">{{item.dict_name}}</el-radio>
             </el-radio-group>
           </el-form-item>
            <el-form-item :label="$t('resource.label.isLeaf')" prop="isLeaf">
             <el-radio-group v-model="editResource.isLeaf">
-              <el-radio label="0">否</el-radio>
-              <el-radio label="1">是</el-radio>
+              <el-radio v-for="(item,index) in isLeafDict" :key="index" :label="item.dict_value">{{item.dict_name}}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-form>
@@ -117,60 +115,8 @@ export default {
       resourceTable: new this.TableModel(),
       editDialog: new this.DialogModel(),
       rules: Rules.ResourceRules,
-      canDeleteDict: this.getDictByGroup("0003"),
-      testData:{
-        success: true,
-        code: "200",
-        message: "success",
-        total: 13,
-        data: [
-        {
-            resourceId: "UserManage",
-            resourceName: "用户管理",
-            url: "1",
-            parentResourceId: "root",
-            isLeaf: "0",
-            morder: 1,
-            enabled: "1",
-            modifier: null,
-            modifyTime: null,
-            icon: "el-icon-lx-cascades",
-            filler1: null,
-            filler2: null,
-            filler3: null,
-            children: [
-            {
-                resourceId: "UserMaintain",
-                resourceName: "用户信息管理",
-                url: "/user",
-                parentResourceId: "UserManage",
-                isLeaf: "1",
-                morder: 1,
-                enabled: "1",
-                modifier: null,
-                modifyTime: null,
-                icon: null,
-                filler1: null,
-                filler2: null,
-                filler3: null
-            },
-            {
-                resourceId: "RoleMaintain",
-                resourceName: "角色信息管理",
-                url: "/role",
-                parentResourceId: "UserManage",
-                isLeaf: "1",
-                morder: 2,
-                enabled: "1",
-                modifier: null,
-                modifyTime: null,
-                icon: null,
-                filler1: null,
-                filler2: null,
-                filler3: null
-            }]
-        }]
-    }
+      isLeafDict: this.getDictByGroup("0006"),
+      enabledDict: this.getDictByGroup("0001"),
     };
   },
   methods: {
@@ -188,8 +134,11 @@ export default {
     handleDblclick(val) {
       this.detail();
     },
-    formatCanDelete(row, column) {
-      return this.getDictName(this.canDeleteDict, row[column.property]);
+    formatIsLeaf(row, column) {
+      return this.getDictName(this.isLeafDict, row[column.property]);
+    },
+    formatEnabled(row, column) {
+      return this.getDictName(this.enabledDict, row[column.property]);
     },
     query(type) {
       if (!this.isBlank(type)) {
@@ -198,7 +147,6 @@ export default {
       this.resourceTable.loading = true;
       queryResource(this.queryResource).then(res => {
         if (res.success || res.success == "true") {
-          // this.resourceTable.total = res.total;
           this.resourceTable.data = res.data;
         } else {
           this.$message.error(this.$t("code." + res.code));

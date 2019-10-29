@@ -92,8 +92,7 @@
           </el-form-item>
           <el-form-item :label="this.$t('param.label.canDelete')" prop="canDelete">
             <el-radio-group v-model="editParam.canDelete">
-              <el-radio label="0">否</el-radio>
-              <el-radio label="1">是</el-radio>
+              <el-radio v-for="(item,index) in canDeleteDict" :key="index" :label="item.dict_value">{{item.dict_name}}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-form>

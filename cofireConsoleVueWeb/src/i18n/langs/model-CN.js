@@ -108,7 +108,11 @@ exports.default = {
       'filler3': '预留字段3'
     },
     rule: {
-      
+      'resourceId': '菜单id不能为空',
+      'resourceName': '菜单名称不能为空',
+      'parentResourceId': '父节点id不能为空',
+      'enabled': '是否可用不能为空',
+      'isLeaf': '是否叶节点不能为空',
     },
     title: {
       'add': '菜单新增',
