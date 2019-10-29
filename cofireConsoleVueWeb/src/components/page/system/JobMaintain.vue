@@ -69,7 +69,7 @@
         @current-change="handlePageChange"
         :current-page="queryJob.page"
         :page-sizes="jobTable.pageSizes"
-        :page-size="queryJob.limit"
+        :page-size="queryJob.length"
         :layout="jobTable.layout"
         :total="jobTable.total"
       ></el-pagination>
@@ -177,7 +177,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryJob.limit = val;
+      this.queryJob.length = val;
       this.query();
     },
     handlePageChange(val) {

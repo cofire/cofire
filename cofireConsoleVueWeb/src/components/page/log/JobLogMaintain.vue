@@ -79,7 +79,7 @@
         @current-change="handlePageChange"
         :current-page="queryJobLog.page"
         :page-sizes="joblogTable.pageSizes"
-        :page-size="queryJobLog.limit"
+        :page-size="queryJobLog.length"
         :layout="joblogTable.layout"
         :total="joblogTable.total"
       ></el-pagination>
@@ -104,7 +104,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryJobLog.limit = val;
+      this.queryJobLog.length = val;
       this.query();
     },
     handlePageChange(val) {

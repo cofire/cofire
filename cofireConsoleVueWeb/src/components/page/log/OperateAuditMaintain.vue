@@ -104,7 +104,7 @@
         @current-change="handlePageChange"
         :current-page="queryOperateAudit.page"
         :page-sizes="queryOperateTable.pageSizes"
-        :page-size="queryOperateAudit.limit"
+        :page-size="queryOperateAudit.length"
         :layout="queryOperateTable.layout"
         :total="queryOperateTable.total"
       ></el-pagination>
@@ -127,7 +127,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryOperateAudit.limit = val;
+      this.queryOperateAudit.length = val;
       this.query();
     },
     handlePageChange(val) {

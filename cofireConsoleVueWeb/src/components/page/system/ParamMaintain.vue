@@ -63,7 +63,7 @@
         @current-change="handlePageChange"
         :current-page="queryParam.page"
         :page-sizes="paramTable.pageSizes"
-        :page-size="queryParam.limit"
+        :page-size="queryParam.length"
         :layout="paramTable.layout"
         :total="paramTable.total"
       ></el-pagination>
@@ -128,7 +128,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryParam.limit = val;
+      this.queryParam.length = val;
       this.query();
     },
     handlePageChange(val) {

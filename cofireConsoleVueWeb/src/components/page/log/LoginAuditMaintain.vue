@@ -110,7 +110,7 @@
         @current-change="handlePageChange"
         :current-page="queryLoginAudit.page"
         :page-sizes="loginAuditTable.pageSizes"
-        :page-size="queryLoginAudit.limit"
+        :page-size="queryLoginAudit.length"
         :layout="loginAuditTable.layout"
         :total="loginAuditTable.total"
       ></el-pagination>

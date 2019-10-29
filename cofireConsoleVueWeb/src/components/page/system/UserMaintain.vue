@@ -76,7 +76,7 @@
         @current-change="handlePageChange"
         :current-page="queryUser.page"
         :page-sizes="userTable.pageSizes"
-        :page-size="queryUser.limit"
+        :page-size="queryUser.length"
         :layout="userTable.layout"
         :total="userTable.total"
       ></el-pagination>
@@ -207,7 +207,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryUser.limit = val;
+      this.queryUser.length = val;
       this.query();
     },
     handlePageChange(val) {

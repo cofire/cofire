@@ -68,7 +68,7 @@
         @current-change="handlePageChange"
         :current-page="queryRole.page"
         :page-sizes="roleTable.pageSizes"
-        :page-size="queryRole.limit"
+        :page-size="queryRole.length"
         :layout="roleTable.layout"
         :total="roleTable.total"
       ></el-pagination>
@@ -147,7 +147,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryRole.limit = val;
+      this.queryRole.length = val;
       this.query();
     },
     handlePageChange(val) {

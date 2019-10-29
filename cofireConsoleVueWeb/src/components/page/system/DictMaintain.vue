@@ -67,7 +67,7 @@
         @current-change="handlePageChange"
         :current-page="queryDict.page"
         :page-sizes="dictTable.pageSizes"
-        :page-size="queryDict.limit"
+        :page-size="queryDict.length"
         :layout="dictTable.layout"
         :total="dictTable.total"
       ></el-pagination>
@@ -130,7 +130,7 @@ export default {
       this.currentRow = val;
     },
     handleSizeChange(val) {
-      this.queryDict.limit = val;
+      this.queryDict.length = val;
       this.query();
     },
     handlePageChange(val) {
