@@ -5,11 +5,10 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.cofire.common.constant.Constants;
 import com.cofire.common.result.TreeNode;
 
 public class TreeUtil {
-
-    public static final String ROOT = "root";
 
     /**
      * 两层循环实现建树
@@ -23,7 +22,7 @@ public class TreeUtil {
 
         for (TreeNode treeNode : treeNodes) {
 
-            if (StringUtils.isBlank(treeNode.getParentId()) || ROOT.equals(treeNode.getParentId())) {
+            if (StringUtils.isBlank(treeNode.getParentId()) || Constants.MENU_ROOT.equals(treeNode.getParentId())) {
                 trees.add(treeNode);
             }
 
@@ -48,7 +47,7 @@ public class TreeUtil {
     public static List<TreeNode> buildByRecursive(List<TreeNode> treeNodes) {
         List<TreeNode> trees = new ArrayList<TreeNode>();
         for (TreeNode treeNode : treeNodes) {
-            if (StringUtils.isBlank(treeNode.getParentId()) || ROOT.equals(treeNode.getParentId())) {
+            if (StringUtils.isBlank(treeNode.getParentId()) || Constants.MENU_ROOT.equals(treeNode.getParentId())) {
                 trees.add(findChildren(treeNode, treeNodes));
             }
         }

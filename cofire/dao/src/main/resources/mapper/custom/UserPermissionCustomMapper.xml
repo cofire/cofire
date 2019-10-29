@@ -18,10 +18,15 @@
 			sys_resource.resource_id AS "id",
 			icon,
 			sys_resource.parent_resource_id AS parentId,
-			sys_resource.url AS url,
-			sys_resource.resource_name AS "name",
-			sys_resource.is_leaf AS leaf,
-			sys_resource.morder
+			CASE
+		WHEN sys_resource.url &lt;&gt; '' THEN
+			sys_resource.url
+		ELSE
+			sys_resource.resource_id
+		END url,
+		 sys_resource.resource_name AS "name",
+		 sys_resource.is_leaf AS leaf,
+		 sys_resource.morder
 		FROM
 			sys_resource
 		LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
@@ -31,6 +36,7 @@
 		WHERE
 			sys_user.user_id = #{user_id}
 		ORDER BY
-			id
+			parentId,
+			morder
 	</select>
 </mapper>

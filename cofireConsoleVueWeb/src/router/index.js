@@ -9,6 +9,8 @@ import UserMaintain from '../components/page/system/UserMaintain'
 import RoleMaintain from '../components/page/system/RoleMaintain'
 import DictMaintain from '../components/page/system/DictMaintain'
 import ParamMaintain from '../components/page/system/ParamMaintain'
+import ResourceMaintain from '../components/page/system/ResourceMaintain'
+
 import JobLogMaintain from '../components/page/log/JobLogMaintain'
 import JobMaintain from '../components/page/system/JobMaintain'
 import LoginAuditMaintain from '../components/page/log/LoginAuditMaintain'
@@ -24,69 +26,76 @@ export default new Router({
             path: '/',
             component: Home,
             meta: {
-                title: 'common.route.R01'
+                title: 'common.route.Home'
             },
             children: [{
                     path: '/dashboard',
                     component: Dashboard,
                     meta: {
-                        title: 'common.route.R02'
+                        title: 'common.route.Home'
                     }
                 },
                 {
                     path: '/user',
                     component: UserMaintain,
                     meta: {
-                        title: 'common.route.R11'
+                        title: 'common.route.UserMaintain'
                     }
                 },
                 {
                     path: '/role',
                     component: RoleMaintain,
                     meta: {
-                        title: 'common.route.R12'
+                        title: 'common.route.RoleMaintain'
+                    }
+                },
+                {
+                    path: '/resource',
+                    component: ResourceMaintain,
+                    meta: {
+                        title: 'common.route.ResourceMaintain'
                     }
                 },
                 {
                     path: '/dict',
                     component: DictMaintain,
                     meta: {
-                        title: 'common.route.R22'
+                        title: 'common.route.DictMaintain'
                     }
                 },
                 {
                     path: '/param',
                     component: ParamMaintain,
                     meta: {
-                        title: 'common.route.R21'
+                        title: 'common.route.ParamMaintain'
                     }
                 },
                 {
                     path: '/job',
                     component: JobMaintain,
                     meta: {
-                        title: 'common.route.R23'
+                        title: 'common.route.JobMaintain'
                     }
                 },
                 {
                     path: '/jobLog',
                     component: JobLogMaintain,
                     meta: {
-                        title: 'common.route.R33'
+                        title: 'common.route.JobLogMaintain'
                     }
                 },
                 {
                     path: '/loginAudit',
                     component: LoginAuditMaintain,
                     meta: {
-                        title: 'common.route.R31'
+                        title: 'common.route.LoginAuditMaintain'
                     }
                 },
                 {
                     path: '/oprateAudit',
                     component: OperateAuditMaintain,
                     meta: {
-                        title: 'common.route.R32'
+                        title: 'common.route.OperateAuditMaintain'
                     }
                 },
                 {

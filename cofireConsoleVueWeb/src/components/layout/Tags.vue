@@ -49,7 +49,7 @@ export default {
       tagsList: [],
       homeItem: {
         path: "/dashboard",
-        title: "common.route.R0"
+        title: "common.route.Dashboard"
       }
     };
   },

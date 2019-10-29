@@ -9,12 +9,12 @@
                     <el-breadcrumb separator="/">
                         <el-breadcrumb-item>
                             <i class="el-icon-lx-calendar"></i>
-                            {{ $t('common.route.R' + parentPath.id) }}
+                            {{ $t('common.route.' + parentPath.id) }}
                         </el-breadcrumb-item>
                         <el-breadcrumb-item
                             v-for="item in pathNav"
                             :key="item.id"
-                        >{{ $t('common.route.R' + item.id) }}</el-breadcrumb-item>
+                        >{{ $t('common.route.' + item.id) }}</el-breadcrumb-item>
                     </el-breadcrumb>
                 </el-row>
                 <transition name="move" mode="out-in">

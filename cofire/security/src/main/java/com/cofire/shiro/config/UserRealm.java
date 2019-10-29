@@ -62,7 +62,7 @@ public class UserRealm extends AuthorizingRealm {
         user.setPassWord("");
         // 将用户信息放入session中
         SecurityUtils.getSubject().getSession().setAttribute(Constants.SESSION_USER_INFO, user);
-        SecurityUtils.getSubject().getSession().setTimeout(900000L);
+        SecurityUtils.getSubject().getSession().setTimeout(-1000);
         Set<String> userPermission = userPermissionService.getUserPermission(userId);
         SecurityUtils.getSubject().getSession().setAttribute(Constants.SESSION_USER_PERMISSION, userPermission);
         return authenticationInfo;

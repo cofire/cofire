@@ -6,24 +6,24 @@
                 <template v-if="item.subMenu">
                     <el-submenu :index="item.url" :key="item.url">
                         <template slot="title">
-                            <i :class="item.icon"></i><span slot="title">{{ $t('common.route.R' + item.id) }}</span>
+                            <i :class="item.icon"></i><span slot="title">{{ $t('common.route.' + item.id) }}</span>
                         </template>
                         <template v-for="subItem in item.subMenu">
                             <el-submenu v-if="subItem.subMenu" :index="subItem.url" :key="subItem.url">
                                 <template slot="title">{{ $t('common.route.R' + subItem.id) }}</template>
                                 <el-menu-item v-for="(threeItem,i) in subItem.subMenu" :key="i" :index="threeItem.url">
-                                    {{ $t('common.route.R' + threeItem.id) }}
+                                    {{ $t('common.route.' + threeItem.id) }}
                                 </el-menu-item>
                             </el-submenu>
                             <el-menu-item v-else :index="subItem.url" :key="subItem.url">
-                                {{$t('common.route.R' + subItem.id) }}
+                                {{$t('common.route.' + subItem.id) }}
                             </el-menu-item>
                         </template>
                     </el-submenu>
                 </template>
                 <template v-else>
                     <el-menu-item :index="item.url" :key="item.url">
-                        <i :class="item.icon"></i><span slot="title">{{ $t('common.route.R' + item.id) }}</span>
+                        <i :class="item.icon"></i><span slot="title">{{ $t('common.route.' + item.id) }}</span>
                     </el-menu-item>
                 </template>
             </template>

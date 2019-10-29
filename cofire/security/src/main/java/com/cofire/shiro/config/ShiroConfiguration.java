@@ -63,18 +63,10 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/console/api/*", "anon");
         filterChainDefinitionMap.put("/error", "anon");
         filterChainDefinitionMap.put("/error/**", "anon");
-        filterChainDefinitionMap.put("/console/mvisitor/*", "anon");
-        filterChainDefinitionMap.put("/console/getDictByGroup", "anon");
-        filterChainDefinitionMap.put("/console/getRichText", "anon");
 
         // 页面访问入口和静态资源
         filterChainDefinitionMap.put("/console", "anon");
         filterChainDefinitionMap.put("/console/static/**", "anon");
-        filterChainDefinitionMap.put("/ipad", "anon");
-        filterChainDefinitionMap.put("/ipad/static/**", "anon");
-        filterChainDefinitionMap.put("/mobile", "anon");
-        filterChainDefinitionMap.put("/mobile/static/**", "anon");
-        filterChainDefinitionMap.put("/test/**", "anon");
 
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

@@ -91,6 +91,38 @@ exports.default = {
       "cancelDeletePrompt": "已取消删除该角色信息",
     }
   },
+  resource:{
+    label: {
+      'resourceId': '菜单id',
+      'resourceName': '菜单名称',
+      'url': '菜单链接',
+      'parentResourceId': '父节点id',
+      'isLeaf': '是否叶节点',
+      'morder': '排序',
+      'enabled': '是否可用',
+      'modifier': '最后修改人',
+      'modifyTime': '最后修改时间',
+      'icon': '小图标',
+      'filler1': '预留字段1',
+      'filler2': '预留字段2',
+      'filler3': '预留字段3'
+    },
+    rule: {
+      
+    },
+    title: {
+      'add': '菜单新增',
+      'edit': '菜单编辑',
+      'detail': '菜单信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的菜单信息",
+      "roleSet":"请选中需要菜单设置的菜单信息",
+      "delete":"请选中需要删除的菜单信息",
+      "deletePrompt":"正在删除该菜单信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该菜单信息",
+    }
+  },
   dict:{
     label: {
       'groupId': '组号',

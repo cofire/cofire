@@ -36,6 +36,16 @@ export const queryUserRoleList = data => fetch('/console/role/queryUserRoleList'
 /**查询角色菜单树 */
 export const getRoleTree = data => fetch('/console/role/getRoleTree', data, 'POST');
 
+/** 菜单管理 */
+/** 获取菜单列表 */
+/** 获取菜单列表 */
+export const queryResource = data => fetch('/console/resource/query', data, 'POST');
+/** 保存菜单信息 */
+export const saveResource = data => fetch('/console/resource/save', data, 'POST');
+/**删除菜单信息 */
+export const deleteResource = data => fetch('/console/resource/delete', data, 'POST');
+
+
 /** 数据字典管理 */
 /** 获取数据字典列表 */
 export const queryDict = data => fetch('/console/dict/query', data, 'POST');

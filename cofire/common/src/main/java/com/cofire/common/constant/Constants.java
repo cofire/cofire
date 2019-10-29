@@ -11,6 +11,9 @@ public class Constants {
     public static final String FLAG_ADD = "add";
     public static final String FLAG_UPDATE = "update";
 
+    // 菜单根节点
+    public static final String MENU_ROOT = "Root";
+
     /**
      * session中存放用户信息的key值
      */
