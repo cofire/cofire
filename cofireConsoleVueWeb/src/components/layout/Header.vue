@@ -101,7 +101,7 @@ export default {
       lang: "cn",
       collapse: false,
       fullscreen: false,
-      name: "linxin",
+      name: "cofire",
       message: 2,
       updateUserPassWord: {
         currentPassWord: "",

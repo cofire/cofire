@@ -1,3 +1,5 @@
+import {TableColumn} from 'element-ui';
+
 import {
   CurrentUserStore
 } from "./components/store/common/CurrentUserStore";
@@ -21,7 +23,7 @@ export default {
             el.disabled = true
             setTimeout(() => {
               el.disabled = false
-            }, binding.value || 1000)
+            }, binding.value || 1500)
           }
         })
       }
@@ -147,8 +149,19 @@ export default {
     }
 
     /**table中数据字典格式化---暂时不用 */
-    Array.prototype.formateTableDict = function (row, column) {
-      return Vue.prototype.getDictName(this, row[column.property]);
+    Vue.prototype.formateTableDict = function (row, column) {
+      var groupCode = "";
+      if(!Vue.prototype.isBlank(this.className)){
+        var classlist  = this.className.split(" ");
+        if(!Vue.prototype.isBlank(classlist[0])){
+          var dictCodeList = classlist[0].split("-");
+          if(dictCodeList.length == 2){
+            groupCode = dictCodeList[1];
+          }
+        }
+      }
+      var dictList = Vue.prototype.getDictByGroup(groupCode);
+      return Vue.prototype.getDictName(dictList, row[column.property]);
     };
 
     /** js对象深度复制 */

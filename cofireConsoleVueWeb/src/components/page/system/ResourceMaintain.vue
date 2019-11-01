@@ -45,11 +45,11 @@
         <el-table-column property="url" :label="$t('resource.label.url')" width="200"></el-table-column>
         <el-table-column property="parentResourceId" :label="$t('resource.label.parentResourceId')" width="150"></el-table-column>
         <el-table-column property="icon" :label="$t('resource.label.icon')" width="200"></el-table-column>
-        <el-table-column property="isLeaf" :label="$t('resource.label.isLeaf')" width="100" :formatter="formatIsLeaf"></el-table-column>
+        <el-table-column property="isLeaf" :label="$t('resource.label.isLeaf')" width="100" :formatter="formateTableDict" className="dict-0006"></el-table-column>
         <el-table-column property="morder" :label="$t('resource.label.morder')" width="100"></el-table-column>
-        <el-table-column property="enabled" :label="$t('resource.label.enabled')" width="100" :formatter="formatEnabled"></el-table-column>
+        <el-table-column property="enabled" :label="$t('resource.label.enabled')" width="100" :formatter="formateTableDict" className="dict-0001"></el-table-column>
         <el-table-column property="modifier" :label="$t('resource.label.modifier')" width="100"></el-table-column>
-        <el-table-column property="modifyTime" :label="$t('resource.label.modifyTime')" width="150"></el-table-column>
+        <el-table-column property="modifyTime" :label="$t('resource.label.modifyTime')" width="150" :formatter="formatTableTime"></el-table-column>
       </el-table>
     </el-row>
     <!-- 编辑弹出框 -->
@@ -133,12 +133,6 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
-    },
-    formatIsLeaf(row, column) {
-      return this.getDictName(this.isLeafDict, row[column.property]);
-    },
-    formatEnabled(row, column) {
-      return this.getDictName(this.enabledDict, row[column.property]);
     },
     query(type) {
       if (!this.isBlank(type)) {

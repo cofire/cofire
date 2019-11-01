@@ -10,11 +10,13 @@ import RoleMaintain from '../components/page/system/RoleMaintain'
 import DictMaintain from '../components/page/system/DictMaintain'
 import ParamMaintain from '../components/page/system/ParamMaintain'
 import ResourceMaintain from '../components/page/system/ResourceMaintain'
-
 import JobLogMaintain from '../components/page/log/JobLogMaintain'
 import JobMaintain from '../components/page/system/JobMaintain'
 import LoginAuditMaintain from '../components/page/log/LoginAuditMaintain'
 import OperateAuditMaintain from '../components/page/log/OperateAuditMaintain'
+
+import Printer from '../components/page/Printer'
+
 Vue.use(Router);
 
 export default new Router({
@@ -121,6 +123,10 @@ export default new Router({
         {
             path: '*',
             redirect: '/404'
+        },
+        {
+            path: '/printer',
+            component: Printer
         }
     ]
 })

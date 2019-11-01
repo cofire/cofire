@@ -65,7 +65,7 @@
           property="isSuccess"
           :label="this.$t('jobLog.label.isSuccess')"
           width="200"
-          :formatter="formatIsSuccess"
+          :formatter="formateTableDict" className="dict-0004"
         ></el-table-column>
         <el-table-column
           property="message"
@@ -113,9 +113,6 @@ export default {
     },
     handleDblclick(val) {
       this.edit();
-    },
-    formatIsSuccess(row, column) {
-      return this.getDictName(this.isSuccessDict, row[column.property]);
     },
     query(type) {
       if (!this.isBlank(type)) {

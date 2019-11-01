@@ -60,7 +60,7 @@
         <el-table-column property="hour" :label="this.$t('job.label.hour')" width="90"></el-table-column>
         <el-table-column property="minute" :label="this.$t('job.label.minute')" width="90"></el-table-column>
         <el-table-column property="second" :label="this.$t('job.label.second')" width="90"></el-table-column>
-        <el-table-column property="isDel" :label="this.$t('job.label.isDel')" width="150" :formatter="formatCanDelete"></el-table-column>
+        <el-table-column property="isDel" :label="this.$t('job.label.isDel')" width="150" :formatter="formateTableDict" className="dict-0003"></el-table-column>
         <el-table-column property="modifier" :label="this.$t('job.label.modifier')" width="100"></el-table-column>
         <el-table-column property="modifyTime" :label="this.$t('job.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
       </el-table>
@@ -187,9 +187,7 @@ export default {
     handleDblclick(val) {
       this.detail();
     },
-    formatCanDelete(row, column) {
-      return this.getDictName(this.canDeleteJob, row[column.property]);
-    },
+    
     query(type) {
       if (!this.isBlank(type)) {
         this.queryJob.page = 1;

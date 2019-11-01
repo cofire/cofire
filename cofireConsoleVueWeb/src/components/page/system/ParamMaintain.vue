@@ -54,7 +54,7 @@
         <el-table-column property="paramId" :label="this.$t('param.label.paramId')" width="200"></el-table-column>
         <el-table-column property="paramValue" :label="this.$t('param.label.paramValue')" width="250"></el-table-column>
         <el-table-column property="paramName" :label="this.$t('param.label.paramName')" width="200"></el-table-column>
-         <el-table-column property="canDelete" :label="this.$t('param.label.canDelete')" width="200" :formatter="formatCanDelete"></el-table-column>
+         <el-table-column property="canDelete" :label="this.$t('param.label.canDelete')" width="200" :formatter="formateTableDict" className="dict-0003"></el-table-column>
         <el-table-column property="modifier" :label="this.$t('param.label.modifier')" width="200"></el-table-column>
         <el-table-column property="modifyTime" :label="this.$t('param.label.modifyTime')" width="200" :formatter="formatTableTime"></el-table-column>
       </el-table>
@@ -136,9 +136,6 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
-    },
-    formatCanDelete(row, column) {
-      return this.getDictName(this.canDeleteDict, row[column.property]);
     },
     query(type) {
       if (!this.isBlank(type)) {

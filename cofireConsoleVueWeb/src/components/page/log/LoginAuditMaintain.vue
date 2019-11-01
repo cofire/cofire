@@ -90,13 +90,13 @@
           property="auditType"
           :label="this.$t('loginAudit.label.auditType')"
           width="100"
-          :formatter="formatAuditType"
+          :formatter="formateTableDict" className="dict-0002"
         ></el-table-column>
         <el-table-column
           property="sourceType"
           :label="this.$t('loginAudit.label.sourceType')"
           width="100"
-          :formatter="formatSourceType"
+          :formatter="formateTableDict" className="dict-0005"
         ></el-table-column>
         <el-table-column
           property="message"
