@@ -15,7 +15,8 @@ import JobMaintain from '../components/page/system/JobMaintain'
 import LoginAuditMaintain from '../components/page/log/LoginAuditMaintain'
 import OperateAuditMaintain from '../components/page/log/OperateAuditMaintain'
 
-import Printer from '../components/page/Printer'
+import Printer from '../components/page/tools/Printer'
+import Icon from '../components/page/tools/Icon'
 
 Vue.use(Router);
 
@@ -99,6 +100,10 @@ export default new Router({
                     meta: {
                         title: 'common.route.OperateAuditMaintain'
                     }
+                },
+                {
+                    path: '/icon',
+                    component: Icon
                 },
                 {
                     path: '/404',

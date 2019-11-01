@@ -19,6 +19,8 @@ exports.default = {
       'LoginAuditMaintain':'登录登出日志',
       'OperateAuditMaintain':'操作日志',
       'JobLogMaintain':'定时任务日志',
+      'Tools': '工具',
+      'Icon': '图标'
     },
     button: {
       'login': '登录',
