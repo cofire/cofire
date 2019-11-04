@@ -14,6 +14,7 @@ exports.default = {
       'SystemManage':'系统管理',
       'ParamMaintain':'系统参数',
       'DictMaintain':'数据字典',
+      'ReturnCodeMaintain':'返回码',
       'JobMaintain':'定时任务管理',
       'LogManage':'日志管理',
       'LoginAuditMaintain':'登录登出日志',

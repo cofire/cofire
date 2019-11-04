@@ -45,7 +45,6 @@ export const saveResource = data => fetch('/console/resource/save', data, 'POST'
 /**删除菜单信息 */
 export const deleteResource = data => fetch('/console/resource/delete', data, 'POST');
 
-
 /** 数据字典管理 */
 /** 获取数据字典列表 */
 export const queryDict = data => fetch('/console/dict/query', data, 'POST');
@@ -61,6 +60,14 @@ export const queryParam = data => fetch('/console/param/query', data, 'POST');
 export const saveParam = data => fetch('/console/param/save', data, 'POST');
 /**删除系统参数信息 */
 export const deleteParam = data => fetch('/console/param/delete', data, 'POST');
+
+/** 返回码管理 */
+/** 获取返回码列表 */
+export const queryReturnCode = data => fetch('/console/returnCode/query', data, 'POST');
+/** 保存返回码信息 */
+export const saveReturnCode = data => fetch('/console/returnCode/save', data, 'POST');
+/**删除返回码信息 */
+export const deleteReturnCode = data => fetch('/console/returnCode/delete', data, 'POST');
 
 /** 查询定时任务日志 */
 export const queryJobLog = data => fetch('/console/jobLog/query', data, 'POST');

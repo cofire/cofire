@@ -194,6 +194,34 @@ exports.default = {
       "canNotDeletePrompt": "不可删除删除该系统参数信息",
     }
   },
+  returnCode:{
+    label: {
+      'code': '返回码',
+      'message': '返回信息',
+      'remark': '备注',
+      'modifyTime': '最后修改时间',
+      'modifier': '最后修改人',
+      'filler1': '预留字段1',
+      'filler2': '预留字段2',
+      'filler3': '预留字段3',
+    },
+    rule: {
+      'code': '返回码不能为空',
+      'message': '返回信息不能为空',
+    },
+    title: {
+      'add': '返回码新增',
+      'edit': '返回码编辑',
+      'detail': '返回码信息详情',
+    },
+    message: {
+      "edit": "请选中需要编辑的返回码信息",
+      "delete":"请选中需要删除的返回码信息",
+      "deletePrompt":"正在删除该返回码信息，是否继续？",
+      "cancelDeletePrompt": "已取消删除该返回码信息",
+      "canNotDeletePrompt": "不可删除删除该返回码信息",
+    }
+  },
   job:{
     label: {
       'jobId': '定时任务id',

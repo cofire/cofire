@@ -163,12 +163,6 @@ export default {
         }
         this.loginAuditTable.loading = false;
       });
-    },
-    formatAuditType(row, column) {
-      return this.getDictName(this.auditTypeDict, row[column.property]);
-    },
-    formatSourceType(row, column) {
-      return this.getDictName(this.sourceTypeDict, row[column.property]);
     }
   },
   mounted() {

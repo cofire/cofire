@@ -10,6 +10,7 @@ import RoleMaintain from '../components/page/system/RoleMaintain'
 import DictMaintain from '../components/page/system/DictMaintain'
 import ParamMaintain from '../components/page/system/ParamMaintain'
 import ResourceMaintain from '../components/page/system/ResourceMaintain'
+import ReturnCodeMaintain from '../components/page/system/ReturnCodeMaintain'
 import JobLogMaintain from '../components/page/log/JobLogMaintain'
 import JobMaintain from '../components/page/system/JobMaintain'
 import LoginAuditMaintain from '../components/page/log/LoginAuditMaintain'
@@ -74,6 +75,13 @@ export default new Router({
                     }
                 },
                 {
+                    path: '/returnCode',
+                    component: ReturnCodeMaintain,
+                    meta: {
+                        title: 'common.route.ReturnCodeMaintain'
+                    }
+                },
+                {
                     path: '/job',
                     component: JobMaintain,
                     meta: {
@@ -103,7 +111,10 @@ export default new Router({
                 },
                 {
                     path: '/icon',
-                    component: Icon
+                    component: Icon,
+                    meta: {
+                        title: 'common.route.Icon'
+                    }
                 },
                 {
                     path: '/404',

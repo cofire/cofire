@@ -159,5 +159,17 @@ export const Rules = {
       message: i18n.t('job.rule.jobName'),
       trigger: 'blur'
     }]
+  },
+  ReturnCodeRules: {
+    code: [{
+      required: true,
+      message: i18n.t('returnCode.rule.code'),
+      trigger: 'blur'
+    }],
+    message: [{
+      required: true,
+      message: i18n.t('returnCode.rule.message'),
+      trigger: 'blur'
+    }],
   }
 }
