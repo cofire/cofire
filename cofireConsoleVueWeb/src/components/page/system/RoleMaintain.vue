@@ -175,7 +175,7 @@ export default {
     add() {
       this.editRole = new SysRoleModel();
       this.treeChecked = [];
-      this.editRole.saveFlag = "add";
+      this.editRole.saveFlag = this.GLOBAL.saveFlag.add;
       this.editDialog.title = this.$t("role.title.add");
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
@@ -195,7 +195,7 @@ export default {
       this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
       this.editRole = this.copyObject(this.currentRow, this.editRole);
-      this.editRole.saveFlag = "update";
+      this.editRole.saveFlag = this.GLOBAL.saveFlag.update;
       this.editDialog.title = this.$t("role.title.edit");
 
       if (this.$refs["editForm"] != undefined) {

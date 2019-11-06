@@ -10,6 +10,7 @@ export default class TableModel {
   /** 表格数据总数 */
   total = 0;
   /** 表格每页显示条数 */
+  pageSize = 10;
   pageSizes = [10, 20, 30, 40, 50];
   layout = "total, sizes, prev, pager, next, jumper"
 

@@ -64,6 +64,8 @@ public class SystemInitListener implements ServletContextListener {
         }
         SystemService.initSysParam();
         SystemService.initSysDict();
+        SystemService.initRerurnCode();
+
         try {
             QuartzJobConfig.registerQuartzJob();
         } catch (Exception e) {

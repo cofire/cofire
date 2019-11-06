@@ -154,7 +154,7 @@ export default {
     },
      add() {
       this.editParam = new SysParamModel();
-      this.editParam.saveFlag = "add";
+      this.editParam.saveFlag = this.GLOBAL.saveFlag.add;
       this.editDialog.title = this.$t("param.title.add");
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
@@ -173,7 +173,7 @@ export default {
       this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
       this.editParam = this.copyObject(this.currentRow, this.editParam);
-      this.editParam.saveFlag = "update";
+      this.editParam.saveFlag = this.GLOBAL.saveFlag.update;
       this.editDialog.title = this.$t("param.title.edit");
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {

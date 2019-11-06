@@ -238,7 +238,7 @@ export default {
     },
     add() {
       this.editUser = new SysUserModel();
-      this.editUser.saveFlag = "add";
+      this.editUser.saveFlag = this.GLOBAL.saveFlag.add;
       this.editDialog.title = this.$t("user.title.add");
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
@@ -254,7 +254,7 @@ export default {
         return;
       }
       this.editUser = this.copyObject(this.currentRow, this.editUser);
-      this.editUser.saveFlag = "update";
+      this.editUser.saveFlag = this.GLOBAL.saveFlag.update;
       this.editDialog.title = this.$t("user.title.edit");
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;

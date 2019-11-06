@@ -18,6 +18,7 @@ import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
+import com.cofire.console.common.impl.SystemService;
 import com.cofire.console.service.sytem.IReturnCodeService;
 import com.cofire.dao.mapper.system.SysReturnCodeMapper;
 import com.cofire.dao.model.system.SysReturnCode;
@@ -113,6 +114,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
             returnCode.setModifier(CurrentUserUtil.getCurentUserId());
             returnCode.setModifyTime(Util.getCurrentDateTimeString());
             returnCodeMapper.insert(returnCode);
+            SystemService.initRerurnCode();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("新增返回码信息失败：" + e.getMessage());
@@ -138,6 +140,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
             returnCode.setModifier(CurrentUserUtil.getCurentUserId());
             returnCode.setModifyTime(Util.getCurrentDateTimeString());
             returnCodeMapper.updateByPrimaryKeySelective(returnCode);
+            SystemService.initRerurnCode();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改返回码信息失败：" + e.getMessage());

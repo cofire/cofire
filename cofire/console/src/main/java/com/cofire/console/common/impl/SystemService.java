@@ -91,4 +91,18 @@ public class SystemService {
         }
         logger.info("初始化数据字典完成");
     }
+
+    /**
+     * 
+     * @Title: initRerurnCode
+     * @author ly
+     * @Description:
+     * @param 参数
+     * @return void 返回类型
+     */
+    public static void initRerurnCode() {
+        logger.info("正在初始化返回码");
+
+        logger.info("初始化返回码完成");
+    }
 }

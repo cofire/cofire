@@ -150,7 +150,7 @@ export default {
     },
      add() {
       this.editResource = new SysResourceModel();
-      this.editResource.saveFlag = "add";
+      this.editResource.saveFlag = this.GLOBAL.saveFlag.add;
       this.editDialog.title = this.$t("resource.title.add");
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
@@ -169,7 +169,7 @@ export default {
       this.editDialog.isDetail = false;
       this.editDialog.disabled = true;
       this.editResource = this.copyObject(this.currentRow, this.editResource);
-      this.editResource.saveFlag = "update";
+      this.editResource.saveFlag = this.GLOBAL.saveFlag.update;
       this.editDialog.title = this.$t("resource.title.edit");
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {

@@ -157,7 +157,7 @@ export default {
     },
     add() {
       this.editDict = new SysDictModel();
-      this.editDict.saveFlag = "add";
+      this.editDict.saveFlag = this.GLOBAL.saveFlag.add;
       this.editDialog.title = this.$t("dict.title.add");
       this.editDialog.visible = true;
       this.editDialog.formDisabled = false;
@@ -176,7 +176,7 @@ export default {
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
       this.editDict = this.copyObject(this.currentRow, this.editDict);
-      this.editDict.saveFlag = "update";
+      this.editDict.saveFlag = this.GLOBAL.saveFlag.update;
       this.editDialog.title = this.$t("dict.title.edit");
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {

@@ -33,6 +33,7 @@ import com.cofire.dao.mapper.system.SysRoleMapper;
 import com.cofire.dao.mapper.system.SysRoleResourceMapper;
 import com.cofire.dao.mapper.system.SysUserRoleMapper;
 import com.cofire.dao.model.system.SysResource;
+import com.cofire.dao.model.system.SysResourceExample;
 import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysRoleExample;
 import com.cofire.dao.model.system.SysRoleResource;
@@ -300,7 +301,9 @@ public class RoleServiceImpl implements IRoleService {
         Set<String> checkedSet = new HashSet<>();
         List<TreeNode> treeList = new ArrayList<>();
         try {
-            List<SysResource> resourceList = resourceMapper.selectByExample(null);
+            SysResourceExample resourceExample = new SysResourceExample();
+            resourceExample.setOrderByClause("morder");
+            List<SysResource> resourceList = resourceMapper.selectByExample(resourceExample);
             for (SysResource resource : resourceList) {
                 TreeNode node = new TreeNode(resource.getResourceId(), resource.getResourceName(), resource.getParentResourceId());
                 treeList.add(node);

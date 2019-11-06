@@ -1,8 +1,16 @@
+// 版本号
 const version = "1.0";
-const pageSizes = [10, 20, 30, 40, 50];
-const pageSize = 10;
+// 操作类型
+const saveFlag = {
+  query: "query",
+  add: "add",
+  update: "update",
+  delete: "delete",
+  export: "export",
+  upload: "upload"
+};
+
 export default {
   version,
-  pageSizes,
-  pageSize
+  saveFlag
 }
