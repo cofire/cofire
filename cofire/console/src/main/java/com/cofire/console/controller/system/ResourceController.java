@@ -26,13 +26,13 @@ public class ResourceController extends SystemBaseController {
 
     @BussinessLog("保存菜单信息")
     @RequestMapping(value = "/resource/save", method = { RequestMethod.POST })
-    public Result saveResource(String saveFlag, SysResource resource) {
+    public Result saveResource(String operation, SysResource resource) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return resourceService.add(resource);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return resourceService.upadte(resource);
         }
         return result;

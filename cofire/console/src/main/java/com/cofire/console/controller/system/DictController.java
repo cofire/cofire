@@ -27,13 +27,13 @@ public class DictController extends SystemBaseController {
 
     @BussinessLog("保存数据字典信息")
     @RequestMapping(value = "/dict/save", method = { RequestMethod.POST })
-    public Result saveDict(String saveFlag, SysDict dict) {
+    public Result saveDict(String operation, SysDict dict) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return dictService.add(dict);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return dictService.upadte(dict);
         }
         return result;

@@ -27,13 +27,13 @@ public class JobController extends SystemBaseController {
 
     @BussinessLog("保存定时任务信息")
     @RequestMapping(value = "/job/save", method = { RequestMethod.POST })
-    public Result saveJob(String saveFlag, QtzJob job) {
+    public Result saveJob(String operation, QtzJob job) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return jobService.add(job);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return jobService.upadte(job);
         }
         return result;

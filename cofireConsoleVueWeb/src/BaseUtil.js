@@ -1,5 +1,3 @@
-import {TableColumn} from 'element-ui';
-
 import {
   CurrentUserStore
 } from "./components/store/common/CurrentUserStore";

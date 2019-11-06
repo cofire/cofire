@@ -28,13 +28,13 @@ public class UserController extends SystemBaseController {
 
     @BussinessLog("保存用户信息")
     @RequestMapping(value = "/user/save", method = { RequestMethod.POST })
-    public Result saveUser(String saveFlag, SysUser user) {
+    public Result saveUser(String operation, SysUser user) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return userService.add(user);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return userService.upadte(user);
         }
         return result;

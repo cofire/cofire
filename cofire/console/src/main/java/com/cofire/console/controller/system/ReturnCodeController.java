@@ -27,13 +27,13 @@ public class ReturnCodeController extends SystemBaseController {
 
     @BussinessLog("保存返回码信息")
     @RequestMapping(value = "/returnCode/save", method = { RequestMethod.POST })
-    public Result saveReturnCode(String saveFlag, SysReturnCode returnCode) {
+    public Result saveReturnCode(String operation, SysReturnCode returnCode) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return returnCodeService.add(returnCode);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return returnCodeService.upadte(returnCode);
         }
         return result;

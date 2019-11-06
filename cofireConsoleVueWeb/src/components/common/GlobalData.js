@@ -1,7 +1,7 @@
 // 版本号
 const version = "1.0";
 // 操作类型
-const saveFlag = {
+const operation = {
   query: "query",
   add: "add",
   update: "update",
@@ -12,5 +12,5 @@ const saveFlag = {
 
 export default {
   version,
-  saveFlag
+  operation
 }

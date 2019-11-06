@@ -27,13 +27,13 @@ public class ParamController extends SystemBaseController {
 
     @BussinessLog("保存系统参数信息")
     @RequestMapping(value = "/param/save", method = { RequestMethod.POST })
-    public Result saveParam(String saveFlag, SysParam param) {
+    public Result saveParam(String operation, SysParam param) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return paramService.add(param);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return paramService.upadte(param);
         }
         return result;

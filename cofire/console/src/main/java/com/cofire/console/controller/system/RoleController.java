@@ -28,13 +28,13 @@ public class RoleController extends SystemBaseController {
 
     @BussinessLog("保存角色信息")
     @RequestMapping(value = "/role/save", method = { RequestMethod.POST })
-    public Result saveRole(String saveFlag, SysRole role, String permission) {
+    public Result saveRole(String operation, SysRole role, String permission) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
-        if (Constants.FLAG_ADD.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_ADD.equalsIgnoreCase(operation)) {
             return roleService.add(role, permission);
         }
-        if (Constants.FLAG_UPDATE.equalsIgnoreCase(saveFlag)) {
+        if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
             return roleService.upadte(role, permission);
         }
         return result;

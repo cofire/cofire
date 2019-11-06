@@ -172,7 +172,7 @@ export default {
     },
     add() {
       this.editReturnCode = new SysReturnCodeModel();
-      this.editReturnCode.saveFlag = this.GLOBAL.saveFlag.add;
+      this.editReturnCode.operation = this.GLOBAL.operation.add;
       this.editDialog.title = this.$t("returnCode.title.add");
       this.editDialog.visible = true;
       this.editDialog.formDisabled = false;
@@ -194,7 +194,7 @@ export default {
         this.currentRow,
         this.editReturnCode
       );
-      this.editReturnCode.saveFlag = this.GLOBAL.saveFlag.update;
+      this.editReturnCode.operation = this.GLOBAL.operation.update;
       this.editDialog.title = this.$t("returnCode.title.edit");
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {

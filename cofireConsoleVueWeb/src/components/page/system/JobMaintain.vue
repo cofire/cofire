@@ -205,7 +205,7 @@ export default {
     },
     add() {
       this.editJob = new QtzJobModel();
-      this.editJob.saveFlag = this.GLOBAL.saveFlag.add;
+      this.editJob.operation = this.GLOBAL.operation.add;
       this.editDialog.title = this.$t("job.title.add");
       this.editDialog.visible = true;
       this.editDialog.formDisabled = false;
@@ -224,7 +224,7 @@ export default {
       this.editDialog.formDisabled = false;
       this.editDialog.isDetail = false;
       this.editJob = this.copyObject(this.currentRow, this.editJob);
-      this.editJob.saveFlag = this.GLOBAL.saveFlag.update;
+      this.editJob.operation = this.GLOBAL.operation.update;
       this.editDialog.title = this.$t("job.title.edit");
       this.editDialog.visible = true;
       if (this.$refs["editForm"] != undefined) {

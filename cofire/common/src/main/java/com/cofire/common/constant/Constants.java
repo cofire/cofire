@@ -8,8 +8,18 @@ package com.cofire.common.constant;
 public class Constants {
     public static final String MYSQL = "mysql";
 
-    public static final String FLAG_ADD = "add";
-    public static final String FLAG_UPDATE = "update";
+    // 查询
+    public static final String OPERATION_QUERY = "query";
+    // 新增
+    public static final String OPERATION_ADD = "add";
+    // 修改
+    public static final String OPERATION_UPDATE = "update";
+    // 删除
+    public static final String OPERATION_DELETE = "delete";
+    // 导出
+    public static final String OPERATION_EXPORT = "export";
+    // 上传
+    public static final String OPERATION_UPLOAD = "upload";
 
     // 菜单根节点
     public static final String MENU_ROOT = "Root";
