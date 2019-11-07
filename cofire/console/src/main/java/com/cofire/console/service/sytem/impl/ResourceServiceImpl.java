@@ -132,9 +132,12 @@ public class ResourceServiceImpl implements IResourceService {
         Result result = new Result();
         try {
             logger.info("正在修改菜单信息");
+            SysResourceExample example = new SysResourceExample();
+            SysResourceExample.Criteria criteria = example.createCriteria();
+            criteria.andResourceIdEqualTo(resource.getResourceId());
             resource.setModifier(CurrentUserUtil.getCurentUserId());
             resource.setModifyTime(Util.getCurrentDateTimeString());
-            resourceMapper.updateByPrimaryKeySelective(resource);
+            resourceMapper.updateByExample(resource, example);
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("修改菜单信息失败：" + e.getMessage());

@@ -142,9 +142,13 @@ public class ParamServiceImpl implements IParamService {
         Result result = new Result();
         try {
             logger.info("正在修改系统参数信息");
+            SysParamExample example = new SysParamExample();
+            SysParamExample.Criteria criteria = example.createCriteria();
+            criteria.andGroupIdEqualTo(param.getGroupId());
+            criteria.andParamIdEqualTo(param.getParamId());
             param.setModifier(CurrentUserUtil.getCurentUserId());
             param.setModifyTime(Util.getCurrentDateTimeString());
-            paramMapper.updateByPrimaryKeySelective(param);
+            paramMapper.updateByExample(param, example);
             SystemService.initSysParam();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {

@@ -140,9 +140,13 @@ public class DictServiceImpl implements IDictService {
         Result result = new Result();
         try {
             logger.info("正在修改数据字典信息");
+            SysDictExample example = new SysDictExample();
+            SysDictExample.Criteria criteria = example.createCriteria();
+            criteria.andGroupIdEqualTo(dict.getGroupId());
+            criteria.andDictValueEqualTo(dict.getDictValue());
             dict.setModifier(CurrentUserUtil.getCurentUserId());
             dict.setModifyTime(Util.getCurrentDateTimeString());
-            dictMapper.updateByPrimaryKeySelective(dict);
+            dictMapper.updateByExample(dict, example);
             SystemService.initSysDict();
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {

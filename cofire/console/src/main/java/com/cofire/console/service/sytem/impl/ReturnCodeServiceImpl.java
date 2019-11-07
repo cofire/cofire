@@ -137,8 +137,12 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
         Result result = new Result();
         try {
             logger.info("正在修改返回码信息");
+            SysReturnCodeExample example = new SysReturnCodeExample();
+            SysReturnCodeExample.Criteria criteria = example.createCriteria();
+            criteria.andCodeEqualTo(returnCode.getCode());
             returnCode.setModifier(CurrentUserUtil.getCurentUserId());
             returnCode.setModifyTime(Util.getCurrentDateTimeString());
+            returnCodeMapper.updateByExample(returnCode, example);
             returnCodeMapper.updateByPrimaryKeySelective(returnCode);
             SystemService.initRerurnCode();
             result.setSuccess(true, CodeEnum.E_200);

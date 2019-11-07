@@ -143,9 +143,12 @@ public class JobServiceImpl implements IJobService {
         Result result = new Result();
         try {
             logger.info("正在修改定时任务信息");
+            QtzJobExample example = new QtzJobExample();
+            QtzJobExample.Criteria criteria = example.createCriteria();
+            criteria.andJobIdEqualTo(job.getJobId());
             job.setModifier(CurrentUserUtil.getCurentUserId());
             job.setModifyTime(Util.getCurrentDateTimeString());
-            jobMapper.updateByPrimaryKeySelective(job);
+            jobMapper.updateByExample(job, example);
             QuartzJobConfig.standbyQuartzJob();
             QuartzJobConfig.registerQuartzJob();
             result.setSuccess(true, CodeEnum.E_200);
