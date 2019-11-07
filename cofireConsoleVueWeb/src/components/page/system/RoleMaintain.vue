@@ -14,23 +14,23 @@
     <el-row class="table-operations">
       <el-button
         type="primary"
-        icon="el-icon-lx-search"
+        icon="el-icon-search"
         @click="query('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
-        icon="el-icon-lx-roundadd"
+        icon="el-icon-circle-plus-outline"
         @click="add()"
       >{{$t('common.button.add')}}</el-button>
-      <el-button type="primary" icon="el-icon-lx-edit" @click="edit()">{{$t('common.button.edit')}}</el-button>
+      <el-button type="primary" icon="el-icon-edit-outline" @click="edit()">{{$t('common.button.edit')}}</el-button>
       <el-button
         type="primary"
-        icon="el-icon-lx-delete"
+        icon="el-icon-delete"
         @click="deleteRole()"
       >{{$t('common.button.delete')}}</el-button>
       <el-button
         type="primary"
-        icon="el-icon-lx-refresh"
+        icon="el-icon-refresh-right"
         @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>

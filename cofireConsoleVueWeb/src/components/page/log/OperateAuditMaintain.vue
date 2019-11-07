@@ -37,12 +37,12 @@
     <el-row class="table-operations">
       <el-button
         type="primary"
-        icon="el-icon-lx-search"
+        icon="el-icon-search"
         @click="query('click')"
       >{{$t('common.button.query')}}</el-button>
       <el-button
         type="primary"
-        icon="el-icon-lx-refresh"
+        icon="el-icon-refresh-right"
         @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
     </el-row>

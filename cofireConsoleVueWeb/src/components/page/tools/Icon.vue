@@ -2,20 +2,7 @@
   <div>
     <div class="container">
       <h2>使用方法</h2>
-      <p style="line-height: 50px;">直接通过设置类名为 el-icon-lx-iconName 来使用即可。例如：（共{{iconList.length}}个图标）</p>
-      <p class="example-p">
-        <i class="el-icon-lx-redpacket_fill" style="font-size: 30px;color: #ff5900"></i>
-        <span>&lt;i class=&quot;el-icon-lx-redpacket_fill&quot;&gt;&lt;/i&gt;</span>
-      </p>
-      <p class="example-p">
-        <i class="el-icon-lx-weibo" style="font-size: 30px;color:#fd5656"></i>
-        <span>&lt;i class=&quot;el-icon-lx-weibo&quot;&gt;&lt;/i&gt;</span>
-      </p>
-      <p class="example-p">
-        <i class="el-icon-lx-emojifill" style="font-size: 30px;color: #ffc300"></i>
-        <span>&lt;i class=&quot;el-icon-lx-emojifill&quot;&gt;&lt;/i&gt;</span>
-      </p>
-      <br>
+      <p style="line-height: 50px;">直接通过设置类名为 el-icon-iconName 来使用即可。例如：（共{{iconList.length}}个图标）</p>
       <h2>图标</h2>
       <div class="search-box">
         <el-input class="search" size="large" v-model="keyword" clearable placeholder="请输入图标名称"></el-input>
