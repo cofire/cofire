@@ -39,7 +39,8 @@ exports.default = {
       'confirm': '确认',
       'selectFile': '选择文件',
       "roleSet": '角色设置', 
-      'confirmRestPassWord': '密码重置'
+      'confirmRestPassWord': '密码重置',
+      'export': '导出',
     },
 
     label: {

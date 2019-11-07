@@ -1,10 +1,14 @@
 package com.cofire.console.service.sytem.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -14,10 +18,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
+import com.cofire.common.utils.file.EasyExcelUtils;
 import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.DESCrypto;
 import com.cofire.common.utils.security.MD5Crypto;
@@ -33,6 +39,7 @@ import com.cofire.dao.model.system.SysUser;
 import com.cofire.dao.model.system.SysUserExample;
 import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
+import com.cofire.dao.rowModel.SysUserRowModel;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -342,5 +349,39 @@ public class UserServiceImpl implements IUserService {
             result.setSuccess(false, CodeEnum.E_500);
         }
         return result;
+    }
+
+    @Override
+    public void exportExcel(SysUser user, HttpServletResponse response) {
+        logger.info("正在查询用户信息");
+        SysUserExample userExample = new SysUserExample();
+        SysUserExample.Criteria criteria = userExample.createCriteria();
+        if (null != user) {
+            logger.info("查询条件为" + user);
+            if (StringUtils.isNotEmpty(user.getUserId())) {
+                criteria.andUserIdLike("%" + user.getUserId() + "%");
+            }
+            if (StringUtils.isNotEmpty(user.getUserName())) {
+                criteria.andUserNameLike("%" + user.getUserName() + "%");
+            }
+        }
+
+        userExample.setDatabaseId(Constants.MYSQL);
+        userExample.setOrderByClause("user_id DESC");
+        try {
+            // 获取数据集
+            List<SysUser> userList = userMapper.selectPageByExample(userExample);
+            List<SysUserRowModel> dataList = new ArrayList<SysUserRowModel>();
+            for (SysUser sysUser : userList) {
+                SysUserRowModel userRowModel = new SysUserRowModel();
+                BeanUtils.copyProperties(userRowModel, sysUser);
+                dataList.add(userRowModel);
+            }
+            // EasyExcelUtils.createExcelStream(response, dataList, ExcelTypeEnum.XLS, "test");
+            EasyExcelUtils.createExcelStream(response, SysUserRowModel.class, dataList, ExcelTypeEnum.XLS, "test", "test1");
+        } catch (Exception e) {
+            logger.error("查询用户信息失败");
+        }
+        logger.info("查询用户信息完成");
     }
 }

@@ -1,8 +1,7 @@
-import { baseUrl } from './env'
-
+import Vue from 'vue'
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
     type = type.toUpperCase();
-    url = baseUrl + url;
+    url =  Vue.prototype.GLOBAL.baseUrl + url;
     let dataStr = ''; //数据拼接字符串
     Object.keys(data).forEach(key => {
         if(data[key] !== undefined && data[key] !== null && data[key] !== ""){

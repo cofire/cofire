@@ -6,7 +6,6 @@
     </div>
 </template>
 <script>
-import {baseImgPath} from '@/config/env.js'
 export default {
     name: 'Printer',
     data() {
@@ -15,15 +14,7 @@ export default {
         }
     },
     computed:{
-        common(){
-        return JSON.parse(localStorage.getItem('common'));
-        },
-        logoUrl(){
-        return baseImgPath + "?path=" + encodeURIComponent(this.common.logo)
-        },
-        avatorUrl(){
-        return baseImgPath + "?path=" + encodeURIComponent(this.common.avator)
-        }
+      
     },
 }
 </script>

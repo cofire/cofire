@@ -43,6 +43,11 @@
       >{{$t('common.button.confirmRestPassWord')}}</el-button>
       <el-button
         type="primary"
+        icon="el-icon-bottom"
+        @click="exportUser()"
+      >{{$t('common.button.export')}}</el-button>
+      <el-button
+        type="primary"
         icon="el-icon-lx-refresh"
         @click="resetForm($refs['queryForm'])"
       >{{$t('common.button.reset')}}</el-button>
@@ -181,7 +186,8 @@ import {
   queryUserRoleList,
   saveUserRole,
   restPassWord,
-  deleteUser
+  deleteUser,
+  exportUser
 } from "../../../api/getData";
 import { Rules } from "../../rules/Rules";
 
@@ -412,6 +418,9 @@ export default {
         .catch(() => {
           this.$message.info(this.$t("user.message.cancelDeletePrompt"));
         });
+    },
+    exportUser() {
+      exportUser(this.queryUser);
     }
   },
   mounted() {

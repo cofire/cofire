@@ -1,5 +1,7 @@
 package com.cofire.console.controller.system;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,5 +64,11 @@ public class UserController extends SystemBaseController {
     @RequestMapping(value = "/user/changePassWord", method = { RequestMethod.POST })
     public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
         return userService.changePassWord(currentPassWord, newPassWord, confirmNewPassWord);
+    }
+
+    @BussinessLog("导出用户信息")
+    @RequestMapping(value = "/user/exportExcel")
+    public void exportExcel(SysUser user, HttpServletResponse response) {
+        userService.exportExcel(user, response);
     }
 }

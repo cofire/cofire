@@ -149,11 +149,11 @@ export default {
     /**table中数据字典格式化---暂时不用 */
     Vue.prototype.formateTableDict = function (row, column) {
       var groupCode = "";
-      if(!Vue.prototype.isBlank(this.className)){
-        var classlist  = this.className.split(" ");
-        if(!Vue.prototype.isBlank(classlist[0])){
+      if (!Vue.prototype.isBlank(this.className)) {
+        var classlist = this.className.split(" ");
+        if (!Vue.prototype.isBlank(classlist[0])) {
           var dictCodeList = classlist[0].split("-");
-          if(dictCodeList.length == 2){
+          if (dictCodeList.length == 2) {
             groupCode = dictCodeList[1];
           }
         }

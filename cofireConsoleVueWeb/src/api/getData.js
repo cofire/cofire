@@ -1,4 +1,5 @@
-import fetch from '@/config/fetch'
+import fetch from '../config/fetch'
+import downloadFile from '../config/downloadFile'
 
 /** 注意添加注释 */
 /** 公共接口 */
@@ -22,6 +23,8 @@ export const restPassWord = data => fetch('/console/user/restPassWord', data, 'P
 export const saveUserRole = data => fetch('/console/user/saveUserRole', data, 'POST');
 /**修改密码 */
 export const changePassWord = data => fetch('/console/user/changePassWord', data, 'POST');
+/**导出用户信息 */
+export const exportUser = data => downloadFile('/console/user/exportExcel', data);
 
 /** 角色管理 */
 /** 获取角色列表 */

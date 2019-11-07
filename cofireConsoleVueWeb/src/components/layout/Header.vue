@@ -87,9 +87,8 @@
 </template>
 <script>
 import bus from "../common/bus";
-import { loginOut } from "@/api/getData";
+import { loginOut } from "../../api/getData";
 import { changePassWord } from "../../api/getData";
-import { baseImgPath } from "@/config/env.js";
 import { CurrentUserStore } from "../store/common/CurrentUserStore";
 import { Rules } from "../rules/Rules";
 import { encrypt } from "../common/3des";

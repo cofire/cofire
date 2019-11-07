@@ -3,6 +3,8 @@ package com.cofire.console.service.sytem;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.dao.model.system.SysUser;
@@ -23,4 +25,6 @@ public interface IUserService {
     Result restPassWord(String userId);
 
     Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord);
+
+    void exportExcel(SysUser user, HttpServletResponse response);
 }

@@ -36,4 +36,18 @@ public class ErrorController {
         return result;
     }
 
+    /**
+     * 
+     * @Title: exportError
+     * @author ly
+     * @Description:文件导出异常
+     * @param @return 参数
+     * @return Result 返回类型
+     */
+    @RequestMapping("/exportError")
+    public Result exportError() {
+        Result result = new Result(false, CodeEnum.E_500);
+        return result;
+    }
+
 }
