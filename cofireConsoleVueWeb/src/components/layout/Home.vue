@@ -8,7 +8,7 @@
                 <el-row class="crumbs" v-if="pathNavFull.length > 0">
                     <el-breadcrumb separator="/">
                         <el-breadcrumb-item>
-                            <i class="el-icon-lx-calendar"></i>
+                            <i class="el-icon-date"></i>
                             {{ $t('common.route.' + parentPath.id) }}
                         </el-breadcrumb-item>
                         <el-breadcrumb-item

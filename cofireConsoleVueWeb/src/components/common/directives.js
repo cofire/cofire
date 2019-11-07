@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 // v-dialogDrag: 弹窗拖拽属性
+// 使用方法在dialog上添加 v-dialogDrag
 Vue.directive('dialogDrag', {
     bind(el, binding, vnode, oldVnode) {
         const dialogHeaderEl = el.querySelector('.el-dialog__header');
@@ -77,4 +78,19 @@ Vue.directive('dialogDrag', {
             };
         }
     }
-})
+});
+
+// 防重复点击(指令实现)
+// 使用方法 在button上添加 v-preventReClick
+Vue.directive('preventReClick', {
+    inserted(el, binding) {
+      el.addEventListener('click', () => {
+        if (!el.disabled) {
+          el.disabled = true
+          setTimeout(() => {
+            el.disabled = false
+          }, binding.value || 1500)
+        }
+      })
+    }
+  });

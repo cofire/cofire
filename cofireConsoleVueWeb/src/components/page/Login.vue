@@ -18,7 +18,7 @@
         <el-form-item prop="userId">
           <el-input
             v-model="loginForm.userId"
-            prefix-icon="el-icon-lx-people"
+            prefix-icon="el-icon-user"
             :placeholder="$t('login.userId')"
           ></el-input>
         </el-form-item>
@@ -28,7 +28,7 @@
             :placeholder="$t('login.passWord')"
             v-model="loginForm.passWord"
             @keyup.enter.native="submitForm('loginForm')"
-            prefix-icon="el-icon-lx-lock"
+            prefix-icon="el-icon-lock"
           ></el-input>
         </el-form-item>
         <div class="lang">

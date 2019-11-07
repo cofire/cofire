@@ -1,10 +1,10 @@
 import {
   CurrentUserStore
-} from "./components/store/common/CurrentUserStore";
-import GlobalData from "./components/common/GlobalData"
-import TableModel from "./components/model/common/TableModel"
-import DialogModel from "./components/model/common/DialogModel"
-import LoadingModel from './components/model/common/LoadingModel';
+} from "../store/common/CurrentUserStore";
+import GlobalData from "./GlobalData"
+import TableModel from "../model/common/TableModel"
+import DialogModel from "../model/common/DialogModel"
+import LoadingModel from '../model/common/LoadingModel';
 
 
 export default {
@@ -13,19 +13,6 @@ export default {
     Vue.prototype.TableModel = TableModel;
     Vue.prototype.DialogModel = DialogModel;
     Vue.prototype.LoadingModel = LoadingModel;
-    // 防重复点击(指令实现)
-    Vue.directive('preventReClick', {
-      inserted(el, binding) {
-        el.addEventListener('click', () => {
-          if (!el.disabled) {
-            el.disabled = true
-            setTimeout(() => {
-              el.disabled = false
-            }, binding.value || 1500)
-          }
-        })
-      }
-    });
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')
