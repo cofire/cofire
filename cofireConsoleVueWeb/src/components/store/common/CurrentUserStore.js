@@ -53,6 +53,7 @@ const CurrentUserStore = new Vuex.Store({
         state.menuList = [];
         state.user = new SysUserModel();
         state.dictList = [];
+        state.tagList = [];
         state.lang = 'cn';
       }
   },

@@ -89,6 +89,7 @@ export default {
               getUserDetail(new BaseModel()).then(re => {
                 if (re.success || re.success == "true") {
                   CurrentUserStore.dispatch("set", re.data);
+                  CurrentUserStore.dispatch("clearTagList")
                   console.log("加载菜单成功");
                 } else {
                   console.log("加载菜单失败");

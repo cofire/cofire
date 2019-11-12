@@ -11,14 +11,20 @@ import "babel-polyfill";
 import i18n from './i18n/i18n';
 import BaseUtil from './components/common/BaseUtil'
 
-import {getUserDetail} from '@/api/getData'
-import {CurrentUserStore} from './components/store/common/CurrentUserStore';
-import {BaseModel} from './components/model/common/BaseModel'
+import {
+  getUserDetail
+} from '@/api/getData'
+import {
+  CurrentUserStore
+} from './components/store/common/CurrentUserStore';
+import {
+  BaseModel
+} from './components/model/common/BaseModel'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
-    size: 'small',
-    i18n: (key, value) => i18n.t(key, value)
+  size: 'small',
+  i18n: (key, value) => i18n.t(key, value)
 });
 
 Vue.use(BaseUtil);
@@ -28,27 +34,27 @@ axios.defaults.withCredentials = true
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-    const userId = CurrentUserStore.state.user.userId;
-    if(to.path !== '/login' && Vue.prototype.isBlank(userId)){
-        getUserDetail(new BaseModel()).then((re) => {
-            if (re.success || re.success == "true") {
-                CurrentUserStore.dispatch("set", re.data);
-                console.log("加载菜单成功");
-                next();
-            }else{
-                console.log("加载菜单失败"); 
-                CurrentUserStore.dispatch("clear");
-                next('/login');
-            }
-        });
-    } else {
+  const userId = CurrentUserStore.state.user.userId;
+  if (to.path !== '/login' && Vue.prototype.isNotBlank(userId)) {
+    getUserDetail(new BaseModel()).then((re) => {
+      if (re.success || re.success == "true") {
+        CurrentUserStore.dispatch("set", re.data);
+        console.log("加载菜单成功");
         next();
-    }
-    
+      } else {
+        console.log("加载菜单失败");
+        CurrentUserStore.dispatch("clear");
+        next('/login');
+      }
+    });
+  } else {
+    next();
+  }
+
 })
 
 new Vue({
-    router,
-    i18n,
-    render: h => h(App)
+  router,
+  i18n,
+  render: h => h(App)
 }).$mount('#app')
