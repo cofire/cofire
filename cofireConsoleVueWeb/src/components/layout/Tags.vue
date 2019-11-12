@@ -43,6 +43,8 @@
 
 <script>
 import bus from "../common/bus";
+import { CurrentUserStore } from "../store/common/CurrentUserStore";
+
 export default {
   data() {
     return {
@@ -68,11 +70,13 @@ export default {
       } else {
         this.$router.push(this.homeItem.path);
       }
+      CurrentUserStore.dispatch("setTagList", this.tagsList);
     },
     // 关闭全部标签
     closeAll() {
       this.tagsList = [];
       this.$router.push(this.homeItem.path);
+      CurrentUserStore.dispatch("clearTagList");
     },
     // 关闭其他标签
     closeOther() {
@@ -80,9 +84,13 @@ export default {
         return item.path === this.$route.fullPath;
       });
       this.tagsList = curItem;
+      CurrentUserStore.dispatch("setTagList", this.tagsList);
     },
     // 设置标签
     setTags(route) {
+      if(this.isNotBlank(CurrentUserStore.state.tagList)){
+        this.tagsList = CurrentUserStore.state.tagList;
+      }
       const isExist = this.tagsList.some(item => {
         return item.path === route.fullPath;
       });
@@ -95,6 +103,7 @@ export default {
           path: route.fullPath,
           name: route.matched[1].components.default.name
         });
+        CurrentUserStore.dispatch("setTagList", this.tagsList);
       }
       bus.$emit("tags", this.tagsList);
     },
@@ -130,6 +139,7 @@ export default {
           this.tagsList.splice(i, 1);
         }
       }
+      CurrentUserStore.dispatch("setTagList", this.tagsList);
     });
   }
 };

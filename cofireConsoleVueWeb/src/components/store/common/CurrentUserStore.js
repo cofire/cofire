@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { SysUserModel } from "../../model/system/SysUserModel";
+import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
 const CurrentUserStore = new Vuex.Store({
+  plugins: [createPersistedState({
+            storage:window.sessionStorage
+        })],
   // 全局变量
   state: {
       user: new SysUserModel(),
       menuList: [],
       dictList: [],
+      tagList:[],
       lang: 'cn'
   },
   // 修改全局变量必须通过mutations中的方法
@@ -26,6 +31,12 @@ const CurrentUserStore = new Vuex.Store({
       },
       clearUser(state) {
           state.user = new SysUserModel();
+      },
+      setTagList(state, data) {
+        state.tagList = data;
+      },
+      clearTagList(state) {
+          state.tagList = [];
       },
       setLang (state, data) {
         state.lang = data;
@@ -51,14 +62,20 @@ const CurrentUserStore = new Vuex.Store({
       setMenuList (context, data) {
           context.commit('setMenuList', data)
       },
-      setUser (context, data) {
-          context.commit('setUser', data)
-      },
       clearMenuList (context) {
           context.commit('clearMenuList')
       },
+      setUser (context, data) {
+          context.commit('setUser', data)
+      },
       clearUser (context) {
         context.commit('clearUser')
+      },
+      setTagList (context, data) {
+        context.commit('setTagList', data)
+      },
+      clearTagList (context) {
+          context.commit('clearTagList')
       },
       setLang (context, data) {
         context.commit('setLang', data)
