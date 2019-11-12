@@ -25,12 +25,14 @@ public class LogTaskFactory {
     private static SysOperateAuditMapper operationLogMapper = SpringContextUtils.getBean(SysOperateAuditMapper.class);
     private static SysLoginAuditMapper loginAuditsMapper = SpringContextUtils.getBean(SysLoginAuditMapper.class);
 
-    public static TimerTask bussinessLog(String ip, String sessionId, String reqUrl, String userId, String description, String requestdPara) {
+    public static TimerTask bussinessLog(String ip, String sessionId, String reqUrl, String userId, String description, String parameter, String sourceType,
+            String operationType) {
         return new TimerTask() {
             @Override
             public void run() {
                 try {
-                    SysOperateAudit operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqUrl, userId, description, requestdPara);
+                    SysOperateAudit operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqUrl, userId, description, parameter, sourceType,
+                            operationType);
                     operationLogMapper.insert(operateAudit);
                 } catch (Exception e) {
                     logger.error("创建业务日志异常!", e);

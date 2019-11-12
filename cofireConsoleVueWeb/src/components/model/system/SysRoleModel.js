@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysRoleModel extends CommonModel {
+export class SysRoleModel extends BaseModel {
   /** 角色id (主健ID) (无默认值) */
   roleId = '';
 

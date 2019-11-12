@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class QtzJobLogModel extends CommonModel {
+export class QtzJobLogModel extends BaseModel {
 	/** 自增id (主健ID) (无默认值) */
   sid = '';
 

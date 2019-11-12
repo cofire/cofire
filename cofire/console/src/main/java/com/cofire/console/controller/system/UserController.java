@@ -16,20 +16,20 @@ import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.model.system.SysUser;
 
 @RestController
+@RequestMapping(value = "/console/user")
 public class UserController extends SystemBaseController {
-    // private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private IUserService userService;
 
     @BussinessLog("查询用户信息")
-    @RequestMapping(value = "/user/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = { RequestMethod.POST })
     public Result queryRole(ParamItem paramItem, SysUser user) {
         return userService.query(paramItem, user);
     }
 
     @BussinessLog("保存用户信息")
-    @RequestMapping(value = "/user/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
     public Result saveUser(String operation, SysUser user) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -43,31 +43,31 @@ public class UserController extends SystemBaseController {
     }
 
     @BussinessLog("删除用户信息")
-    @RequestMapping(value = "/user/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
     public Result deleteUser(String userId) {
         return userService.delete(userId);
     }
 
     @BussinessLog("用户角色设置")
-    @RequestMapping(value = "/user/saveUserRole", method = { RequestMethod.POST })
+    @RequestMapping(value = "/saveUserRole", method = { RequestMethod.POST })
     public Result saveUserRole(String userId, String roleIds) {
         return userService.saveUserRole(userId, roleIds);
     }
 
     @BussinessLog("用户重置密码")
-    @RequestMapping(value = "/user/restPassWord", method = { RequestMethod.POST })
+    @RequestMapping(value = "/restPassWord", method = { RequestMethod.POST })
     public Result restPassWord(String userId) {
         return userService.restPassWord(userId);
     }
 
     @BussinessLog("用户修改密码")
-    @RequestMapping(value = "/user/changePassWord", method = { RequestMethod.POST })
+    @RequestMapping(value = "/changePassWord", method = { RequestMethod.POST })
     public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
         return userService.changePassWord(currentPassWord, newPassWord, confirmNewPassWord);
     }
 
     @BussinessLog("导出用户信息")
-    @RequestMapping(value = "/user/exportExcel")
+    @RequestMapping(value = "/exportExcel")
     public void exportExcel(SysUser user, HttpServletResponse response) {
         userService.exportExcel(user, response);
     }

@@ -302,6 +302,8 @@ exports.default = {
       'requestTime': '请求发生时间',
       'result': '返回结果',
       'returnTime': '接口调用返回时间',
+      'sourceType': '来源类型',
+      'operationType': '操作类型',
       'filler1': '预留字段1',
       'filler2': '预留字段2',
       'filler3': '预留字段3'

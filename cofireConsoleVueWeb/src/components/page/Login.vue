@@ -54,6 +54,7 @@ import { login, getUserDetail } from "../../api/getData";
 import { encrypt } from "../common/3des";
 import { Rules } from "../rules/Rules";
 import { CurrentUserStore } from "../store/common/CurrentUserStore";
+import {BaseModel} from "../model/common/BaseModel";
 
 export default {
   inject: ["reload"],
@@ -81,10 +82,11 @@ export default {
           login({
             userId: this.loginForm.userId,
             passWord: encrypt(this.loginForm.userId, this.loginForm.passWord),
-            filler1: "console"
+            sourceType: "pc",
+            operation: "login",
           }).then(res => {
             if (res.success || res.success == "true") {
-              getUserDetail().then(re => {
+              getUserDetail(new BaseModel()).then(re => {
                 if (re.success || re.success == "true") {
                   CurrentUserStore.dispatch("set", re.data);
                   console.log("加载菜单成功");

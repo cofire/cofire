@@ -1,16 +1,16 @@
 package com.cofire.console.service.sytem;
 
 import com.cofire.common.result.Result;
-import com.cofire.dao.model.system.SysUser;
 
 public interface ILoginService {
     /**
      * 登录表单提交
      */
-    Result authLogin(SysUser user);
+    Result authLogin(String userId, String passWord, String sourceType, String operation);
 
     /**
      * 退出登录
      */
-    Result logout();
+    Result logout(String sourceType, String operation);
+
 }

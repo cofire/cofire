@@ -12,13 +12,14 @@ import com.cofire.console.service.sytem.IOperateAuditService;
 import com.cofire.dao.model.system.SysOperateAudit;
 
 @RestController
+@RequestMapping(value = "/console/operateAudit")
 public class OperateAuditController extends SystemBaseController {
 
     @Autowired
     private IOperateAuditService operateAuditService;
 
     @BussinessLog("查询操作日志")
-    @RequestMapping(value = "/operateAudit/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = { RequestMethod.POST })
     public Result queryOperateAudit(ParamItem operateAuditItem, SysOperateAudit operateAudit) {
         return operateAuditService.query(operateAuditItem, operateAudit);
     }

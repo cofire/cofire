@@ -14,19 +14,20 @@ import com.cofire.console.service.sytem.IParamService;
 import com.cofire.dao.model.system.SysParam;
 
 @RestController
+@RequestMapping(value = "/console/param")
 public class ParamController extends SystemBaseController {
 
     @Autowired
     private IParamService paramService;
 
     @BussinessLog("查询系统参数信息")
-    @RequestMapping(value = "/param/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = { RequestMethod.POST })
     public Result queryParam(ParamItem paramItem, SysParam param) {
         return paramService.query(paramItem, param);
     }
 
     @BussinessLog("保存系统参数信息")
-    @RequestMapping(value = "/param/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
     public Result saveParam(String operation, SysParam param) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -40,7 +41,7 @@ public class ParamController extends SystemBaseController {
     }
 
     @BussinessLog("删除系统参数信息")
-    @RequestMapping(value = "/param/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
     public Result deleteParam(SysParam param) {
         return paramService.delete(param);
     }

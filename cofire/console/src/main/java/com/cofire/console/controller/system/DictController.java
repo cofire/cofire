@@ -14,19 +14,20 @@ import com.cofire.console.service.sytem.IDictService;
 import com.cofire.dao.model.system.SysDict;
 
 @RestController
+@RequestMapping(value = "/console/dict")
 public class DictController extends SystemBaseController {
 
     @Autowired
     private IDictService dictService;
 
     @BussinessLog("查询数据字典信息")
-    @RequestMapping(value = "/dict/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = { RequestMethod.POST })
     public Result queryDict(ParamItem paramItem, SysDict dict) {
         return dictService.query(paramItem, dict);
     }
 
     @BussinessLog("保存数据字典信息")
-    @RequestMapping(value = "/dict/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
     public Result saveDict(String operation, SysDict dict) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -40,7 +41,7 @@ public class DictController extends SystemBaseController {
     }
 
     @BussinessLog("删除数据字典信息")
-    @RequestMapping(value = "/dict/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
     public Result deleteDict(SysDict dict) {
         return dictService.delete(dict);
     }

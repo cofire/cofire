@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysDictModel extends CommonModel {
+export class SysDictModel extends BaseModel {
   /** 组号 (主健ID)(必填项) (无默认值) */
   groupId = '';
 

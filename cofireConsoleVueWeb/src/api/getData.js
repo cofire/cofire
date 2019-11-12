@@ -6,9 +6,9 @@ import downloadFile from '../config/downloadFile'
 /** 登录 */
 export const login = data => fetch('/console/login', data, 'POST');
 /** 登出 */
-export const loginOut = () => fetch('/console/loginOut', {}, 'POST');
+export const loginOut = data => fetch('/console/loginOut', data, 'POST');
 /** 获取用户信息 */
-export const getUserDetail = () => fetch('/getUserDetail', {}, 'POST');
+export const getUserDetail = data => fetch('/getUserDetail', data, 'POST');
 
 /** 用户管理 */
 /** 获取用户列表 */

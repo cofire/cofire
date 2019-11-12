@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysUserModel extends CommonModel {
+export class SysUserModel extends BaseModel {
   /** 用户名-即用户登录时使用的名称(必填项) (无默认值) */
   userId = '';
 

@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysReturnCodeModel extends CommonModel {
+export class SysReturnCodeModel extends BaseModel {
   /** 返回码 (主健ID) (无默认值) */
   code = '';
 

@@ -73,20 +73,23 @@ public class LogAop {
         // 获取请求的类名
         String className = point.getTarget().getClass().getName();
         // 获取请求参数
-        Map<String, String> obj2 = HttpContext.getRequestParameters();
+        Map<String, String> parameter = HttpContext.getRequestParameters();
         BussinessLog annotation = currentMethod.getAnnotation(BussinessLog.class);
         String bussinessName = annotation.value();
-        logger.info("接口说明：" + bussinessName);
-        logger.info("接口参数：" + obj2.toString());
         // 获取请求ip
         String ip = HttpContext.getClientIP();
         String reqURI = HttpContext.getRequestURI();
+        logger.info("接口说明：" + bussinessName);
+        logger.info("接口参数：" + parameter.toString());
         logger.info("请求用户id：" + userId);
         logger.info("请求用户Session：" + sessionId);
         logger.info("请求方法：" + className + "." + methodName);
         logger.info("请求Ip：" + ip);
         logger.info("请求URI：" + reqURI);
-        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, obj2.toString());
+        logger.info("请求类型：" + parameter.get("operation"));
+        logger.info("操作来源：" + parameter.get("source_type"));
+        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, parameter.toString(), parameter.get("source_type"),
+                parameter.get("operation"));
         aopLog.set(operateAudit);
     }
 

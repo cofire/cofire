@@ -13,6 +13,7 @@ import BaseUtil from './components/common/BaseUtil'
 
 import {getUserDetail} from '@/api/getData'
 import {CurrentUserStore} from './components/store/common/CurrentUserStore';
+import {BaseModel} from './components/model/common/BaseModel'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
@@ -29,7 +30,7 @@ axios.defaults.withCredentials = true
 router.beforeEach((to, from, next) => {
     const userId = CurrentUserStore.state.user.userId;
     if(to.path !== '/login' && Vue.prototype.isBlank(userId)){
-        getUserDetail().then((re) => {
+        getUserDetail(new BaseModel()).then((re) => {
             if (re.success || re.success == "true") {
                 CurrentUserStore.dispatch("set", re.data);
                 console.log("加载菜单成功");

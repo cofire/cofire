@@ -92,6 +92,7 @@ import { changePassWord } from "../../api/getData";
 import { CurrentUserStore } from "../store/common/CurrentUserStore";
 import { Rules } from "../rules/Rules";
 import { encrypt } from "../common/3des";
+import { BaseModel } from "../model/common/BaseModel"
 export default {
   inject: ["reload"],
   data() {
@@ -101,7 +102,6 @@ export default {
       collapse: false,
       fullscreen: false,
       name: "cofire",
-      message: 2,
       updateUserPassWord: {
         currentPassWord: "",
         newPassWord: "",
@@ -135,7 +135,7 @@ export default {
             type: "warning"
           }
         ).then(() => {
-          loginOut().then(res => {
+          loginOut(new BaseModel()).then(res => {
             if (res.success || res.success == "true") {
               this.$message({
                 type: "success",

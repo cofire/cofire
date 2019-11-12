@@ -63,6 +63,17 @@
           :label="this.$t('operateAudit.label.userId')"
           width="100"
         ></el-table-column>
+        <el-table-column
+          property="sourceType"
+          :label="this.$t('operateAudit.label.sourceType')"
+          width="100"
+        ></el-table-column>
+        <el-table-column
+          property="operationType"
+          :label="this.$t('operateAudit.label.operationType')"
+          width="100"
+          :formatter="formateTableDict" className="dict-0007"
+        ></el-table-column>
         <el-table-column property="ip" :label="this.$t('operateAudit.label.ip')" width="100"></el-table-column>
         <el-table-column
           property="description"

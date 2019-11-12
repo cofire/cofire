@@ -12,6 +12,8 @@
     <result column="request_time" jdbcType="VARCHAR" property="requestTime" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="return_time" jdbcType="VARCHAR" property="returnTime" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="operation_type" jdbcType="VARCHAR" property="operationType" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
     <result column="filler2" jdbcType="VARCHAR" property="filler2" />
     <result column="filler3" jdbcType="VARCHAR" property="filler3" />
@@ -76,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     sid, user_id, ip, session_id, description, request_url, request_param, request_time, 
-    result, return_time, filler1, filler2, filler3
+    result, return_time, source_type, operation_type, filler1, filler2, filler3
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysOperateAuditExample" resultMap="BaseResultMap">
     select
@@ -113,13 +115,15 @@
     insert into sys_operate_audit (sid, user_id, ip, 
       session_id, description, request_url, 
       request_param, request_time, result, 
-      return_time, filler1, filler2, 
-      filler3)
+      return_time, source_type, operation_type, 
+      filler1, filler2, filler3
+      )
     values (#{sid,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
       #{sessionId,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{requestUrl,jdbcType=VARCHAR}, 
       #{requestParam,jdbcType=VARCHAR}, #{requestTime,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
-      #{returnTime,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
-      #{filler3,jdbcType=VARCHAR})
+      #{returnTime,jdbcType=VARCHAR}, #{sourceType,jdbcType=VARCHAR}, #{operationType,jdbcType=VARCHAR}, 
+      #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysOperateAudit">
     insert into sys_operate_audit
@@ -153,6 +157,12 @@
       </if>
       <if test="returnTime != null">
         return_time,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="operationType != null">
+        operation_type,
       </if>
       <if test="filler1 != null">
         filler1,
@@ -194,6 +204,12 @@
       </if>
       <if test="returnTime != null">
         #{returnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null">
+        #{operationType,jdbcType=VARCHAR},
       </if>
       <if test="filler1 != null">
         #{filler1,jdbcType=VARCHAR},
@@ -245,6 +261,12 @@
       <if test="record.returnTime != null">
         return_time = #{record.returnTime,jdbcType=VARCHAR},
       </if>
+      <if test="record.sourceType != null">
+        source_type = #{record.sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationType != null">
+        operation_type = #{record.operationType,jdbcType=VARCHAR},
+      </if>
       <if test="record.filler1 != null">
         filler1 = #{record.filler1,jdbcType=VARCHAR},
       </if>
@@ -271,6 +293,8 @@
       request_time = #{record.requestTime,jdbcType=VARCHAR},
       result = #{record.result,jdbcType=VARCHAR},
       return_time = #{record.returnTime,jdbcType=VARCHAR},
+      source_type = #{record.sourceType,jdbcType=VARCHAR},
+      operation_type = #{record.operationType,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
       filler2 = #{record.filler2,jdbcType=VARCHAR},
       filler3 = #{record.filler3,jdbcType=VARCHAR}
@@ -308,6 +332,12 @@
       <if test="returnTime != null">
         return_time = #{returnTime,jdbcType=VARCHAR},
       </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null">
+        operation_type = #{operationType,jdbcType=VARCHAR},
+      </if>
       <if test="filler1 != null">
         filler1 = #{filler1,jdbcType=VARCHAR},
       </if>
@@ -331,6 +361,8 @@
       request_time = #{requestTime,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       return_time = #{returnTime,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=VARCHAR},
+      operation_type = #{operationType,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},
       filler2 = #{filler2,jdbcType=VARCHAR},
       filler3 = #{filler3,jdbcType=VARCHAR}

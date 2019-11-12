@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_operate_audit
- * @开发日期 2019-10-14
+ * @开发日期 2019-11-12
  * @开发作者 by:ly 
  */
 public class SysOperateAudit implements Serializable {
@@ -37,6 +37,12 @@ public class SysOperateAudit implements Serializable {
 
     /** 接口调用返回时间 (无默认值) */
     private String returnTime;
+
+    /** 来源类型 (无默认值) */
+    private String sourceType;
+
+    /** 操作类型 (无默认值) */
+    private String operationType;
 
     /** 预留字段1 (无默认值) */
     private String filler1;
@@ -127,6 +133,22 @@ public class SysOperateAudit implements Serializable {
 
     public void setReturnTime(String returnTime) {
         this.returnTime = returnTime == null ? null : returnTime.trim();
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType == null ? null : sourceType.trim();
+    }
+
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType == null ? null : operationType.trim();
     }
 
     public String getFiller1() {

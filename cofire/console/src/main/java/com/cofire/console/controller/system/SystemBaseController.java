@@ -1,10 +1,8 @@
 package com.cofire.console.controller.system;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
-@RestController
-@RequestMapping("/console")
+@Controller
 public class SystemBaseController {
 
 }

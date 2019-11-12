@@ -26,20 +26,17 @@ public class LoginServiceImpl implements ILoginService {
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Override
-    public Result authLogin(SysUser user) {
+    public Result authLogin(String userId, String passWord, String sourceType, String operation) {
         Result result = new Result();
-        if (user == null || StringUtils.isEmpty(user.getUserId()) || StringUtils.isEmpty(user.getPassWord())) {
+        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(passWord)) {
             result.setSuccess(false, CodeEnum.E_400);
             return result;
         }
-        String userId = user.getUserId();
-        String password = user.getPassWord();
         // 密码3des解密
-        password = DESCrypto.JS3DESEncryption(userId, password);
+        passWord = DESCrypto.JS3DESEncryption(userId, passWord);
         // // 明文密码MD5加密
         try {
-            password = MD5Crypto.encrypt(password, userId);
-            user.setPassWord(password);
+            passWord = MD5Crypto.encrypt(passWord, userId);
         } catch (Exception e) {
             logger.error("用户密码加密失败：" + e.getMessage());
             result = new Result(CodeEnum.E_400);
@@ -47,7 +44,7 @@ public class LoginServiceImpl implements ILoginService {
         }
 
         Subject currentUser = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserId(), user.getPassWord());
+        UsernamePasswordToken token = new UsernamePasswordToken(userId, passWord);
         try {
             currentUser.login(token);
             logger.info("登录成功！");
@@ -60,7 +57,7 @@ public class LoginServiceImpl implements ILoginService {
             String ip = HttpContext.getClientIP();
             Session session = SecurityUtils.getSubject().getSession();
             String sesionId = (String) session.getId();
-            LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN, userId, Constants.SOURCE_TYPE_PC));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN, userId, sourceType));
 
         } catch (Exception e) {
             logger.error("记录登录日志失败：" + e.getMessage());
@@ -70,12 +67,8 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public Result logout() {
+    public Result logout(String sourceType, String operation) {
         Result result = new Result();
-        String url = HttpContext.getRequestURI();
-        // 获取url中参数 ，PC端第二个为console,pad端第二个为ipad
-        String padOrPc = url.split("/")[1];
-        System.out.println(padOrPc + "打印url");
         try {
             Session session = SecurityUtils.getSubject().getSession();
             SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER_INFO);
@@ -85,7 +78,7 @@ public class LoginServiceImpl implements ILoginService {
                 String userId = user.getUserId();
                 String sesionId = (String) session.getId();
                 String ip = HttpContext.getClientIP();
-                LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN_OUT, userId, Constants.AUDIT_TYPE_LOGIN));
+                LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN_OUT, userId, sourceType));
             }
         } catch (Exception e) {
             logger.error("记录登录日志失败：" + e.getMessage());

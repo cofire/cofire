@@ -14,19 +14,20 @@ import com.cofire.console.service.sytem.IJobService;
 import com.cofire.dao.model.system.QtzJob;
 
 @RestController
+@RequestMapping(value = "/console/job")
 public class JobController extends SystemBaseController {
 
     @Autowired
     private IJobService jobService;
 
     @BussinessLog("查询定时任务信息")
-    @RequestMapping(value = "/job/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = { RequestMethod.POST })
     public Result queryJob(ParamItem paramItem, QtzJob job) {
         return jobService.query(paramItem, job);
     }
 
     @BussinessLog("保存定时任务信息")
-    @RequestMapping(value = "/job/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = { RequestMethod.POST })
     public Result saveJob(String operation, QtzJob job) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -40,7 +41,7 @@ public class JobController extends SystemBaseController {
     }
 
     @BussinessLog("删除定时任务信息")
-    @RequestMapping(value = "/job/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
     public Result deleteJob(QtzJob job) {
         return jobService.delete(job);
     }

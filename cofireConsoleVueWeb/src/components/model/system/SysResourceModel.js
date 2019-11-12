@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysResourceModel extends CommonModel {
+export class SysResourceModel extends BaseModel {
   /** 菜单id (主健ID) (无默认值) */
   resourceId = '';
 

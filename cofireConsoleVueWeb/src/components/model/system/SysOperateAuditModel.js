@@ -1,8 +1,8 @@
 import {
-  CommonModel
-} from "../common/CommonModel";
+  BaseModel
+} from "../common/BaseModel";
 
-export class SysOperateAuditModel extends CommonModel {
+export class SysOperateAuditModel extends BaseModel {
   /** 自增id (主健ID) (无默认值) */
   sid = '';
 
@@ -32,6 +32,12 @@ export class SysOperateAuditModel extends CommonModel {
 
   /** 接口调用返回时间 (无默认值) */
   returnTime = '';
+
+  /** 来源类型 (无默认值) */
+  sourceType = '';
+
+  /** 操作类型 (无默认值) */
+  operationType = '';
 
   /** 预留字段1 (无默认值) */
   filler1 = '';

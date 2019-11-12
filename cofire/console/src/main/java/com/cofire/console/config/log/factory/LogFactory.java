@@ -15,46 +15,49 @@ public class LogFactory {
      * @return
      * @return OperateAudits 返回类型
      */
-    public static SysOperateAudit createOperateAudit(String ip, String sessionId, String reqUrl, String userId, String description, String requestdPara)
-            throws Exception {
-        SysOperateAudit operateAudits = new SysOperateAudit();
-        operateAudits.setIp(ip);
-        operateAudits.setSessionId(sessionId);
-        operateAudits.setRequestUrl(reqUrl);
-        operateAudits.setUserId(userId);
+    public static SysOperateAudit createOperateAudit(String ip, String sessionId, String reqUrl, String userId, String description, String parameter,
+            String sourceType, String operationType) throws Exception {
+        SysOperateAudit operateAudit = new SysOperateAudit();
+        operateAudit.setIp(ip);
+        operateAudit.setSessionId(sessionId);
+        operateAudit.setRequestUrl(reqUrl);
+        operateAudit.setUserId(userId);
         if (description == null) {
             description = "";
         }
         if (description.length() > 1000) {
             description = description.substring(0, 1000);
         }
-        operateAudits.setDescription(description);
-        if (requestdPara == null) {
-            requestdPara = "";
+        operateAudit.setDescription(description);
+        if (parameter == null) {
+            parameter = "";
         }
-        if (requestdPara.length() > 400) {
-            requestdPara = requestdPara.substring(0, 400);
+        if (parameter.length() > 400) {
+            parameter = parameter.substring(0, 400);
         }
-        operateAudits.setRequestParam(requestdPara);
-        operateAudits.setRequestTime(DateUtils.dataTimeToNumber(new Date()));
-        operateAudits.setFiller1("");
-        operateAudits.setFiller2("");
-        operateAudits.setFiller3("");
-        return operateAudits;
+        operateAudit.setRequestParam(parameter);
+        operateAudit.setRequestTime(DateUtils.dataTimeToNumber(new Date()));
+        operateAudit.setOperationType(operationType);
+        operateAudit.setSourceType(sourceType);
+        operateAudit.setFiller1("");
+        operateAudit.setFiller2("");
+        operateAudit.setFiller3("");
+        return operateAudit;
     }
 
     public static SysLoginAudit createLoginAudit(String ip, String sessionId, String auditType, String userId, String sourceType) throws Exception {
-        SysLoginAudit loginAudits = new SysLoginAudit();
-        loginAudits.setIp(ip);
-        loginAudits.setSessionId(sessionId);
-        loginAudits.setCreateTime(DateUtils.dataTimeToNumber(new Date()));
-        loginAudits.setAuditType(auditType);
-        loginAudits.setUserId(userId);
-        loginAudits.setFiller1("");
-        loginAudits.setFiller2("");
-        loginAudits.setFiller3("");
-        loginAudits.setSourceType(sourceType);
-        loginAudits.setMessage("");
-        return loginAudits;
+        SysLoginAudit loginAudit = new SysLoginAudit();
+        loginAudit.setIp(ip);
+        loginAudit.setSessionId(sessionId);
+        loginAudit.setCreateTime(DateUtils.dataTimeToNumber(new Date()));
+        loginAudit.setAuditType(auditType);
+        loginAudit.setSourceType(sourceType);
+        loginAudit.setUserId(userId);
+        loginAudit.setFiller1("");
+        loginAudit.setFiller2("");
+        loginAudit.setFiller3("");
+
+        loginAudit.setMessage("");
+        return loginAudit;
     }
 }
