@@ -93,6 +93,7 @@
         :visible.sync="editDialog.visible"
         :close-on-click-modal="editDialog.close_on_click_modal"
         width="30%"
+        v-dialogDrag
       >
         <el-form
           ref="editForm"
@@ -110,7 +111,7 @@
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="editDialog.visible = false">{{$t("common.button.cancel")}}</el-button>
-          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')">{{$t("common.button.save")}}</el-button>
+          <el-button v-if="editDialog.isDetail == false" type="primary" @click="save('editForm')" v-preventReClick>{{$t("common.button.save")}}</el-button>
         </span>
       </el-dialog>
     </el-row>

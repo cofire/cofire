@@ -58,7 +58,7 @@
         <el-table-column property="dictValue" :label="this.$t('dict.label.dictValue')" width="250"></el-table-column>
       =  <el-table-column property="dictNameCn" :label="this.$t('dict.label.dictNameCn')" width="200"></el-table-column>
         <el-table-column property="dictNameEn" :label="this.$t('dict.label.dictNameEn')" width="200"></el-table-column>
-        <el-table-column property="modifyUser" :label="this.$t('dict.label.modifier')" width="200"></el-table-column>
+        <el-table-column property="modifier" :label="this.$t('dict.label.modifier')" width="200"></el-table-column>
         <el-table-column
           property="modifyTime"
           :label="this.$t('dict.label.modifyTime')"
@@ -237,10 +237,11 @@ export default {
             this.currentRow,
             this.deleteDictModel
           );
+          this.deleteDictModel.operation = this.GLOBAL.operation.delete;
           deleteDict(this.deleteDictModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));
-              this.query();
+              this.query("delete");
             } else {
               this.$message.error(this.$t("code." + res.code));
             }

@@ -6,7 +6,6 @@ import TableModel from "../model/common/TableModel"
 import DialogModel from "../model/common/DialogModel"
 import LoadingModel from '../model/common/LoadingModel';
 
-
 export default {
   install(Vue) {
     Vue.prototype.GLOBAL = GlobalData;
@@ -134,7 +133,6 @@ export default {
       return value;
     }
 
-    /**table中数据字典格式化---暂时不用 */
     Vue.prototype.formateTableDict = function (row, column) {
       var groupCode = "";
       if (!Vue.prototype.isBlank(this.className)) {

@@ -53,7 +53,7 @@ const en = {
 
     label: {
       'selectLang': '选择语言',
-      'platformTitle': 'I SECURITY',
+      'platformTitle': 'cofire',
       'tags': '标签选项',
       'closeOther': '关闭其他',
       'closeAll': '关闭所有',
