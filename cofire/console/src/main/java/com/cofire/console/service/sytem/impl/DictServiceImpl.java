@@ -54,8 +54,11 @@ public class DictServiceImpl implements IDictService {
             if (StringUtils.isNotEmpty(dict.getDictValue())) {
                 criteria.andDictValueLike("%" + dict.getDictValue() + "%");
             }
-            if (StringUtils.isNotEmpty(dict.getDictName())) {
-                criteria.andDictNameLike("%" + dict.getDictName() + "%");
+            if (StringUtils.isNotEmpty(dict.getDictNameCn())) {
+                criteria.andDictNameCnLike("%" + dict.getDictNameCn() + "%");
+            }
+            if (StringUtils.isNotEmpty(dict.getDictNameEn())) {
+                criteria.andDictNameEnLike("%" + dict.getDictNameEn() + "%");
             }
         }
         Long count = 0L;

@@ -13,7 +13,7 @@
             <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
               <i class="el-icon-rank"></i>
             </el-tooltip>
-          </div> -->
+          </div>-->
           <div class="lang">
             <label class="lang-label">{{this.$t('common.label.selectLang')}}：</label>
             <el-radio-group v-model="lang" @change="langChangeHandler">
@@ -92,7 +92,7 @@ import { changePassWord } from "../../api/getData";
 import { CurrentUserStore } from "../store/common/CurrentUserStore";
 import { Rules } from "../rules/Rules";
 import { encrypt } from "../common/3des";
-import { BaseModel } from "../model/common/BaseModel"
+import { BaseModel } from "../model/common/BaseModel";
 export default {
   inject: ["reload"],
   data() {
@@ -118,8 +118,9 @@ export default {
   },
   methods: {
     langChangeHandler(val) {
-      localStorage.setItem("lang", val);
       this.$i18n.locale = val;
+      CurrentUserStore.dispatch("setLang", val);
+      this.setSelectOption();
       this.reload();
     },
     // 用户名下拉菜单选择事件

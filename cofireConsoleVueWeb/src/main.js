@@ -35,7 +35,7 @@ axios.defaults.withCredentials = true
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
   const userId = CurrentUserStore.state.user.userId;
-  if (to.path !== '/login' && Vue.prototype.isNotBlank(userId)) {
+  if (to.path !== '/login' && Vue.prototype.isBlank(userId)) {
     getUserDetail(new BaseModel()).then((re) => {
       if (re.success || re.success == "true") {
         CurrentUserStore.dispatch("set", re.data);

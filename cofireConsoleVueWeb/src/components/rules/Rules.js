@@ -115,9 +115,14 @@ export const Rules = {
       message: i18n.t('dict.rule.groupName'),
       trigger: 'blur'
     }],
-    dictName: [{
+    dictNameCn: [{
       required: true,
-      message: i18n.t('dict.rule.dictName'),
+      message: i18n.t('dict.rule.dictNameCn'),
+      trigger: 'blur'
+    }],
+    dictNameEn: [{
+      required: true,
+      message: i18n.t('dict.rule.dictNameEn'),
       trigger: 'blur'
     }]
   },

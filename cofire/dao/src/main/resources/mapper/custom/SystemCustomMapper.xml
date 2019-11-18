@@ -19,15 +19,10 @@
 		SELECT
 			concat(group_id, '|', dict_value) AS pk_id,
 			group_id,
-			CASE
-		WHEN dict_value IS NOT NULL THEN
-			concat(dict_value, '-', dict_name)
-		ELSE
-			dict_name
-		END dict_name,
-		 dict_value,
-		 dict_name AS ori_dict_name,
-		 group_name
+			dict_value,
+			dict_name_cn,
+			dict_name_en,
+			group_name
 		FROM
 			sys_dict
 	</select>

@@ -132,7 +132,8 @@ exports.default = {
       'groupId': '组号',
       'dictValue': '数据字典值',
       'groupName': '组名',
-      'dictName': '数据字典名称',
+      'dictNameCn': '数据字典中文名称',
+      'dictNameEn': '数据字典英文名称',
       'modifyTime': '最后修改时间',
       'modifier': '最后修改人',
       'filler1': '预留字段1',
@@ -144,8 +145,8 @@ exports.default = {
       'groupId': '组号不能为空',
       'dictValue': '数据字典值不能为空',
       'groupName': '组名不能为空',
-      'dictName': '数据字典名称不能为空',
-      
+      'dictNameCn': '数据字典中文名称不能为空',
+      'dictNameEn': '数据字典英文名称不能为空',
     },
     title: {
       'add': '数据字典新增',

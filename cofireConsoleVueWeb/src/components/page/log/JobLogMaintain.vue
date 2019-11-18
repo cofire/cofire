@@ -19,9 +19,9 @@
           <el-select v-model="queryJobLog.isSuccess" clearable>
             <el-option
               v-for="item in this.isSuccessDict"
-              :key="item.dict_value"
-              :label="item.dict_name"
-              :value="item.dict_value"
+              :key="item[GLOBAL.selectOption.key]"
+              :label="item[GLOBAL.selectOption.label]"
+              :value="item[GLOBAL.selectOption.value]"
             ></el-option>
           </el-select>
         </el-form-item>

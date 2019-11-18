@@ -27,9 +27,9 @@
           <el-select v-model="queryLoginAudit.auditType" clearable>
             <el-option
               v-for="item in this.auditTypeDict"
-              :key="item.dict_value"
-              :label="item.dict_name"
-              :value="item.dict_value"
+              :key="item[GLOBAL.selectOption.key]"
+              :label="item[GLOBAL.selectOption.label]"
+              :value="item[GLOBAL.selectOption.value]"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -41,9 +41,9 @@
           <el-select v-model="queryLoginAudit.sourceType" clearable>
             <el-option
               v-for="item in this.sourceTypeDict"
-              :key="item.dict_value"
-              :label="item.dict_name"
-              :value="item.dict_value"
+              :key="item[GLOBAL.selectOption.key]"
+              :label="item[GLOBAL.selectOption.label]"
+              :value="item[GLOBAL.selectOption.value]"
             ></el-option>
           </el-select>
         </el-form-item>

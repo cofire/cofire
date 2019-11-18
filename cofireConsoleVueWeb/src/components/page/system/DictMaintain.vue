@@ -8,8 +8,11 @@
         <el-form-item :label="$t('dict.label.dictValue')" prop="dictValue" class="queryCondition">
           <el-input v-model="queryDict.dictValue" :placeholder="$t('dict.label.dictValue')"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('dict.label.dictName')" prop="dictName" class="queryCondition">
-          <el-input v-model="queryDict.dictName" :placeholder="$t('dict.label.dictName')"></el-input>
+        <el-form-item :label="$t('dict.label.dictNameCn')" prop="dictNameCn" class="queryCondition">
+          <el-input v-model="queryDict.dictNameCn" :placeholder="$t('dict.label.dictNameCn')"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('dict.label.dictNameEn')" prop="dictNameEn" class="queryCondition">
+          <el-input v-model="queryDict.dictNameEn" :placeholder="$t('dict.label.dictNameEn')"></el-input>
         </el-form-item>
       </el-form>
     </el-row>
@@ -53,7 +56,8 @@
         <el-table-column property="groupId" :label="this.$t('dict.label.groupId')" width="200"></el-table-column>
         <el-table-column property="groupName" :label="this.$t('dict.label.groupName')" width="200"></el-table-column>
         <el-table-column property="dictValue" :label="this.$t('dict.label.dictValue')" width="250"></el-table-column>
-        <el-table-column property="dictName" :label="this.$t('dict.label.dictName')" width="200"></el-table-column>
+      =  <el-table-column property="dictNameCn" :label="this.$t('dict.label.dictNameCn')" width="200"></el-table-column>
+        <el-table-column property="dictNameEn" :label="this.$t('dict.label.dictNameEn')" width="200"></el-table-column>
         <el-table-column property="modifyUser" :label="this.$t('dict.label.modifier')" width="200"></el-table-column>
         <el-table-column
           property="modifyTime"
@@ -84,7 +88,7 @@
           ref="editForm"
           :rules="rules"
           :model="editDict"
-          label-width="120px"
+          label-width="140px"
           :disabled="editDialog.formDisabled"
         >
           <el-form-item :label="this.$t('dict.label.groupId')" prop="groupId">
@@ -96,8 +100,11 @@
           <el-form-item :label="this.$t('dict.label.dictValue')" prop="dictValue">
             <el-input v-model="editDict.dictValue" :disabled="editDialog.disabled"></el-input>
           </el-form-item>
-          <el-form-item :label="this.$t('dict.label.dictName')" prop="dictName">
-            <el-input v-model="editDict.dictName"></el-input>
+          <el-form-item :label="this.$t('dict.label.dictNameCn')" prop="dictNameCn">
+            <el-input v-model="editDict.dictNameCn"></el-input>
+          </el-form-item>
+          <el-form-item :label="this.$t('dict.label.dictNameEn')" prop="dictNameEn">
+            <el-input v-model="editDict.dictNameEn"></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">

@@ -33,12 +33,12 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
-		<!-- <table tableName="sys_dict" domainObjectName="SysDict" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-		<table tableName="qtz_job" domainObjectName="QtzJob" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="sys_dict" domainObjectName="SysDict" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<!-- <table tableName="qtz_job" domainObjectName="QtzJob" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		<table tableName="qtz_job_log" domainObjectName="QtzJobLog" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		<table tableName="sys_login_audit" domainObjectName="SysLoginAudit" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-		 --><table tableName="sys_operate_audit" domainObjectName="SysOperateAudit" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-		<!-- <table tableName="sys_param" domainObjectName="SysParam" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="sys_operate_audit" domainObjectName="SysOperateAudit" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+		<table tableName="sys_param" domainObjectName="SysParam" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		<table tableName="sys_resource" domainObjectName="SysResource" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		<table tableName="sys_role" domainObjectName="SysRole" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
 		<table tableName="sys_role_resource" domainObjectName="SysRoleResource" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />

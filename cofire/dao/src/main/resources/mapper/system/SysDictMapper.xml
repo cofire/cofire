@@ -5,7 +5,8 @@
     <id column="group_id" jdbcType="VARCHAR" property="groupId" />
     <id column="dict_value" jdbcType="VARCHAR" property="dictValue" />
     <result column="group_name" jdbcType="VARCHAR" property="groupName" />
-    <result column="dict_name" jdbcType="VARCHAR" property="dictName" />
+    <result column="dict_name_cn" jdbcType="VARCHAR" property="dictNameCn" />
+    <result column="dict_name_en" jdbcType="VARCHAR" property="dictNameEn" />
     <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
     <result column="filler1" jdbcType="VARCHAR" property="filler1" />
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    group_id, dict_value, group_name, dict_name, modify_time, modifier, filler1, filler2, 
-    filler3, filler4
+    group_id, dict_value, group_name, dict_name_cn, dict_name_en, modify_time, modifier, 
+    filler1, filler2, filler3, filler4
   </sql>
   <select id="selectByExample" parameterType="com.cofire.dao.model.system.SysDictExample" resultMap="BaseResultMap">
     select
@@ -110,13 +111,13 @@
   </delete>
   <insert id="insert" parameterType="com.cofire.dao.model.system.SysDict">
     insert into sys_dict (group_id, dict_value, group_name, 
-      dict_name, modify_time, modifier, 
-      filler1, filler2, filler3, 
-      filler4)
+      dict_name_cn, dict_name_en, modify_time, 
+      modifier, filler1, filler2, 
+      filler3, filler4)
     values (#{groupId,jdbcType=VARCHAR}, #{dictValue,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, 
-      #{dictName,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
-      #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, #{filler3,jdbcType=VARCHAR}, 
-      #{filler4,jdbcType=VARCHAR})
+      #{dictNameCn,jdbcType=VARCHAR}, #{dictNameEn,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{filler1,jdbcType=VARCHAR}, #{filler2,jdbcType=VARCHAR}, 
+      #{filler3,jdbcType=VARCHAR}, #{filler4,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.cofire.dao.model.system.SysDict">
     insert into sys_dict
@@ -130,8 +131,11 @@
       <if test="groupName != null">
         group_name,
       </if>
-      <if test="dictName != null">
-        dict_name,
+      <if test="dictNameCn != null">
+        dict_name_cn,
+      </if>
+      <if test="dictNameEn != null">
+        dict_name_en,
       </if>
       <if test="modifyTime != null">
         modify_time,
@@ -162,8 +166,11 @@
       <if test="groupName != null">
         #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="dictName != null">
-        #{dictName,jdbcType=VARCHAR},
+      <if test="dictNameCn != null">
+        #{dictNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="dictNameEn != null">
+        #{dictNameEn,jdbcType=VARCHAR},
       </if>
       <if test="modifyTime != null">
         #{modifyTime,jdbcType=VARCHAR},
@@ -203,8 +210,11 @@
       <if test="record.groupName != null">
         group_name = #{record.groupName,jdbcType=VARCHAR},
       </if>
-      <if test="record.dictName != null">
-        dict_name = #{record.dictName,jdbcType=VARCHAR},
+      <if test="record.dictNameCn != null">
+        dict_name_cn = #{record.dictNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictNameEn != null">
+        dict_name_en = #{record.dictNameEn,jdbcType=VARCHAR},
       </if>
       <if test="record.modifyTime != null">
         modify_time = #{record.modifyTime,jdbcType=VARCHAR},
@@ -234,7 +244,8 @@
     set group_id = #{record.groupId,jdbcType=VARCHAR},
       dict_value = #{record.dictValue,jdbcType=VARCHAR},
       group_name = #{record.groupName,jdbcType=VARCHAR},
-      dict_name = #{record.dictName,jdbcType=VARCHAR},
+      dict_name_cn = #{record.dictNameCn,jdbcType=VARCHAR},
+      dict_name_en = #{record.dictNameEn,jdbcType=VARCHAR},
       modify_time = #{record.modifyTime,jdbcType=VARCHAR},
       modifier = #{record.modifier,jdbcType=VARCHAR},
       filler1 = #{record.filler1,jdbcType=VARCHAR},
@@ -251,8 +262,11 @@
       <if test="groupName != null">
         group_name = #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="dictName != null">
-        dict_name = #{dictName,jdbcType=VARCHAR},
+      <if test="dictNameCn != null">
+        dict_name_cn = #{dictNameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="dictNameEn != null">
+        dict_name_en = #{dictNameEn,jdbcType=VARCHAR},
       </if>
       <if test="modifyTime != null">
         modify_time = #{modifyTime,jdbcType=VARCHAR},
@@ -279,7 +293,8 @@
   <update id="updateByPrimaryKey" parameterType="com.cofire.dao.model.system.SysDict">
     update sys_dict
     set group_name = #{groupName,jdbcType=VARCHAR},
-      dict_name = #{dictName,jdbcType=VARCHAR},
+      dict_name_cn = #{dictNameCn,jdbcType=VARCHAR},
+      dict_name_en = #{dictNameEn,jdbcType=VARCHAR},
       modify_time = #{modifyTime,jdbcType=VARCHAR},
       modifier = #{modifier,jdbcType=VARCHAR},
       filler1 = #{filler1,jdbcType=VARCHAR},

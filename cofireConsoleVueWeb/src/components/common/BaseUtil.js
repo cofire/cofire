@@ -125,9 +125,10 @@ export default {
       if (dictList === undefined || dictList === null || !(dictList instanceof Array)) {
         return value;
       }
+      const lang = CurrentUserStore.state.lang;
       for (let index in dictList) {
         if (dictList[index].dict_value === value) {
-          return dictList[index]['dict_name'];
+          return dictList[index]['dict_name_' + lang];
         }
       }
       return value;
@@ -179,6 +180,12 @@ export default {
         return true;
       }
       return false;
+    }
+
+    /** 重新加载下拉框model */
+    Vue.prototype.setSelectOption = () => {
+      Vue.prototype.GLOBAL.selectOption.label = "dict_name_" + CurrentUserStore.state.lang;
+      return;
     }
   }
 };

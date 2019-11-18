@@ -12,9 +12,10 @@ export class SysDictModel extends BaseModel {
   /** 组名 (无默认值) */
   groupName = '';
 
-  /** 数据字典名称 (无默认值) */
-  dictName = '';
-
+  /** 数据字典中文名称 (无默认值) */
+  dictNameCn = '';
+  /** 数据字典英文名称 (无默认值) */
+  dictNameEn = '';
   /** 最后修改时间 (无默认值) */
   modifyTime = '';
 

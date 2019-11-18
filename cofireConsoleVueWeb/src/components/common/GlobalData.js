@@ -1,3 +1,7 @@
+import {
+  CurrentUserStore
+} from "../store/common/CurrentUserStore";
+
 const baseUrl = 'http://localhost:8080'; //本地运行时链接
 
 // 版本号
@@ -12,8 +16,15 @@ const operation = {
   upload: "upload"
 };
 
+const selectOption = {
+  key: "dict_value",
+  label: "dict_name_" + CurrentUserStore.state.lang,
+  value: "dict_value"
+};
+
 export default {
   baseUrl,
   version,
-  operation
+  operation,
+  selectOption
 }

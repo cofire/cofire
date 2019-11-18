@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_dict
- * @开发日期 2019-10-14
+ * @开发日期 2019-11-17
  * @开发作者 by:ly 
  */
 public class SysDict implements Serializable {
@@ -17,8 +17,11 @@ public class SysDict implements Serializable {
     /** 组名 (无默认值) */
     private String groupName;
 
-    /** 数据字典名称 (无默认值) */
-    private String dictName;
+    /** 数据字典中文名称 (无默认值) */
+    private String dictNameCn;
+
+    /** 数据字典英文名称 (无默认值) */
+    private String dictNameEn;
 
     /** 最后修改时间 (无默认值) */
     private String modifyTime;
@@ -64,12 +67,20 @@ public class SysDict implements Serializable {
         this.groupName = groupName == null ? null : groupName.trim();
     }
 
-    public String getDictName() {
-        return dictName;
+    public String getDictNameCn() {
+        return dictNameCn;
     }
 
-    public void setDictName(String dictName) {
-        this.dictName = dictName == null ? null : dictName.trim();
+    public void setDictNameCn(String dictNameCn) {
+        this.dictNameCn = dictNameCn == null ? null : dictNameCn.trim();
+    }
+
+    public String getDictNameEn() {
+        return dictNameEn;
+    }
+
+    public void setDictNameEn(String dictNameEn) {
+        this.dictNameEn = dictNameEn == null ? null : dictNameEn.trim();
     }
 
     public String getModifyTime() {

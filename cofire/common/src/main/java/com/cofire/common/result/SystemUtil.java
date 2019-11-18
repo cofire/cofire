@@ -1,6 +1,5 @@
 package com.cofire.common.result;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,12 +7,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 public class SystemUtil {
-    // 系统参数列表
-    private static List<Map<String, String>> sysParamList;
     // 系统参数Map
     private static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
-    // 数据字典列表
-    private static List<Map<String, String>> dictList = new ArrayList<Map<String, String>>();
     // 数据字典分组
     private static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
     // 数据字典
@@ -83,49 +78,22 @@ public class SystemUtil {
      * 
      * @Title: getDictName
      * @author ly
-     * @Description: 获取数据字典的名称
-     * @param @param groupCode
-     * @param @param dictVal
+     * @Description:
+     * @param @param groupCode 数据字典组号
+     * @param @param dictVal 数据字典值
+     * @param @param lang 语言类型
      * @param @return 参数
      * @return String 返回类型
      */
-    public static String getDictName(String groupCode, String dictVal) {
-        if (StringUtils.isEmpty(groupCode)) {
+    public static String getDictName(String groupCode, String dictVal, String lang) {
+        if (StringUtils.isEmpty(groupCode) || StringUtils.isEmpty(dictVal) || StringUtils.isEmpty(lang)) {
             return "";
-        }
-        if (StringUtils.isEmpty(dictVal)) {
-            dictVal = "";
         }
         String pkId = groupCode + "|" + dictVal;
         Map<String, String> dictMap = dtDictMap.get(pkId);
         if (dictMap == null || dictMap.isEmpty() || dictMap.size() <= 0) {
             return "";
         }
-        return dictMap.get("dict_name");
-    }
-
-    /**
-     * 
-     * @Title: getDictOriName
-     * @author ly
-     * @Description:获取数据字典原始名称
-     * @param @param groupCode
-     * @param @param dictVal
-     * @param @return 参数
-     * @return String 返回类型
-     */
-    public static String getDictOriName(String groupCode, String dictVal) {
-        if (StringUtils.isEmpty(groupCode)) {
-            return "";
-        }
-        if (StringUtils.isEmpty(dictVal)) {
-            dictVal = "";
-        }
-        String pkId = groupCode + "|" + dictVal;
-        Map<String, String> dictMap = dtDictMap.get(pkId);
-        if (dictMap == null || dictMap.isEmpty() || dictMap.size() <= 0) {
-            return "";
-        }
-        return dictMap.get("ori_dict_name");
+        return dictMap.get("dict_name_" + lang);
     }
 }

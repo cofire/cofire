@@ -73,6 +73,7 @@ export default {
     langChangeHandler(val) {
       this.$i18n.locale = val;
       CurrentUserStore.dispatch("setLang", val );
+      this.setSelectOption();
       this.reload();
     },
     submitForm(formName) {
