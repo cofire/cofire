@@ -30,18 +30,19 @@
         :data="resourceTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "resourceTable.border"
         v-loading="resourceTable.loading"
         :element-loading-text="resourceTable.text"
         :element-loading-spinner="resourceTable.spinner"
         :element-loading-background="resourceTable.background"
         row-key="resourceId"
-         default-expand-all
+        default-expand-all
         :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
       >
         <el-table-column type="index" :label="$t('common.label.index')" width="60"></el-table-column>
         <el-table-column property="resourceId" :label="$t('resource.label.resourceId')" sortable width="200"></el-table-column>
-        <el-table-column property="resourceName" :label="$t('resource.label.resourceName')" width="150"></el-table-column>
+        <el-table-column property="resourceName" :label="$t('resource.label.resourceName')" sortable width="150"></el-table-column>
         <el-table-column property="url" :label="$t('resource.label.url')" width="200"></el-table-column>
         <el-table-column property="parentResourceId" :label="$t('resource.label.parentResourceId')" width="150"></el-table-column>
         <el-table-column property="icon" :label="$t('resource.label.icon')" width="200"></el-table-column>
@@ -133,6 +134,9 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
+    },
+    handleSortChange(item){
+      console.log(item);
     },
     query(type) {
       if (!this.isBlank(type)) {
