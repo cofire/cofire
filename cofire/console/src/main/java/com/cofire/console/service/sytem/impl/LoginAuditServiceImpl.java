@@ -13,6 +13,7 @@ import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.console.service.sytem.ILoginAuditService;
 import com.cofire.dao.mapper.system.SysLoginAuditMapper;
 import com.cofire.dao.model.system.SysLoginAudit;
@@ -68,13 +69,20 @@ public class LoginAuditServiceImpl implements ILoginAuditService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                loginAuditExample.setDatabaseId(Constants.MYSQL);
-                loginAuditExample.setOrderByClause("sid DESC");
-                loginAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
+        }
+        loginAuditExample.setDatabaseId(Constants.MYSQL);
+        loginAuditExample.setOrderByClause(paramItem.getOrderByClause());
+        loginAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
         List<SysLoginAudit> loginAuditList = null;
         try {
             // 获取数据集

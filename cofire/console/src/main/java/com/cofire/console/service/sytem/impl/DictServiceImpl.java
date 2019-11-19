@@ -16,6 +16,7 @@ import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.common.impl.SystemService;
@@ -69,13 +70,19 @@ public class DictServiceImpl implements IDictService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                dictExample.setDatabaseId(Constants.MYSQL);
-                dictExample.setOrderByClause("group_id,dict_value");
-                dictExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("group_id,dict_value");
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("group_id,dict_value");
+        }
+        dictExample.setDatabaseId(Constants.MYSQL);
+        dictExample.setOrderByClause(paramItem.getOrderByClause());
+        dictExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
+
         List<SysDict> dictList = null;
         try {
             // 获取数据集

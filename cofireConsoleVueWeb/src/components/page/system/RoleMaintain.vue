@@ -41,6 +41,7 @@
         :data="roleTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "roleTable.border"
         v-loading="roleTable.loading"
         :element-loading-text="roleTable.text"
@@ -48,8 +49,8 @@
         :element-loading-background="roleTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="roleId" :label="this.$t('role.label.roleId')" width="200"></el-table-column>
-        <el-table-column property="roleName" :label="this.$t('role.label.roleName')" width="200"></el-table-column>
+        <el-table-column property="roleId" :label="this.$t('role.label.roleId')" width="200" sortable></el-table-column>
+        <el-table-column property="roleName" :label="this.$t('role.label.roleName')" width="200" sortable></el-table-column>
         <el-table-column
           property="description"
           :label="this.$t('role.label.description')"
@@ -156,6 +157,11 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
+    },
+    handleSortChange(item){
+      this.queryRole.sort = item.prop;
+      this.queryRole.order = item.order;
+      this.query("query");
     },
     query(type) {
       this.roleTable.loading = true;

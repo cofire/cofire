@@ -50,6 +50,7 @@
       <el-table
         ref="singleTable"
         :data="queryOperateTable.data"
+        @sort-change="handleSortChange"
         highlight-current-row
         :border = "queryOperateTable.border"
         v-loading="queryOperateTable.loading"
@@ -61,12 +62,14 @@
         <el-table-column
           property="userId"
           :label="this.$t('operateAudit.label.userId')"
-          width="100"
+          width="120"
+          sortable
         ></el-table-column>
         <el-table-column
           property="sourceType"
           :label="this.$t('operateAudit.label.sourceType')"
           width="100"
+          sortable
         ></el-table-column>
         <el-table-column
           property="operationType"
@@ -96,6 +99,7 @@
           :label="this.$t('operateAudit.label.requestTime')"
           width="200"
           :formatter="this.formatTableTime"
+          sortable
         ></el-table-column>
         <el-table-column
           property="result"
@@ -147,6 +151,11 @@ export default {
     },
     handleDblclick(val) {
       this.edit();
+    },
+    handleSortChange(item){
+      this.queryOperateAudit.sort = item.prop;
+      this.queryOperateAudit.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {

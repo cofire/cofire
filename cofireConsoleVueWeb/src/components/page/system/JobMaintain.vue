@@ -43,6 +43,7 @@
         :data="jobTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "jobTable.border"
         v-loading="jobTable.loading"
         :element-loading-text="jobTable.text"
@@ -50,8 +51,8 @@
         :element-loading-background="jobTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="jobId" :label="this.$t('job.label.jobId')" width="100"></el-table-column>
-        <el-table-column property="jobName" :label="this.$t('job.label.jobName')" width="100"></el-table-column>
+        <el-table-column property="jobId" :label="this.$t('job.label.jobId')" width="120" sortable></el-table-column>
+        <el-table-column property="jobName" :label="this.$t('job.label.jobName')" width="100" sortable></el-table-column>
         <el-table-column property="jobDesc" :label="this.$t('job.label.jobDesc')" width="200"></el-table-column>
         <el-table-column property="year" :label="this.$t('job.label.year')" width="90"></el-table-column>
         <el-table-column property="month" :label="this.$t('job.label.month')" width="90"></el-table-column>
@@ -187,7 +188,11 @@ export default {
     handleDblclick(val) {
       this.detail();
     },
-    
+    handleSortChange(item){
+      this.queryJob.sort = item.prop;
+      this.queryJob.order = item.order;
+      this.query("query");
+    },
     query(type) {
       if (!this.isBlank(type)) {
         this.queryJob.page = 1;

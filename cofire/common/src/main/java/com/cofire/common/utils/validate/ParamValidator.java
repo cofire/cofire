@@ -8,6 +8,9 @@ import java.util.Objects;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
+import com.cofire.common.result.ParamItem;
+import com.cofire.common.utils.string.StringUtil;
+
 /**
  * 
  * @ClassName: ParamValidator
@@ -61,5 +64,24 @@ public class ParamValidator {
             }
         }
         return false;
+    }
+
+    public static boolean checkHasPros(Class<?> clazz, String... checkProperties) {
+        Assert.notNull(clazz, "参数对象不能为空");
+        Field[] fields = clazz.getDeclaredFields();
+        List<String> checkPropList = (checkProperties != null) ? Arrays.asList(checkProperties) : null;
+        boolean isChecked = false;
+        for (String prop : checkPropList) {
+            for (Field field : fields) {
+                if (field.getName().equalsIgnoreCase(StringUtil.lineToHump(prop)) || field.getName().equalsIgnoreCase(StringUtil.humpToLine(prop))) {
+
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        checkHasPros(ParamItem.class, "length");
     }
 }

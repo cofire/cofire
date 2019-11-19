@@ -59,6 +59,7 @@
         :data="userTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "userRoleTable.border"
         v-loading="userRoleTable.loading"
         :element-loading-text="userRoleTable.text"
@@ -66,8 +67,8 @@
         :element-loading-background="userRoleTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="userId" :label="$t('user.label.userId')" width="200"></el-table-column>
-        <el-table-column property="userName" :label="$t('user.label.userName')" width="200"></el-table-column>
+        <el-table-column property="userId" :label="$t('user.label.userId')" width="200" sortable></el-table-column>
+        <el-table-column property="userName" :label="$t('user.label.userName')" width="200" sortable></el-table-column>
         <el-table-column property="modifier" :label="$t('user.label.modifier')" width="200"></el-table-column>
         <el-table-column
           property="modifyTime"

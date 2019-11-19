@@ -43,6 +43,7 @@
         :data="paramTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "paramTable.border"
         v-loading="paramTable.loading"
         :element-loading-text="paramTable.text"
@@ -50,9 +51,9 @@
         :element-loading-background="paramTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="groupId" :label="this.$t('param.label.groupId')" width="200"></el-table-column>
-        <el-table-column property="paramId" :label="this.$t('param.label.paramId')" width="200"></el-table-column>
-        <el-table-column property="paramValue" :label="this.$t('param.label.paramValue')" width="250"></el-table-column>
+        <el-table-column property="groupId" :label="this.$t('param.label.groupId')" width="200" sortable></el-table-column>
+        <el-table-column property="paramId" :label="this.$t('param.label.paramId')" width="200" sortable></el-table-column>
+        <el-table-column property="paramValue" :label="this.$t('param.label.paramValue')" width="250" sortable></el-table-column>
         <el-table-column property="paramName" :label="this.$t('param.label.paramName')" width="200"></el-table-column>
          <el-table-column property="canDelete" :label="this.$t('param.label.canDelete')" width="200" :formatter="formateTableDict" className="dict-0003"></el-table-column>
         <el-table-column property="modifier" :label="this.$t('param.label.modifier')" width="200"></el-table-column>
@@ -136,6 +137,11 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
+    },
+    handleSortChange(item){
+      this.queryParam.sort = item.prop;
+      this.queryParam.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {

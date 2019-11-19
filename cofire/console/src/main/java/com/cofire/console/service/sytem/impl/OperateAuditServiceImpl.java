@@ -14,6 +14,7 @@ import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.console.service.sytem.IOperateAuditService;
 import com.cofire.dao.mapper.system.SysOperateAuditMapper;
 import com.cofire.dao.model.system.SysOperateAudit;
@@ -69,13 +70,20 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                operateAuditExample.setDatabaseId(Constants.MYSQL);
-                operateAuditExample.setOrderByClause("sid DESC");
-                operateAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
+        }
+        operateAuditExample.setDatabaseId(Constants.MYSQL);
+        operateAuditExample.setOrderByClause(paramItem.getOrderByClause());
+        operateAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
         List<SysOperateAudit> operateAuditList = null;
         try {
             // 获取数据集

@@ -65,6 +65,7 @@
       <el-table
         ref="singleTable"
         :data="loginAuditTable.data"
+        @sort-change="handleSortChange"
         highlight-current-row
         :border = "loginAuditTable.border"
         v-loading="loginAuditTable.loading"
@@ -73,7 +74,7 @@
         :element-loading-background="loginAuditTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="userId" :label="this.$t('loginAudit.label.userId')" width="100"></el-table-column>
+        <el-table-column property="userId" :label="this.$t('loginAudit.label.userId')" width="100" sortable></el-table-column>
         <el-table-column property="ip" :label="this.$t('loginAudit.label.ip')" width="200"></el-table-column>
         <el-table-column
           property="sessionId"
@@ -85,6 +86,7 @@
           :label="this.$t('loginAudit.label.createTime')"
           width="200"
           :formatter="formatTableTime"
+          sortable
         ></el-table-column>
         <el-table-column
           property="auditType"
@@ -145,6 +147,11 @@ export default {
     },
     handleDblclick(val) {
       this.edit();
+    },
+    handleSortChange(item){
+      this.queryLoginAudit.sort = item.prop;
+      this.queryLoginAudit.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {

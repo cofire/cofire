@@ -40,6 +40,7 @@
         :data="returnCodeTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border="returnCodeTable.border"
         v-loading="returnCodeTable.loading"
         :element-loading-text="returnCodeTable.text"
@@ -47,7 +48,7 @@
         :element-loading-background="returnCodeTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="code" :label="this.$t('returnCode.label.code')" width="200"></el-table-column>
+        <el-table-column property="code" :label="this.$t('returnCode.label.code')" width="200" sortable></el-table-column>
         <el-table-column
           property="message"
           :label="this.$t('returnCode.label.message')"
@@ -59,6 +60,7 @@
           :label="this.$t('returnCode.label.modifyTime')"
           width="200"
           :formatter="formatTableTime"
+          sortable
         ></el-table-column>
         <el-table-column
           property="modifier"
@@ -154,6 +156,11 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
+    },
+    handleSortChange(item){
+      this.queryReturnCode.sort = item.prop;
+      this.queryReturnCode.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {

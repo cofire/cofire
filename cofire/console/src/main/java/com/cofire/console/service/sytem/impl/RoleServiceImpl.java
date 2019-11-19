@@ -25,6 +25,7 @@ import com.cofire.common.utils.collection.TreeUtil;
 import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.string.DateUtils;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IRoleService;
@@ -88,13 +89,18 @@ public class RoleServiceImpl implements IRoleService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                roleExample.setDatabaseId(Constants.MYSQL);
-                roleExample.setOrderByClause("role_id DESC");
-                roleExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("role_id");
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("role_id");
+        }
+        roleExample.setDatabaseId(Constants.MYSQL);
+        roleExample.setOrderByClause(paramItem.getOrderByClause());
+        roleExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
         List<SysRole> roleList = null;
         try {
             // 获取数据集

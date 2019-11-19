@@ -29,6 +29,7 @@ import com.cofire.common.utils.security.DESCrypto;
 import com.cofire.common.utils.security.MD5Crypto;
 import com.cofire.common.utils.security.Util;
 import com.cofire.common.utils.string.DateUtils;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IUserService;
@@ -94,13 +95,18 @@ public class UserServiceImpl implements IUserService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                userExample.setDatabaseId(Constants.MYSQL);
-                userExample.setOrderByClause("user_id DESC");
-                userExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("user_id");
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("user_id");
+        }
+        userExample.setDatabaseId(Constants.MYSQL);
+        userExample.setOrderByClause(paramItem.getOrderByClause());
+        userExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
         List<SysUser> userList = null;
         try {
             // 获取数据集

@@ -36,4 +36,17 @@ public class Constants {
     public static final String SOURCE_TYPE_PC = "0";
     public static final String SOURCE_TYPE_IPAD = "1";
     public static final String SOURCE_TYPE_XINIU = "2";
+
+    /**
+     * 数据库查询排序枚举
+     */
+    // 升序
+    public static final String SORT_ASC = "ASC";
+    // 降序
+    public static final String SORT_DESC = "DESC";
+    // 升序
+    public static final String SORT_ASCENDING = "ASCENDING";
+    // 降序
+    public static final String SORT_DESCENDING = "DESCENDING";
+
 }

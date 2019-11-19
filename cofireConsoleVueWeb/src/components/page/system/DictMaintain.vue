@@ -46,6 +46,7 @@
         :data="dictTable.data"
         @current-change="handleCurrentChange"
         @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "dictTable.border"
         v-loading="dictTable.loading"
         :element-loading-text="dictTable.text"
@@ -53,8 +54,8 @@
         :element-loading-background="dictTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="groupId" :label="this.$t('dict.label.groupId')" width="200"></el-table-column>
-        <el-table-column property="groupName" :label="this.$t('dict.label.groupName')" width="200"></el-table-column>
+        <el-table-column property="groupId" :label="this.$t('dict.label.groupId')" width="200" sortable></el-table-column>
+        <el-table-column property="groupName" :label="this.$t('dict.label.groupName')" width="200" sortable></el-table-column>
         <el-table-column property="dictValue" :label="this.$t('dict.label.dictValue')" width="250"></el-table-column>
       =  <el-table-column property="dictNameCn" :label="this.$t('dict.label.dictNameCn')" width="200"></el-table-column>
         <el-table-column property="dictNameEn" :label="this.$t('dict.label.dictNameEn')" width="200"></el-table-column>
@@ -146,6 +147,11 @@ export default {
     },
     handleDblclick(val) {
       this.detail();
+    },
+    handleSortChange(item){
+      this.queryDict.sort = item.prop;
+      this.queryDict.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {

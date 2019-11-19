@@ -13,6 +13,7 @@ import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.mybatis.page.Page;
+import com.cofire.common.utils.string.StringUtil;
 import com.cofire.console.service.sytem.IJobLogService;
 import com.cofire.dao.mapper.system.QtzJobLogMapper;
 import com.cofire.dao.model.system.QtzJobLog;
@@ -62,13 +63,20 @@ public class JobLogServiceImpl implements IJobLogService {
             logger.error(result.getMessage());
             return result;
         }
-        if (null != paramItem) {
-            if (null != paramItem.getPage() && null != paramItem.getLength()) {
-                jobLogExample.setDatabaseId(Constants.MYSQL);
-                jobLogExample.setOrderByClause("sid DESC");
-                jobLogExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-            }
+        if (null == paramItem) {
+            paramItem = new ParamItem();
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
         }
+        if (StringUtils.isNotBlank(paramItem.getSort())) {
+            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
+        } else {
+            paramItem.setSort("sid");
+            paramItem.setOrder(Constants.SORT_DESC);
+        }
+        jobLogExample.setDatabaseId(Constants.MYSQL);
+        jobLogExample.setOrderByClause(paramItem.getOrderByClause());
+        jobLogExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
         List<QtzJobLog> jobLogList = null;
         try {
             // 获取数据集

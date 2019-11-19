@@ -44,8 +44,7 @@
         ref="singleTable"
         highlight-current-row
         :data="joblogTable.data"
-        @current-change="handleCurrentChange"
-        @row-dblclick="handleDblclick"
+        @sort-change="handleSortChange"
         :border = "joblogTable.border"
         v-loading="joblogTable.loading"
         :element-loading-text="joblogTable.text"
@@ -53,12 +52,13 @@
         :element-loading-background="joblogTable.background"
       >
         <el-table-column type="index" :label="this.$t('common.label.index')" width="60"></el-table-column>
-        <el-table-column property="jobId" :label="this.$t('jobLog.label.jobId')" width="200"></el-table-column>
+        <el-table-column property="jobId" :label="this.$t('jobLog.label.jobId')" width="200" sortable></el-table-column>
         <el-table-column
           property="runTime"
           :label="this.$t('jobLog.label.runTime')"
           width="200"
           :formatter="formatTableTime"
+          sortable
         ></el-table-column>
         <el-table-column property="ip" :label="this.$t('jobLog.label.ip')" width="200"></el-table-column>
         <el-table-column
@@ -113,6 +113,11 @@ export default {
     },
     handleDblclick(val) {
       this.edit();
+    },
+    handleSortChange(item){
+      this.queryJobLog.sort = item.prop;
+      this.queryJobLog.order = item.order;
+      this.query("query");
     },
     query(type) {
       if (!this.isBlank(type)) {
