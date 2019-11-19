@@ -228,6 +228,11 @@ export default {
     handleSelectionChange(val) {
       this.userRoleList = val;
     },
+    handleSortChange(item){
+      this.queryUser.sort = item.prop;
+      this.queryUser.order = item.order;
+      this.query("query");
+    },
     query(type) {
       this.userRoleTable.loading = true;
       if (!this.isBlank(type)) {
