@@ -74,8 +74,12 @@ export default async (url = '', data = {}, type = 'POST', contentType = 'urlenco
           Router.replace("/login");
         }, 1500);
       }
+      if (responseJson.status == 400 || responseJson.status == 401 || responseJson.status == 403 || responseJson.status == 404 || responseJson.status == 500 || responseJson.status == 503) {
+        Vue.prototype.$message.error(i18n.t("code." + responseJson.status));
+      }
       return responseJson
     } catch (error) {
+      Vue.prototype.$message.error("系统错误，请稍后在试");
       throw new Error(error)
     }
   }
