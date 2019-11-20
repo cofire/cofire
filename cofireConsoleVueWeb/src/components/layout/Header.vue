@@ -136,18 +136,14 @@ export default {
             type: "warning"
           }
         ).then(() => {
-          loginOut(new BaseModel()).then(res => {
+          const model = new BaseModel();
+          model.operation = 'LoginOut';
+          loginOut(model).then(res => {
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: res.message
-              });
+              this.$message.success(res.message);
               CurrentUserStore.dispatch("clear");
             } else {
-              this.$message({
-                type: "error",
-                message: res.message
-              });
+              this.$message.error(res.message);
             }
           });
           this.$router.replace("/login");
@@ -203,6 +199,8 @@ export default {
         if (valid) {
           // currentPassWord : encrypt('string', this.updateUserPassWord.currentPassWord)
           changePassWord({
+            operation: 'update',
+            source: 'pc',
             currentPassWord: encrypt(
               CurrentUserStore.state.user.userId,
               this.updateUserPassWord.currentPassWord
@@ -218,15 +216,9 @@ export default {
           }).then(res => {
             this.editVisible = false;
             if (res.success || res.success == "true") {
-              this.$message({
-                type: "success",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.success(res.message);
             } else {
-              this.$message({
-                type: "error",
-                message: this.$t("code." + res.code)
-              });
+              this.$message.error(res.message);
             }
           });
         } else {

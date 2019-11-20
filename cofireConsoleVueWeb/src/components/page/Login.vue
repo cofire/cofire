@@ -83,7 +83,7 @@ export default {
           login({
             userId: this.loginForm.userId,
             passWord: encrypt(this.loginForm.userId, this.loginForm.passWord),
-            sourceType: "pc",
+            source: "pc",
             operation: "login",
           }).then(res => {
             if (res.success || res.success == "true") {

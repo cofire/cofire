@@ -87,8 +87,8 @@ public class LogAop {
         logger.info("请求Ip：" + ip);
         logger.info("请求URI：" + reqURI);
         logger.info("请求类型：" + parameter.get("operation"));
-        logger.info("操作来源：" + parameter.get("source_type"));
-        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, parameter.toString(), parameter.get("source_type"),
+        logger.info("操作来源：" + parameter.get("source"));
+        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, parameter.toString(), parameter.get("source"),
                 parameter.get("operation"));
         aopLog.set(operateAudit);
     }

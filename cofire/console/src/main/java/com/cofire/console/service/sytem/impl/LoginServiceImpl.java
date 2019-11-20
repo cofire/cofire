@@ -26,7 +26,7 @@ public class LoginServiceImpl implements ILoginService {
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     @Override
-    public Result authLogin(String userId, String passWord, String sourceType, String operation) {
+    public Result authLogin(String userId, String passWord, String source, String operation) {
         Result result = new Result();
         if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(passWord)) {
             result.setSuccess(false, CodeEnum.E_400);
@@ -57,7 +57,7 @@ public class LoginServiceImpl implements ILoginService {
             String ip = HttpContext.getClientIP();
             Session session = SecurityUtils.getSubject().getSession();
             String sesionId = (String) session.getId();
-            LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN, userId, sourceType));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN, userId, source));
 
         } catch (Exception e) {
             logger.error("记录登录日志失败：" + e.getMessage());
@@ -67,7 +67,7 @@ public class LoginServiceImpl implements ILoginService {
     }
 
     @Override
-    public Result logout(String sourceType, String operation) {
+    public Result logout(String source, String operation) {
         Result result = new Result();
         try {
             Session session = SecurityUtils.getSubject().getSession();
@@ -78,7 +78,7 @@ public class LoginServiceImpl implements ILoginService {
                 String userId = user.getUserId();
                 String sesionId = (String) session.getId();
                 String ip = HttpContext.getClientIP();
-                LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN_OUT, userId, sourceType));
+                LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN_OUT, userId, source));
             }
         } catch (Exception e) {
             logger.error("记录登录日志失败：" + e.getMessage());
