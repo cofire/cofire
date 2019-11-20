@@ -1,6 +1,15 @@
 import fetch from '../config/fetch'
 import downloadFile from '../config/downloadFile'
 
+/**
+ * fetch参数详解：
+ *  url = '' 向后台请求数据的URL
+ *  data = {} 向后台发起请求的数据
+ *  type = 'POST' 向后台发起请求的方式，目前只支持 POST请求
+ *  contentType = 'urlencoded' 请求数据的格式，目前支持x-www-form-urlencoded和 application/json两种格式
+ *  method = 'fetch' 目前只支持fetch方法
+ */
+
 /** 注意添加注释 */
 /** 公共接口 */
 /** 登录 */
@@ -79,7 +88,7 @@ export const queryLoginAudit = data => fetch('/console/loginAudit/query', data, 
 /** 获取操作日志列表 */
 export const queryOperateAudit = data => fetch('/console/operateAudit/query', data, 'POST');
 
-/** 定时任务管理 */ 
+/** 定时任务管理 */
 /** 获取定时任务列表 */
 export const queryJob = data => fetch('/console/job/query', data, 'POST');
 /** 保存定时任务信息 */
