@@ -99,10 +99,15 @@ public class LogAop {
         if (result.length() > 1000) {
             result = result.substring(0, 1000);
         }
-        SysOperateAudit operateAudit = aopLog.get();
-        operateAudit.setResult(result);
-        operateAudit.setReturnTime(DateUtils.dataTimeToNumber(new Date()));
-        LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
+        try {
+            SysOperateAudit operateAudit = aopLog.get();
+            operateAudit.setResult(result);
+            operateAudit.setReturnTime(DateUtils.dataTimeToNumber(new Date()));
+            LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
+        } catch (Exception e) {
+            logger.error("记录操作日志失败：" + e.getMessage());
+        }
+
     }
 
 }
