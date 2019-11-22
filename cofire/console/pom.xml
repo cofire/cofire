@@ -8,6 +8,7 @@
     </parent>
     <artifactId>console</artifactId>
     <name>console</name>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
@@ -95,11 +96,12 @@
     <build>
     	<finalName>cofire</finalName>
         <plugins>
+        	<!-- 打jar包时放开，打War包时注释 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- 指定该Main Class为全局的唯一入口 -->
+                 <!--    指定该Main Class为全局的唯一入口 -->
                     <mainClass>com.cofire.console.Application</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
@@ -107,11 +109,19 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
-                            <!--可以把依赖的包都打包到生成的Jar包中-->
+                           <!--  可以把依赖的包都打包到生成的Jar包中 -->
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            <!-- 打war包时放开，打jar包时注释 -->
+           <!--  <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin> -->
         </plugins>
     </build>
 </project>
