@@ -2,7 +2,7 @@ import {
   CurrentUserStore
 } from "../store/common/CurrentUserStore";
 
-const baseUrl = 'http://localhost:8080'; //本地运行时链接
+const baseUrl = 'http://localhost:8080/cofire'; //本地运行时链接
 
 // 版本号
 const version = "1.0";
