@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cofire.dao.mapper.system.impl.SysRoleMapperImpl">
+    <resultMap id="BaseResultMap" type="com.cofire.dao.model.system.SysRoleResource">
+        <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+        <id column="resource_id" jdbcType="VARCHAR" property="resourceId" />
+        <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+        <result column="modify_time" jdbcType="VARCHAR" property="modifyTime" />
+        <result column="filler1" jdbcType="VARCHAR" property="filler1" />
+        <result column="filler2" jdbcType="VARCHAR" property="filler2" />
+        <result column="filler3" jdbcType="VARCHAR" property="filler3" />
+    </resultMap>
+    <select id="getRoleLeafResource" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        SELECT
+        'true' AS QUERYID,
+        role_id,
+        sys_role_resource.resource_id,
+        sys_role_resource.modifier,
+        sys_role_resource.modify_time
+        FROM
+        sys_role_resource
+        LEFT JOIN sys_resource ON sys_role_resource.resource_id =
+        sys_resource.resource_id
+        WHERE
+        role_id = #{roleId}
+        AND sys_resource.is_leaf = '1';
+    </select>
+</mapper>

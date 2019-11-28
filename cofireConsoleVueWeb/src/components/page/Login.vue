@@ -102,7 +102,6 @@ export default {
             } else {
               this.$message.error(this.$t("code." + res.code));
             }
-            debugger;
             this.fullScreenLoading("common.message.loginLoading").close();
             // this.loadingModel.loading = false;
           });

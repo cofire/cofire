@@ -30,9 +30,9 @@ import com.cofire.common.utils.validate.ParamValidator;
 import com.cofire.console.common.CurrentUserUtil;
 import com.cofire.console.service.sytem.IRoleService;
 import com.cofire.dao.mapper.system.SysResourceMapper;
-import com.cofire.dao.mapper.system.SysRoleMapper;
 import com.cofire.dao.mapper.system.SysRoleResourceMapper;
 import com.cofire.dao.mapper.system.SysUserRoleMapper;
+import com.cofire.dao.mapper.system.impl.SysRoleMapperImpl;
 import com.cofire.dao.model.system.SysResource;
 import com.cofire.dao.model.system.SysResourceExample;
 import com.cofire.dao.model.system.SysRole;
@@ -47,14 +47,17 @@ import com.cofire.dao.model.system.SysUserRoleExample;
 public class RoleServiceImpl implements IRoleService {
 
     private final static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
-    @Autowired
-    private SysRoleMapper roleMapper;
+    // @Autowired
+    // private SysRoleMapper roleMapper;
     @Autowired
     private SysUserRoleMapper userRoleMapper;
     @Autowired
     private SysResourceMapper resourceMapper;
     @Autowired
     private SysRoleResourceMapper roleResourceMapper;
+
+    @Autowired
+    private SysRoleMapperImpl sysRoleMapperImpl;
 
     /**
      * 
@@ -84,7 +87,7 @@ public class RoleServiceImpl implements IRoleService {
         Long count = 0L;
         try {
             // 获取数据总和
-            count = roleMapper.countByExample(roleExample);
+            count = sysRoleMapperImpl.countByExample(roleExample);
         } catch (Exception e) {
             logger.error(result.getMessage());
             return result;
@@ -104,7 +107,7 @@ public class RoleServiceImpl implements IRoleService {
         List<SysRole> roleList = null;
         try {
             // 获取数据集
-            roleList = roleMapper.selectPageByExample(roleExample);
+            roleList = sysRoleMapperImpl.selectPageByExample(roleExample);
             result.setSuccess(true, CodeEnum.E_200);
         } catch (Exception e) {
             logger.error("查询角色信息失败");
@@ -139,7 +142,7 @@ public class RoleServiceImpl implements IRoleService {
         SysRoleExample roleExample = new SysRoleExample();
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         criteria.andRoleIdEqualTo(role.getRoleId());
-        List<SysRole> roleList = roleMapper.selectByExample(roleExample);
+        List<SysRole> roleList = sysRoleMapperImpl.selectByExample(roleExample);
         if (roleList.size() > 0) {
             result.setSuccess(false, CodeEnum.E_400);
             return result;
@@ -147,7 +150,7 @@ public class RoleServiceImpl implements IRoleService {
         try {
             role.setModifier(CurrentUserUtil.getCurentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
-            roleMapper.insert(role);
+            sysRoleMapperImpl.insert(role);
             SysRoleResourceExample example = new SysRoleResourceExample();
             SysRoleResourceExample.Criteria roleResourcecriteria = example.createCriteria();
             roleResourcecriteria.andRoleIdEqualTo(role.getRoleId());
@@ -204,7 +207,7 @@ public class RoleServiceImpl implements IRoleService {
             roleCriteria.andRoleIdEqualTo(role.getRoleId());
             role.setModifier(CurrentUserUtil.getCurentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
-            roleMapper.updateByExample(role, roleExample);
+            sysRoleMapperImpl.updateByExample(role, roleExample);
             SysRoleResourceExample example = new SysRoleResourceExample();
             SysRoleResourceExample.Criteria criteria = example.createCriteria();
             criteria.andRoleIdEqualTo(role.getRoleId());
@@ -251,7 +254,7 @@ public class RoleServiceImpl implements IRoleService {
             SysRoleExample roleExample = new SysRoleExample();
             SysRoleExample.Criteria roleCriteria = roleExample.createCriteria();
             roleCriteria.andRoleIdEqualTo(role.getRoleId());
-            roleMapper.deleteByExample(roleExample);
+            sysRoleMapperImpl.deleteByExample(roleExample);
             SysRoleResourceExample example = new SysRoleResourceExample();
             SysRoleResourceExample.Criteria criteria = example.createCriteria();
             criteria.andRoleIdEqualTo(role.getRoleId());
@@ -316,10 +319,8 @@ public class RoleServiceImpl implements IRoleService {
             }
 
             if (StringUtils.isNotBlank(roleId)) {
-                SysRoleResourceExample example = new SysRoleResourceExample();
-                SysRoleResourceExample.Criteria criteria = example.createCriteria();
-                criteria.andRoleIdEqualTo(roleId);
-                List<SysRoleResource> checkedList = roleResourceMapper.selectByExample(example);
+                // 只查该角色的菜单列表的子节点
+                List<SysRoleResource> checkedList = sysRoleMapperImpl.getRoleLeafResource(roleId);
                 for (SysRoleResource roleResource : checkedList) {
                     checkedSet.add(roleResource.getResourceId());
                 }

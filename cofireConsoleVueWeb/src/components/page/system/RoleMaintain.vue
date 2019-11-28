@@ -226,7 +226,7 @@ export default {
     save(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.editRole.permission = this.$refs.tree.getCheckedKeys();
+          this.editRole.permission = this.$refs.tree.getCheckedKeys() + "," + this.$refs.tree.getHalfCheckedKeys();
           saveRole(this.editRole).then(res => {
             if (res.success || res.success == "true") {
               this.editDialog.visible = false;
