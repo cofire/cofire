@@ -4,6 +4,7 @@ import {
 
 const baseUrl = 'http://localhost:8080/cofire'; //本地运行时链接
 
+const noPermissionRoutes=['/login','/404','/403','/printer'];
 // 版本号
 const version = "1.0";
 // 操作类型
@@ -26,5 +27,6 @@ export default {
   baseUrl,
   version,
   operation,
-  selectOption
+  selectOption,
+  noPermissionRoutes
 }

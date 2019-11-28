@@ -1,30 +1,30 @@
 <template>
-    <div class="wrapper">
-        <v-head></v-head>
-        <v-sidebar></v-sidebar>
-        <div class="content-box" :class="{'content-collapse':collapse}">
-            <v-tags></v-tags>
-            <div class="content">
-                <el-row class="crumbs" v-if="pathNavFull.length > 0">
-                    <el-breadcrumb separator="/">
-                        <el-breadcrumb-item>
-                            <i class="el-icon-date"></i>
-                            {{ $t('common.route.' + parentPath.id) }}
-                        </el-breadcrumb-item>
-                        <el-breadcrumb-item
-                            v-for="item in pathNav"
-                            :key="item.id"
-                        >{{ $t('common.route.' + item.id) }}</el-breadcrumb-item>
-                    </el-breadcrumb>
-                </el-row>
-                <transition name="move" mode="out-in">
-                    <keep-alive :include="tagsList">
-                        <router-view></router-view>
-                    </keep-alive>
-                </transition>
-            </div>
-        </div>
+  <div class="wrapper">
+    <v-head></v-head>
+    <v-sidebar></v-sidebar>
+    <div class="content-box" :class="{'content-collapse':collapse}">
+      <v-tags></v-tags>
+      <div class="content">
+        <el-row class="crumbs" v-if="pathNavFull.length > 0">
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item>
+              <i class="el-icon-date"></i>
+              {{ $t('common.route.' + parentPath.id) }}
+            </el-breadcrumb-item>
+            <el-breadcrumb-item
+              v-for="item in pathNav"
+              :key="item.id"
+            >{{ $t('common.route.' + item.id) }}</el-breadcrumb-item>
+          </el-breadcrumb>
+        </el-row>
+        <transition name="move" mode="out-in">
+          <keep-alive :include="tagsList">
+            <router-view></router-view>
+          </keep-alive>
+        </transition>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -70,8 +70,19 @@ export default {
         }
       });
       return parents;
+    },
+    isMenuContainUrl(menuList, path) {
+      return menuList.some(menu => {
+        if (path == menu.url) {
+          return true;
+        }
+        if (path != menu.url && menu.subMenu) {
+          return this.isMenuContainUrl(menu.subMenu, path);
+        }
+      });
     }
   },
+
   created() {
     bus.$on("collapse", msg => {
       this.collapse = msg;
@@ -88,6 +99,12 @@ export default {
   },
   watch: {
     $route(newValue, oldValue) {
+      if (this.GLOBAL.noPermissionRoutes.indexOf(newValue.path) < 0) {
+        if (!this.isMenuContainUrl(this.menuList, newValue.path)) {
+          this.$router.replace("/403");
+          this.$message.error(this.$t("code.403"));
+        }
+      }
       const path = newValue.fullPath;
       this.pathNavFull = this.getMenuParents(this.menuList, path);
       if (this.pathNavFull.length > 0) {
