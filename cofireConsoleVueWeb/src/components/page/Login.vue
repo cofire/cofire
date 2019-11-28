@@ -79,7 +79,8 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loadingModel.loading = true;
+          // this.loadingModel.loading = true;
+          this.fullScreenLoading("common.message.loginLoading");
           login({
             userId: this.loginForm.userId,
             passWord: encrypt(this.loginForm.userId, this.loginForm.passWord),
@@ -101,7 +102,9 @@ export default {
             } else {
               this.$message.error(this.$t("code." + res.code));
             }
-            this.loadingModel.loading = false;
+            debugger;
+            this.fullScreenLoading("common.message.loginLoading").close();
+            // this.loadingModel.loading = false;
           });
         } else {
           console.log("error submit!!");

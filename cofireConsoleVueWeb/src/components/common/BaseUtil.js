@@ -5,6 +5,7 @@ import GlobalData from "./GlobalData"
 import TableModel from "../model/common/TableModel"
 import DialogModel from "../model/common/DialogModel"
 import LoadingModel from '../model/common/LoadingModel';
+import i18n from '../../i18n/i18n';
 
 export default {
   install(Vue) {
@@ -12,6 +13,15 @@ export default {
     Vue.prototype.TableModel = TableModel;
     Vue.prototype.DialogModel = DialogModel;
     Vue.prototype.LoadingModel = LoadingModel;
+    Vue.prototype.fullScreenLoading = (text = 'common.message.loadingText') => {
+      return Vue.prototype.$loading({
+        lock: true,
+        text: i18n.t(text),
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+    };
+
     /**
      * 日期格式格式化 
      * 请求示例 formatDate('20190519101010')
