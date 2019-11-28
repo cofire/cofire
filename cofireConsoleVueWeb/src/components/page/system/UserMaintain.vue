@@ -290,6 +290,7 @@ export default {
     save(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.fullScreenLoading();
           saveUser(this.editUser).then(res => {
             if (res.success || res.success == "true") {
               this.editDialog.visible = false;
@@ -302,6 +303,7 @@ export default {
         } else {
           this.$message.warning(this.$t("common.message.paramInvalid"));
         }
+        this.fullScreenLoading().close();
       });
     },
     roleSet() {
