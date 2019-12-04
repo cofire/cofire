@@ -24,7 +24,7 @@ public class CurrentUserUtil {
      * @param @return 参数
      * @return SysUser 返回类型
      */
-    public static SysUser getCurentUser() {
+    public static SysUser getCurrentUser() {
         Session session = SecurityUtils.getSubject().getSession();
         SysUser user = (SysUser) session.getAttribute(Constants.SESSION_USER_INFO);
         if (user == null) {
@@ -41,7 +41,7 @@ public class CurrentUserUtil {
      * @param @return 参数
      * @return String 返回类型
      */
-    public static String getCurentUserId() {
-        return getCurentUser().getUserId();
+    public static String getCurrentUserId() {
+        return getCurrentUser().getUserId();
     }
 }

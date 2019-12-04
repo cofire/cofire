@@ -49,7 +49,7 @@ public class BaseController {
         UserDetailModel<SysUser, Menu> userDetail = new UserDetailModel<SysUser, Menu>();
         try {
             List<Menu> menus = new ArrayList<>();
-            SysUser user = CurrentUserUtil.getCurentUser();
+            SysUser user = CurrentUserUtil.getCurrentUser();
             String userId = user.getUserId();
             logger.info("当前登录用户的id：" + userId);
             List<Map<String, String>> dataList = userService.getUserResource(userId);

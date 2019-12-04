@@ -117,7 +117,7 @@ public class ResourceServiceImpl implements IResourceService {
             return result;
         }
         try {
-            resource.setModifier(CurrentUserUtil.getCurentUserId());
+            resource.setModifier(CurrentUserUtil.getCurrentUserId());
             resource.setModifyTime(Util.getCurrentDateTimeString());
             resourceMapper.insert(resource);
             result.setSuccess(true, CodeEnum.E_200);
@@ -145,7 +145,7 @@ public class ResourceServiceImpl implements IResourceService {
             SysResourceExample example = new SysResourceExample();
             SysResourceExample.Criteria criteria = example.createCriteria();
             criteria.andResourceIdEqualTo(resource.getResourceId());
-            resource.setModifier(CurrentUserUtil.getCurentUserId());
+            resource.setModifier(CurrentUserUtil.getCurrentUserId());
             resource.setModifyTime(Util.getCurrentDateTimeString());
             resourceMapper.updateByExample(resource, example);
             result.setSuccess(true, CodeEnum.E_200);

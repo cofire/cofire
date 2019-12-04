@@ -131,7 +131,7 @@ public class ParamServiceImpl implements IParamService {
             return result;
         }
         try {
-            param.setModifier(CurrentUserUtil.getCurentUserId());
+            param.setModifier(CurrentUserUtil.getCurrentUserId());
             param.setModifyTime(Util.getCurrentDateTimeString());
             paramMapper.insert(param);
             SystemService.initSysParam();
@@ -161,7 +161,7 @@ public class ParamServiceImpl implements IParamService {
             SysParamExample.Criteria criteria = example.createCriteria();
             criteria.andGroupIdEqualTo(param.getGroupId());
             criteria.andParamIdEqualTo(param.getParamId());
-            param.setModifier(CurrentUserUtil.getCurentUserId());
+            param.setModifier(CurrentUserUtil.getCurrentUserId());
             param.setModifyTime(Util.getCurrentDateTimeString());
             paramMapper.updateByExample(param, example);
             SystemService.initSysParam();

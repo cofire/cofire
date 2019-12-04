@@ -135,7 +135,7 @@ public class DictServiceImpl implements IDictService {
             return result;
         }
         try {
-            dict.setModifier(CurrentUserUtil.getCurentUserId());
+            dict.setModifier(CurrentUserUtil.getCurrentUserId());
             dict.setModifyTime(Util.getCurrentDateTimeString());
             dictMapper.insert(dict);
             SystemService.initSysDict();
@@ -165,7 +165,7 @@ public class DictServiceImpl implements IDictService {
             SysDictExample.Criteria criteria = example.createCriteria();
             criteria.andGroupIdEqualTo(dict.getGroupId());
             criteria.andDictValueEqualTo(dict.getDictValue());
-            dict.setModifier(CurrentUserUtil.getCurentUserId());
+            dict.setModifier(CurrentUserUtil.getCurrentUserId());
             dict.setModifyTime(Util.getCurrentDateTimeString());
             dictMapper.updateByExample(dict, example);
             SystemService.initSysDict();

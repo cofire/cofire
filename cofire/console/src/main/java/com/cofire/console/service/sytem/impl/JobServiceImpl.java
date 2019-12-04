@@ -130,7 +130,7 @@ public class JobServiceImpl implements IJobService {
             return result;
         }
         try {
-            job.setModifier(CurrentUserUtil.getCurentUserId());
+            job.setModifier(CurrentUserUtil.getCurrentUserId());
             job.setModifyTime(Util.getCurrentDateTimeString());
             jobMapper.insertSelective(job);
             QuartzJobConfig.standbyQuartzJob();
@@ -161,7 +161,7 @@ public class JobServiceImpl implements IJobService {
             QtzJobExample example = new QtzJobExample();
             QtzJobExample.Criteria criteria = example.createCriteria();
             criteria.andJobIdEqualTo(job.getJobId());
-            job.setModifier(CurrentUserUtil.getCurentUserId());
+            job.setModifier(CurrentUserUtil.getCurrentUserId());
             job.setModifyTime(Util.getCurrentDateTimeString());
             jobMapper.updateByExample(job, example);
             QuartzJobConfig.standbyQuartzJob();

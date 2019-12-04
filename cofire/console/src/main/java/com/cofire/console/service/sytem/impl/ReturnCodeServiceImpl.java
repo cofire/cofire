@@ -126,7 +126,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
             return result;
         }
         try {
-            returnCode.setModifier(CurrentUserUtil.getCurentUserId());
+            returnCode.setModifier(CurrentUserUtil.getCurrentUserId());
             returnCode.setModifyTime(Util.getCurrentDateTimeString());
             returnCodeMapper.insert(returnCode);
             SystemService.initRerurnCode();
@@ -155,7 +155,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
             SysReturnCodeExample example = new SysReturnCodeExample();
             SysReturnCodeExample.Criteria criteria = example.createCriteria();
             criteria.andCodeEqualTo(returnCode.getCode());
-            returnCode.setModifier(CurrentUserUtil.getCurentUserId());
+            returnCode.setModifier(CurrentUserUtil.getCurrentUserId());
             returnCode.setModifyTime(Util.getCurrentDateTimeString());
             returnCodeMapper.updateByExample(returnCode, example);
             returnCodeMapper.updateByPrimaryKeySelective(returnCode);

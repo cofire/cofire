@@ -162,7 +162,7 @@ public class UserServiceImpl implements IUserService {
         try {
             user.setModifyTime(Util.getCurrentDateTimeString());
             user.setPassWord(MD5Crypto.encrypt(user.getUserId(), user.getUserId()));
-            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setModifier(CurrentUserUtil.getCurrentUserId());
             user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.insert(user);
             result.setSuccess(true, CodeEnum.E_200);
@@ -190,7 +190,7 @@ public class UserServiceImpl implements IUserService {
             SysUserExample userExample = new SysUserExample();
             SysUserExample.Criteria userCriteria = userExample.createCriteria();
             userCriteria.andUserIdEqualTo(user.getUserId());
-            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setModifier(CurrentUserUtil.getCurrentUserId());
             user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.updateByExample(user, userExample);
             result.setSuccess(true, CodeEnum.E_200);
@@ -266,7 +266,7 @@ public class UserServiceImpl implements IUserService {
                     SysUserRole userRole = new SysUserRole();
                     userRole.setRoleId(roleId);
                     userRole.setUserId(userId);
-                    userRole.setModifier(CurrentUserUtil.getCurentUserId());
+                    userRole.setModifier(CurrentUserUtil.getCurrentUserId());
                     userRole.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
                     userRoleMapper.insertSelective(userRole);
                 }
@@ -337,15 +337,15 @@ public class UserServiceImpl implements IUserService {
     public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
         logger.info("正在修改密码");
         Result result = new Result();
-        if (ParamValidator.checkParamsHasEmpty(CurrentUserUtil.getCurentUserId(), currentPassWord, newPassWord, confirmNewPassWord)
+        if (ParamValidator.checkParamsHasEmpty(CurrentUserUtil.getCurrentUserId(), currentPassWord, newPassWord, confirmNewPassWord)
                 || !newPassWord.equals(confirmNewPassWord)) {
             result.setSuccess(false, CodeEnum.E_400);
             return result;
         }
         try {
-            String oriPassWord = DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurentUserId(), currentPassWord);
-            String oriPassWordEncrypt = MD5Crypto.encrypt(oriPassWord, CurrentUserUtil.getCurentUserId());
-            SysUser user = userMapper.selectByPrimaryKey(CurrentUserUtil.getCurentUserId());
+            String oriPassWord = DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurrentUserId(), currentPassWord);
+            String oriPassWordEncrypt = MD5Crypto.encrypt(oriPassWord, CurrentUserUtil.getCurrentUserId());
+            SysUser user = userMapper.selectByPrimaryKey(CurrentUserUtil.getCurrentUserId());
             if (user == null) {
                 result.setSuccess(false, CodeEnum.E_500);
                 return result;
@@ -354,8 +354,8 @@ public class UserServiceImpl implements IUserService {
                 result.setSuccess(false, CodeEnum.E_400);
                 return result;
             }
-            user.setPassWord(MD5Crypto.encrypt(DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurentUserId(), newPassWord), CurrentUserUtil.getCurentUserId()));
-            user.setModifier(CurrentUserUtil.getCurentUserId());
+            user.setPassWord(MD5Crypto.encrypt(DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurrentUserId(), newPassWord), CurrentUserUtil.getCurrentUserId()));
+            user.setModifier(CurrentUserUtil.getCurrentUserId());
             user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.updateByPrimaryKey(user);
             result.setSuccess(true, CodeEnum.E_700);

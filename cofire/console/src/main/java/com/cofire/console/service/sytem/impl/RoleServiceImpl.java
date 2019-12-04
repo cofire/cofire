@@ -155,7 +155,7 @@ public class RoleServiceImpl implements IRoleService {
             return result;
         }
         try {
-            role.setModifier(CurrentUserUtil.getCurentUserId());
+            role.setModifier(CurrentUserUtil.getCurrentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
             sysRoleMapperImpl.insert(role);
             SysRoleResourceExample example = new SysRoleResourceExample();
@@ -170,7 +170,7 @@ public class RoleServiceImpl implements IRoleService {
                     SysRoleResource roleResource = new SysRoleResource();
                     roleResource.setRoleId(role.getRoleId());
                     roleResource.setResourceId(resouce);
-                    roleResource.setModifier(CurrentUserUtil.getCurentUserId());
+                    roleResource.setModifier(CurrentUserUtil.getCurrentUserId());
                     roleResource.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
                     roleResourceMapper.insertSelective(roleResource);
                 }
@@ -212,7 +212,7 @@ public class RoleServiceImpl implements IRoleService {
             SysRoleExample roleExample = new SysRoleExample();
             SysRoleExample.Criteria roleCriteria = roleExample.createCriteria();
             roleCriteria.andRoleIdEqualTo(role.getRoleId());
-            role.setModifier(CurrentUserUtil.getCurentUserId());
+            role.setModifier(CurrentUserUtil.getCurrentUserId());
             role.setModifyTime(Util.getCurrentDateTimeString());
             sysRoleMapperImpl.updateByExample(role, roleExample);
             SysRoleResourceExample example = new SysRoleResourceExample();
@@ -227,7 +227,7 @@ public class RoleServiceImpl implements IRoleService {
                     SysRoleResource roleResource = new SysRoleResource();
                     roleResource.setRoleId(role.getRoleId());
                     roleResource.setResourceId(resouce);
-                    roleResource.setModifier(CurrentUserUtil.getCurentUserId());
+                    roleResource.setModifier(CurrentUserUtil.getCurrentUserId());
                     roleResource.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
                     roleResourceMapper.insertSelective(roleResource);
                 }
