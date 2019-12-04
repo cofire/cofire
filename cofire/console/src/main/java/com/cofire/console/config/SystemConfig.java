@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
  * 
  * @ClassName: SystemConfig
  * @Description:管理配置文件中的参数
- * @date 2019年5月15日
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 @Component
 public class SystemConfig {

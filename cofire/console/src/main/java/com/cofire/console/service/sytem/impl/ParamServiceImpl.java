@@ -25,6 +25,15 @@ import com.cofire.dao.mapper.system.SysParamMapper;
 import com.cofire.dao.model.system.SysParam;
 import com.cofire.dao.model.system.SysParamExample;
 
+/**
+ * 
+ * @ClassName: ParamServiceImpl
+ * @Description:系统参数管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class ParamServiceImpl implements IParamService {
 
@@ -136,7 +145,7 @@ public class ParamServiceImpl implements IParamService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:系统参数信息
      * @param @param param
@@ -144,7 +153,7 @@ public class ParamServiceImpl implements IParamService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysParam param) {
+    public Result update(SysParam param) {
         Result result = new Result();
         try {
             logger.info("正在修改系统参数信息");

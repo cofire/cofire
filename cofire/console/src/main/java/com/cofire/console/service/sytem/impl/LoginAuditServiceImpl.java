@@ -19,6 +19,15 @@ import com.cofire.dao.mapper.system.SysLoginAuditMapper;
 import com.cofire.dao.model.system.SysLoginAudit;
 import com.cofire.dao.model.system.SysLoginAuditExample;
 
+/**
+ * 
+ * @ClassName: LoginAuditServiceImpl
+ * @Description:登录登出日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class LoginAuditServiceImpl implements ILoginAuditService {
 

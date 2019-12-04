@@ -3,10 +3,10 @@ package com.cofire.console.service.sytem.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +24,15 @@ import com.cofire.dao.model.custom.ResourceCustomModel;
 import com.cofire.dao.model.system.SysResource;
 import com.cofire.dao.model.system.SysResourceExample;
 
+/**
+ * 
+ * @ClassName: ResourceServiceImpl
+ * @Description:菜单管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class ResourceServiceImpl implements IResourceService {
 
@@ -55,14 +64,14 @@ public class ResourceServiceImpl implements IResourceService {
             resourceList = resourceMapper.selectByExample(example);
             for (SysResource resource : resourceList) {
                 ResourceCustomModel resourceTreeNode = new ResourceCustomModel();
-                BeanUtils.copyProperties(resourceTreeNode, resource);
+                BeanUtils.copyProperties(resource, resourceTreeNode);
                 if (StringUtils.isBlank(resourceTreeNode.getParentResourceId()) || Constants.MENU_ROOT.equals(resourceTreeNode.getParentResourceId())) {
                     resourceTreeList.add(resourceTreeNode);
                 }
 
                 for (SysResource childResource : resourceList) {
                     ResourceCustomModel childNode = new ResourceCustomModel();
-                    BeanUtils.copyProperties(childNode, childResource);
+                    BeanUtils.copyProperties(childResource, childNode);
                     if (childNode.getParentResourceId().equals(resourceTreeNode.getResourceId())) {
                         if (resourceTreeNode.getChildren() == null) {
                             resourceTreeNode.setChildren(new ArrayList<ResourceCustomModel>());
@@ -75,6 +84,7 @@ public class ResourceServiceImpl implements IResourceService {
             result.setData(resourceTreeList);
         } catch (Exception e) {
             logger.error("查询菜单信息失败：" + e.getMessage());
+            e.printStackTrace();
             result.setMessage("系统错误");
             result.setSuccess(true, CodeEnum.E_500);
             return result;
@@ -120,7 +130,7 @@ public class ResourceServiceImpl implements IResourceService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:菜单信息
      * @param @param resource
@@ -128,7 +138,7 @@ public class ResourceServiceImpl implements IResourceService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysResource resource) {
+    public Result update(SysResource resource) {
         Result result = new Result();
         try {
             logger.info("正在修改菜单信息");

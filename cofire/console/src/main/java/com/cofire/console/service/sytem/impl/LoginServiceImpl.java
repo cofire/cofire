@@ -21,6 +21,15 @@ import com.cofire.console.config.log.factory.LogTaskFactory;
 import com.cofire.console.service.sytem.ILoginService;
 import com.cofire.dao.model.system.SysUser;
 
+/**
+ * 
+ * @ClassName: LoginServiceImpl
+ * @Description:登录登出
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class LoginServiceImpl implements ILoginService {
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
@@ -54,7 +63,7 @@ public class LoginServiceImpl implements ILoginService {
             return result;
         }
         try {
-            String ip = HttpContext.getClientIP();
+            String ip = HttpContext.getClientIp();
             Session session = SecurityUtils.getSubject().getSession();
             String sesionId = (String) session.getId();
             LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN, userId, source));
@@ -77,7 +86,7 @@ public class LoginServiceImpl implements ILoginService {
 
                 String userId = user.getUserId();
                 String sesionId = (String) session.getId();
-                String ip = HttpContext.getClientIP();
+                String ip = HttpContext.getClientIp();
                 LogManager.me().executeLog(LogTaskFactory.loginLog(ip, sesionId, Constants.AUDIT_TYPE_LOGIN_OUT, userId, source));
             }
         } catch (Exception e) {

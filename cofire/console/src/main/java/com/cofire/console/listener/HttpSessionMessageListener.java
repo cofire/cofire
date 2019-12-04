@@ -14,8 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author chl_seu
+ * 
+ * @ClassName: HttpSessionMessageListener
+ * @Description:session管理
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 @WebListener
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -28,10 +33,7 @@ public class HttpSessionMessageListener implements HttpSessionListener {
         return sessionMap;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see javax.servlet.http.HttpSessionListener#sessionCreated(javax.servlet.http.HttpSessionEvent)
-     */
+    @Override
     public void sessionCreated(HttpSessionEvent event) {
         HttpSession session = event.getSession();
         synchronized (HttpSessionMessageListener.class) {
@@ -41,10 +43,7 @@ public class HttpSessionMessageListener implements HttpSessionListener {
 
     }
 
-    /*
-     * (non-Javadoc)
-     * @see javax.servlet.http.HttpSessionListener#sessionDestroyed(javax.servlet.http.HttpSessionEvent)
-     */
+    @Override
     public void sessionDestroyed(HttpSessionEvent event) {
         HttpSession session = event.getSession();
         synchronized (HttpSessionMessageListener.class) {

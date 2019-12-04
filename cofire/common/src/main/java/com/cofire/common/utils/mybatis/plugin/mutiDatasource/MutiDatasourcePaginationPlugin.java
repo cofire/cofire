@@ -17,6 +17,15 @@ import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
+/**
+ * 
+ * @ClassName: MutiDatasourcePaginationPlugin
+ * @Description:多数据源分页插件
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class MutiDatasourcePaginationPlugin extends PluginAdapter {
 
     @Override
@@ -31,13 +40,13 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
      */
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        String objectName = introspectedTable.getTableConfiguration().getDomainObjectName();// 对象名称
+        String objectName = introspectedTable.getTableConfiguration().getDomainObjectName();
 
         interfaze.addImportedType(new FullyQualifiedJavaType("java.util.List"));
         interfaze.addImportedType(new FullyQualifiedJavaType(introspectedTable.getBaseRecordType()));
 
         Method method = new Method();
-        method = new Method();// 分页查询方法
+        method = new Method();
         method.setName("selectPageByExample");
         method.addParameter(new Parameter(new FullyQualifiedJavaType(introspectedTable.getExampleType()), "example"));
         method.setReturnType(new FullyQualifiedJavaType("java.util.List<" + objectName + ">"));
@@ -50,8 +59,8 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
         XmlElement parentElement = document.getRootElement();
 
-        // ----------------------------------------------------------------------------oracle 分页，生成相关 sql 部分语句 begin
-        // 产生分页语句前半部分
+        /** oracle 分页，生成相关 sql 部分语句 begin */
+        /** 产生分页语句前半部分 */
         XmlElement oraclePaginationPrefixElement = new XmlElement("sql");
         oraclePaginationPrefixElement.addAttribute(new Attribute("id", "OracleDialectPrefix"));
         XmlElement pageStart = new XmlElement("if");
@@ -60,7 +69,7 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         oraclePaginationPrefixElement.addElement(pageStart);
         parentElement.addElement(oraclePaginationPrefixElement);
 
-        // 产生分页语句后半部分
+        /** 产生分页语句后半部分 */
         XmlElement oraclePaginationSuffixElement = new XmlElement("sql");
         oraclePaginationSuffixElement.addAttribute(new Attribute("id", "OracleDialectSuffix"));
         XmlElement pageEnd = new XmlElement("if");
@@ -68,10 +77,10 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         pageEnd.addElement(new TextElement("<![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <=#{page.end} ]]>"));
         oraclePaginationSuffixElement.addElement(pageEnd);
         parentElement.addElement(oraclePaginationSuffixElement);
-        // ----------------------------------------------------------------------------oracle 分页，生成相关 sql 部分语句 end
+        /** oracle 分页，生成相关 sql 部分语句 end */
 
-        // ----------------------------------------------------------------------------mssql 分页，生成相关 sql 部分语句 begin
-        // 产生分页语句前半部分
+        /** mssql 分页，生成相关 sql 部分语句 begin */
+        /** 产生分页语句前半部分 */
         XmlElement mssqlPaginationPrefixElement = new XmlElement("sql");
         mssqlPaginationPrefixElement.addAttribute(new Attribute("id", "MssqlDialectPrefix"));
         XmlElement msPageStart = new XmlElement("if");
@@ -80,7 +89,7 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         mssqlPaginationPrefixElement.addElement(msPageStart);
         parentElement.addElement(mssqlPaginationPrefixElement);
 
-        // 产生分页语句后半部分
+        /** 产生分页语句后半部分 */
         XmlElement mssqlPaginationSuffixElement = new XmlElement("sql");
         mssqlPaginationSuffixElement.addAttribute(new Attribute("id", "MssqlDialectSuffix"));
         XmlElement msPageEnd = new XmlElement("if");
@@ -88,7 +97,7 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         msPageEnd.addElement(new TextElement("<![CDATA[ ) p ) p2 where R > #{page.begin} and R <= #{page.end} ]]>"));
         mssqlPaginationSuffixElement.addElement(msPageEnd);
         parentElement.addElement(mssqlPaginationSuffixElement);
-        // ----------------------------------------------------------------------------mssql 分页，生成相关 sql 部分语句 end
+        /** mssql 分页，生成相关 sql 部分语句 end */
 
         XmlElement mysqlPaginationSuffixElement = new XmlElement("sql");
         mysqlPaginationSuffixElement.addAttribute(new Attribute("id", "MysqlDialect"));
@@ -98,7 +107,7 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         mysqlPaginationSuffixElement.addElement(oraclePage);
         parentElement.addElement(mysqlPaginationSuffixElement);
 
-        // 重写分页方法
+        /** 重写分页方法 */
         XmlElement pageQueryElement = new XmlElement("select");
         pageQueryElement.addAttribute(new Attribute("id", "selectPageByExample"));
         pageQueryElement.addAttribute(new Attribute("resultMap", "BaseResultMap"));
@@ -106,8 +115,8 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         XmlElement oraclePageStart = new XmlElement("include");
         oraclePageStart.addAttribute(new Attribute("refid", "OracleDialectPrefix"));
         pageQueryElement.addElement(oraclePageStart);
-
-        XmlElement mssqlPageStart = new XmlElement("include"); // mssql头部
+        /** mssql头部 */
+        XmlElement mssqlPageStart = new XmlElement("include");
         mssqlPageStart.addAttribute(new Attribute("refid", "MssqlDialectPrefix"));
         pageQueryElement.getElements().add(mssqlPageStart);
 
@@ -140,12 +149,12 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
         XmlElement oraclePageEnd = new XmlElement("include");
         oraclePageEnd.addAttribute(new Attribute("refid", "OracleDialectSuffix"));
         pageQueryElement.addElement(oraclePageEnd);
-
-        XmlElement mssqlPageEnd = new XmlElement("include"); // mssql头部
+        /** mssql头部 */
+        XmlElement mssqlPageEnd = new XmlElement("include");
         mssqlPageEnd.addAttribute(new Attribute("refid", "MssqlDialectSuffix"));
         pageQueryElement.getElements().add(mssqlPageEnd);
-
-        XmlElement mysqlPageEnd = new XmlElement("include"); // mysql头部
+        /** mysql头部 */
+        XmlElement mysqlPageEnd = new XmlElement("include");
         mysqlPageEnd.addAttribute(new Attribute("refid", "MysqlDialect"));
         pageQueryElement.getElements().add(mysqlPageEnd);
         parentElement.addElement(pageQueryElement);
@@ -245,6 +254,7 @@ public class MutiDatasourcePaginationPlugin extends PluginAdapter {
     /**
      * This plugin is always valid - no properties are required
      */
+    @Override
     public boolean validate(List<String> warnings) {
         return true;
     }

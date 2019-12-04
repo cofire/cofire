@@ -12,7 +12,13 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 /**
- * @description: 对没有登录的请求进行拦截, 全部返回json信息. 覆盖掉shiro原本的跳转login.jsp的拦截方式
+ * 
+ * @ClassName: AjaxPermissionsAuthorizationFilter
+ * @Description:对没有登录的请求进行拦截, 全部返回json信息. 覆盖掉shiro原本的跳转login.jsp的拦截方式
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
  */
 public class AjaxPermissionsAuthorizationFilter extends FormAuthenticationFilter {
 

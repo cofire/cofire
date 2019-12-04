@@ -6,14 +6,35 @@ import com.cofire.common.utils.string.DateUtils;
 import com.cofire.dao.model.system.SysLoginAudit;
 import com.cofire.dao.model.system.SysOperateAudit;
 
+/**
+ * 
+ * @ClassName: LogFactory
+ * @Description:日志工厂
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class LogFactory {
+    private static final int DESCRIPTION_LENGTH = 1000;
+    private static final int PARAMETER_LENGTH = 1000;
 
     /**
      * 
-     * @Title: OperateAudits
+     * @Title: createOperateAudit
+     * @author ly
      * @Description:创建操作日志
-     * @return
-     * @return OperateAudits 返回类型
+     * @param @param ip
+     * @param @param sessionId
+     * @param @param reqUrl
+     * @param @param userId
+     * @param @param description
+     * @param @param parameter
+     * @param @param sourceType
+     * @param @param operationType
+     * @param @return
+     * @param @throws Exception 参数
+     * @return SysOperateAudit 返回类型
      */
     public static SysOperateAudit createOperateAudit(String ip, String sessionId, String reqUrl, String userId, String description, String parameter,
             String sourceType, String operationType) throws Exception {
@@ -25,14 +46,14 @@ public class LogFactory {
         if (description == null) {
             description = "";
         }
-        if (description.length() > 1000) {
+        if (description.length() > DESCRIPTION_LENGTH) {
             description = description.substring(0, 1000);
         }
         operateAudit.setDescription(description);
         if (parameter == null) {
             parameter = "";
         }
-        if (parameter.length() > 400) {
+        if (parameter.length() > PARAMETER_LENGTH) {
             parameter = parameter.substring(0, 400);
         }
         operateAudit.setRequestParam(parameter);

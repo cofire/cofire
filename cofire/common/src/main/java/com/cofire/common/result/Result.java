@@ -2,6 +2,15 @@ package com.cofire.common.result;
 
 import com.cofire.common.constant.CodeEnum;
 
+/**
+ * 
+ * @ClassName: Result
+ * @Description:返回结果类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class Result {
     private boolean success = false;
     private String code;

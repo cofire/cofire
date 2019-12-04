@@ -16,8 +16,10 @@ import com.cofire.dao.model.system.SysOperateAudit;
  * 
  * @ClassName: LogTaskFactory
  * @Description:日志操作任务创建工厂
- * @date 2019年4月30日
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 @DependsOn("springContextUtils")
 public class LogTaskFactory {

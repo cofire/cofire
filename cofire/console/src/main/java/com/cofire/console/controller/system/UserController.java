@@ -15,6 +15,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IUserService;
 import com.cofire.dao.model.system.SysUser;
 
+/**
+ * 
+ * @ClassName: UserController
+ * @Description:用户管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/user")
 public class UserController extends SystemBaseController {
@@ -37,7 +46,7 @@ public class UserController extends SystemBaseController {
             return userService.add(user);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return userService.upadte(user);
+            return userService.update(user);
         }
         return result;
     }

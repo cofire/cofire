@@ -6,6 +6,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.result.Result;
 
+/**
+ * 
+ * @ClassName: ErrorController
+ * @Description:错误信息返回
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping("/error")
 public class ErrorController {

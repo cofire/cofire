@@ -7,18 +7,29 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 
+/**
+ * 
+ * @ClassName: MapUtil
+ * @Description:Map 工具类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class MapUtil {
-    private static final int ChineseLen = 3;
+    private static final int CHINESE_LEN = 3;
 
     /**
+     * 特定格式的List转Map
      * 
-     * @Title: list2Map @Description: TODO(特定格式的List转Map) @param @param dtList @param @param keyStr @param @return
-     *         设定文件 @return Map<String,Map<String,String>> 返回类型 @throws
+     * @param dtList
+     * @param keyStr
+     * @return
      */
     public static Map<String, Map<String, String>> list2Map(List<Map<String, String>> dtList, String keyStr) {
-        Map<String, Map<String, String>> resultMap = new HashMap<String, Map<String, String>>();
+        Map<String, Map<String, String>> resultMap = new HashMap<String, Map<String, String>>(10);
         for (int i = 0; i < dtList.size(); i++) {
-            Map<String, String> dtMap = new HashMap<String, String>();
+            Map<String, String> dtMap = new HashMap<String, String>(10);
             dtMap = dtList.get(i);
             resultMap.put(dtMap.get(keyStr), dtMap);
         }
@@ -35,9 +46,9 @@ public class MapUtil {
      * @return Map<String,Map<String,String>> 返回类型
      */
     public static Map<String, List<Map<String, String>>> listGroup2Map(List<Map<String, String>> dtList, String keyStr) {
-        Map<String, List<Map<String, String>>> resultMap = new HashMap<String, List<Map<String, String>>>();
+        Map<String, List<Map<String, String>>> resultMap = new HashMap<String, List<Map<String, String>>>(10);
         for (int i = 0; i < dtList.size(); i++) {
-            Map<String, String> dtMap = new HashMap<String, String>();
+            Map<String, String> dtMap = new HashMap<String, String>(10);
             dtMap = dtList.get(i);
             if (CollectionUtils.isEmpty(resultMap.get(dtMap.get(keyStr)))) {
                 List<Map<String, String>> dtMaps = new ArrayList<>();
@@ -64,9 +75,11 @@ public class MapUtil {
     }
 
     /**
+     * 返回map中某key的长度
      * 
-     * @Title: mapKeyLength @Description: TODO(返回map中某key的长度) @param @param map @param @param key @param @return
-     *         设定文件 @return int 返回类型 @throws
+     * @param map
+     * @param key
+     * @return
      */
     public static int mapKeyLength(Map map, String key) {
         int len = 0;
@@ -74,7 +87,7 @@ public class MapUtil {
         for (int i = 0; i < tmpText.length(); i++) {
             char c = tmpText.charAt(i);
             if (c > 255) {
-                len += ChineseLen;
+                len += CHINESE_LEN;
             } else {
                 len += 1;
 

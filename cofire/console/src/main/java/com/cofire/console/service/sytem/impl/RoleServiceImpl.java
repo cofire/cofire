@@ -43,12 +43,19 @@ import com.cofire.dao.model.system.SysUser;
 import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 
+/**
+ * 
+ * @ClassName: RoleServiceImpl
+ * @Description: 角色管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class RoleServiceImpl implements IRoleService {
 
     private final static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
-    // @Autowired
-    // private SysRoleMapper roleMapper;
     @Autowired
     private SysUserRoleMapper userRoleMapper;
     @Autowired
@@ -178,7 +185,7 @@ public class RoleServiceImpl implements IRoleService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:角色信息
      * @param @param role
@@ -187,7 +194,7 @@ public class RoleServiceImpl implements IRoleService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result upadte(SysRole role, String permission) {
+    public Result update(SysRole role, String permission) {
         Result result = new Result();
         try {
             if (ParamValidator.checkParamsHasEmpty(role, "roleId", "roleNmae")) {
@@ -325,7 +332,7 @@ public class RoleServiceImpl implements IRoleService {
                     checkedSet.add(roleResource.getResourceId());
                 }
             }
-            HashMap<String, Object> resultMap = new HashMap<>();
+            HashMap<String, Object> resultMap = new HashMap<>(20);
             resultMap.put("resourceTree", TreeUtil.buildByRecursive(treeList));
             resultMap.put("checked", checkedSet);
             result.setData(resultMap);

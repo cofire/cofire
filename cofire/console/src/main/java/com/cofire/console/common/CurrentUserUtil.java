@@ -6,6 +6,15 @@ import org.apache.shiro.session.Session;
 import com.cofire.common.constant.Constants;
 import com.cofire.dao.model.system.SysUser;
 
+/**
+ * 
+ * @ClassName: CurrentUserUtil
+ * @Description:获取当前用户的工具类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class CurrentUserUtil {
     /**
      * 

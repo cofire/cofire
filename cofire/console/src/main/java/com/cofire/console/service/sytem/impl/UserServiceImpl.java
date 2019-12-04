@@ -8,11 +8,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +42,15 @@ import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 import com.cofire.dao.rowModel.SysUserRowModel;
 
+/**
+ * 
+ * @ClassName: UserServiceImpl
+ * @Description:用户信息管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -166,7 +175,7 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:用户信息
      * @param @param user
@@ -174,7 +183,7 @@ public class UserServiceImpl implements IUserService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysUser user) {
+    public Result update(SysUser user) {
         Result result = new Result();
         try {
             logger.info("正在修改用户信息");
@@ -380,7 +389,7 @@ public class UserServiceImpl implements IUserService {
             List<SysUserRowModel> dataList = new ArrayList<SysUserRowModel>();
             for (SysUser sysUser : userList) {
                 SysUserRowModel userRowModel = new SysUserRowModel();
-                BeanUtils.copyProperties(userRowModel, sysUser);
+                BeanUtils.copyProperties(sysUser, userRowModel);
                 dataList.add(userRowModel);
             }
             // EasyExcelUtils.createExcelStream(response, dataList, ExcelTypeEnum.XLS, "test");

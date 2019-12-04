@@ -12,12 +12,13 @@ import com.cofire.console.common.impl.SystemService;
 import com.cofire.quartz.QuartzJobConfig;
 
 /**
- * 系统启动监听器
  * 
  * @ClassName: SystemInitListener
- * @Description:
- * @date 2019年5月5日
+ * @Description:系统启动监听器
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 
 @WebListener

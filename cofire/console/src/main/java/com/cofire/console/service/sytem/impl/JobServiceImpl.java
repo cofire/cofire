@@ -25,6 +25,15 @@ import com.cofire.dao.model.system.QtzJob;
 import com.cofire.dao.model.system.QtzJobExample;
 import com.cofire.quartz.QuartzJobConfig;
 
+/**
+ * 
+ * @ClassName: JobServiceImpl
+ * @Description:定时任务管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class JobServiceImpl implements IJobService {
 
@@ -136,7 +145,7 @@ public class JobServiceImpl implements IJobService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:定时任务信息
      * @param @param job
@@ -145,7 +154,7 @@ public class JobServiceImpl implements IJobService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result upadte(QtzJob job) {
+    public Result update(QtzJob job) {
         Result result = new Result();
         try {
             logger.info("正在修改定时任务信息");

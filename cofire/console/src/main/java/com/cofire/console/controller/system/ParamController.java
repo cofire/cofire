@@ -13,6 +13,16 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IParamService;
 import com.cofire.dao.model.system.SysParam;
 
+/**
+ * 
+ * @ClassName: ParamController
+ * @Description:系统参数
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
+
 @RestController
 @RequestMapping(value = "/console/param")
 public class ParamController extends SystemBaseController {
@@ -35,7 +45,7 @@ public class ParamController extends SystemBaseController {
             return paramService.add(param);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return paramService.upadte(param);
+            return paramService.update(param);
         }
         return result;
     }

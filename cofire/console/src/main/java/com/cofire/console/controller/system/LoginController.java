@@ -8,6 +8,15 @@ import com.cofire.common.result.Result;
 import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.ILoginService;
 
+/**
+ * 
+ * @ClassName: LoginController
+ * @Description:登录登出
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping("/console")
 public class LoginController extends SystemBaseController {

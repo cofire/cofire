@@ -14,11 +14,21 @@ import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
+/**
+ * 
+ * @ClassName: DeleteLogicByIdsPlugin
+ * @Description:按id删除插件
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class DeleteLogicByIdsPlugin extends PluginAdapter {
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean validate(List<String> warnings) {
         return true;
     }
@@ -67,8 +77,8 @@ public class DeleteLogicByIdsPlugin extends PluginAdapter {
 
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
-
-        String tableName = introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime();// 数据库表名
+        /** 数据库表名 */
+        String tableName = introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime();
 
         XmlElement parentElement = document.getRootElement();
 

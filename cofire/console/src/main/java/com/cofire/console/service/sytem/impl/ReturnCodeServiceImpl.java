@@ -25,6 +25,15 @@ import com.cofire.dao.mapper.system.SysReturnCodeMapper;
 import com.cofire.dao.model.system.SysReturnCode;
 import com.cofire.dao.model.system.SysReturnCodeExample;
 
+/**
+ * 
+ * @ClassName: ReturnCodeServiceImpl
+ * @Description: 返回码管理
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class ReturnCodeServiceImpl implements IReturnCodeService {
 
@@ -131,7 +140,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:返回码信息
      * @param @param returnCode
@@ -139,7 +148,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysReturnCode returnCode) {
+    public Result update(SysReturnCode returnCode) {
         Result result = new Result();
         try {
             logger.info("正在修改返回码信息");

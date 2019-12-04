@@ -15,6 +15,15 @@ import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 
+/**
+ * 
+ * @ClassName: SelectCountAndListByMapPlugin
+ * @Description:查询总数
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class SelectCountAndListByMapPlugin extends PluginAdapter {
 
     /**
@@ -40,7 +49,8 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
 
         // 形如 表名+别名 ： sys_sysman_resource sys_sysman_resource
-        String tableWithAliasName = introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime();// 数据库表名
+        // 数据库表名
+        String tableWithAliasName = introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime();
 
         // 形如 表名 ： sys_sysman_resource
         String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
@@ -99,19 +109,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin equal = 相等部分的 操作
         StringBuilder sbEqual = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sbEqual.setLength(0);
             sbEqual.append(introspectedColumn.getJavaProperty());
-            sbEqual.append(" != null"); //$NON-NLS-1$
-            sbEqual.append(" and "); //$NON-NLS-1$
+            sbEqual.append(" != null");
+            sbEqual.append(" and ");
             sbEqual.append(introspectedColumn.getJavaProperty());
-            sbEqual.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sbEqual.toString())); //$NON-NLS-1$
+            sbEqual.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sbEqual.toString()));
 
             sbEqual.setLength(0);
             sbEqual.append(" AND ");
             sbEqual.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sbEqual.append(" = "); //$NON-NLS-1$
+            sbEqual.append(" = ");
             sbEqual.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn));
             valuesNotNullElement.addElement(new TextElement(sbEqual.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -121,19 +131,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin greater 大于
         StringBuilder sbGreater = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sbGreater.setLength(0);
             sbGreater.append("myGreater_" + introspectedColumn.getJavaProperty());
-            sbGreater.append(" != null"); //$NON-NLS-1$
-            sbGreater.append(" and "); //$NON-NLS-1$
+            sbGreater.append(" != null");
+            sbGreater.append(" and ");
             sbGreater.append("myGreater_" + introspectedColumn.getJavaProperty());
-            sbGreater.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sbGreater.toString())); //$NON-NLS-1$
+            sbGreater.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sbGreater.toString()));
 
             sbGreater.setLength(0);
             sbGreater.append(" AND ");
             sbGreater.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sbGreater.append(" &gt; "); //$NON-NLS-1$
+            sbGreater.append(" &gt; ");
             sbGreater.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn, "myGreater_"));
             valuesNotNullElement.addElement(new TextElement(sbGreater.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -143,19 +153,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin lesser 小于
         StringBuilder sbLesser = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sbLesser.setLength(0);
             sbLesser.append("myLesser_" + introspectedColumn.getJavaProperty());
-            sbLesser.append(" != null"); //$NON-NLS-1$
-            sbLesser.append(" and "); //$NON-NLS-1$
+            sbLesser.append(" != null");
+            sbLesser.append(" and ");
             sbLesser.append("myLesser_" + introspectedColumn.getJavaProperty());
-            sbLesser.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sbLesser.toString())); //$NON-NLS-1$
+            sbLesser.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sbLesser.toString()));
 
             sbLesser.setLength(0);
             sbLesser.append(" AND ");
             sbLesser.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sbLesser.append(" &lt; "); //$NON-NLS-1$
+            sbLesser.append(" &lt; ");
             sbLesser.append(MyBatis3FormattingUtilities.getParameterClause(introspectedColumn, "myLesser_"));
             valuesNotNullElement.addElement(new TextElement(sbLesser.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -165,19 +175,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin like 相似部分的 操作-前后完全匹配相似
         StringBuilder sblike = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sblike.setLength(0);
             sblike.append("myLike_" + introspectedColumn.getJavaProperty());
-            sblike.append(" != null"); //$NON-NLS-1$
-            sblike.append(" and "); //$NON-NLS-1$
+            sblike.append(" != null");
+            sblike.append(" and ");
             sblike.append("myLike_" + introspectedColumn.getJavaProperty());
-            sblike.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sblike.toString())); //$NON-NLS-1$
+            sblike.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sblike.toString()));
 
             sblike.setLength(0);
             sblike.append(" AND ");
             sblike.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sblike.append(" like "); //$NON-NLS-1$
+            sblike.append(" like ");
             sblike.append("CONCAT('%', " + MyBatis3FormattingUtilities.getParameterClause(introspectedColumn, "myLike_") + ",'%' )");
             valuesNotNullElement.addElement(new TextElement(sblike.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -187,19 +197,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin like 相似部分的 操作-前端匹配
         StringBuilder sblikeStart = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sblikeStart.setLength(0);
             sblikeStart.append("myLikeStart_" + introspectedColumn.getJavaProperty());
-            sblikeStart.append(" != null"); //$NON-NLS-1$
-            sblikeStart.append(" and "); //$NON-NLS-1$
+            sblikeStart.append(" != null");
+            sblikeStart.append(" and ");
             sblikeStart.append("myLikeStart_" + introspectedColumn.getJavaProperty());
-            sblikeStart.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sblikeStart.toString())); //$NON-NLS-1$
+            sblikeStart.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sblikeStart.toString()));
 
             sblikeStart.setLength(0);
             sblikeStart.append(" AND ");
             sblikeStart.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sblikeStart.append(" like "); //$NON-NLS-1$
+            sblikeStart.append(" like ");
             sblikeStart.append("CONCAT('%', " + MyBatis3FormattingUtilities.getParameterClause(introspectedColumn, "myLikeStart_") + ")");
             valuesNotNullElement.addElement(new TextElement(sblikeStart.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -209,19 +219,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin like 相似部分的 操作-后端匹配
         StringBuilder sblikeEnd = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sblikeEnd.setLength(0);
             sblikeEnd.append("myLikeEnd_" + introspectedColumn.getJavaProperty());
-            sblikeEnd.append(" != null"); //$NON-NLS-1$
-            sblikeEnd.append(" and "); //$NON-NLS-1$
+            sblikeEnd.append(" != null");
+            sblikeEnd.append(" and ");
             sblikeEnd.append("myLikeEnd_" + introspectedColumn.getJavaProperty());
-            sblikeEnd.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sblikeEnd.toString())); //$NON-NLS-1$
+            sblikeEnd.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sblikeEnd.toString()));
 
             sblikeEnd.setLength(0);
             sblikeEnd.append(" AND ");
             sblikeEnd.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sblikeEnd.append(" like "); //$NON-NLS-1$
+            sblikeEnd.append(" like ");
             sblikeEnd.append("CONCAT( " + MyBatis3FormattingUtilities.getParameterClause(introspectedColumn, "myLikeEnd_") + ",'%' )");
             valuesNotNullElement.addElement(new TextElement(sblikeEnd.toString()));
             trimElement.addElement(valuesNotNullElement);
@@ -231,19 +241,19 @@ public class SelectCountAndListByMapPlugin extends PluginAdapter {
         // alexgaoyh begin in 语句
         StringBuilder sbIn = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             sbIn.setLength(0);
             sbIn.append("myIn_" + introspectedColumn.getJavaProperty());
-            sbIn.append(" != null"); //$NON-NLS-1$
-            sbIn.append(" and "); //$NON-NLS-1$
+            sbIn.append(" != null");
+            sbIn.append(" and ");
             sbIn.append("myIn_" + introspectedColumn.getJavaProperty());
-            sbIn.append(" != ''"); //$NON-NLS-1$
-            valuesNotNullElement.addAttribute(new Attribute("test", sbIn.toString())); //$NON-NLS-1$
+            sbIn.append(" != ''");
+            valuesNotNullElement.addAttribute(new Attribute("test", sbIn.toString()));
 
             sbIn.setLength(0);
             sbIn.append(" AND ");
             sbIn.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            sbIn.append(" in "); //$NON-NLS-1$
+            sbIn.append(" in ");
             sbIn.append("<foreach item=\"item\" index=\"index\" collection=\"" + "myIn_" + introspectedColumn.getJavaProperty()
                     + "\" open=\"(\" separator=\",\" close=\")\"> #{item} </foreach>");
             valuesNotNullElement.addElement(new TextElement(sbIn.toString()));

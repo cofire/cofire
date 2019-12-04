@@ -13,6 +13,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IReturnCodeService;
 import com.cofire.dao.model.system.SysReturnCode;
 
+/**
+ * 
+ * @ClassName: ReturnCodeController
+ * @Description:返回码
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/returnCode")
 public class ReturnCodeController extends SystemBaseController {
@@ -35,7 +44,7 @@ public class ReturnCodeController extends SystemBaseController {
             return returnCodeService.add(returnCode);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return returnCodeService.upadte(returnCode);
+            return returnCodeService.update(returnCode);
         }
         return result;
     }

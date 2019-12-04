@@ -19,6 +19,15 @@ import com.cofire.dao.mapper.system.QtzJobLogMapper;
 import com.cofire.dao.model.system.QtzJobLog;
 import com.cofire.dao.model.system.QtzJobLogExample;
 
+/**
+ * 
+ * @ClassName: JobLogServiceImpl
+ * @Description:定时任务日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class JobLogServiceImpl implements IJobLogService {
 

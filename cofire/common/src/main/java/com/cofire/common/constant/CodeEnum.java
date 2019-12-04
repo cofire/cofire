@@ -3,10 +3,11 @@ package com.cofire.common.constant;
 /**
  * 
  * @ClassName: CodeEnum
- * @Description:返回码分为10位，前两位划分子系统（00代表系统模块公共返回参数，01代表用户管理，依次类推）， 中间两位划分页面（每一个页面一个返回码），
- *                                                               五六位划分功能（00-新增，01-修改，02-删除，03-查询），七到十位自定义返回码（自定义不重复即可)
- * @date 2019年5月13日
+ * @Description:返回码
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 public enum CodeEnum {
 

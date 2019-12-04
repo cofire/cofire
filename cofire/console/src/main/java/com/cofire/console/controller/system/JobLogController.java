@@ -11,6 +11,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IJobLogService;
 import com.cofire.dao.model.system.QtzJobLog;
 
+/**
+ * 
+ * @ClassName: JobLogController
+ * @Description:定时任务日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/jobLog")
 public class JobLogController extends SystemBaseController {

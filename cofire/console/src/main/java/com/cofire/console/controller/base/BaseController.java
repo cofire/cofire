@@ -25,6 +25,15 @@ import com.cofire.dao.model.custom.Menu;
 import com.cofire.dao.model.custom.UserDetailModel;
 import com.cofire.dao.model.system.SysUser;
 
+/**
+ * 
+ * @ClassName: BaseController
+ * @Description:基础controller
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping
 public class BaseController {
@@ -39,7 +48,7 @@ public class BaseController {
         Result result = new Result();
         UserDetailModel<SysUser, Menu> userDetail = new UserDetailModel<SysUser, Menu>();
         try {
-            List<Menu> menus = new ArrayList<>(); // 菜单
+            List<Menu> menus = new ArrayList<>();
             SysUser user = CurrentUserUtil.getCurentUser();
             String userId = user.getUserId();
             logger.info("当前登录用户的id：" + userId);

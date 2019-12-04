@@ -13,6 +13,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IDictService;
 import com.cofire.dao.model.system.SysDict;
 
+/**
+ * 
+ * @ClassName: DictController
+ * @Description:数据字典
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/dict")
 public class DictController extends SystemBaseController {
@@ -35,7 +44,7 @@ public class DictController extends SystemBaseController {
             return dictService.add(dict);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return dictService.upadte(dict);
+            return dictService.update(dict);
         }
         return result;
     }

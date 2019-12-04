@@ -13,6 +13,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IJobService;
 import com.cofire.dao.model.system.QtzJob;
 
+/**
+ * 
+ * @ClassName: JobController
+ * @Description:定时任务
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/job")
 public class JobController extends SystemBaseController {
@@ -35,7 +44,7 @@ public class JobController extends SystemBaseController {
             return jobService.add(job);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return jobService.upadte(job);
+            return jobService.update(job);
         }
         return result;
     }

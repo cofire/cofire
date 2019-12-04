@@ -20,6 +20,15 @@ import com.cofire.dao.mapper.system.SysOperateAuditMapper;
 import com.cofire.dao.model.system.SysOperateAudit;
 import com.cofire.dao.model.system.SysOperateAuditExample;
 
+/**
+ * 
+ * @ClassName: OperateAuditServiceImpl
+ * @Description:操作日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Service
 public class OperateAuditServiceImpl implements IOperateAuditService {
 

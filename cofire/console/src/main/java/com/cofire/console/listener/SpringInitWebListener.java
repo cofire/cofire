@@ -16,11 +16,14 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.cofire.common.utils.spring.SpringContextUtils;
 
 /**
- * @author chl_seu
- * @version 1.0
  * 
- *          读取Spring配置，初始化ApplicationContext. 在web应用中一般用ContextLoaderListener加载webapplication,
- *          如果需要在action之外或者control类之外获取webapplication思路之一是，单独写个类放在static变量中
+ * @ClassName: SpringInitWebListener
+ * @Description: 读取Spring配置，初始化ApplicationContext. 在web应用中一般用ContextLoaderListener加载webapplication,
+ *               如果需要在action之外或者control类之外获取webapplication思路之一是，单独写个类放在static变量中
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
  */
 @WebListener
 public class SpringInitWebListener extends ContextLoaderListener {

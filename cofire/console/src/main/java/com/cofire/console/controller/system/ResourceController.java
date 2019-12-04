@@ -12,6 +12,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IResourceService;
 import com.cofire.dao.model.system.SysResource;
 
+/**
+ * 
+ * @ClassName: ResourceController
+ * @Description:菜单
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/resource")
 public class ResourceController extends SystemBaseController {
@@ -34,7 +43,7 @@ public class ResourceController extends SystemBaseController {
             return resourceService.add(resource);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return resourceService.upadte(resource);
+            return resourceService.update(resource);
         }
         return result;
     }

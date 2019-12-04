@@ -119,14 +119,16 @@ public class ImageMarkUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (null != is)
+                if (null != is) {
                     is.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-                if (null != os)
+                if (null != os) {
                     os.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -6,12 +6,21 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * 
+ * @ClassName: SystemUtil
+ * @Description:系统工具类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class SystemUtil {
-    // 系统参数Map
+    /** 系统参数Map */
     private static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
-    // 数据字典分组
+    /** 数据字典分组 */
     private static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
-    // 数据字典
+    /** 数据字典 */
     private static Map<String, Map<String, String>> dtDictMap = new HashMap<String, Map<String, String>>();
 
     public static Map<String, Map<String, String>> getSysParamMap() {

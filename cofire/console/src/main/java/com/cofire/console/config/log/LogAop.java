@@ -29,9 +29,11 @@ import com.cofire.dao.model.system.SysUser;
 /**
  * 
  * @ClassName: LogAop
- * @Description: 业务日志记录
- * @date 2019年4月30日
+ * @Description:业务日志记录
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 @Aspect
 @Component
@@ -41,6 +43,8 @@ public class LogAop {
 
     ThreadLocal<SysOperateAudit> aopLog = new ThreadLocal<>();
     SysOperateAudit operateAudit = new SysOperateAudit();
+
+    private static final int RESULT_LENGTH = 1000;
 
     @Pointcut(value = "@annotation(com.cofire.console.config.log.BussinessLog)")
     public void cutService() {
@@ -77,18 +81,18 @@ public class LogAop {
         BussinessLog annotation = currentMethod.getAnnotation(BussinessLog.class);
         String bussinessName = annotation.value();
         // 获取请求ip
-        String ip = HttpContext.getClientIP();
-        String reqURI = HttpContext.getRequestURI();
+        String ip = HttpContext.getClientIp();
+        String reqUrl = HttpContext.getRequestUri();
         logger.info("接口说明：" + bussinessName);
         logger.info("接口参数：" + parameter.toString());
         logger.info("请求用户id：" + userId);
         logger.info("请求用户Session：" + sessionId);
         logger.info("请求方法：" + className + "." + methodName);
         logger.info("请求Ip：" + ip);
-        logger.info("请求URI：" + reqURI);
+        logger.info("请求URI：" + reqUrl);
         logger.info("请求类型：" + parameter.get("operation"));
         logger.info("操作来源：" + parameter.get("source"));
-        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqURI, userId, bussinessName, parameter.toString(), parameter.get("source"),
+        operateAudit = LogFactory.createOperateAudit(ip, sessionId, reqUrl, userId, bussinessName, parameter.toString(), parameter.get("source"),
                 parameter.get("operation"));
         aopLog.set(operateAudit);
     }
@@ -96,7 +100,7 @@ public class LogAop {
     @AfterReturning(returning = "ret", pointcut = "cutService()")
     public void doAfterReturning(Object ret) throws Throwable {
         String result = JSON.toJSONString(ret);
-        if (result.length() > 1000) {
+        if (result.length() > RESULT_LENGTH) {
             result = result.substring(0, 1000);
         }
         try {
@@ -106,6 +110,8 @@ public class LogAop {
             LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
         } catch (Exception e) {
             logger.error("记录操作日志失败：" + e.getMessage());
+        } finally {
+            aopLog.remove();
         }
 
     }

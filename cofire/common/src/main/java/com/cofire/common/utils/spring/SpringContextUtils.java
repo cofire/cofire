@@ -8,6 +8,15 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+/**
+ * 
+ * @ClassName: SpringContextUtils
+ * @Description:spring工具类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class SpringContextUtils implements ApplicationContextAware {
     private static final Logger logger = LoggerFactory.getLogger(SpringContextUtils.class);
 
@@ -67,6 +76,7 @@ public class SpringContextUtils implements ApplicationContextAware {
         return applicationContext;
     }
 
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         getInstance().applicationContext = applicationContext;
     }

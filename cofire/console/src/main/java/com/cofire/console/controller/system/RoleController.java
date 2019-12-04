@@ -14,6 +14,15 @@ import com.cofire.console.service.sytem.IRoleService;
 import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysUser;
 
+/**
+ * 
+ * @ClassName: RoleController
+ * @Description:角色
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/role")
 public class RoleController extends SystemBaseController {
@@ -36,7 +45,7 @@ public class RoleController extends SystemBaseController {
             return roleService.add(role, permission);
         }
         if (Constants.OPERATION_UPDATE.equalsIgnoreCase(operation)) {
-            return roleService.upadte(role, permission);
+            return roleService.update(role, permission);
         }
         return result;
     }

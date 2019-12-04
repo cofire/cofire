@@ -11,6 +11,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.ILoginAuditService;
 import com.cofire.dao.model.system.SysLoginAudit;
 
+/**
+ * 
+ * @ClassName: LoginAuditController
+ * @Description:登录日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/loginAudit")
 public class LoginAuditController extends SystemBaseController {

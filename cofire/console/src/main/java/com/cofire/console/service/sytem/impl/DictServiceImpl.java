@@ -25,6 +25,17 @@ import com.cofire.dao.mapper.system.SysDictMapper;
 import com.cofire.dao.model.system.SysDict;
 import com.cofire.dao.model.system.SysDictExample;
 
+/**
+ * 数据字典
+ * 
+ * @ClassName: DictServiceImpl
+ * @Description:
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
+
 @Service
 public class DictServiceImpl implements IDictService {
 
@@ -107,7 +118,7 @@ public class DictServiceImpl implements IDictService {
     public Result add(SysDict dict) {
         Result result = new Result();
         try {
-            if (ParamValidator.checkParamsHasEmpty(dict, "dictId", "dictNmae")) {
+            if (ParamValidator.checkParamsHasEmpty(dict, "dictId", "dictName")) {
                 result.setSuccess(false, CodeEnum.E_400);
                 return result;
             }
@@ -138,7 +149,7 @@ public class DictServiceImpl implements IDictService {
 
     /**
      * 
-     * @Title: upadte
+     * @Title: update
      * @author ly
      * @Description:数据字典信息
      * @param @param dict
@@ -146,7 +157,7 @@ public class DictServiceImpl implements IDictService {
      * @return Result 返回类型
      */
     @Override
-    public Result upadte(SysDict dict) {
+    public Result update(SysDict dict) {
         Result result = new Result();
         try {
             logger.info("正在修改数据字典信息");

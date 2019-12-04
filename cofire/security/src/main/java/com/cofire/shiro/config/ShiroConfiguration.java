@@ -18,6 +18,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+/**
+ * 
+ * @ClassName: ShiroConfiguration
+ * @Description:shiro配置
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @Configuration
 public class ShiroConfiguration {
 

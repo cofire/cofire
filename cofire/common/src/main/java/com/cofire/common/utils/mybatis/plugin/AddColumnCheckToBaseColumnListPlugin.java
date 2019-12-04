@@ -25,6 +25,7 @@ import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
  *
  */
 public class AddColumnCheckToBaseColumnListPlugin extends PluginAdapter {
+    @Override
     public boolean validate(List<String> arg0) {
         return true;
     }
@@ -47,19 +48,19 @@ public class AddColumnCheckToBaseColumnListPlugin extends PluginAdapter {
         trimElement.addAttribute(new Attribute("suffixOverrides", ","));
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
             StringBuffer strIf = new StringBuffer();
-            XmlElement valuesNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            XmlElement valuesNotNullElement = new XmlElement("if");
             strIf.setLength(0);
             strIf.append("myColumn_" + introspectedColumn.getJavaProperty());
-            strIf.append(" == null"); //$NON-NLS-1$
-            strIf.append(" or "); //$NON-NLS-1$
+            strIf.append(" == null");
+            strIf.append(" or ");
             strIf.append("myColumn_" + introspectedColumn.getJavaProperty());
-            strIf.append(" == ''"); //$NON-NLS-1$
+            strIf.append(" == ''");
 
-            valuesNotNullElement.addAttribute(new Attribute("test", strIf.toString())); //$NON-NLS-1$
+            valuesNotNullElement.addAttribute(new Attribute("test", strIf.toString()));
 
             strIf.setLength(0);
             strIf.append(MyBatis3FormattingUtilities.getAliasedEscapedColumnName(introspectedColumn));
-            strIf.append(" as "); //$NON-NLS-1$
+            strIf.append(" as ");
             strIf.append(introspectedColumn.getTableAlias() + "_" + introspectedColumn.getActualColumnName() + " ,");
             valuesNotNullElement.addElement(new TextElement(strIf.toString()));
 

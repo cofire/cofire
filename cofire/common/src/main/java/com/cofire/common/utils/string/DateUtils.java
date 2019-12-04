@@ -53,26 +53,29 @@ public final class DateUtils {
 
     public static String getDay(Date date) {
 
-        if (date == null)
+        if (date == null) {
             return null;
-        else
+        } else {
             return dateToNumber(date).substring(6, 8);
+        }
     }
 
     public static String getMonth(Date date) {
 
-        if (date == null)
+        if (date == null) {
             return null;
-        else
+        } else {
             return dateToNumber(date).substring(4, 6);
+        }
     }
 
     public static String getYear(Date date) {
 
-        if (date == null)
+        if (date == null) {
             return null;
-        else
+        } else {
             return dateToNumber(date).substring(0, 4);
+        }
     }
 
     public static String dataTimeToString(Date time) {
@@ -125,8 +128,9 @@ public final class DateUtils {
 
     public static Date stringToDate(String string) throws ParseException {
 
-        if (string == null)
+        if (string == null) {
             return null;
+        }
         if (string.trim().length() == 0) {
 
             return null;
@@ -139,8 +143,9 @@ public final class DateUtils {
 
     public static Date stringToDate(String string, String format) throws ParseException {
 
-        if (string == null)
+        if (string == null) {
             return null;
+        }
         if (string.trim().length() == 0) {
 
             return null;
@@ -153,8 +158,9 @@ public final class DateUtils {
 
     public static Date stringToFullDateTimeWithTimeCompact(String string) throws ParseException {
 
-        if (string == null)
+        if (string == null) {
             return null;
+        }
         if (string.trim().length() == 0) {
 
             return null;
@@ -167,8 +173,9 @@ public final class DateUtils {
 
     public static Date stringToFullDateTimeWithCompact(String string) throws ParseException {
 
-        if (string == null)
+        if (string == null) {
             return null;
+        }
         if (string.trim().length() == 0) {
 
             return null;
@@ -181,8 +188,9 @@ public final class DateUtils {
 
     public static String stringToDateString(String string) {
 
-        if (string == null)
+        if (string == null) {
             return null;
+        }
         StringBuilder time = new StringBuilder();
         for (int i = 0; i < 14; i++) {
 
@@ -197,8 +205,9 @@ public final class DateUtils {
                 time.append(" ");
                 continue;
             }
-            if (i == 9 || i == 11)
+            if (i == 9 || i == 11) {
                 time.append(":");
+            }
         }
 
         return time.toString();
@@ -223,29 +232,32 @@ public final class DateUtils {
 
     public static String numberToDateString(String string) {
 
-        if (string == null || string.trim().length() != 8)
+        if (string == null || string.trim().length() != 8) {
             return "";
-        else
+        } else {
             return (new StringBuilder()).append(string.substring(0, 4)).append("-").append(string.substring(4, 6)).append("-").append(string.substring(6, 8))
                     .toString();
+        }
     }
 
     public static String numberToTimeString(String time) {
 
-        if (time == null || time.trim().length() != 14)
+        if (time == null || time.trim().length() != 14) {
             return "";
-        else
+        } else {
             return (new StringBuilder()).append(time.substring(0, 4)).append("-").append(time.substring(4, 6)).append("-").append(time.substring(6, 8))
                     .append(" ").append(time.substring(8, 10)).append(":").append(time.substring(10, 12)).append(":").append(time.substring(12, 14)).toString();
+        }
     }
 
     public static String numberToTimeString2(String time) {
 
-        if (time == null || time.trim().length() != 6)
+        if (time == null || time.trim().length() != 6) {
             return "";
-        else
+        } else {
             return (new StringBuilder()).append(time.substring(0, 2)).append(":").append(time.substring(2, 4)).append(":").append(time.substring(4, 6))
                     .toString();
+        }
     }
 
     public static Date numberToTime(String string) throws ParseException {

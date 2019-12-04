@@ -112,19 +112,20 @@ public class Util {
         String stmp = "";
         for (int n = 0; n < b.length; n++) {
             stmp = Integer.toHexString(b[n] & 0xFF);
-            if (stmp.length() == 1)
+            if (stmp.length() == 1) {
                 hs += ("0" + stmp);
-            else
+            } else {
                 hs += stmp;
+            }
         }
         return hs.toUpperCase();
     }
 
     // 十六進制串到字節轉換
     public static byte[] hex2byte(byte[] b) {
-        if ((b.length % 2) != 0)
+        if ((b.length % 2) != 0) {
             throw new IllegalArgumentException("长度不是偶数!");
-
+        }
         byte[] b2 = new byte[b.length / 2];
 
         for (int n = 0; n < b.length; n += 2) {
@@ -320,8 +321,9 @@ public class Util {
             field.setAccessible(true);
             String name = field.getName();
             Object value = field.get(o);
-            if (value != null)
+            if (value != null) {
                 map.put(name, value);
+            }
         }
         Set<Entry<String, Object>> set = map.entrySet();
         Iterator<Entry<String, Object>> it = set.iterator();

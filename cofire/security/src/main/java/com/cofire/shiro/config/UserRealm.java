@@ -22,6 +22,15 @@ import com.cofire.common.constant.Constants;
 import com.cofire.dao.model.system.SysUser;
 import com.cofire.shiro.service.IUserPermissionService;
 
+/**
+ * 
+ * @ClassName: UserRealm
+ * @Description:用户信息校验
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class UserRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(UserRealm.class);
 

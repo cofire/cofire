@@ -11,6 +11,15 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.IOperateAuditService;
 import com.cofire.dao.model.system.SysOperateAudit;
 
+/**
+ * 
+ * @ClassName: OperateAuditController
+ * @Description:操作日志
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping(value = "/console/operateAudit")
 public class OperateAuditController extends SystemBaseController {

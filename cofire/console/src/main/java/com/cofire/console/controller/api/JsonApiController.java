@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cofire.common.result.Result;
 
+/**
+ * 
+ * @ClassName: JsonApiController
+ * @Description:测试接收json格式参数
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 @RestController
 @RequestMapping("/console/api")
 public class JsonApiController {

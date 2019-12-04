@@ -16,6 +16,15 @@ import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 
+/**
+ * 
+ * @ClassName: MysqlPaginationPlugin
+ * @Description:mysql分页插件
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class MysqlPaginationPlugin extends PluginAdapter {
 
     @Override
@@ -98,6 +107,7 @@ public class MysqlPaginationPlugin extends PluginAdapter {
         topLevelClass.addMethod(getterMethod);
     }
 
+    @Override
     public boolean validate(List<String> warnings) {
         return true;
     }

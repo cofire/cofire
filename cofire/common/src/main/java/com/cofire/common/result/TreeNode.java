@@ -2,11 +2,23 @@ package com.cofire.common.result;
 
 import java.util.List;
 
+/**
+ * 
+ * @ClassName: TreeNode
+ * @Description:树结构
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class TreeNode {
-    private String id;// 本节点id
-    private String name;// 本节点名称
-    private String parentId;// 本节点的父节点
-    // 子节点
+    /** 本节点id */
+    private String id;
+    /** 本节点名称 */
+    private String name;
+    /** 本节点的父节点 */
+    private String parentId;
+    /** 子节点 */
     private List<TreeNode> children;
 
     public TreeNode() {

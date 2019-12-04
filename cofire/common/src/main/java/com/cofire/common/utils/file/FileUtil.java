@@ -6,26 +6,37 @@ import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * 
+ * @ClassName: FileUtil
+ * @Description:文件操作工具类
+ * @author ly
+ * @date 2019年12月4日
+ *
+ * @version V1.0
+ */
 public class FileUtil {
-    // 常用图片格式
-    public static final String[] picSuffix = { "bmp", "jpg", "jpeg", "png" };
+    /** 常用图片格式 */
+    public static final String[] PIC_SUFFIX = { "bmp", "jpg", "jpeg", "png" };
+
+    public static final String FILE_SPLITTER = ".";
 
     /**
      * 
      * @Title: getPath
      * @author ly
      * @Description:获取图片保存路径 base/yyyy/mm/dd
-     * @param @param p_baseName
+     * @param @param baseName
      * @param @return 参数
      * @return String 返回类型
      */
-    public static String getAbsolutePath(String p_baseName) {
-        Calendar m_calendar = Calendar.getInstance();
-        int m_year = m_calendar.get(Calendar.YEAR);
-        int m_month = m_calendar.get(Calendar.MONTH) + 1;
-        int m_day = m_calendar.get(Calendar.DAY_OF_MONTH);
-        String m_path = p_baseName + "/" + m_year + "/" + m_month + "/" + m_day + "/";
-        return m_path;
+    public static String getAbsolutePath(String baseName) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String path = baseName + "/" + year + "/" + month + "/" + day + "/";
+        return path;
     }
 
     /**
@@ -33,17 +44,17 @@ public class FileUtil {
      * @Title: getPath
      * @author ly
      * @Description:获取图片保存路径 base/yyyy/mm/dd
-     * @param @param p_baseName
+     * @param @param baseName
      * @param @return 参数
      * @return String 返回类型
      */
     public static String getRelatPath() {
-        Calendar m_calendar = Calendar.getInstance();
-        int m_year = m_calendar.get(Calendar.YEAR);
-        int m_month = m_calendar.get(Calendar.MONTH) + 1;
-        int m_day = m_calendar.get(Calendar.DAY_OF_MONTH);
-        String m_path = "/" + m_year + "/" + m_month + "/" + m_day + "/";
-        return m_path;
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String path = "/" + year + "/" + month + "/" + day + "/";
+        return path;
     }
 
     /**
@@ -51,24 +62,24 @@ public class FileUtil {
      * @Title: getSuffix
      * @author ly
      * @Description:获取图片扩展名，如果不是常用扩展名，返回null（不区分大小写）
-     * @param @param p_fileName
+     * @param @param fileName
      * @param @return 参数
      * @return String 返回类型
      */
-    public static String getSuffix(String p_fileName) {
-        if (StringUtils.isEmpty(p_fileName)) {
+    public static String getSuffix(String fileName) {
+        if (StringUtils.isEmpty(fileName)) {
             return null;
         }
-        if (-1 == p_fileName.lastIndexOf(".")) {
+        if (-1 == fileName.lastIndexOf(FILE_SPLITTER)) {
             return null;
         }
-        String m_suffix = p_fileName.substring(p_fileName.lastIndexOf(".") + 1);
-        m_suffix = m_suffix.toLowerCase();
-        int c_index = Arrays.binarySearch(picSuffix, m_suffix);
-        if (c_index == -1) {
+        String suffix = fileName.substring(fileName.lastIndexOf(FILE_SPLITTER) + 1);
+        suffix = suffix.toLowerCase();
+        int index = Arrays.binarySearch(PIC_SUFFIX, suffix);
+        if (index == -1) {
             return null;
         }
-        return m_suffix;
+        return suffix;
     }
 
     /**
@@ -107,10 +118,10 @@ public class FileUtil {
         File dir = new File(path);
         if (dir.exists()) {
             File[] tmp = dir.listFiles();
-            //如果为空文件夹 则直接删除
-            if (tmp.length == 0){
+            // 如果为空文件夹 则直接删除
+            if (tmp.length == 0) {
                 dir.delete();
-            }else{
+            } else {
                 for (int i = 0; i < tmp.length; i++) {
                     if (tmp[i].isDirectory()) {
                         delDir(path + "/" + tmp[i].getName());

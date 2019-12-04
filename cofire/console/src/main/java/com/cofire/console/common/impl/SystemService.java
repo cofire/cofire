@@ -18,23 +18,25 @@ import com.cofire.dao.mapper.custom.SystemCustomMapper;
  * 
  * @ClassName: SystemService
  * @Description: 系统参数管理（系统参数和数据字典）
- * @date 2019年5月5日
+ * @author ly
+ * @date 2019年12月4日
  *
+ * @version V1.0
  */
 public class SystemService {
     private final static Logger logger = LoggerFactory.getLogger(SystemService.class);
 
-    private final static SystemCustomMapper systemCustomMapper = SpringContextUtils.getBean(SystemCustomMapper.class);;
+    private final static SystemCustomMapper SYSTEM_CUSTOM_MAPPER = SpringContextUtils.getBean(SystemCustomMapper.class);;
 
-    // 系统参数列表
+    /** 系统参数列表 */
     private static List<Map<String, String>> sysParamList;
-    // 系统参数Map
+    /** 系统参数Map */
     private static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
-    // 数据字典列表
+    /** 数据字典列表 */
     private static List<Map<String, String>> dictList = new ArrayList<Map<String, String>>();
-    // 数据字典分组
+    /** 数据字典分组 */
     private static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
-    // 数据字典
+    /** 数据字典 */
     private static Map<String, Map<String, String>> dtDictMap = new HashMap<String, Map<String, String>>();
 
     /**
@@ -46,7 +48,7 @@ public class SystemService {
     public static void initSysParam() {
         logger.info("正在初始化系统参数");
         try {
-            sysParamList = systemCustomMapper.getSysparamsList();
+            sysParamList = SYSTEM_CUSTOM_MAPPER.getSysparamsList();
             if (!CollectionUtils.isEmpty(sysParamList)) {
                 sysParamMap = MapUtil.list2Map(sysParamList, "pk_id");
                 SystemUtil.setSysParamMap(sysParamMap);
@@ -72,7 +74,7 @@ public class SystemService {
     public static void initSysDict() {
         logger.info("正在初始化数据字典");
         try {
-            dictList = systemCustomMapper.getDictList();
+            dictList = SYSTEM_CUSTOM_MAPPER.getDictList();
             if (!CollectionUtils.isEmpty(dictList)) {
                 MapUtil.list2Map(dictList, "pk_id");
                 dictGroupMap = MapUtil.listGroup2Map(dictList, "group_id");
