@@ -9,7 +9,12 @@
     
     	<plugin type="com.cofire.common.utils.mybatis.plugin.mutiDatasource.MutiDatasourcePaginationPlugin" />
     	<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
-    	
+    	<plugin type="com.cofire.common.utils.mybatis.plugin.MapperAnnotationPlugin">
+	        <!-- @Mapper 默认开启 -->
+	        <property name="@Mapper" value="false"/>
+	        <!-- @Repository 默认关闭，开启后解决IDEA工具@Autowired报错 -->
+	        <property name="@Repository" value="true"/>
+	    </plugin>
         <commentGenerator type="com.cofire.common.utils.mybatis.plugin.RemarksCommentGenerator">
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
