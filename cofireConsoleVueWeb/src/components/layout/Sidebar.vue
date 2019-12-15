@@ -10,7 +10,7 @@
                         </template>
                         <template v-for="subItem in item.subMenu">
                             <el-submenu v-if="subItem.subMenu" :index="subItem.url" :key="subItem.url">
-                                <template slot="title">{{ $t('common.route.R' + subItem.id) }}</template>
+                                <template slot="title">{{ $t('common.route.' + subItem.id) }}</template>
                                 <el-menu-item v-for="(threeItem,i) in subItem.subMenu" :key="i" :index="threeItem.url">
                                     {{ $t('common.route.' + threeItem.id) }}
                                 </el-menu-item>

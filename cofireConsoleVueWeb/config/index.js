@@ -50,8 +50,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',  //本地打包和发布生产时放开
-    // assetsPublicPath: '/console/', //所有项目一起打包时放开
+    // assetsPublicPath: '/',  //本地打包和发布生产时放开
+    assetsPublicPath: '/cofire/console/', //所有项目一起打包时放开
 
     /**
      * Source Maps

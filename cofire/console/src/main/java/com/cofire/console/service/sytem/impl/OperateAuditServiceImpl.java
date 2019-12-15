@@ -9,16 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.cofire.common.constant.CodeEnum;
-import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
-import com.cofire.common.utils.mybatis.page.Page;
-import com.cofire.common.utils.string.StringUtil;
 import com.cofire.console.service.sytem.IOperateAuditService;
 import com.cofire.dao.mapper.system.SysOperateAuditMapper;
 import com.cofire.dao.model.system.SysOperateAudit;
 import com.cofire.dao.model.system.SysOperateAuditExample;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 
@@ -71,39 +69,11 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
                 criteria.andRequestTimeBetween(times[0], times[1]);
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = operateAuditMapper.countByExample(operateAuditExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        operateAuditExample.setDatabaseId(Constants.MYSQL);
-        operateAuditExample.setOrderByClause(paramItem.getOrderByClause());
-        operateAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysOperateAudit> operateAuditList = null;
-        try {
-            // 获取数据集
-            operateAuditList = operateAuditMapper.selectPageByExample(operateAuditExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询操作日志信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
+        System.out.println(1 / 0);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysOperateAudit> operateAuditList = operateAuditMapper.selectByExample(operateAuditExample);
+        PageInfo<SysOperateAudit> pageInfo = new PageInfo<>(operateAuditList);
+        Long count = pageInfo.getTotal();
         result.setTotal(count);
         result.setData(operateAuditList);
         logger.info("查询操作日志信息完成");
