@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.console.service.sytem.IOperateAuditService;
@@ -65,11 +64,9 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
             if (StringUtils.isNotEmpty(operateAudit.getRequestTime())) {
                 String auditTime = operateAudit.getRequestTime();
                 String[] times = auditTime.split(",");
-                System.out.println(JSON.toJSONString(operateAudit.getRequestTime()));
                 criteria.andRequestTimeBetween(times[0], times[1]);
             }
         }
-        System.out.println(1 / 0);
         PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
         List<SysOperateAudit> operateAuditList = operateAuditMapper.selectByExample(operateAuditExample);
         PageInfo<SysOperateAudit> pageInfo = new PageInfo<>(operateAuditList);

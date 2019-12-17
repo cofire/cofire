@@ -49,4 +49,18 @@ public class Constants {
     /** 降序 */
     public static final String SORT_DESCENDING = "DESCENDING";
 
+    // 判断请求参数类型是否为JSON字符串方式
+    public static final String IS_JSON_PARAM = "IS_JSON_PARAM";
+
+    // content-type
+    public static final String CONTENT_TYPE_JSON = "application/json;charset=utf-8";
+    public static final String CONTENT_TYPE_JSON_N = "application/json";
+    public static final String CONTENT_TYPE_TEXT_JSON = "text/json;charset=utf-8";
+    public static final String CONTENT_TYPE_TEXT_JSON_N = "text/json";
+    public static final String CONTENT_TYPE_FORM = "application/x-www-form-urlencoded;charset=UTF-8";
+    public static final String CONTENT_TYPE_FORM_N = "application/x-www-form-urlencoded";
+
+    public static final String CHARSET_UTF_8 = "UTF-8";
+
+    public static final String JSON_PARAM = "JSON_PARAM";
 }
