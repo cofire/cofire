@@ -50,7 +50,7 @@ public class JobLogServiceImpl implements IJobLogService {
     @Override
     public Result query(ParamItem paramItem, QtzJobLog jobLog) {
         logger.info("正在查询定时任务日志信息");
-        Result result = new Result();
+        Result result = new Result(true);
         QtzJobLogExample jobLogExample = new QtzJobLogExample();
         QtzJobLogExample.Criteria criteria = jobLogExample.createCriteria();
         if (null != jobLog) {

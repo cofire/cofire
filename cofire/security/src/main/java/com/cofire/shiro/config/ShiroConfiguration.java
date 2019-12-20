@@ -11,6 +11,8 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +21,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 /**
- * 
+ *
  * @ClassName: ShiroConfiguration
  * @Description:shiro配置
  * @author ly
@@ -38,6 +40,30 @@ public class ShiroConfiguration {
         proxy.setTargetBeanName("shiroFilter");
         filterRegistrationBean.setFilter(proxy);
         return filterRegistrationBean;
+    }
+
+    @Bean
+    public SimpleCookie getSimpleCookie() {
+        SimpleCookie simpleCookie = new SimpleCookie();
+        simpleCookie.setName("SHRIOSESSIONID");
+        return simpleCookie;
+    }
+
+    /**
+     * 配置shiro session 的一个管理器
+     */
+    @Bean(name = "sessionManager")
+    public DefaultWebSessionManager getDefaultWebSessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //session有效期 默认值1800000 30分钟 1800000毫秒  -1000表示永久
+        sessionManager.setGlobalSessionTimeout(1800000);
+        SimpleCookie simpleCookie = getSimpleCookie();
+        //设置js不可读取此Cookie
+        simpleCookie.setHttpOnly(true);
+        //3年 cookie有效期
+        simpleCookie.setMaxAge(3 * 365 * 24 * 60 * 60);
+        sessionManager.setSessionIdCookie(simpleCookie);
+        return sessionManager;
     }
 
     /**

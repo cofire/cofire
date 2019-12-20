@@ -56,7 +56,7 @@ public class ParamServiceImpl implements IParamService {
     @Override
     public Result query(ParamItem paramItem, SysParam param) {
         logger.info("正在查询系统参数信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysParamExample paramExample = new SysParamExample();
         SysParamExample.Criteria criteria = paramExample.createCriteria();
         if (null != param) {

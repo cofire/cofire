@@ -56,7 +56,7 @@ public class JobServiceImpl implements IJobService {
     @Override
     public Result query(ParamItem paramItem, QtzJob job) {
         logger.info("正在查询定时任务信息");
-        Result result = new Result();
+        Result result = new Result(true);
         QtzJobExample jobExample = new QtzJobExample();
         QtzJobExample.Criteria criteria = jobExample.createCriteria();
         if (null != job) {

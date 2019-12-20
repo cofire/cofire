@@ -86,7 +86,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Result query(ParamItem paramItem, SysUser user) {
         logger.info("正在查询用户信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysUserExample userExample = new SysUserExample();
         SysUserExample.Criteria criteria = userExample.createCriteria();
         if (null != user) {

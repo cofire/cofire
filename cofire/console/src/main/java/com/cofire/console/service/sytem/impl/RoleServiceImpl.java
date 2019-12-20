@@ -81,7 +81,7 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public Result query(ParamItem paramItem, SysRole role) {
         logger.info("正在查询角色信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysRoleExample roleExample = new SysRoleExample();
         SysRoleExample.Criteria criteria = roleExample.createCriteria();
         if (null != role) {

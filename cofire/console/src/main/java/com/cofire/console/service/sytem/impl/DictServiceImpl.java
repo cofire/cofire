@@ -58,7 +58,7 @@ public class DictServiceImpl implements IDictService {
     @Override
     public Result query(ParamItem paramItem, SysDict dict) {
         logger.info("正在查询数据字典信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysDictExample dictExample = new SysDictExample();
         SysDictExample.Criteria criteria = dictExample.createCriteria();
         if (null != dict) {

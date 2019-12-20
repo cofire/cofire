@@ -46,7 +46,7 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
     @Override
     public Result query(ParamItem paramItem, SysOperateAudit operateAudit) {
         logger.info("正在查询操作日志信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysOperateAuditExample operateAuditExample = new SysOperateAuditExample();
         SysOperateAuditExample.Criteria criteria = operateAuditExample.createCriteria();
         if (null != operateAudit) {

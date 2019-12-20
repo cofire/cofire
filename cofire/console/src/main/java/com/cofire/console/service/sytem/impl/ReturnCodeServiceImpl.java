@@ -56,7 +56,7 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
     @Override
     public Result query(ParamItem paramItem, SysReturnCode returnCode) {
         logger.info("正在查询返回码信息");
-        Result result = new Result();
+        Result result = new Result(true);
         SysReturnCodeExample returnCodeExample = new SysReturnCodeExample();
         SysReturnCodeExample.Criteria criteria = returnCodeExample.createCriteria();
         if (null != returnCode) {

@@ -22,6 +22,11 @@ public class Result {
         super();
     }
 
+    public Result(boolean success) {
+        super();
+        this.success = success;
+    }
+
     public Result(CodeEnum codeEnum) {
         super();
         this.code = codeEnum.getCode();
