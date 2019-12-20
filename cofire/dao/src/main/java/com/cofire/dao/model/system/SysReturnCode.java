@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_return_code
- * @开发日期 2019-11-04
+ * @开发日期 2019-12-20
  * @开发作者 by:ly 
  */
 public class SysReturnCode implements Serializable {

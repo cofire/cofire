@@ -241,49 +241,4 @@
     where user_id = #{userId,jdbcType=VARCHAR}
       and role_id = #{roleId,jdbcType=VARCHAR}
   </update>
-  <sql id="OracleDialectPrefix">
-    <if test="page != null and databaseId == 'oracle'">
-      select * from ( select row_.*, rownum rownum_ from ( 
-    </if>
-  </sql>
-  <sql id="OracleDialectSuffix">
-    <if test="page != null and databaseId == 'oracle'">
-      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <=#{page.end} ]]>
-    </if>
-  </sql>
-  <sql id="MssqlDialectPrefix">
-    <if test="page != null and databaseId == 'mssql'">
-      select * from ( select row_number() over (order by ${orderByClause}) as R, p.* from ( 
-    </if>
-  </sql>
-  <sql id="MssqlDialectSuffix">
-    <if test="page != null and databaseId == 'mssql'">
-      <![CDATA[ ) p ) p2 where R > #{page.begin} and R <= #{page.end} ]]>
-    </if>
-  </sql>
-  <sql id="MysqlDialect">
-    <if test="page != null and databaseId == 'mysql'">
-      limit #{page.begin} , #{page.length}
-    </if>
-  </sql>
-  <select id="selectPageByExample" parameterType="com.cofire.dao.model.system.SysUserRoleExample" resultMap="BaseResultMap">
-    <include refid="OracleDialectPrefix" />
-    <include refid="MssqlDialectPrefix" />
-    select 
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID, 
-    <include refid="Base_Column_List" />
-    from sys_user_role
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null and (databaseId == 'mysql' or databaseId == 'oracle') ">
-      order by ${orderByClause}
-    </if>
-    <include refid="OracleDialectSuffix" />
-    <include refid="MssqlDialectSuffix" />
-    <include refid="MysqlDialect" />
-  </select>
 </mapper>

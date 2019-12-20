@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysUserRoleMapper {
     long countByExample(SysUserRoleExample example);
 
@@ -27,6 +29,4 @@ public interface SysUserRoleMapper {
     int updateByPrimaryKeySelective(SysUserRole record);
 
     int updateByPrimaryKey(SysUserRole record);
-
-    List<SysUserRole> selectPageByExample(SysUserRoleExample example);
 }

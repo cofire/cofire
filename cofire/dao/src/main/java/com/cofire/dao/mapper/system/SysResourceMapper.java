@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysResource;
 import com.cofire.dao.model.system.SysResourceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysResourceMapper {
     long countByExample(SysResourceExample example);
 
@@ -27,6 +29,4 @@ public interface SysResourceMapper {
     int updateByPrimaryKeySelective(SysResource record);
 
     int updateByPrimaryKey(SysResource record);
-
-    List<SysResource> selectPageByExample(SysResourceExample example);
 }

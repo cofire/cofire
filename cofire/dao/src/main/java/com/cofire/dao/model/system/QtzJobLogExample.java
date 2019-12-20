@@ -1,6 +1,5 @@
 package com.cofire.dao.model.system;
 
-import com.cofire.common.utils.mybatis.page.Page;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +9,6 @@ public class QtzJobLogExample {
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
-
-    protected Page page;
-
-    protected String databaseId;
 
     public QtzJobLogExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -66,22 +61,6 @@ public class QtzJobLogExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
-    }
-
-    public void setPage(Page page) {
-        this.page=page;
-    }
-
-    public Page getPage() {
-        return page;
-    }
-
-    public void setDatabaseId(String databaseId) {
-        this.databaseId=databaseId;
-    }
-
-    public String getDatabaseId() {
-        return databaseId;
     }
 
     protected abstract static class GeneratedCriteria {

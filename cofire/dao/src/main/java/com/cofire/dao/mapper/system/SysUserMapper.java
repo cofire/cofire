@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysUser;
 import com.cofire.dao.model.system.SysUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysUserMapper {
     long countByExample(SysUserExample example);
 
@@ -27,6 +29,4 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
-
-    List<SysUser> selectPageByExample(SysUserExample example);
 }

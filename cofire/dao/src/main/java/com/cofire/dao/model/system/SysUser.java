@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_user
- * @开发日期 2019-10-17
+ * @开发日期 2019-12-20
  * @开发作者 by:ly 
  */
 public class SysUser implements Serializable {

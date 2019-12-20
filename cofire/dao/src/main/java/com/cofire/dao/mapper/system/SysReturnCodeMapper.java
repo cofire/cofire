@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysReturnCode;
 import com.cofire.dao.model.system.SysReturnCodeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysReturnCodeMapper {
     long countByExample(SysReturnCodeExample example);
 
@@ -27,6 +29,4 @@ public interface SysReturnCodeMapper {
     int updateByPrimaryKeySelective(SysReturnCode record);
 
     int updateByPrimaryKey(SysReturnCode record);
-
-    List<SysReturnCode> selectPageByExample(SysReturnCodeExample example);
 }

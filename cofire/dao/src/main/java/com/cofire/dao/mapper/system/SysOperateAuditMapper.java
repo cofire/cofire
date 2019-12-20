@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysOperateAudit;
 import com.cofire.dao.model.system.SysOperateAuditExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysOperateAuditMapper {
     long countByExample(SysOperateAuditExample example);
 
@@ -27,6 +29,4 @@ public interface SysOperateAuditMapper {
     int updateByPrimaryKeySelective(SysOperateAudit record);
 
     int updateByPrimaryKey(SysOperateAudit record);
-
-    List<SysOperateAudit> selectPageByExample(SysOperateAuditExample example);
 }

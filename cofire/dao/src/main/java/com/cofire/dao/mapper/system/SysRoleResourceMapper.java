@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysRoleResource;
 import com.cofire.dao.model.system.SysRoleResourceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysRoleResourceMapper {
     long countByExample(SysRoleResourceExample example);
 
@@ -27,6 +29,4 @@ public interface SysRoleResourceMapper {
     int updateByPrimaryKeySelective(SysRoleResource record);
 
     int updateByPrimaryKey(SysRoleResource record);
-
-    List<SysRoleResource> selectPageByExample(SysRoleResourceExample example);
 }

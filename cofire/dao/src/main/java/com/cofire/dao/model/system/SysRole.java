@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @数表名称 sys_role
- * @开发日期 2019-10-14
+ * @开发日期 2019-12-20
  * @开发作者 by:ly 
  */
 public class SysRole implements Serializable {

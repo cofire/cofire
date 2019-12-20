@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysParam;
 import com.cofire.dao.model.system.SysParamExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysParamMapper {
     long countByExample(SysParamExample example);
 
@@ -27,6 +29,4 @@ public interface SysParamMapper {
     int updateByPrimaryKeySelective(SysParam record);
 
     int updateByPrimaryKey(SysParam record);
-
-    List<SysParam> selectPageByExample(SysParamExample example);
 }

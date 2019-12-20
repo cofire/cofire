@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.QtzJobLog;
 import com.cofire.dao.model.system.QtzJobLogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface QtzJobLogMapper {
     long countByExample(QtzJobLogExample example);
 
@@ -27,6 +29,4 @@ public interface QtzJobLogMapper {
     int updateByPrimaryKeySelective(QtzJobLog record);
 
     int updateByPrimaryKey(QtzJobLog record);
-
-    List<QtzJobLog> selectPageByExample(QtzJobLogExample example);
 }

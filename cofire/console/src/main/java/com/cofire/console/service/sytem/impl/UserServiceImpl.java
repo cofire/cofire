@@ -20,11 +20,9 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.cofire.common.constant.CodeEnum;
-import com.cofire.common.constant.Constants;
 import com.cofire.common.result.ParamItem;
 import com.cofire.common.result.Result;
 import com.cofire.common.utils.file.EasyExcelUtils;
-import com.cofire.common.utils.mybatis.page.Page;
 import com.cofire.common.utils.security.DESCrypto;
 import com.cofire.common.utils.security.MD5Crypto;
 import com.cofire.common.utils.security.Util;
@@ -41,6 +39,8 @@ import com.cofire.dao.model.system.SysUserExample;
 import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 import com.cofire.dao.rowModel.SysUserRowModel;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @Author ly
@@ -62,10 +62,10 @@ public class UserServiceImpl implements IUserService {
 
     /**
      * @Author ly
-     * @Description //TODO 
+     * @Description //TODO
      * @Date 11:11 2019/12/20
-     * @Param 
-     * @return 
+     * @Param
+     * @return
      **/
     @Override
     public List<Map<String, String>> getUserResource(String userId) {
@@ -115,21 +115,10 @@ public class UserServiceImpl implements IUserService {
         } else {
             paramItem.setSort("user_id");
         }
-        userExample.setDatabaseId(Constants.MYSQL);
-        userExample.setOrderByClause(paramItem.getOrderByClause());
-        userExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysUser> userList = null;
-        try {
-            // 获取数据集
-            userList = userMapper.selectPageByExample(userExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询用户信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysUser> userList = userMapper.selectByExample(userExample);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(userList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(userList);
         logger.info("查询用户信息完成");
         return result;
@@ -356,7 +345,8 @@ public class UserServiceImpl implements IUserService {
                 result.setSuccess(false, CodeEnum.E_400);
                 return result;
             }
-            user.setPassWord(MD5Crypto.encrypt(DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurrentUserId(), newPassWord), CurrentUserUtil.getCurrentUserId()));
+            user.setPassWord(
+                    MD5Crypto.encrypt(DESCrypto.JS3DESEncryption(CurrentUserUtil.getCurrentUserId(), newPassWord), CurrentUserUtil.getCurrentUserId()));
             user.setModifier(CurrentUserUtil.getCurrentUserId());
             user.setModifyTime(DateUtils.dataTimeToNumber(new Date()));
             userMapper.updateByPrimaryKey(user);
@@ -383,11 +373,10 @@ public class UserServiceImpl implements IUserService {
             }
         }
 
-        userExample.setDatabaseId(Constants.MYSQL);
         userExample.setOrderByClause("user_id DESC");
         try {
             // 获取数据集
-            List<SysUser> userList = userMapper.selectPageByExample(userExample);
+            List<SysUser> userList = userMapper.selectByExample(userExample);
             List<SysUserRowModel> dataList = new ArrayList<SysUserRowModel>();
             for (SysUser sysUser : userList) {
                 SysUserRowModel userRowModel = new SysUserRowModel();

@@ -4,7 +4,9 @@ import com.cofire.dao.model.system.SysDict;
 import com.cofire.dao.model.system.SysDictExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SysDictMapper {
     long countByExample(SysDictExample example);
 
@@ -27,6 +29,4 @@ public interface SysDictMapper {
     int updateByPrimaryKeySelective(SysDict record);
 
     int updateByPrimaryKey(SysDict record);
-
-    List<SysDict> selectPageByExample(SysDictExample example);
 }
