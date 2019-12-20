@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,40 +66,10 @@ public class JobLogServiceImpl implements IJobLogService {
                 criteria.andRunTimeBetween(times[0], times[1]);
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = jobLogMapper.countByExample(jobLogExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        jobLogExample.setDatabaseId(Constants.MYSQL);
-        jobLogExample.setOrderByClause(paramItem.getOrderByClause());
-        jobLogExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<QtzJobLog> jobLogList = null;
-        try {
-            // 获取数据集
-            jobLogList = jobLogMapper.selectPageByExample(jobLogExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询定时任务日志信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<QtzJobLog> jobLogList = jobLogMapper.selectByExample(jobLogExample);
+        PageInfo<QtzJobLog> pageInfo = new PageInfo<>(jobLogList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(jobLogList);
         logger.info("查询定时任务日志信息完成");
         return result;

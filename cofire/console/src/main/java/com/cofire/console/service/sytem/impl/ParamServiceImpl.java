@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,38 +72,10 @@ public class ParamServiceImpl implements IParamService {
                 criteria.andParamNameLike("%" + param.getParamName() + "%");
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = paramMapper.countByExample(paramExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("group_id,param_id");
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("group_id,param_id");
-        }
-        paramExample.setDatabaseId(Constants.MYSQL);
-        paramExample.setOrderByClause(paramItem.getOrderByClause());
-        paramExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysParam> paramList = null;
-        try {
-            // 获取数据集
-            paramList = paramMapper.selectPageByExample(paramExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询系统参数信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysParam> paramList = paramMapper.selectByExample(paramExample);
+        PageInfo<SysParam> pageInfo = new PageInfo<>(paramList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(paramList);
         logger.info("查询系统参数信息完成");
         return result;

@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -91,38 +93,10 @@ public class RoleServiceImpl implements IRoleService {
                 criteria.andRoleNameLike("%" + role.getRoleName() + "%");
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = sysRoleMapperImpl.countByExample(roleExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("role_id");
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("role_id");
-        }
-        roleExample.setDatabaseId(Constants.MYSQL);
-        roleExample.setOrderByClause(paramItem.getOrderByClause());
-        roleExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysRole> roleList = null;
-        try {
-            // 获取数据集
-            roleList = sysRoleMapperImpl.selectPageByExample(roleExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询角色信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysRole> roleList = sysRoleMapperImpl.selectByExample(roleExample);
+        PageInfo<SysRole> pageInfo = new PageInfo<>(roleList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(roleList);
         logger.info("查询角色信息完成");
         return result;

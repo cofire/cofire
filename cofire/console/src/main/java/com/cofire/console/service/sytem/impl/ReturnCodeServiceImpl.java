@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,38 +67,10 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
                 criteria.andMessageEqualTo("%" + returnCode.getMessage() + "%");
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = returnCodeMapper.countByExample(returnCodeExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("code");
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("code");
-        }
-        returnCodeExample.setDatabaseId(Constants.MYSQL);
-        returnCodeExample.setOrderByClause(paramItem.getOrderByClause());
-        returnCodeExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysReturnCode> returnCodeList = null;
-        try {
-            // 获取数据集
-            returnCodeList = returnCodeMapper.selectPageByExample(returnCodeExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询返回码信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysReturnCode> returnCodeList = returnCodeMapper.selectByExample(returnCodeExample);
+        PageInfo<SysReturnCode> pageInfo = new PageInfo<>(returnCodeList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(returnCodeList);
         logger.info("查询返回码信息完成");
         return result;

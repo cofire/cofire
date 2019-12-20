@@ -43,14 +43,12 @@ import com.cofire.dao.model.system.SysUserRoleExample;
 import com.cofire.dao.rowModel.SysUserRowModel;
 
 /**
- * 
- * @ClassName: UserServiceImpl
- * @Description:用户信息管理
- * @author ly
- * @date 2019年12月4日
- *
- * @version V1.0
- */
+ * @Author ly
+ * @Description //TODO
+ * @Date 11:15 2019/12/20
+ * @Param
+ * @return
+ **/
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -63,8 +61,12 @@ public class UserServiceImpl implements IUserService {
     private SysUserRoleMapper userRoleMapper;
 
     /**
-     * 获取用户权限
-     */
+     * @Author ly
+     * @Description //TODO 
+     * @Date 11:11 2019/12/20
+     * @Param 
+     * @return 
+     **/
     @Override
     public List<Map<String, String>> getUserResource(String userId) {
         List<Map<String, String>> userResourceList = userPermissionCustomMapper.getUserResource(userId);

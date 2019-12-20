@@ -1,0 +1,3 @@
+2019-12-20 11:24:08.798 INFO  --- [QuartzJobConfig.java:37][localhost-startStop-1] - 准备注册定时任务
+2019-12-20 11:24:08.827 INFO  --- [QuartzJobConfig.java:42][localhost-startStop-1] - 总共有0个定时任务
+2019-12-20 11:24:08.827 INFO  --- [QuartzJobConfig.java:62][localhost-startStop-1] - Quartz任务注册成功

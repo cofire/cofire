@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,38 +70,10 @@ public class JobServiceImpl implements IJobService {
                 criteria.andJobDescLike("%" + job.getJobDesc() + "%");
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = jobMapper.countByExample(jobExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("job_id");
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("job_id");
-        }
-        jobExample.setDatabaseId(Constants.MYSQL);
-        jobExample.setOrderByClause(paramItem.getOrderByClause());
-        jobExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<QtzJob> jobList = null;
-        try {
-            // 获取数据集
-            jobList = jobMapper.selectPageByExample(jobExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询定时任务信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<QtzJob> jobList = jobMapper.selectByExample(jobExample);
+        PageInfo<QtzJob> pageInfo = new PageInfo<>(jobList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(jobList);
         logger.info("查询定时任务信息完成");
         return result;

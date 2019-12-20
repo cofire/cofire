@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,39 +75,10 @@ public class DictServiceImpl implements IDictService {
                 criteria.andDictNameEnLike("%" + dict.getDictNameEn() + "%");
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = dictMapper.countByExample(dictExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("group_id,dict_value");
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("group_id,dict_value");
-        }
-        dictExample.setDatabaseId(Constants.MYSQL);
-        dictExample.setOrderByClause(paramItem.getOrderByClause());
-        dictExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-
-        List<SysDict> dictList = null;
-        try {
-            // 获取数据集
-            dictList = dictMapper.selectPageByExample(dictExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询数据字典信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysDict> dictList = dictMapper.selectByExample(dictExample);
+        PageInfo<SysDict> pageInfo = new PageInfo<>(dictList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(dictList);
         logger.info("查询数据字典信息完成");
         return result;

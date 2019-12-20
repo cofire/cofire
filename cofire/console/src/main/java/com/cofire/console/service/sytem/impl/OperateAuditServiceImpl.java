@@ -70,8 +70,7 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
         PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
         List<SysOperateAudit> operateAuditList = operateAuditMapper.selectByExample(operateAuditExample);
         PageInfo<SysOperateAudit> pageInfo = new PageInfo<>(operateAuditList);
-        Long count = pageInfo.getTotal();
-        result.setTotal(count);
+        result.setTotal(pageInfo.getTotal());
         result.setData(operateAuditList);
         logger.info("查询操作日志信息完成");
         return result;

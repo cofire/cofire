@@ -2,6 +2,8 @@ package com.cofire.console.service.sytem.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,40 +72,10 @@ public class LoginAuditServiceImpl implements ILoginAuditService {
                 criteria.andCreateTimeBetween(times[0], times[1]);
             }
         }
-        Long count = 0L;
-        try {
-            // 获取数据总和
-            count = loginAuditMapper.countByExample(loginAuditExample);
-        } catch (Exception e) {
-            logger.error(result.getMessage());
-            return result;
-        }
-        if (null == paramItem) {
-            paramItem = new ParamItem();
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        if (StringUtils.isNotBlank(paramItem.getSort())) {
-            paramItem.setSort(StringUtil.humpToLine(paramItem.getSort()));
-        } else {
-            paramItem.setSort("sid");
-            paramItem.setOrder(Constants.SORT_DESC);
-        }
-        loginAuditExample.setDatabaseId(Constants.MYSQL);
-        loginAuditExample.setOrderByClause(paramItem.getOrderByClause());
-        loginAuditExample.setPage(new Page(paramItem.getPage(), paramItem.getLength()));
-        List<SysLoginAudit> loginAuditList = null;
-        try {
-            // 获取数据集
-            loginAuditList = loginAuditMapper.selectPageByExample(loginAuditExample);
-            result.setSuccess(true, CodeEnum.E_200);
-        } catch (Exception e) {
-            logger.error("查询定时任务日志信息失败");
-            result.setMessage("系统错误");
-            result.setSuccess(true, CodeEnum.E_500);
-            return result;
-        }
-        result.setTotal(count);
+        PageHelper.startPage(paramItem.getPage(), paramItem.getLength());
+        List<SysLoginAudit> loginAuditList = loginAuditMapper.selectByExample(loginAuditExample);
+        PageInfo<SysLoginAudit> pageInfo = new PageInfo<>(loginAuditList);
+        result.setTotal(pageInfo.getTotal());
         result.setData(loginAuditList);
         logger.info("查询定时任务日志信息完成");
         return result;
