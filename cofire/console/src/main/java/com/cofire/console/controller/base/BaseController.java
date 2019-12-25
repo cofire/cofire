@@ -39,7 +39,7 @@ public class BaseController {
     @Autowired
     private IUserService userService;
 
-    @BussinessLog("获取用户菜单")
+    @BussinessLog(value = "获取用户菜单", value = "获取用户菜单2")
     @RequestMapping("/getUserDetail")
     public Result getUserDetail(HttpServletRequest request) {
         logger.info("正在获取用户菜单");

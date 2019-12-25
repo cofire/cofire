@@ -33,7 +33,7 @@ public class ReturnCodeController extends SystemBaseController {
         return returnCodeService.query(paramItem, returnCode);
     }
 
-    @BussinessLog("保存返回码信息")
+    @BussinessLog(value = "保存返回码信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveReturnCode(String operation, SysReturnCode returnCode) {
         Result result = new Result();
@@ -47,7 +47,7 @@ public class ReturnCodeController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除返回码信息")
+    @BussinessLog(value = "删除返回码信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteReturnCode(SysReturnCode returnCode) {
         return returnCodeService.delete(returnCode);

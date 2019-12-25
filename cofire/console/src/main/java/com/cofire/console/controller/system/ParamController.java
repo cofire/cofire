@@ -34,7 +34,7 @@ public class ParamController extends SystemBaseController {
         return paramService.query(paramItem, param);
     }
 
-    @BussinessLog("保存系统参数信息")
+    @BussinessLog(value = "保存系统参数信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveParam(String operation, SysParam param) {
         Result result = new Result();
@@ -48,7 +48,7 @@ public class ParamController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除系统参数信息")
+    @BussinessLog(value = "删除系统参数信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteParam(SysParam param) {
         return paramService.delete(param);

@@ -33,7 +33,7 @@ public class JobController extends SystemBaseController {
         return jobService.query(paramItem, job);
     }
 
-    @BussinessLog("保存定时任务信息")
+    @BussinessLog(value = "保存定时任务信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveJob(String operation, QtzJob job) {
         Result result = new Result();
@@ -47,7 +47,7 @@ public class JobController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除定时任务信息")
+    @BussinessLog(value = "删除定时任务信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteJob(QtzJob job) {
         return jobService.delete(job);

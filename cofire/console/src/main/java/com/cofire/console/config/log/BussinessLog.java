@@ -1,12 +1,9 @@
 package com.cofire.console.config.log;
 
 import com.cofire.common.constant.Constants;
+import org.springframework.core.annotation.AliasFor;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * @author ly
@@ -19,12 +16,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME) // 注解在哪个阶段执行
 @Documented // 生成文档
 public @interface BussinessLog {
-    String value() default "";
-
     /**
      * 记录接口名称
      **/
-    String log() default "";
+    String value() default "";
 
     /**
      * 记录操作类型
@@ -35,4 +30,6 @@ public @interface BussinessLog {
      * 是否记录返回值
      **/
     boolean flag() default true;
+
+    Class<? extends Annotation> annotation() default Annotation.class;
 }

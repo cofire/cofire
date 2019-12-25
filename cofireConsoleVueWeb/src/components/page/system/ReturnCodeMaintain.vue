@@ -255,7 +255,6 @@ export default {
             this.currentRow,
             this.deleteReturnCodeModel
           );
-          this.deleteReturnCodeModel.operation = this.GLOBAL.operation.delete;
           deleteReturnCode(this.deleteReturnCodeModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));

@@ -34,6 +34,11 @@ public class Constants {
     public static final String OPERATION_UPLOAD = "upload";
 
     /**
+     * 保存
+     **/
+    public static final String OPERATION_SAVE = "save";
+
+    /**
      * 菜单根节点
      */
     public static final String MENU_ROOT = "Root";

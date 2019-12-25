@@ -21,13 +21,11 @@ public class LoginController extends SystemBaseController {
     @Autowired
     private ILoginService loginService;
 
-    @BussinessLog("登录")
     @RequestMapping("/login")
     public Result login(String userId, String passWord, String source, String operation) {
         return loginService.authLogin(userId, passWord, source, operation);
     }
 
-    @BussinessLog("登出")
     @RequestMapping("/loginOut")
     public Result loginOut(String source, String operation) {
         return loginService.logout(source, operation);

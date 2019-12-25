@@ -261,7 +261,6 @@ export default {
             this.currentRow,
             this.deleteRoleModel
           );
-          this.deleteRoleModel.operation = this.GLOBAL.operation.delete;
           deleteRole(this.deleteRoleModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));

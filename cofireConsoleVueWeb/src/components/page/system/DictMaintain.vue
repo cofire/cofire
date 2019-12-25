@@ -243,7 +243,6 @@ export default {
             this.currentRow,
             this.deleteDictModel
           );
-          this.deleteDictModel.operation = this.GLOBAL.operation.delete;
           deleteDict(this.deleteDictModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));

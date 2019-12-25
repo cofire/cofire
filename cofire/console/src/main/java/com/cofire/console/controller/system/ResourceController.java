@@ -32,7 +32,7 @@ public class ResourceController extends SystemBaseController {
         return resourceService.query();
     }
 
-    @BussinessLog("保存菜单信息")
+    @BussinessLog(value = "保存菜单信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveResource(String operation, SysResource resource) {
         Result result = new Result();
@@ -46,7 +46,7 @@ public class ResourceController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除菜单信息")
+    @BussinessLog(value = "删除菜单信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteResource(SysResource resource) {
         return resourceService.delete(resource);

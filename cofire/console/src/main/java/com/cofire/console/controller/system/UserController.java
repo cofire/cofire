@@ -35,7 +35,7 @@ public class UserController extends SystemBaseController {
         return userService.query(paramItem, user);
     }
 
-    @BussinessLog("保存用户信息")
+    @BussinessLog(value = "保存用户信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveUser(String operation, SysUser user) {
         Result result = new Result();
@@ -49,25 +49,25 @@ public class UserController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除用户信息")
+    @BussinessLog(value = "删除用户信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteUser(String userId) {
         return userService.delete(userId);
     }
 
-    @BussinessLog("用户角色设置")
+    @BussinessLog(value = "用户角色设置", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/saveUserRole", method = {RequestMethod.POST})
     public Result saveUserRole(String userId, String roleIds) {
         return userService.saveUserRole(userId, roleIds);
     }
 
-    @BussinessLog("用户重置密码")
+    @BussinessLog(value = "用户重置密码", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/restPassWord", method = {RequestMethod.POST})
     public Result restPassWord(String userId) {
         return userService.restPassWord(userId);
     }
 
-    @BussinessLog("用户修改密码")
+    @BussinessLog(value = "用户修改密码", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/changePassWord", method = {RequestMethod.POST})
     public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {
         return userService.changePassWord(currentPassWord, newPassWord, confirmNewPassWord);

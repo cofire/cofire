@@ -34,7 +34,7 @@ public class RoleController extends SystemBaseController {
         return roleService.query(paramItem, role);
     }
 
-    @BussinessLog("保存角色信息")
+    @BussinessLog(value = "保存角色信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveRole(String operation, SysRole role, String permission) {
         Result result = new Result();
@@ -48,7 +48,7 @@ public class RoleController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除角色信息")
+    @BussinessLog(value = "删除角色信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteRole(SysRole role) {
         return roleService.delete(role);

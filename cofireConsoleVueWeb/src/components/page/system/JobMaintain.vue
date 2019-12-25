@@ -283,7 +283,6 @@ export default {
             this.currentRow,
             this.deleteJobModel
           );
-          this.deleteJobModel.operation = this.GLOBAL.operation.delete;
           deleteJob(this.deleteJobModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));

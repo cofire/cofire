@@ -231,7 +231,6 @@ export default {
             this.currentRow,
             this.deleteResourceModel
           );
-          this.deleteResourceModel.operation = this.GLOBAL.operation.delete;
           deleteResource(this.deleteResourceModel).then(res => {
             if (res.success || res.success == "true") {
               this.$message.success(this.$t("code." + res.code));

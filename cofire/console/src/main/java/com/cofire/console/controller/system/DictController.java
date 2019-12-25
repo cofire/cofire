@@ -33,7 +33,7 @@ public class DictController extends SystemBaseController {
         return dictService.query(paramItem, dict);
     }
 
-    @BussinessLog("保存数据字典信息")
+    @BussinessLog(value = "保存数据字典信息", operation = Constants.OPERATION_SAVE)
     @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveDict(String operation, SysDict dict) {
         Result result = new Result();
@@ -47,7 +47,7 @@ public class DictController extends SystemBaseController {
         return result;
     }
 
-    @BussinessLog("删除数据字典信息")
+    @BussinessLog(value = "删除数据字典信息", operation = Constants.OPERATION_DELETE)
     @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteDict(SysDict dict) {
         return dictService.delete(dict);
