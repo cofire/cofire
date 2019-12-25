@@ -38,11 +38,9 @@ public class UserPermissionServiceImpl implements IUserPermissionService {
     }
 
     /**
-     * 
+     * @return Set<String> 返回类型
      * @Title: getUserPermission
      * @Description:获取用户权限
-     * @return
-     * @return Set<String> 返回类型
      */
     @Override
     public Set<String> getUserPermission(String p_userId) {

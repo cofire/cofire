@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.cofire.console.listener;
 
@@ -16,7 +16,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.cofire.common.utils.spring.SpringContextUtils;
 
 /**
- * 
+ *
  * @ClassName: SpringInitWebListener
  * @Description: 读取Spring配置，初始化ApplicationContext. 在web应用中一般用ContextLoaderListener加载webapplication,
  *               如果需要在action之外或者control类之外获取webapplication思路之一是，单独写个类放在static变量中

@@ -5,31 +5,47 @@ import java.io.Serializable;
 /**
  * @数表名称 sys_user
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class SysUser implements Serializable {
-    /** 用户账号 (主健ID) (无默认值) */
+    /**
+     * 用户账号 (主健ID) (无默认值)
+     */
     private String userId;
 
-    /** 用户姓名 (无默认值) */
+    /**
+     * 用户姓名 (无默认值)
+     */
     private String userName;
 
-    /** 密码 (无默认值) */
+    /**
+     * 密码 (无默认值)
+     */
     private String passWord;
 
-    /** 最后修改人 (无默认值) */
+    /**
+     * 最后修改人 (无默认值)
+     */
     private String modifier;
 
-    /** 最后修改时间 (无默认值) */
+    /**
+     * 最后修改时间 (无默认值)
+     */
     private String modifyTime;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
     private static final long serialVersionUID = 1L;

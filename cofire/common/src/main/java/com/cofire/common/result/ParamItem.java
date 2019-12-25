@@ -5,25 +5,36 @@ import org.apache.commons.lang.StringUtils;
 import com.cofire.common.constant.Constants;
 
 /**
- * 
+ * @param <T>
+ * @author ly
  * @ClassName: paramItem
  * @Description:接受前台传过来的数据中公共请求参数
  * @date 2019年5月13日
- * @author ly
- * @param <T>
  */
 public class ParamItem {
-    /** 当前页面 */
+    /**
+     * 当前页面
+     */
     private Integer page;
-    /** 页面大小 */
+    /**
+     * 页面大小
+     */
     private Integer length;
-    /** 操作类型 */
+    /**
+     * 操作类型
+     */
     private String operation;
-    /** 操作来源 */
+    /**
+     * 操作来源
+     */
     private String sourceType;
-    /** 排序字段 */
+    /**
+     * 排序字段
+     */
     private String sort;
-    /** 排序类型 */
+    /**
+     * 排序类型
+     */
     private String order;
 
     public ParamItem() {
@@ -117,12 +128,11 @@ public class ParamItem {
     }
 
     /**
-     * 
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: getOrderByClause
      * @author ly
      * @Description:组合排序字段
-     * @param @return 参数
-     * @return String 返回类型
      */
     public String getOrderByClause() {
         if (StringUtils.isBlank(this.sort)) {

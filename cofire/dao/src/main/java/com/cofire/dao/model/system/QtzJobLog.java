@@ -5,34 +5,52 @@ import java.io.Serializable;
 /**
  * @数表名称 qtz_job_log
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class QtzJobLog implements Serializable {
-    /** 自增id (主健ID) (无默认值) */
+    /**
+     * 自增id (主健ID) (无默认值)
+     */
     private Long sid;
 
-    /** 定时任务id (无默认值) */
+    /**
+     * 定时任务id (无默认值)
+     */
     private String jobId;
 
-    /** 执行时间 (无默认值) */
+    /**
+     * 执行时间 (无默认值)
+     */
     private String runTime;
 
-    /** 运行时ip (无默认值) */
+    /**
+     * 运行时ip (无默认值)
+     */
     private String ip;
 
-    /** 是否成功 (无默认值) */
+    /**
+     * 是否成功 (无默认值)
+     */
     private String isSuccess;
 
-    /** 信息 (无默认值) */
+    /**
+     * 信息 (无默认值)
+     */
     private String message;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
     private static final long serialVersionUID = 1L;

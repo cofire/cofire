@@ -7,28 +7,27 @@ import java.util.Calendar;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: FileUtil
  * @Description:文件操作工具类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class FileUtil {
-    /** 常用图片格式 */
-    public static final String[] PIC_SUFFIX = { "bmp", "jpg", "jpeg", "png" };
+    /**
+     * 常用图片格式
+     */
+    public static final String[] PIC_SUFFIX = {"bmp", "jpg", "jpeg", "png"};
 
     public static final String FILE_SPLITTER = ".";
 
     /**
-     * 
+     * @param @param  baseName
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: getPath
      * @author ly
      * @Description:获取图片保存路径 base/yyyy/mm/dd
-     * @param @param baseName
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String getAbsolutePath(String baseName) {
         Calendar calendar = Calendar.getInstance();
@@ -40,13 +39,12 @@ public class FileUtil {
     }
 
     /**
-     * 
+     * @param @param  baseName
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: getPath
      * @author ly
      * @Description:获取图片保存路径 base/yyyy/mm/dd
-     * @param @param baseName
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String getRelatPath() {
         Calendar calendar = Calendar.getInstance();
@@ -58,13 +56,12 @@ public class FileUtil {
     }
 
     /**
-     * 
+     * @param @param  fileName
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: getSuffix
      * @author ly
      * @Description:获取图片扩展名，如果不是常用扩展名，返回null（不区分大小写）
-     * @param @param fileName
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String getSuffix(String fileName) {
         if (StringUtils.isEmpty(fileName)) {
@@ -83,13 +80,12 @@ public class FileUtil {
     }
 
     /**
-     * 
-     * @Title: delFile
-     * @author ly
-     * @Description: 文件删除
      * @param @param path
      * @param @param filename 参数
      * @return void 返回类型
+     * @Title: delFile
+     * @author ly
+     * @Description: 文件删除
      * @示例D:\\data\\upload\\2010\\1.txt
      */
     public static void delFile(String filePath) {
@@ -106,12 +102,11 @@ public class FileUtil {
     }
 
     /**
-     * 
+     * @param @param path 参数
+     * @return void 返回类型
      * @Title: delDir
      * @author ly
      * @Description:删除文件夹
-     * @param @param path 参数
-     * @return void 返回类型
      * @示例 D:\\data\\upload\\2010
      */
     public static void delDir(String path) {

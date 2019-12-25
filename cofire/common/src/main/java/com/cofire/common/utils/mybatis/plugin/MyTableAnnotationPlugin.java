@@ -9,15 +9,14 @@ import org.mybatis.generator.internal.util.StringUtility;
 
 /**
  * 生成实体类时，对整个类增加 Table 的注解部分
- * 
- * @author alexgaoyh
  *
+ * @author alexgaoyh
  */
 public class MyTableAnnotationPlugin extends PluginAdapter {
 
     /**
      * 生成基础实体类
-     * 
+     *
      * @param topLevelClass
      * @param introspectedTable
      * @return

@@ -14,13 +14,11 @@ import com.cofire.console.service.sytem.IReturnCodeService;
 import com.cofire.dao.model.system.SysReturnCode;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ReturnCodeController
  * @Description:返回码
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/returnCode")
@@ -30,13 +28,13 @@ public class ReturnCodeController extends SystemBaseController {
     private IReturnCodeService returnCodeService;
 
     @BussinessLog("查询返回码信息")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryReturnCode(ParamItem paramItem, SysReturnCode returnCode) {
         return returnCodeService.query(paramItem, returnCode);
     }
 
     @BussinessLog("保存返回码信息")
-    @RequestMapping(value = "/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveReturnCode(String operation, SysReturnCode returnCode) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -50,7 +48,7 @@ public class ReturnCodeController extends SystemBaseController {
     }
 
     @BussinessLog("删除返回码信息")
-    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteReturnCode(SysReturnCode returnCode) {
         return returnCodeService.delete(returnCode);
     }

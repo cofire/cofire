@@ -19,19 +19,19 @@ import com.cofire.dao.model.system.QtzJobExample;
 
 public class QuartzJobConfig {
     // 常量
-    private static Scheduler scheduler = SpringContextUtils.getBean(Scheduler.class);;
+    private static Scheduler scheduler = SpringContextUtils.getBean(Scheduler.class);
+    ;
     private final static String JOB_GROUP = "jobGroup";
     private final static Logger logger = LoggerFactory.getLogger(QuartzJobConfig.class);
 
     private final static QtzJobMapper jobMapper = SpringContextUtils.getBean(QtzJobMapper.class);
 
     /**
-     * 
+     * @param @throws Exception 参数
+     * @return void 返回类型
      * @Title: registerQuartzJob
      * @author ly
      * @Description:定时任务注册
-     * @param @throws Exception 参数
-     * @return void 返回类型
      */
     public static void registerQuartzJob() throws Exception {
         logger.info("准备注册定时任务");
@@ -63,10 +63,9 @@ public class QuartzJobConfig {
     }
 
     /**
-     * 
+     * @return void 返回类型
      * @Title: shutdownQuartzJob
      * @Description:关闭所有定时任务，且不可重新注册
-     * @return void 返回类型
      */
     public static void shutdownQuartzJob() {
         try {
@@ -80,10 +79,9 @@ public class QuartzJobConfig {
     }
 
     /**
-     * 
+     * @return void 返回类型
      * @Title: standbyQuartzJob
      * @Description:暂停且清除所有的定时任务
-     * @return void 返回类型
      */
     public static void standbyQuartzJob() {
         try {
@@ -96,12 +94,10 @@ public class QuartzJobConfig {
     }
 
     /**
-     * 
+     * @param job
+     * @return String 返回类型
      * @Title: getCronExpression
      * @Description:组装cron表达式
-     * @param job
-     * @return
-     * @return String 返回类型
      */
     public static String getCronExpression(QtzJob job) {
         String cronExpression = null;

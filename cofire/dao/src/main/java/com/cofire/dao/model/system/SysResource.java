@@ -5,46 +5,72 @@ import java.io.Serializable;
 /**
  * @数表名称 sys_resource
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class SysResource implements Serializable {
-    /** 菜单id (主健ID) (无默认值) */
+    /**
+     * 菜单id (主健ID) (无默认值)
+     */
     private String resourceId;
 
-    /** 菜单名称(必填项) (无默认值) */
+    /**
+     * 菜单名称(必填项) (无默认值)
+     */
     private String resourceName;
 
-    /** 菜单链接 (无默认值) */
+    /**
+     * 菜单链接 (无默认值)
+     */
     private String url;
 
-    /** 父节点id (无默认值) */
+    /**
+     * 父节点id (无默认值)
+     */
     private String parentResourceId;
 
-    /** 是否叶节点(必填项) (无默认值) */
+    /**
+     * 是否叶节点(必填项) (无默认值)
+     */
     private String isLeaf;
 
-    /** 排序 (无默认值) */
+    /**
+     * 排序 (无默认值)
+     */
     private Integer morder;
 
-    /** 是否可用(必填项) (无默认值) */
+    /**
+     * 是否可用(必填项) (无默认值)
+     */
     private String enabled;
 
-    /** 最后修改人 (无默认值) */
+    /**
+     * 最后修改人 (无默认值)
+     */
     private String modifier;
 
-    /** 最后修改时间 (无默认值) */
+    /**
+     * 最后修改时间 (无默认值)
+     */
     private String modifyTime;
 
-    /** 小图标 (无默认值) */
+    /**
+     * 小图标 (无默认值)
+     */
     private String icon;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
     private static final long serialVersionUID = 1L;

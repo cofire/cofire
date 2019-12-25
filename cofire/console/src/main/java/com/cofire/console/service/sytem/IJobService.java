@@ -6,18 +6,17 @@ import com.cofire.dao.model.system.QtzJob;
 
 /**
  * 定时任务
- * 
+ *
+ * @author ly
+ * @version V1.0
  * @ClassName: IJobService
  * @Description:
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public interface IJobService {
     /**
      * 定时任务查询
-     * 
+     *
      * @param paramItem
      * @param job
      * @return
@@ -26,7 +25,7 @@ public interface IJobService {
 
     /**
      * 定时任务新增
-     * 
+     *
      * @param job
      * @return
      */
@@ -34,7 +33,7 @@ public interface IJobService {
 
     /**
      * 定时任务更新
-     * 
+     *
      * @param job
      * @return
      */
@@ -42,7 +41,7 @@ public interface IJobService {
 
     /**
      * 定时任务删除
-     * 
+     *
      * @param job
      * @return
      */

@@ -12,13 +12,11 @@ import com.cofire.console.service.sytem.IJobLogService;
 import com.cofire.dao.model.system.QtzJobLog;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: JobLogController
  * @Description:定时任务日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/jobLog")
@@ -28,7 +26,7 @@ public class JobLogController extends SystemBaseController {
     private IJobLogService jobLogService;
 
     @BussinessLog("查询定时任务执行日志")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryJobLog(ParamItem paramItem, QtzJobLog jobLog) {
         return jobLogService.query(paramItem, jobLog);
     }

@@ -8,20 +8,34 @@ package com.cofire.common.constant;
 public class Constants {
     public static final String MYSQL = "mysql";
 
-    /** 查询 */
+    /**
+     * 查询
+     */
     public static final String OPERATION_QUERY = "query";
-    /** 新增 */
+    /**
+     * 新增
+     */
     public static final String OPERATION_ADD = "add";
-    /** 修改 */
+    /**
+     * 修改
+     */
     public static final String OPERATION_UPDATE = "update";
-    /** 删除 */
+    /**
+     * 删除
+     */
     public static final String OPERATION_DELETE = "delete";
-    /** 导出 */
+    /**
+     * 导出
+     */
     public static final String OPERATION_EXPORT = "export";
-    /** 上传 */
+    /**
+     * 上传
+     */
     public static final String OPERATION_UPLOAD = "upload";
 
-    /** 菜单根节点 */
+    /**
+     * 菜单根节点
+     */
     public static final String MENU_ROOT = "Root";
 
     /**
@@ -29,10 +43,14 @@ public class Constants {
      */
     public static final String SESSION_USER_INFO = "userInfo";
     public static final String SESSION_USER_PERMISSION = "userPermission";
-    /** 登录登出 */
+    /**
+     * 登录登出
+     */
     public static final String AUDIT_TYPE_LOGIN = "0";
     public static final String AUDIT_TYPE_LOGIN_OUT = "1";
-    /** 登录登出来源 */
+    /**
+     * 登录登出来源
+     */
     public static final String SOURCE_TYPE_PC = "0";
     public static final String SOURCE_TYPE_IPAD = "1";
     public static final String SOURCE_TYPE_XINIU = "2";
@@ -40,13 +58,21 @@ public class Constants {
     /**
      * 数据库查询排序枚举
      */
-    /** 升序 */
+    /**
+     * 升序
+     */
     public static final String SORT_ASC = "ASC";
-    /** 降序 */
+    /**
+     * 降序
+     */
     public static final String SORT_DESC = "DESC";
-    /** 升序 */
+    /**
+     * 升序
+     */
     public static final String SORT_ASCENDING = "ASCENDING";
-    /** 降序 */
+    /**
+     * 降序
+     */
     public static final String SORT_DESCENDING = "DESCENDING";
 
     // 判断请求参数类型是否为JSON字符串方式

@@ -28,13 +28,11 @@ import com.cofire.dao.model.system.SysParam;
 import com.cofire.dao.model.system.SysParamExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ParamServiceImpl
  * @Description:系统参数管理
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class ParamServiceImpl implements IParamService {
@@ -44,14 +42,13 @@ public class ParamServiceImpl implements IParamService {
     private SysParamMapper paramMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询系统参数信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysParam param) {
@@ -118,13 +115,12 @@ public class ParamServiceImpl implements IParamService {
     }
 
     /**
-     * 
+     * @param @param  param
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:系统参数信息
-     * @param @param param
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result update(SysParam param) {
@@ -148,13 +144,12 @@ public class ParamServiceImpl implements IParamService {
     }
 
     /**
-     * 
+     * @param @param  param
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除系统参数信息
-     * @param @param param
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

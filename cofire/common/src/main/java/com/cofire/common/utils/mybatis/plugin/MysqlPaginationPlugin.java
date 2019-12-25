@@ -17,13 +17,11 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: MysqlPaginationPlugin
  * @Description:mysql分页插件
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class MysqlPaginationPlugin extends PluginAdapter {
 

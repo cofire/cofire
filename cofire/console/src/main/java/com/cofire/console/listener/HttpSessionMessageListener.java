@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.cofire.console.listener;
 
@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @ClassName: HttpSessionMessageListener
  * @Description:session管理
  * @author ly
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * @version V1.0
  */
 @WebListener
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class HttpSessionMessageListener implements HttpSessionListener {
 
     private static HashMap sessionMap = new HashMap();

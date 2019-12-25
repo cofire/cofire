@@ -51,7 +51,7 @@ public class BeanUtil {
         return groupBeanList(beanList, property, (Object) null);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public static Map groupBeanList(Collection beanList, String property, Object nullKey) {
         LinkedHashMap result = new LinkedHashMap();
         Iterator var4 = beanList.iterator();
@@ -93,13 +93,12 @@ public class BeanUtil {
     }
 
     /**
-     * 
+     * @param @param  obj
+     * @param @return 参数
+     * @return T 返回类型
      * @Title: clone
      * @author ly
      * @Description:可序列化对象深拷贝
-     * @param @param obj
-     * @param @return 参数
-     * @return T 返回类型
      */
     @SuppressWarnings("unchecked")
     public static <T extends Serializable> T clone(T obj) {

@@ -12,13 +12,11 @@ import com.cofire.console.service.sytem.IOperateAuditService;
 import com.cofire.dao.model.system.SysOperateAudit;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: OperateAuditController
  * @Description:操作日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/operateAudit")
@@ -28,7 +26,7 @@ public class OperateAuditController extends SystemBaseController {
     private IOperateAuditService operateAuditService;
 
     @BussinessLog("查询操作日志")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryOperateAudit(ParamItem operateAuditItem, SysOperateAudit operateAudit) {
         return operateAuditService.query(operateAuditItem, operateAudit);
     }

@@ -26,13 +26,11 @@ import com.cofire.dao.model.custom.UserDetailModel;
 import com.cofire.dao.model.system.SysUser;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: BaseController
  * @Description:基础controller
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping

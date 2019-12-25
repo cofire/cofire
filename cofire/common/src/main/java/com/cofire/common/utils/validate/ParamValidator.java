@@ -12,24 +12,21 @@ import com.cofire.common.result.ParamItem;
 import com.cofire.common.utils.string.StringUtil;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ParamValidator
  * @Description:参数校验
- * @author ly
  * @date 2019年10月14日
- *
- * @version V1.0
  */
 public class ParamValidator {
 
     /**
-     * 
+     * @param @param  values
+     * @param @return false：参数信息完整 true：参数信息不完整
+     * @return boolean 返回类型
      * @Title: checkParamsHasEmpty
      * @author ly
      * @Description:检测参数是否为空
-     * @param @param values
-     * @param @return false：参数信息完整 true：参数信息不完整
-     * @return boolean 返回类型
      */
     public static boolean checkParamsHasEmpty(String... values) {
         for (int i = 0; i < values.length; i++) {
@@ -43,7 +40,7 @@ public class ParamValidator {
     /**
      * 校验参数中是否有为空的属性
      *
-     * @param paramObj 参数对象
+     * @param paramObj        参数对象
      * @param checkProperties 需要校验的参数
      * @return false：参数信息完整 true：参数信息不完整
      * @throws IllegalAccessException

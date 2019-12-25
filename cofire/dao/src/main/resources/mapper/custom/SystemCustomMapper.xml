@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cofire.dao.mapper.custom.SystemCustomMapper">
-	<!-- 获取系统自定义参数 -->
-	<select id="getSysparamsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT
-			concat(group_id, '|', param_id) AS pk_id,
-			group_id,
-			param_id,
-			param_value,
-			param_name,
-			remark
-		FROM
-			sys_param
-	</select>
-	
-	<!-- 获取系统数据字典 -->
-	<select id="getDictList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT
-			concat(group_id, '|', dict_value) AS pk_id,
-			group_id,
-			dict_value,
-			dict_name_cn,
-			dict_name_en,
-			group_name
-		FROM
-			sys_dict
-	</select>
+    <!-- 获取系统自定义参数 -->
+    <select id="getSysparamsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        concat(group_id, '|', param_id) AS pk_id,
+        group_id,
+        param_id,
+        param_value,
+        param_name,
+        remark
+        FROM
+        sys_param
+    </select>
+
+    <!-- 获取系统数据字典 -->
+    <select id="getDictList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        concat(group_id, '|', dict_value) AS pk_id,
+        group_id,
+        dict_value,
+        dict_name_cn,
+        dict_name_en,
+        group_name
+        FROM
+        sys_dict
+    </select>
 </mapper>

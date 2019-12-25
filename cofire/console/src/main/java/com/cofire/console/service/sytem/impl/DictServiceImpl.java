@@ -29,13 +29,12 @@ import com.cofire.dao.model.system.SysDictExample;
 
 /**
  * 数据字典
- * 
+ *
+ * @author ly
+ * @version V1.0
  * @ClassName: DictServiceImpl
  * @Description:
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 
 @Service
@@ -46,14 +45,13 @@ public class DictServiceImpl implements IDictService {
     private SysDictMapper dictMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询数据字典信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysDict dict) {
@@ -121,13 +119,12 @@ public class DictServiceImpl implements IDictService {
     }
 
     /**
-     * 
+     * @param @param  dict
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:数据字典信息
-     * @param @param dict
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result update(SysDict dict) {
@@ -151,13 +148,12 @@ public class DictServiceImpl implements IDictService {
     }
 
     /**
-     * 
+     * @param @param  dict
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除数据字典信息
-     * @param @param dict
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

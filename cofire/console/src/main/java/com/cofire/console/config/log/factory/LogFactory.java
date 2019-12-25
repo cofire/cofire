@@ -7,37 +7,34 @@ import com.cofire.dao.model.system.SysLoginAudit;
 import com.cofire.dao.model.system.SysOperateAudit;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LogFactory
  * @Description:日志工厂
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class LogFactory {
     private static final int DESCRIPTION_LENGTH = 1000;
     private static final int PARAMETER_LENGTH = 1000;
 
     /**
-     * 
-     * @Title: createOperateAudit
-     * @author ly
-     * @Description:创建操作日志
-     * @param @param ip
-     * @param @param sessionId
-     * @param @param reqUrl
-     * @param @param userId
-     * @param @param description
-     * @param @param parameter
-     * @param @param sourceType
-     * @param @param operationType
+     * @param @param  ip
+     * @param @param  sessionId
+     * @param @param  reqUrl
+     * @param @param  userId
+     * @param @param  description
+     * @param @param  parameter
+     * @param @param  sourceType
+     * @param @param  operationType
      * @param @return
      * @param @throws Exception 参数
      * @return SysOperateAudit 返回类型
+     * @Title: createOperateAudit
+     * @author ly
+     * @Description:创建操作日志
      */
     public static SysOperateAudit createOperateAudit(String ip, String sessionId, String reqUrl, String userId, String description, String parameter,
-            String sourceType, String operationType) throws Exception {
+                                                     String sourceType, String operationType) throws Exception {
         SysOperateAudit operateAudit = new SysOperateAudit();
         operateAudit.setIp(ip);
         operateAudit.setSessionId(sessionId);

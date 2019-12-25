@@ -21,13 +21,11 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
 /**
- *
+ * @author ly
+ * @version V1.0
  * @ClassName: ShiroConfiguration
  * @Description:shiro配置
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Configuration
 public class ShiroConfiguration {
@@ -156,7 +154,7 @@ public class ShiroConfiguration {
      * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
      */
     @Bean
-    @DependsOn({ "lifecycleBeanPostProcessor" })
+    @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         advisorAutoProxyCreator.setProxyTargetClass(true);

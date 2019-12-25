@@ -27,13 +27,11 @@ import com.cofire.dao.model.system.SysOperateAudit;
 import com.cofire.dao.model.system.SysUser;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LogAop
  * @Description:业务日志记录
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Aspect
 @Component
@@ -43,6 +41,8 @@ public class LogAop {
 
     ThreadLocal<SysOperateAudit> aopLog = new ThreadLocal<>();
     SysOperateAudit operateAudit = new SysOperateAudit();
+
+    BussinessLog annotation = null;
 
     private static final int RESULT_LENGTH = 1000;
 
@@ -78,7 +78,7 @@ public class LogAop {
         String className = point.getTarget().getClass().getName();
         // 获取请求参数
         Map<String, String> parameter = HttpContext.getRequestParameters();
-        BussinessLog annotation = currentMethod.getAnnotation(BussinessLog.class);
+        annotation = currentMethod.getAnnotation(BussinessLog.class);
         String bussinessName = annotation.value();
         // 获取请求ip
         String ip = HttpContext.getClientIp();
@@ -98,14 +98,16 @@ public class LogAop {
     }
 
     @AfterReturning(returning = "ret", pointcut = "cutService()")
-    public void doAfterReturning(Object ret) throws Throwable {
+    public void doAfterReturning(Object ret) {
         String result = JSON.toJSONString(ret);
         if (result.length() > RESULT_LENGTH) {
             result = result.substring(0, 1000);
         }
         try {
             SysOperateAudit operateAudit = aopLog.get();
-            operateAudit.setResult(result);
+            if (annotation.flag()) {
+                operateAudit.setResult(result);
+            }
             operateAudit.setReturnTime(DateUtils.dataTimeToNumber(new Date()));
             LogManager.me().executeLog(LogTaskFactory.bussinessLog(operateAudit));
         } catch (Exception e) {

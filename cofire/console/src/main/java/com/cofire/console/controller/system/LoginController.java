@@ -9,13 +9,11 @@ import com.cofire.console.config.log.BussinessLog;
 import com.cofire.console.service.sytem.ILoginService;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LoginController
  * @Description:登录登出
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping("/console")

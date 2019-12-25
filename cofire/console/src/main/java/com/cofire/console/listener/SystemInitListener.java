@@ -12,13 +12,11 @@ import com.cofire.console.common.impl.SystemService;
 import com.cofire.quartz.QuartzJobConfig;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: SystemInitListener
  * @Description:系统启动监听器
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 
 @WebListener
@@ -52,11 +50,10 @@ public class SystemInitListener implements ServletContextListener {
     }
 
     /**
-     * 
-     * @Title: systemStartup
-     * @Description:初始化全局变量
      * @param servletContext
      * @return void 返回类型
+     * @Title: systemStartup
+     * @Description:初始化全局变量
      */
     private void systemStartup(ServletContext servletContext) {
         if (logger.isDebugEnabled()) {

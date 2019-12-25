@@ -12,13 +12,11 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
 import org.mybatis.generator.internal.util.StringUtility;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: RemarksCommentGenerator
  * @Description:生成数据库字段注释 类名前加自定义注释 注释增加数据字段是否为必填项 注释增加数据字段是否有默认值 注释增加属性是否为主健
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class RemarksCommentGenerator extends DefaultCommentGenerator {
 

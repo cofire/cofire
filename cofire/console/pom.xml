@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cofire</groupId>
@@ -95,15 +96,15 @@
         </dependency>
     </dependencies>
     <build>
-    	<finalName>cofire</finalName>
+        <finalName>cofire</finalName>
         <plugins>
-        	<!-- 打jar包时放开，打War包时注释 -->
+            <!-- 打jar包时放开，打War包时注释 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.2.2.RELEASE</version>
                 <configuration>
-                 <!--    指定该Main Class为全局的唯一入口 -->
+                    <!--    指定该Main Class为全局的唯一入口 -->
                     <mainClass>com.cofire.console.Application</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
@@ -111,20 +112,20 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
-                           <!--  可以把依赖的包都打包到生成的Jar包中 -->
+                            <!--  可以把依赖的包都打包到生成的Jar包中 -->
                         </goals>
                     </execution>
                 </executions>
             </plugin>
             <!-- 打war包时放开，打jar包时注释 -->
-           <!--  <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.2.2.RELEASE</version>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
-            </plugin> -->
+            <!--  <plugin>
+                 <groupId>org.springframework.boot</groupId>
+                 <artifactId>spring-boot-maven-plugin</artifactId>
+                 <version>2.2.2.RELEASE</version>
+                 <configuration>
+                     <fork>true</fork>
+                 </configuration>
+             </plugin> -->
         </plugins>
     </build>
 </project>

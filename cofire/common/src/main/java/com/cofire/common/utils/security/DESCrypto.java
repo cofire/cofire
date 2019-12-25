@@ -22,19 +22,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * <p>
  * Title: DESCrypto
  * </p>
  * <p>
  * Description: 實現EDS算法對字符串和文件的加密解密 1. DES算法對字符串的加密解密 2. DES算法對文件的加密解密
- * 
+ * <p>
  * 3. Triple DES算法對字符串的加密解密 4. Triple DES算法對文件的加密解密
  * </p>
- * 
+ *
  * @author Dumbbell Yang
- * @Date 2010-01-11
  * @version 1.0
+ * @Date 2010-01-11
  */
 
 public class DESCrypto {
@@ -157,7 +156,7 @@ public class DESCrypto {
 
     /**
      * 加密
-     * 
+     *
      * @param src 明文(字节)
      * @param key 密钥，长度必须是8的倍数
      * @return 密文(字节)
@@ -202,7 +201,7 @@ public class DESCrypto {
 
     /**
      * 解密
-     * 
+     *
      * @param src 密文(字节)
      * @param key 密钥，长度必须是8的倍数
      * @return 明文(字节)
@@ -247,7 +246,7 @@ public class DESCrypto {
 
     /**
      * 加密
-     * 
+     *
      * @param src 明文(字符串)
      * @return 密文(16进制字符串)
      * @throws Exception
@@ -272,7 +271,7 @@ public class DESCrypto {
 
     /**
      * 解密
-     * 
+     *
      * @param src 密文(字符串)
      * @return 明文(字符串)
      * @throws Exception
@@ -328,9 +327,7 @@ public class DESCrypto {
             buffout.write(bout.toByteArray());
             buffout.close();
             fout.close();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             logger.debug(e.getMessage(), e);
         }
 
@@ -383,8 +380,8 @@ public class DESCrypto {
         // DESKeySpec = getDESKeySpecFromString("UeD3m+Df");//DES_KEY);
         DESKeySpec = getDESKeySpecFromString("12345678");
 
-        String[] javaString = new String[] { "Genius is one percent inspiration and ninety-nine percent perspiration", "Where there is a will there is a way",
-                "He who laughs last laughs best", "abcdefgh", "12345" };
+        String[] javaString = new String[]{"Genius is one percent inspiration and ninety-nine percent perspiration", "Where there is a will there is a way",
+                "He who laughs last laughs best", "abcdefgh", "12345"};
 
         logger.info(getDESKeyString());
         for (int i = 0; i < javaString.length; i++) {
@@ -403,8 +400,8 @@ public class DESCrypto {
         // tripleDESKeySpec = getTripleDESKeySpecFromString(TRIPLE_DES_KEY);
         tripleDESKeySpec = getTripleDESKeySpecFromString("cZzvzmbjZRWkdjZwj2BNWT1P");
         logger.info(getTripleDESKeyString());
-        String[] javaString = new String[] { "Genius is one percent inspiration and ninety-nine percent perspiration", "Where there is a will there is a way",
-                "He who laughs last laughs best", "abcdefgh", "12345" };
+        String[] javaString = new String[]{"Genius is one percent inspiration and ninety-nine percent perspiration", "Where there is a will there is a way",
+                "He who laughs last laughs best", "abcdefgh", "12345"};
 
         for (int i = 0; i < javaString.length; i++) {
             String cipherText = tripleDESEncrypt(javaString[i]);
@@ -437,10 +434,10 @@ public class DESCrypto {
     // 測試JS生成的3DES加密的文本用Java解密
     public static void testJS3DESEncryption() throws InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
         String jsKey = "cZzvzmbjZRWkdjZwj2BNWT1P";
-        String[] jsEncrypted = new String[] { "0f3d0b698abf4282b4d073ea2c41e1bc", "7095ed2b7b548762c2c11d3df9fa94ca",
+        String[] jsEncrypted = new String[]{"0f3d0b698abf4282b4d073ea2c41e1bc", "7095ed2b7b548762c2c11d3df9fa94ca",
                 "7095ed2b7b54876285f9de50059fd23f81802b4a44f0a6bc", "7095ed2b7b548762c9609433f7a0556dc2c11d3df9fa94ca",
                 "0dfde5f919fc981cce019abac80931b2c713438900350886ce019abac80931b2383d64c1dd6e8092b4d073ea2c41e1bc",
-                "785611930ad1c793e6f65d15c47565eccdfc84295edc1c0854513f607797dc827ef1d547a8a0f6ef" };
+                "785611930ad1c793e6f65d15c47565eccdfc84295edc1c0854513f607797dc827ef1d547a8a0f6ef"};
 
         logger.info("測試DES Load JavaScript 3DES Key and Encrypted text 加密解密");
         tripleDESKeySpec = getJSTripleDESKeySpecFromString(jsKey);

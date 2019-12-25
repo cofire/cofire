@@ -28,13 +28,11 @@ import com.cofire.dao.model.system.QtzJobExample;
 import com.cofire.quartz.QuartzJobConfig;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: JobServiceImpl
  * @Description:定时任务管理
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class JobServiceImpl implements IJobService {
@@ -44,14 +42,13 @@ public class JobServiceImpl implements IJobService {
     private QtzJobMapper jobMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询定时任务信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, QtzJob job) {
@@ -118,13 +115,12 @@ public class JobServiceImpl implements IJobService {
     }
 
     /**
-     * 
+     * @param @param  job
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:定时任务信息
-     * @param @param job
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -149,13 +145,12 @@ public class JobServiceImpl implements IJobService {
     }
 
     /**
-     * 
+     * @param @param  job
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除定时任务信息
-     * @param @param job
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

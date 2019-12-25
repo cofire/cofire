@@ -21,13 +21,11 @@ import com.alibaba.fastjson.JSON;
 import com.cofire.common.constant.Constants;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: HttpContext
  * @Description:HttpContext 工具类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class HttpContext {
 
@@ -43,7 +41,6 @@ public class HttpContext {
 
     /**
      * 获取请求的ip地址
-     *
      */
     public static String getIp() {
         HttpServletRequest request = HttpContext.getRequest();
@@ -55,12 +52,10 @@ public class HttpContext {
     }
 
     /**
-     * 
+     * @param request
+     * @return String 返回类型
      * @Title: getIpAddr
      * @Description:获取请求的ip
-     * @param request
-     * @return
-     * @return String 返回类型
      */
     public static String getClientIp() {
         HttpServletRequest request = HttpContext.getRequest();
@@ -96,7 +91,6 @@ public class HttpContext {
 
     /**
      * 获取当前请求的Request对象
-     *
      */
     public static HttpServletRequest getRequest() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -109,7 +103,6 @@ public class HttpContext {
 
     /**
      * 获取当前请求的Response对象
-     *
      */
     public static HttpServletResponse getResponse() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -122,7 +115,6 @@ public class HttpContext {
 
     /**
      * 获取请求路径
-     *
      */
     public static String getRequestUri() {
         HttpServletRequest request = HttpContext.getRequest();
@@ -131,9 +123,8 @@ public class HttpContext {
 
     /**
      * 获取所有请求的值
-     *
      */
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({"unchecked"})
     public static Map<String, String> getRequestParameters() {
         HashMap<String, String> values = new HashMap<>(30);
         HttpServletRequest request = HttpContext.getRequest();

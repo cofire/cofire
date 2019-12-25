@@ -17,13 +17,12 @@ public class HttpUtil {
     private final static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     /**
-     * 
+     * @param @param  httpurl
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: doGet
      * @author ly
      * @Description:get请求
-     * @param @param httpurl
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String doGet(String httpurl) {
         logger.info("正在发送get请求url=：" + httpurl);
@@ -89,14 +88,13 @@ public class HttpUtil {
     }
 
     /**
-     * 
+     * @param @param  httpUrl
+     * @param @param  param
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: doPost
      * @author ly
      * @Description:post请求 application/x-www-form-urlencoded
-     * @param @param httpUrl
-     * @param @param param
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String doPost(String httpUrl, String param) {
         logger.info("正在发送post请求url={}，param={}", httpUrl, param);
@@ -181,14 +179,13 @@ public class HttpUtil {
     }
 
     /**
-     * 
+     * @param @param  httpUrl
+     * @param @param  param
+     * @param @return 参数
+     * @return String 返回类型
      * @Title: doPost
      * @author ly
      * @Description:post请求 application/json
-     * @param @param httpUrl
-     * @param @param param
-     * @param @return 参数
-     * @return String 返回类型
      */
     public static String sendPostByJson(String url, String param) {
         logger.info("正在发送get请求url={}，param={}", url, param);

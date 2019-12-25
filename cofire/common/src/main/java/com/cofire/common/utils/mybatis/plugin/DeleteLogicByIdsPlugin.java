@@ -15,13 +15,11 @@ import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: DeleteLogicByIdsPlugin
  * @Description:按id删除插件
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class DeleteLogicByIdsPlugin extends PluginAdapter {
 

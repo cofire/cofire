@@ -13,13 +13,11 @@ import com.cofire.console.service.sytem.IResourceService;
 import com.cofire.dao.model.system.SysResource;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ResourceController
  * @Description:菜单
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/resource")
@@ -29,13 +27,13 @@ public class ResourceController extends SystemBaseController {
     private IResourceService resourceService;
 
     @BussinessLog("查询菜单信息")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryResource() {
         return resourceService.query();
     }
 
     @BussinessLog("保存菜单信息")
-    @RequestMapping(value = "/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveResource(String operation, SysResource resource) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -49,7 +47,7 @@ public class ResourceController extends SystemBaseController {
     }
 
     @BussinessLog("删除菜单信息")
-    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteResource(SysResource resource) {
         return resourceService.delete(resource);
     }

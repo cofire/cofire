@@ -15,13 +15,11 @@ import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysUser;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: RoleController
  * @Description:角色
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/role")
@@ -31,13 +29,13 @@ public class RoleController extends SystemBaseController {
     private IRoleService roleService;
 
     @BussinessLog("查询角色信息")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryRole(ParamItem paramItem, SysRole role) {
         return roleService.query(paramItem, role);
     }
 
     @BussinessLog("保存角色信息")
-    @RequestMapping(value = "/save", method = { RequestMethod.POST })
+    @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public Result saveRole(String operation, SysRole role, String permission) {
         Result result = new Result();
         result.setSuccess(false, CodeEnum.E_400);
@@ -51,19 +49,19 @@ public class RoleController extends SystemBaseController {
     }
 
     @BussinessLog("删除角色信息")
-    @RequestMapping(value = "/delete", method = { RequestMethod.POST })
+    @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public Result deleteRole(SysRole role) {
         return roleService.delete(role);
     }
 
     @BussinessLog("查询用户角色信息")
-    @RequestMapping(value = "/queryUserRoleList", method = { RequestMethod.POST })
+    @RequestMapping(value = "/queryUserRoleList", method = {RequestMethod.POST})
     public Result queryUserRoleList(SysUser user) {
         return roleService.queryUserRoleList(user);
     }
 
     @BussinessLog("查询角色权限列表")
-    @RequestMapping(value = "/getRoleTree", method = { RequestMethod.POST })
+    @RequestMapping(value = "/getRoleTree", method = {RequestMethod.POST})
     public Result getRoleTree(String roleId) {
         return roleService.getRoleTree(roleId);
     }

@@ -7,24 +7,20 @@ import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.result.Result;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ErrorController
  * @Description:错误信息返回
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping("/error")
 public class ErrorController {
 
     /**
-     * 
+     * @return Result 返回类型
      * @Title: sessionTimeOut
      * @Description:session超时或不存在处理
-     * @return
-     * @return Result 返回类型
      */
     @RequestMapping("/sessionTimeOut")
     public Result sessionTimeOut() {
@@ -33,11 +29,9 @@ public class ErrorController {
     }
 
     /**
-     * 
+     * @return String 返回类型
      * @Title: unauth
      * @Description:权限验证失败
-     * @return
-     * @return String 返回类型
      */
     @RequestMapping("/unauth")
     public Result unauth() {
@@ -46,12 +40,11 @@ public class ErrorController {
     }
 
     /**
-     * 
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: exportError
      * @author ly
      * @Description:文件导出异常
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @RequestMapping("/exportError")
     public Result exportError() {

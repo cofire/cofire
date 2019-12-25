@@ -26,13 +26,11 @@ import com.cofire.common.utils.security.Util;
 import com.cofire.console.config.log.BussinessLog;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ImageUploadController
  * @Description:图片上传
- * @author ly
  * @date 2019年5月24日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping("/image")
@@ -41,12 +39,11 @@ public class ImageController {
     private final static Logger logger = LoggerFactory.getLogger(ImageController.class);
 
     /**
-     * 
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: upload
      * @author ly
      * @Description:图片上传接口
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @RequestMapping("/upload")
     public Result imgUpload(HttpServletRequest request, @RequestParam(value = "file") MultipartFile file) {
@@ -104,15 +101,14 @@ public class ImageController {
     }
 
     /**
-     * 
-     * @Title: getImage
-     * @author ly
-     * @Description:图片显示
-     * @param @param path
+     * @param @param  path
      * @param @return
      * @param @throws FileNotFoundException
      * @param @throws IOException 参数
      * @return byte[] 返回类型
+     * @Title: getImage
+     * @author ly
+     * @Description:图片显示
      */
     @BussinessLog("查看照片")
     @SuppressWarnings("resource")

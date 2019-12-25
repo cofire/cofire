@@ -22,13 +22,11 @@ import com.cofire.dao.model.system.SysLoginAudit;
 import com.cofire.dao.model.system.SysLoginAuditExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LoginAuditServiceImpl
  * @Description:登录登出日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class LoginAuditServiceImpl implements ILoginAuditService {
@@ -38,14 +36,13 @@ public class LoginAuditServiceImpl implements ILoginAuditService {
     private SysLoginAuditMapper loginAuditMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  loginAudit
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询定时任务日志信息
-     * @param @param paramItem
-     * @param @param loginAudit
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysLoginAudit loginAudit) {

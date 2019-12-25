@@ -22,13 +22,11 @@ import com.cofire.dao.model.system.QtzJobLog;
 import com.cofire.dao.model.system.QtzJobLogExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: JobLogServiceImpl
  * @Description:定时任务日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class JobLogServiceImpl implements IJobLogService {
@@ -38,14 +36,13 @@ public class JobLogServiceImpl implements IJobLogService {
     private QtzJobLogMapper jobLogMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  jobLog
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询定时任务日志信息
-     * @param @param paramItem
-     * @param @param jobLog
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, QtzJobLog jobLog) {

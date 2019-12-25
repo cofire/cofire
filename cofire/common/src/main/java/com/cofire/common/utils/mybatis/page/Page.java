@@ -4,9 +4,8 @@ import java.io.Serializable;
 
 /**
  * mybatis 扩展mysql 分页插件的Page类标识
- * 
- * @author ly
  *
+ * @author ly
  */
 public class Page implements Serializable {
 
@@ -38,7 +37,7 @@ public class Page implements Serializable {
 
     /**
      * 构造函数.前台第一页对应后台第0页
-     * 
+     *
      * @param begin
      * @param length
      */

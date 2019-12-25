@@ -338,13 +338,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getDayBegin
      * @author ly
      * @Description:当日开始时间
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getDayBegin(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -357,13 +356,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getDayEnd
      * @author ly
      * @Description:当日结束时间
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getDayEnd(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -377,13 +375,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getWeekBegin
      * @author ly
      * @Description:每周开始时间
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getWeekBegin(Date date) {
         Calendar cal = Calendar.getInstance();
@@ -403,13 +400,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getWeekEnd
      * @author ly
      * @Description:每周结束时间
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getWeekEnd(Date date) {
         Calendar cal = Calendar.getInstance();
@@ -430,12 +426,11 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getMonthBegin
      * @author ly
      * @Description:每月开始时间
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getMonthBegin(Date date) {
         Calendar calendar = Calendar.getInstance();// 得到日历
@@ -446,12 +441,11 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getMonthEnd
      * @author ly
      * @Description:每月结束是时间
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getMonthEnd(Date date) {
         Calendar calendar = Calendar.getInstance();// 得到日历
@@ -462,13 +456,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getYearBegin
      * @author ly
      * @Description:当年的开始日期
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getYearBegin(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -479,13 +472,12 @@ public final class DateUtils {
     }
 
     /**
-     * 
+     * @param @param  date
+     * @param @return 参数
+     * @return Date 返回类型
      * @Title: getYearEnd
      * @author ly
      * @Description:当年的结束日期
-     * @param @param date
-     * @param @return 参数
-     * @return Date 返回类型
      */
     public static Date getYearEnd(Date date) {
         Calendar calendar = Calendar.getInstance();

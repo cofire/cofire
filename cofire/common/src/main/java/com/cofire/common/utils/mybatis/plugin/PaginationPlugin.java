@@ -17,20 +17,19 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 
 /**
  * mybais mysql 分页相关，扩展 mybatis-generator-maven-plugin 插件功能，生成分页相关
- * 
- * @author alexgaoyh
  *
+ * @author alexgaoyh
  */
 public class PaginationPlugin extends PluginAdapter {
 
     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) { // add
-                                                                                                                  // field,
-                                                                                                                  // getter,
-                                                                                                                  // setter
-                                                                                                                  // for
-                                                                                                                  // limit
-                                                                                                                  // clause
+        // field,
+        // getter,
+        // setter
+        // for
+        // limit
+        // clause
         addPage(topLevelClass, introspectedTable, "page");
         return super.modelExampleClassGenerated(topLevelClass, introspectedTable);
     }

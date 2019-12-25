@@ -12,13 +12,11 @@ import com.cofire.console.service.sytem.ILoginAuditService;
 import com.cofire.dao.model.system.SysLoginAudit;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LoginAuditController
  * @Description:登录日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @RestController
 @RequestMapping(value = "/console/loginAudit")
@@ -28,7 +26,7 @@ public class LoginAuditController extends SystemBaseController {
     private ILoginAuditService loginAuditService;
 
     @BussinessLog("查询登录登出日志")
-    @RequestMapping(value = "/query", method = { RequestMethod.POST })
+    @RequestMapping(value = "/query", method = {RequestMethod.POST})
     public Result queryLoginAudit(ParamItem loginAuditItem, SysLoginAudit loginAudit) {
         return loginAuditService.query(loginAuditItem, loginAudit);
     }

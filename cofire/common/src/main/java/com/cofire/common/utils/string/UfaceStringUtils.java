@@ -6,13 +6,11 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: UFaceStringUtils
  * @Description:字符串工具类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class UfaceStringUtils {
 
@@ -20,7 +18,7 @@ public class UfaceStringUtils {
 
     /**
      * 将参数中的所有字符串拼接为整个字符串返回
-     * 
+     *
      * @param fragments 需要拼接的字符串
      * @return String 拼接完成的字符串
      */
@@ -34,7 +32,7 @@ public class UfaceStringUtils {
 
     /**
      * 将对象转换为字符串
-     * 
+     *
      * @param obj
      * @return
      */
@@ -51,7 +49,7 @@ public class UfaceStringUtils {
 
     /**
      * 检查字符串是否为空或者null.<br/>
-     * 
+     *
      * <pre>
      * StringUtils.isBlank(null)      = true
      * StringUtils.isBlank("")        = true
@@ -59,7 +57,7 @@ public class UfaceStringUtils {
      * StringUtils.isBlank("bob")     = false
      * StringUtils.isBlank("  bob  ") = false
      * </pre>
-     * 
+     *
      * @param str
      * @return
      */
@@ -69,7 +67,7 @@ public class UfaceStringUtils {
 
     /**
      * 检查字符串是否不为空或者null.<br/>
-     * 
+     *
      * <pre>
      * StringUtils.isBlank(null)      = false
      * StringUtils.isBlank("")        = false
@@ -77,7 +75,7 @@ public class UfaceStringUtils {
      * StringUtils.isBlank("bob")     = true
      * StringUtils.isBlank("  bob  ") = true
      * </pre>
-     * 
+     *
      * @param str
      * @return
      */
@@ -87,7 +85,7 @@ public class UfaceStringUtils {
 
     /**
      * 将字符串转换为十六进制的比特数组
-     * 
+     *
      * @param strhex
      * @return
      */
@@ -108,7 +106,7 @@ public class UfaceStringUtils {
 
     /**
      * 将十六进制的比特数组转换为字符串
-     * 
+     *
      * @param b
      * @return
      */
@@ -128,8 +126,8 @@ public class UfaceStringUtils {
 
     /**
      * 将字符重复指定次数
-     * 
-     * @param times 重复次数
+     *
+     * @param times       重复次数
      * @param replacement
      * @return
      */
@@ -143,7 +141,7 @@ public class UfaceStringUtils {
 
     /**
      * 过滤字符串中的回车换行和制表符
-     * 
+     *
      * @param str
      * @return
      */

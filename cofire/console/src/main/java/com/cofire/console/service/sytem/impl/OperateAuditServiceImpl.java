@@ -18,13 +18,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: OperateAuditServiceImpl
  * @Description:操作日志
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class OperateAuditServiceImpl implements IOperateAuditService {
@@ -34,14 +32,13 @@ public class OperateAuditServiceImpl implements IOperateAuditService {
     private SysOperateAuditMapper operateAuditMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  operateAudit
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询操作日志信息
-     * @param @param paramItem
-     * @param @param operateAudit
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysOperateAudit operateAudit) {

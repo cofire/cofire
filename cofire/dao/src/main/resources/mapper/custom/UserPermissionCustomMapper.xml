@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cofire.dao.mapper.custom.UserPermissionCustomMapper">
-	<!-- 获取用户权限 -->
-	<select id="getUserPermission" parameterType="java.lang.String" resultType="java.lang.String">
+    <!-- 获取用户权限 -->
+    <select id="getUserPermission" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT DISTINCT
-			url
-		FROM
-			sys_resource A
-		INNER JOIN sys_role_resource B ON A.resource_id = B.resource_id
-		INNER JOIN sys_user_role C ON B.role_id = C.role_id
+        url
+        FROM
+        sys_resource A
+        INNER JOIN sys_role_resource B ON A.resource_id = B.resource_id
+        INNER JOIN sys_user_role C ON B.role_id = C.role_id
         WHERE C.user_id= #{user_id}
     </select>
-    
+
     <select id="getUserResource" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT DISTINCT
-			sys_user.user_id,
-			sys_resource.resource_id AS "id",
-			icon,
-			sys_resource.parent_resource_id AS parentId,
-			CASE
-		WHEN sys_resource.url &lt;&gt; '' THEN
-			sys_resource.url
-		ELSE
-			sys_resource.resource_id
-		END url,
-		 sys_resource.resource_name AS "name",
-		 sys_resource.is_leaf AS leaf,
-		 sys_resource.morder
-		FROM
-			sys_resource
-		LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
-		LEFT JOIN sys_role ON sys_role.role_id = sys_role_resource.role_id
-		LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.role_id
-		LEFT JOIN sys_user ON sys_user.user_id = sys_user_role.user_id
-		WHERE
-			sys_user.user_id = #{user_id}
-		ORDER BY
-			parentId,
-			morder
-	</select>
+        SELECT DISTINCT
+        sys_user.user_id,
+        sys_resource.resource_id AS "id",
+        icon,
+        sys_resource.parent_resource_id AS parentId,
+        CASE
+        WHEN sys_resource.url &lt;&gt; '' THEN
+        sys_resource.url
+        ELSE
+        sys_resource.resource_id
+        END url,
+        sys_resource.resource_name AS "name",
+        sys_resource.is_leaf AS leaf,
+        sys_resource.morder
+        FROM
+        sys_resource
+        LEFT JOIN sys_role_resource ON sys_role_resource.resource_id = sys_resource.resource_id
+        LEFT JOIN sys_role ON sys_role.role_id = sys_role_resource.role_id
+        LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.role_id
+        LEFT JOIN sys_user ON sys_user.user_id = sys_user_role.user_id
+        WHERE
+        sys_user.user_id = #{user_id}
+        ORDER BY
+        parentId,
+        morder
+    </select>
 </mapper>

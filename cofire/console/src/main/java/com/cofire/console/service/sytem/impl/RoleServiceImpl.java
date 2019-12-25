@@ -46,13 +46,11 @@ import com.cofire.dao.model.system.SysUserRole;
 import com.cofire.dao.model.system.SysUserRoleExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: RoleServiceImpl
  * @Description: 角色管理
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class RoleServiceImpl implements IRoleService {
@@ -69,14 +67,13 @@ public class RoleServiceImpl implements IRoleService {
     private SysRoleMapperImpl sysRoleMapperImpl;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询用户信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysRole role) {
@@ -158,13 +155,12 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     /**
-     * 
+     * @param @param  role
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:角色信息
-     * @param @param role
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -216,13 +212,12 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     /**
-     * 
+     * @param @param  role
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除角色信息
-     * @param @param role
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -250,13 +245,12 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     /**
-     * 
+     * @param @param  role
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: queryUserRoleList
      * @author ly
      * @Description:查询用户角色列表，用户已有的角色 checked为 true
-     * @param @param role
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result queryUserRoleList(SysUser user) {
@@ -277,13 +271,12 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     /**
-     * 
+     * @param @param  roleId
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: getRoleTree
      * @author ly
      * @Description:查询角色权限列表
-     * @param @param roleId
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result getRoleTree(String roleId) {

@@ -9,13 +9,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: SpringContextUtils
  * @Description:spring工具类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class SpringContextUtils implements ApplicationContextAware {
     private static final Logger logger = LoggerFactory.getLogger(SpringContextUtils.class);

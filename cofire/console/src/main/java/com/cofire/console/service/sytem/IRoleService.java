@@ -6,18 +6,16 @@ import com.cofire.dao.model.system.SysRole;
 import com.cofire.dao.model.system.SysUser;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: IRoleService
  * @Description:角色信息
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public interface IRoleService {
     /**
      * 角色信息查询
-     * 
+     *
      * @param paramItem
      * @param role
      * @return
@@ -26,7 +24,7 @@ public interface IRoleService {
 
     /**
      * 角色信息新增
-     * 
+     *
      * @param role
      * @param permission
      * @return
@@ -35,7 +33,7 @@ public interface IRoleService {
 
     /**
      * 角色信息修改
-     * 
+     *
      * @param role
      * @param permission
      * @return
@@ -44,7 +42,7 @@ public interface IRoleService {
 
     /**
      * 角色信息删除
-     * 
+     *
      * @param role
      * @return
      */
@@ -52,7 +50,7 @@ public interface IRoleService {
 
     /**
      * 查询用户角色
-     * 
+     *
      * @param user
      * @return
      */
@@ -60,7 +58,7 @@ public interface IRoleService {
 
     /**
      * 或者角色权限树
-     * 
+     *
      * @param roleId
      * @return
      */

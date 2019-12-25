@@ -5,9 +5,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class MD5Crypto {
     /**
      * MD5方法
-     * 
+     *
      * @param text 明文
-     * @param key 密钥
+     * @param key  密钥
      * @return 密文
      * @throws Exception
      */

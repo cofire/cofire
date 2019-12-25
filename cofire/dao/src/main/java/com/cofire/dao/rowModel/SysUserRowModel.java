@@ -6,35 +6,51 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 
 public class SysUserRowModel extends BaseRowModel implements Serializable {
-    /** 用户账号 (主健ID) (无默认值) */
+    /**
+     * 用户账号 (主健ID) (无默认值)
+     */
     @ExcelProperty(index = 0, value = "用户账号")
     private String userId;
 
-    /** 用户姓名 (无默认值) */
+    /**
+     * 用户姓名 (无默认值)
+     */
     @ExcelProperty(index = 1, value = "用户姓名")
     private String userName;
 
-    /** 密码 (无默认值) */
+    /**
+     * 密码 (无默认值)
+     */
     @ExcelProperty(index = 2, value = "密码")
     private String passWord;
 
-    /** 最后修改人 (无默认值) */
+    /**
+     * 最后修改人 (无默认值)
+     */
     @ExcelProperty(index = 3, value = "最后修改人")
     private String modifier;
 
-    /** 最后修改时间 (无默认值) */
+    /**
+     * 最后修改时间 (无默认值)
+     */
     @ExcelProperty(index = 4, value = "最后修改时间")
     private String modifyTime;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     @ExcelProperty(index = 5, value = "预留字段1")
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     @ExcelProperty(index = 6, value = "预留字段2")
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     @ExcelProperty(index = 7, value = "预留字段3")
     private String filler3;
 

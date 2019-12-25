@@ -5,19 +5,17 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: WebSecurityConfig
  * @Description:配置静态访问资源
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Configuration
 public class WebSecurityConfig extends WebMvcConfigurationSupport {
     /**
      * 配置静态访问资源
-     * 
+     *
      * @param registry
      */
     @Override

@@ -13,13 +13,11 @@ import com.cofire.dao.model.system.SysLoginAudit;
 import com.cofire.dao.model.system.SysOperateAudit;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LogTaskFactory
  * @Description:日志操作任务创建工厂
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @DependsOn("springContextUtils")
 public class LogTaskFactory {
@@ -28,7 +26,7 @@ public class LogTaskFactory {
     private static SysLoginAuditMapper loginAuditsMapper = SpringContextUtils.getBean(SysLoginAuditMapper.class);
 
     public static TimerTask bussinessLog(String ip, String sessionId, String reqUrl, String userId, String description, String parameter, String sourceType,
-            String operationType) {
+                                         String operationType) {
         return new TimerTask() {
             @Override
             public void run() {

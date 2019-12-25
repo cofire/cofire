@@ -33,17 +33,16 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
- *
  * <p>
  * Title: Util
  * </p>
  * <p>
  * Description: Java加密解密公共方法
  * </p>
- * 
+ *
  * @author Dumbbell Yang
- * @Date 2010-01-11
  * @version 1.0
+ * @Date 2010-01-11
  */
 
 public class Util {
@@ -229,7 +228,7 @@ public class Util {
             }
             return zipFiles(arrFiles, zipToFile);
         } else {
-            return zipFiles(new String[] { strFolder }, zipToFile);
+            return zipFiles(new String[]{strFolder}, zipToFile);
         }
     }
 

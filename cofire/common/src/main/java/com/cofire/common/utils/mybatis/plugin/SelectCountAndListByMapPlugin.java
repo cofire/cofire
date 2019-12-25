@@ -16,13 +16,11 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: SelectCountAndListByMapPlugin
  * @Description:查询总数
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class SelectCountAndListByMapPlugin extends PluginAdapter {
 

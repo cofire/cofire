@@ -61,11 +61,11 @@ public class UserServiceImpl implements IUserService {
     private SysUserRoleMapper userRoleMapper;
 
     /**
+     * @return
      * @Author ly
      * @Description //TODO
      * @Date 11:11 2019/12/20
      * @Param
-     * @return
      **/
     @Override
     public List<Map<String, String>> getUserResource(String userId) {
@@ -74,14 +74,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询用户信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysUser user) {
@@ -165,13 +164,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:用户信息
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result update(SysUser user) {
@@ -193,13 +191,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除用户信息
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -227,14 +224,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     * @param @param  userId
+     * @param @param  roleIds
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: saveUserRole
      * @author ly
      * @Description:保存用户角色信息
-     * @param @param userId
-     * @param @param roleIds
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -272,13 +268,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     * @param @param  userId
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: restPassWord
      * @author ly
      * @Description:重置用户密码
-     * @param @param userId
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result restPassWord(String userId) {
@@ -303,7 +298,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 
+     *
      * @Title: changePassWord
      * @author ly
      * @Description:修改密码
@@ -314,15 +309,14 @@ public class UserServiceImpl implements IUserService {
      * @return Result 返回类型
      */
     /**
-     * 
+     * @param @param  currentPassWord
+     * @param @param  newPassWord
+     * @param @param  confirmNewPassWord
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: changePassWord
      * @author ly
      * @Description:修改密码
-     * @param @param currentPassWord
-     * @param @param newPassWord
-     * @param @param confirmNewPassWord
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result changePassWord(String currentPassWord, String newPassWord, String confirmNewPassWord) {

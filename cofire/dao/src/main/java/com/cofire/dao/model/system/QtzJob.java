@@ -5,61 +5,97 @@ import java.io.Serializable;
 /**
  * @数表名称 qtz_job
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class QtzJob implements Serializable {
-    /** 定时任务id (主健ID) (无默认值) */
+    /**
+     * 定时任务id (主健ID) (无默认值)
+     */
     private String jobId;
 
-    /** 任务名称(必填项) (无默认值) */
+    /**
+     * 任务名称(必填项) (无默认值)
+     */
     private String jobName;
 
-    /** 任务描述 (无默认值) */
+    /**
+     * 任务描述 (无默认值)
+     */
     private String jobDesc;
 
-    /** 年(必填项) (无默认值) */
+    /**
+     * 年(必填项) (无默认值)
+     */
     private String year;
 
-    /** 月(必填项) (无默认值) */
+    /**
+     * 月(必填项) (无默认值)
+     */
     private String month;
 
-    /** 日期(必填项) (无默认值) */
+    /**
+     * 日期(必填项) (无默认值)
+     */
     private String day;
 
-    /** 星期(必填项) (无默认值) */
+    /**
+     * 星期(必填项) (无默认值)
+     */
     private String week;
 
-    /** 小时(必填项) (无默认值) */
+    /**
+     * 小时(必填项) (无默认值)
+     */
     private String hour;
 
-    /** 分(必填项) (无默认值) */
+    /**
+     * 分(必填项) (无默认值)
+     */
     private String minute;
 
-    /** 秒(必填项) (无默认值) */
+    /**
+     * 秒(必填项) (无默认值)
+     */
     private String second;
 
-    /** 逻辑删除标识:0-未删除；1-已删除(必填项)  (默认值为: 0) */
+    /**
+     * 逻辑删除标识:0-未删除；1-已删除(必填项)  (默认值为: 0)
+     */
     private String isDel;
 
-    /** 最后修改人 (无默认值) */
+    /**
+     * 最后修改人 (无默认值)
+     */
     private String modifier;
 
-    /** 最后修改时间 (无默认值) */
+    /**
+     * 最后修改时间 (无默认值)
+     */
     private String modifyTime;
 
-    /** 附加参数1 (无默认值) */
+    /**
+     * 附加参数1 (无默认值)
+     */
     private String param1;
 
-    /** 附加参数2 (无默认值) */
+    /**
+     * 附加参数2 (无默认值)
+     */
     private String param2;
 
-    /** 附加参数3 (无默认值) */
+    /**
+     * 附加参数3 (无默认值)
+     */
     private String param3;
 
-    /** 附加参数4 (无默认值) */
+    /**
+     * 附加参数4 (无默认值)
+     */
     private String param4;
 
-    /** 附加参数5 (无默认值) */
+    /**
+     * 附加参数5 (无默认值)
+     */
     private String param5;
 
     private static final long serialVersionUID = 1L;

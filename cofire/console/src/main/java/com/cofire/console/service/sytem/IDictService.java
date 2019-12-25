@@ -5,19 +5,17 @@ import com.cofire.common.result.Result;
 import com.cofire.dao.model.system.SysDict;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: IDictService
  * @Description:数据字典
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public interface IDictService {
 
     /**
      * 数据字典分页查询
-     * 
+     *
      * @param paramItem
      * @param dict
      * @return
@@ -26,7 +24,7 @@ public interface IDictService {
 
     /**
      * 数据字典新增
-     * 
+     *
      * @param dict
      * @return
      */
@@ -34,7 +32,7 @@ public interface IDictService {
 
     /**
      * 数据字典修改
-     * 
+     *
      * @param dict
      * @return
      */
@@ -42,7 +40,7 @@ public interface IDictService {
 
     /**
      * 数据字典删除
-     * 
+     *
      * @param dict
      * @return
      */

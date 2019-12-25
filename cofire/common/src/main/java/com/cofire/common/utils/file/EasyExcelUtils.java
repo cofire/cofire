@@ -17,21 +17,20 @@ import com.cofire.common.utils.string.DateUtils;
 
 public class EasyExcelUtils {
     /**
-     * 
+     * @param @param  response
+     * @param @param  clazz
+     * @param @param  dateList
+     * @param @param  type
+     * @param @param  fileName
+     * @param @param  sheetName
+     * @param @throws IOException 参数
+     * @return void 返回类型
      * @Title: createExcelStream
      * @author ly
      * @Description:数据导出excel
-     * @param @param response
-     * @param @param clazz
-     * @param @param dateList
-     * @param @param type
-     * @param @param fileName
-     * @param @param sheetName
-     * @param @throws IOException 参数
-     * @return void 返回类型
      */
     public static void createExcelStream(HttpServletResponse response, Class<? extends BaseRowModel> clazz, List<? extends BaseRowModel> dateList,
-            ExcelTypeEnum type, String fileName, String sheetName) throws IOException {
+                                         ExcelTypeEnum type, String fileName, String sheetName) throws IOException {
         if (StringUtils.isEmpty(fileName)) {
             fileName = DateUtils.dataTimeToNumber(new Date());
         }

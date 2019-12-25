@@ -13,16 +13,15 @@ import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
 
 /**
  * mybatis generator sqlMapBaseColumnListElementGenerated Base_Column_List 列权限控制部分
- * 
+ * <p>
  * 会忽略掉默认的 sqlMapBaseColumnListElementGenerated 方法的执行，则会忽略掉默认的 Base_Column_List SQL语句的生成，改为自定义的SQL 语句的生成
  * 为了考虑数据权限的列权限部分的功能，则需要在查询出来的所有列的部分添加权限过滤功能，如下所示，生成的 <sql id="Base_Column_List"> 部分，即增加了 myColumn_ 开头的权限控制部分的功能；
- * 
+ *
  * <sql id="Base_Column_List"> student.ID as student_ID, <if test="myColumn_name == null or myColumn_name == ''">
  * student.NAME as student_NAME, </if> student.CREATE_TIME as student_CREATE_TIME, student.MODIFY_TIME as
  * student_MODIFY_TIME </sql>
- * 
- * @author alexgaoyh
  *
+ * @author alexgaoyh
  */
 public class AddColumnCheckToBaseColumnListPlugin extends PluginAdapter {
     @Override

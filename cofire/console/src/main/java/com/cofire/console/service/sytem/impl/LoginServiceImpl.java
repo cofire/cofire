@@ -22,13 +22,11 @@ import com.cofire.console.service.sytem.ILoginService;
 import com.cofire.dao.model.system.SysUser;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: LoginServiceImpl
  * @Description:登录登出
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class LoginServiceImpl implements ILoginService {

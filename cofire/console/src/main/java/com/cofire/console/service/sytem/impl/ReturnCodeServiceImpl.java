@@ -28,13 +28,11 @@ import com.cofire.dao.model.system.SysReturnCode;
 import com.cofire.dao.model.system.SysReturnCodeExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ReturnCodeServiceImpl
  * @Description: 返回码管理
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class ReturnCodeServiceImpl implements IReturnCodeService {
@@ -44,14 +42,13 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
     private SysReturnCodeMapper returnCodeMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询返回码信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query(ParamItem paramItem, SysReturnCode returnCode) {
@@ -113,13 +110,12 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
     }
 
     /**
-     * 
+     * @param @param  returnCode
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:返回码信息
-     * @param @param returnCode
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result update(SysReturnCode returnCode) {
@@ -143,13 +139,12 @@ public class ReturnCodeServiceImpl implements IReturnCodeService {
     }
 
     /**
-     * 
+     * @param @param  returnCode
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除返回码信息
-     * @param @param returnCode
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

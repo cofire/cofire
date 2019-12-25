@@ -5,40 +5,62 @@ import java.io.Serializable;
 /**
  * @数表名称 sys_login_audit
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class SysLoginAudit implements Serializable {
-    /** 自增id (主健ID) (无默认值) */
+    /**
+     * 自增id (主健ID) (无默认值)
+     */
     private Long sid;
 
-    /** 用户id (无默认值) */
+    /**
+     * 用户id (无默认值)
+     */
     private String userId;
 
-    /** ip地址 (无默认值) */
+    /**
+     * ip地址 (无默认值)
+     */
     private String ip;
 
-    /** 会话id (无默认值) */
+    /**
+     * 会话id (无默认值)
+     */
     private String sessionId;
 
-    /** 创建时间 (无默认值) */
+    /**
+     * 创建时间 (无默认值)
+     */
     private String createTime;
 
-    /** 日志类型:0-登录；1-登出 (无默认值) */
+    /**
+     * 日志类型:0-登录；1-登出 (无默认值)
+     */
     private String auditType;
 
-    /** 来源类型 (无默认值) */
+    /**
+     * 来源类型 (无默认值)
+     */
     private String sourceType;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
-    /** 消息 (无默认值) */
+    /**
+     * 消息 (无默认值)
+     */
     private String message;
 
     private static final long serialVersionUID = 1L;

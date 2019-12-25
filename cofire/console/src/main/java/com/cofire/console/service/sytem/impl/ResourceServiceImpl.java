@@ -25,13 +25,11 @@ import com.cofire.dao.model.system.SysResource;
 import com.cofire.dao.model.system.SysResourceExample;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: ResourceServiceImpl
  * @Description:菜单管理
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @Service
 public class ResourceServiceImpl implements IResourceService {
@@ -41,14 +39,13 @@ public class ResourceServiceImpl implements IResourceService {
     private SysResourceMapper resourceMapper;
 
     /**
-     * 
+     * @param @param  paramItem
+     * @param @param  user
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: query
      * @author ly
      * @Description:分页查询菜单信息
-     * @param @param paramItem
-     * @param @param user
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result query() {
@@ -129,13 +126,12 @@ public class ResourceServiceImpl implements IResourceService {
     }
 
     /**
-     * 
+     * @param @param  resource
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: update
      * @author ly
      * @Description:菜单信息
-     * @param @param resource
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     public Result update(SysResource resource) {
@@ -157,13 +153,12 @@ public class ResourceServiceImpl implements IResourceService {
     }
 
     /**
-     * 
+     * @param @param  resource
+     * @param @return 参数
+     * @return Result 返回类型
      * @Title: delete
      * @author ly
      * @Description:删除菜单信息
-     * @param @param resource
-     * @param @return 参数
-     * @return Result 返回类型
      */
     @Override
     @Transactional(rollbackFor = Exception.class)

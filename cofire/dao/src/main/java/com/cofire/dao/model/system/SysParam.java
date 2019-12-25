@@ -5,43 +5,67 @@ import java.io.Serializable;
 /**
  * @数表名称 sys_param
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class SysParam implements Serializable {
-    /** 组号 (主健ID)(必填项) (无默认值) */
+    /**
+     * 组号 (主健ID)(必填项) (无默认值)
+     */
     private String groupId;
 
-    /** 参数id(必填项) (主健ID) (无默认值) */
+    /**
+     * 参数id(必填项) (主健ID) (无默认值)
+     */
     private String paramId;
 
-    /** 参数值(必填项)(必填项) (无默认值) */
+    /**
+     * 参数值(必填项)(必填项) (无默认值)
+     */
     private String paramValue;
 
-    /** 参数名(必填项)(必填项) (无默认值) */
+    /**
+     * 参数名(必填项)(必填项) (无默认值)
+     */
     private String paramName;
 
-    /** 是否可修改(必填项)(必填项) (无默认值) */
+    /**
+     * 是否可修改(必填项)(必填项) (无默认值)
+     */
     private String canDelete;
 
-    /** 备注 (无默认值) */
+    /**
+     * 备注 (无默认值)
+     */
     private String remark;
 
-    /** 最后修改人 (无默认值) */
+    /**
+     * 最后修改人 (无默认值)
+     */
     private String modifier;
 
-    /** 最后修改时间 (无默认值) */
+    /**
+     * 最后修改时间 (无默认值)
+     */
     private String modifyTime;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
-    /** 预留字段4 (无默认值) */
+    /**
+     * 预留字段4 (无默认值)
+     */
     private String filler4;
 
     private static final long serialVersionUID = 1L;

@@ -6,20 +6,16 @@ import java.util.Map;
 public interface SystemCustomMapper {
 
     /**
-     * 
+     * @return List<Map < String, String>> 返回类型
      * @Title: getSysparams
      * @Description:获取所有的系统参数
-     * @return
-     * @return List<Map<String,String>> 返回类型
      */
     List<Map<String, String>> getSysparamsList();
 
     /**
-     * 
+     * @return List<Map < String, String>> 返回类型
      * @Title: getDictList
      * @Description:获取所有的数据字典
-     * @return
-     * @return List<Map<String,String>> 返回类型
      */
     List<Map<String, String>> getDictList();
 }

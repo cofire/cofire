@@ -11,12 +11,10 @@ import org.springframework.stereotype.Repository;
 public interface UserPermissionCustomMapper {
 
     /**
-     *
+     * @param example
+     * @return List<UserPermissionCustom> 返回类型
      * @Title: selectByExample
      * @Description: 查询用户的权限
-     * @param example
-     * @return
-     * @return List<UserPermissionCustom> 返回类型
      */
     Set<String> getUserPermission(@Param("user_id") String p_userId);
 

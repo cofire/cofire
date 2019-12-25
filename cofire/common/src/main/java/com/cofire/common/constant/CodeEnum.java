@@ -1,13 +1,11 @@
 package com.cofire.common.constant;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: CodeEnum
  * @Description:返回码
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public enum CodeEnum {
 

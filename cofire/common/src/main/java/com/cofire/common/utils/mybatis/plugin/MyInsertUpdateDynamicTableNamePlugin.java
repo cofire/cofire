@@ -7,7 +7,6 @@
  * Package Name : com.zhongpin.zp.common.mybatis.plugin <br/>
  * Project Name : zp-common <br/>
  * Description : <br/>
- * 
  */
 
 package com.cofire.common.utils.mybatis.plugin;
@@ -25,7 +24,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  * Function : insert 与 update 方法的sql方法的动态表结构处理. <br/>
  * Reason : insert 与 update 方法的sql方法的动态表结构处理. <br/>
  * Date : 2017年1月13日 下午1:21:40 <br/>
- * 
+ *
  * @author : alexgaoyh <br/>
  * @version : 1.1 <br/>
  * @since : JDK 1.6 <br/>

@@ -9,13 +9,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: Application
  * @Description:启动类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @SpringBootApplication()
 @ServletComponentScan()

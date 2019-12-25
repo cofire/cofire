@@ -15,35 +15,43 @@ import com.cofire.common.utils.spring.SpringContextUtils;
 import com.cofire.dao.mapper.custom.SystemCustomMapper;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: SystemService
  * @Description: 系统参数管理（系统参数和数据字典）
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class SystemService {
     private final static Logger logger = LoggerFactory.getLogger(SystemService.class);
 
-    private final static SystemCustomMapper SYSTEM_CUSTOM_MAPPER = SpringContextUtils.getBean(SystemCustomMapper.class);;
+    private final static SystemCustomMapper SYSTEM_CUSTOM_MAPPER = SpringContextUtils.getBean(SystemCustomMapper.class);
+    ;
 
-    /** 系统参数列表 */
+    /**
+     * 系统参数列表
+     */
     private static List<Map<String, String>> sysParamList;
-    /** 系统参数Map */
+    /**
+     * 系统参数Map
+     */
     private static Map<String, Map<String, String>> sysParamMap = new HashMap<>();
-    /** 数据字典列表 */
+    /**
+     * 数据字典列表
+     */
     private static List<Map<String, String>> dictList = new ArrayList<Map<String, String>>();
-    /** 数据字典分组 */
+    /**
+     * 数据字典分组
+     */
     private static Map<String, List<Map<String, String>>> dictGroupMap = new HashMap<String, List<Map<String, String>>>();
-    /** 数据字典 */
+    /**
+     * 数据字典
+     */
     private static Map<String, Map<String, String>> dtDictMap = new HashMap<String, Map<String, String>>();
 
     /**
-     * 
+     * @return void 返回类型
      * @Title: initSysParam
      * @Description:初始化系统参数
-     * @return void 返回类型
      */
     public static void initSysParam() {
         logger.info("正在初始化系统参数");
@@ -66,10 +74,9 @@ public class SystemService {
     }
 
     /**
-     * 
+     * @return void 返回类型
      * @Title: initSysParam
      * @Description:初始化系统数据字典
-     * @return void 返回类型
      */
     public static void initSysDict() {
         logger.info("正在初始化数据字典");
@@ -95,12 +102,11 @@ public class SystemService {
     }
 
     /**
-     * 
+     * @param 参数
+     * @return void 返回类型
      * @Title: initRerurnCode
      * @author ly
      * @Description:
-     * @param 参数
-     * @return void 返回类型
      */
     public static void initRerurnCode() {
         logger.info("正在初始化返回码");

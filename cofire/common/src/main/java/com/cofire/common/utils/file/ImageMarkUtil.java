@@ -46,8 +46,8 @@ public class ImageMarkUtil {
 
     /**
      * 给图片添加水印文字
-     * 
-     * @param logoText 水印文字
+     *
+     * @param logoText   水印文字
      * @param srcImgPath 源图片路径
      * @param targerPath 目标图片路径
      */
@@ -57,7 +57,7 @@ public class ImageMarkUtil {
 
     /**
      * 给图片添加水印文字、可设置水印文字的旋转角度
-     * 
+     *
      * @param logoText
      * @param srcImgPath
      * @param targerPath

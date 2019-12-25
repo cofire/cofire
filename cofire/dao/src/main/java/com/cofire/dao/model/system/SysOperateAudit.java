@@ -5,52 +5,82 @@ import java.io.Serializable;
 /**
  * @数表名称 sys_operate_audit
  * @开发日期 2019-12-20
- * @开发作者 by:ly 
+ * @开发作者 by:ly
  */
 public class SysOperateAudit implements Serializable {
-    /** 自增id (主健ID) (无默认值) */
+    /**
+     * 自增id (主健ID) (无默认值)
+     */
     private Long sid;
 
-    /** 登录的用户id (无默认值) */
+    /**
+     * 登录的用户id (无默认值)
+     */
     private String userId;
 
-    /** 请求ip地址 (无默认值) */
+    /**
+     * 请求ip地址 (无默认值)
+     */
     private String ip;
 
-    /** sessionid (无默认值) */
+    /**
+     * sessionid (无默认值)
+     */
     private String sessionId;
 
-    /** 方法描述 (无默认值) */
+    /**
+     * 方法描述 (无默认值)
+     */
     private String description;
 
-    /** 请求的url (无默认值) */
+    /**
+     * 请求的url (无默认值)
+     */
     private String requestUrl;
 
-    /** 请求参数 (无默认值) */
+    /**
+     * 请求参数 (无默认值)
+     */
     private String requestParam;
 
-    /** 请求发生时间 (无默认值) */
+    /**
+     * 请求发生时间 (无默认值)
+     */
     private String requestTime;
 
-    /** 返回结果 (无默认值) */
+    /**
+     * 返回结果 (无默认值)
+     */
     private String result;
 
-    /** 接口调用返回时间 (无默认值) */
+    /**
+     * 接口调用返回时间 (无默认值)
+     */
     private String returnTime;
 
-    /** 来源类型 (无默认值) */
+    /**
+     * 来源类型 (无默认值)
+     */
     private String sourceType;
 
-    /** 操作类型 (无默认值) */
+    /**
+     * 操作类型 (无默认值)
+     */
     private String operationType;
 
-    /** 预留字段1 (无默认值) */
+    /**
+     * 预留字段1 (无默认值)
+     */
     private String filler1;
 
-    /** 预留字段2 (无默认值) */
+    /**
+     * 预留字段2 (无默认值)
+     */
     private String filler2;
 
-    /** 预留字段3 (无默认值) */
+    /**
+     * 预留字段3 (无默认值)
+     */
     private String filler3;
 
     private static final long serialVersionUID = 1L;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cofire.dao.mapper.system.impl.SysRoleMapperImpl">
-    <select id="getRoleLeafResource" parameterType="java.util.HashMap" resultMap="com.cofire.dao.mapper.system.SysRoleResourceMapper.BaseResultMap">
+    <select id="getRoleLeafResource" parameterType="java.util.HashMap"
+            resultMap="com.cofire.dao.mapper.system.SysRoleResourceMapper.BaseResultMap">
         SELECT
         'true' AS QUERYID,
         role_id,

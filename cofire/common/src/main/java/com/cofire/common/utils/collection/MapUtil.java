@@ -8,20 +8,18 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: MapUtil
  * @Description:Map 工具类
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 public class MapUtil {
     private static final int CHINESE_LEN = 3;
 
     /**
      * 特定格式的List转Map
-     * 
+     *
      * @param dtList
      * @param keyStr
      * @return
@@ -37,13 +35,11 @@ public class MapUtil {
     }
 
     /**
-     * 
-     * @Title: listGrouping2Map
-     * @Description:listmap分组
      * @param dtList
      * @param keyStr
-     * @return
-     * @return Map<String,Map<String,String>> 返回类型
+     * @return Map<String, Map < String, String>> 返回类型
+     * @Title: listGrouping2Map
+     * @Description:listmap分组
      */
     public static Map<String, List<Map<String, String>>> listGroup2Map(List<Map<String, String>> dtList, String keyStr) {
         Map<String, List<Map<String, String>>> resultMap = new HashMap<String, List<Map<String, String>>>(10);
@@ -62,9 +58,8 @@ public class MapUtil {
     }
 
     /**
-     * 
      * @Title: mapKeyCheck @Description: TODO(检查Map中的某Key值是否为空) @param @param map @param @param key @param @return
-     *         设定文件 @return boolean 返回类型 @throws
+     * 设定文件 @return boolean 返回类型 @throws
      */
     public static boolean mapKeyCheck(Map map, String key) {
         if (map.containsKey(key) && map.get(key) != null && !"".equals(map.get(key).toString())) {
@@ -76,7 +71,7 @@ public class MapUtil {
 
     /**
      * 返回map中某key的长度
-     * 
+     *
      * @param map
      * @param key
      * @return

@@ -8,13 +8,11 @@ import com.cofire.common.constant.CodeEnum;
 import com.cofire.common.result.Result;
 
 /**
- * 
+ * @author ly
+ * @version V1.0
  * @ClassName: GlobalExceptionHandler
  * @Description:全局异常捕获
- * @author ly
  * @date 2019年12月4日
- *
- * @version V1.0
  */
 @ControllerAdvice
 @ResponseBody
