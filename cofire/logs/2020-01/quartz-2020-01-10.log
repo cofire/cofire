@@ -1,0 +1,6 @@
+2020-01-10 16:56:22.615 INFO  --- [QuartzJobConfig.java:37][localhost-startStop-1] - 准备注册定时任务
+2020-01-10 16:56:22.654 INFO  --- [QuartzJobConfig.java:42][localhost-startStop-1] - 总共有0个定时任务
+2020-01-10 16:56:22.655 INFO  --- [QuartzJobConfig.java:62][localhost-startStop-1] - Quartz任务注册成功
+2020-01-10 16:57:49.392 INFO  --- [QuartzJobConfig.java:37][localhost-startStop-1] - 准备注册定时任务
+2020-01-10 16:57:49.455 INFO  --- [QuartzJobConfig.java:42][localhost-startStop-1] - 总共有0个定时任务
+2020-01-10 16:57:49.455 INFO  --- [QuartzJobConfig.java:62][localhost-startStop-1] - Quartz任务注册成功

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cofire.common.utils.context.HttpUtil;
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.excel.ExcelWriter;
@@ -14,8 +15,11 @@ import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.cofire.common.utils.string.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EasyExcelUtils {
+    private final static Logger logger = LoggerFactory.getLogger(EasyExcelUtils.class);
     /**
      * @param @param  response
      * @param @param  clazz
@@ -51,7 +55,7 @@ public class EasyExcelUtils {
                 out.flush();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             response.sendRedirect("/error/exportError");
         }
     }

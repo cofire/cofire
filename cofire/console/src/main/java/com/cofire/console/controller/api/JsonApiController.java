@@ -27,7 +27,7 @@ public class JsonApiController {
 
     @BussinessLog("测试")
     @RequestMapping("/test")
-    public Result test(HttpRequest request, @RequestBody Person person) {
+    public Result test(@RequestBody Person person) {
         Result result = new Result();
         result.setData(person);
         return result;

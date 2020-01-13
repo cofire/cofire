@@ -29,7 +29,7 @@ public class LogManager {
     private LogManager() {
     }
 
-    public static LogManager logManager = new LogManager();
+    private final static LogManager logManager = new LogManager();
 
     public static LogManager me() {
         return logManager;

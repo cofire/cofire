@@ -58,10 +58,10 @@ public class HttpUtil {
                 result = sbf.toString();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             logger.error("请求失败：" + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             logger.error("请求失败：" + e.getMessage());
         } finally {
             // 关闭资源
@@ -69,7 +69,7 @@ public class HttpUtil {
                 try {
                     br.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("error:", e);
                 }
             }
 
@@ -77,7 +77,7 @@ public class HttpUtil {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("error:", e);
                 }
             }
 
@@ -143,10 +143,10 @@ public class HttpUtil {
                 result = sbf.toString();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             logger.error("请求失败：" + e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             logger.error("请求失败：" + e.getMessage());
         } finally {
             // 关闭资源
@@ -154,21 +154,21 @@ public class HttpUtil {
                 try {
                     br.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("error:", e);
                 }
             }
             if (null != os) {
                 try {
                     os.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("error:", e);
                 }
             }
             if (null != is) {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("error:", e);
                 }
             }
             // 断开与远程地址url的连接
@@ -225,7 +225,7 @@ public class HttpUtil {
                 result += line;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("error:", e);
             logger.error("请求失败：" + e.getMessage());
         }
         // 使用finally块来关闭输出流、输入流

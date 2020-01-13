@@ -83,11 +83,11 @@ public class BeanUtil {
             bean = class1.newInstance();
             BeanUtils.populate(bean, map);
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            logger.error(e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.error(e);
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return bean;
     }
@@ -118,7 +118,7 @@ public class BeanUtil {
             cloneObj = (T) ois.readObject();
             ois.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         return cloneObj;
     }

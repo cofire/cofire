@@ -81,7 +81,7 @@ public class ResourceServiceImpl implements IResourceService {
             result.setData(resourceTreeList);
         } catch (Exception e) {
             logger.error("查询菜单信息失败：" + e.getMessage());
-            e.printStackTrace();
+            logger.error("error:", e);
             result.setMessage("系统错误");
             result.setSuccess(true, CodeEnum.E_500);
             return result;
@@ -103,7 +103,7 @@ public class ResourceServiceImpl implements IResourceService {
             }
         } catch (IllegalAccessException e) {
             logger.error("参数校验失败, {}", e.getMessage());
-            e.printStackTrace();
+            logger.error("error:", e);
             result.setSuccess(false, CodeEnum.E_500);
             return result;
         }

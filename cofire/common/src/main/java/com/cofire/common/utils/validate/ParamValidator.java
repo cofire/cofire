@@ -2,9 +2,11 @@ package com.cofire.common.utils.validate;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
@@ -51,8 +53,11 @@ public class ParamValidator {
         Class<?> paramObjClass = paramObj.getClass();
         Field[] fields = paramObjClass.getDeclaredFields();
         List<String> checkPropList = (checkProperties != null) ? Arrays.asList(checkProperties) : null;
+        if (CollectionUtils.isEmpty(checkPropList)) {
+            return false;
+        }
         for (Field field : fields) {
-            if (checkPropList.contains(field)) {
+            if (checkPropList.contains(field.getName())) {
                 // 该方法可以访问被private修饰的字段的value值
                 field.setAccessible(true);
                 if (Objects.isNull(field.get(paramObjClass))) {

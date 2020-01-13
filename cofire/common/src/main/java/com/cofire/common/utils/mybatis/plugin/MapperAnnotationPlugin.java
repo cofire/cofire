@@ -81,7 +81,6 @@ public class MapperAnnotationPlugin extends PluginAdapter {
      * @param introspectedTable
      * @return
      */
-    @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         for (String annotation : this.annotations) {
             if (annotation.equals("@Mapper")) {

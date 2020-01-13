@@ -70,7 +70,6 @@ public class ImageMarkUtil {
         if (null == suffix) {
             suffix = "jpg";
         }
-        InputStream is = null;
         OutputStream os = null;
         try {
             // 源图片
@@ -118,13 +117,6 @@ public class ImageMarkUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (null != is) {
-                    is.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             try {
                 if (null != os) {
                     os.close();

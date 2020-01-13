@@ -20,6 +20,7 @@ import org.mybatis.generator.internal.util.StringUtility;
  */
 public class RemarksCommentGenerator extends DefaultCommentGenerator {
 
+    @Override
     public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * @数表名称 " + introspectedTable.getFullyQualifiedTable());

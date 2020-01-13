@@ -52,13 +52,15 @@ public class HttpContext {
     }
 
     /**
-     * @param request
      * @return String 返回类型
      * @Title: getIpAddr
      * @Description:获取请求的ip
      */
     public static String getClientIp() {
         HttpServletRequest request = HttpContext.getRequest();
+        if (request == null) {
+            return "";
+        }
         String ipAddress = null;
         ipAddress = request.getHeader(X_FORWARDED_FOR);
         if (ipAddress == null || ipAddress.length() == 0 || UNKNOW.equalsIgnoreCase(ipAddress)) {
@@ -76,6 +78,9 @@ public class HttpContext {
                     inet = InetAddress.getLocalHost();
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
+                }
+                if (inet == null) {
+                    return "";
                 }
                 ipAddress = inet.getHostAddress();
             }
@@ -118,6 +123,9 @@ public class HttpContext {
      */
     public static String getRequestUri() {
         HttpServletRequest request = HttpContext.getRequest();
+        if (request == null) {
+            return "";
+        }
         return request.getRequestURI();
     }
 
@@ -146,13 +154,13 @@ public class HttpContext {
                 || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_TEXT_JSON)
                 || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_JSON_N)
                 || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_TEXT_JSON_N)) {
-
+            BufferedReader streamReader = null;
             try {
                 String charEncoding = request.getCharacterEncoding();
                 if (charEncoding == null) {
                     charEncoding = "UTF-8";
                 }
-                BufferedReader streamReader = new BufferedReader(new InputStreamReader(request.getInputStream(), charEncoding));
+                streamReader = new BufferedReader(new InputStreamReader(request.getInputStream(), charEncoding));
                 StringBuilder responseStrBuilder = new StringBuilder();
                 String inputStr;
                 while ((inputStr = streamReader.readLine()) != null) {
@@ -160,11 +168,17 @@ public class HttpContext {
                 }
                 values = (HashMap<String, String>) JSON.parseObject(responseStrBuilder.toString(), Map.class);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("error:", e);
+            } finally {
+                try {
+                    if (streamReader != null) {
+                        streamReader.close();
+                    }
+                } catch (Exception e) {
+                    logger.error("error:", e);
+                }
             }
-
         }
-        System.out.println(values);
         return values;
     }
 

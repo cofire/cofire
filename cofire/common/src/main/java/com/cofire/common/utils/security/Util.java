@@ -54,12 +54,21 @@ public class Util {
 
     // 字串寫入二進制文件
     public static void saveToFile(String strString, String strFile) {
+        FileOutputStream file = null;
         try {
-            FileOutputStream file = new FileOutputStream(strFile);
+            file = new FileOutputStream(strFile);
             file.write(strString.getBytes());
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (file != null) {
+                    file.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -182,14 +191,15 @@ public class Util {
         if (file.exists()) {
             file.delete();
         }
-
+        ZipOutputStream out = null;
+        FileInputStream in = null;
         try {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipToFile));
+            out = new ZipOutputStream(new FileOutputStream(zipToFile));
 
             // Compress the files
             for (int i = 0; i < files.length; i++) {
                 if (new File(files[i]).exists()) {
-                    FileInputStream in = new FileInputStream(files[i]);
+                    in = new FileInputStream(files[i]);
 
                     // Add ZIP entry to output stream.
                     out.putNextEntry(new ZipEntry(getFileName(files[i])));
@@ -213,6 +223,21 @@ public class Util {
         } catch (IOException e) {
             logger.debug(e.getMessage(), e);
             return "";
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

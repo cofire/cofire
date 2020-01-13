@@ -136,7 +136,7 @@ public class UserServiceImpl implements IUserService {
             }
         } catch (IllegalAccessException e) {
             logger.error("参数校验失败, {}", e.getMessage());
-            e.printStackTrace();
+            logger.error("error:", e);
             result.setSuccess(false, CodeEnum.E_500);
             return result;
         }

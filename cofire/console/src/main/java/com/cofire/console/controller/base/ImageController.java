@@ -129,6 +129,7 @@ public class ImageController {
         FileInputStream inputStream = new FileInputStream(file);
         byte[] bytes = new byte[inputStream.available()];
         inputStream.read(bytes, 0, inputStream.available());
+        inputStream.close();
         return bytes;
     }
 }

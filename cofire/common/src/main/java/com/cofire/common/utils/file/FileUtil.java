@@ -17,7 +17,7 @@ public class FileUtil {
     /**
      * 常用图片格式
      */
-    public static final String[] PIC_SUFFIX = {"bmp", "jpg", "jpeg", "png"};
+    private static final String[] PIC_SUFFIX = {"bmp", "jpg", "jpeg", "png"};
 
     public static final String FILE_SPLITTER = ".";
 
@@ -93,12 +93,7 @@ public class FileUtil {
             return;
         }
         File file = new File(filePath);
-        if (file.exists() && file.isFile()) {
-            file.delete();
-        } else {
-            return;
-        }
-        return;
+        file.delete();
     }
 
     /**
