@@ -19,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSON;
 import com.cofire.common.constant.Constants;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 /**
  * @author ly

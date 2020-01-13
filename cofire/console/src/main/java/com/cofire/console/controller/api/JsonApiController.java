@@ -1,10 +1,12 @@
 package com.cofire.console.controller.api;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cofire.common.utils.context.HttpHelper;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,32 +29,11 @@ public class JsonApiController {
 
     @BussinessLog("测试")
     @RequestMapping("/test")
-    public Result test(@RequestBody Person person) {
+    public Result test(@RequestBody Person person) throws IOException {
         Result result = new Result();
         result.setData(person);
         return result;
     }
-
-    @RequestMapping("/test2")
-    String request(HttpServletRequest request, HttpServletResponse response) {
-        String param = null;
-        // try {
-        // BufferedReader streamReader = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        // StringBuilder responseStrBuilder = new StringBuilder();
-        // String inputStr;
-        // while ((inputStr = streamReader.readLine()) != null)
-        // responseStrBuilder.append(inputStr);
-        //
-        // JSONObject jsonObject = JSONObject.parseObject(responseStrBuilder.toString());
-        // param = jsonObject.toJSONString();
-        // System.out.println(param);
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        HttpContext.getRequestParameters();
-        return param;
-    }
-
 }
 
 class Person {
