@@ -6,13 +6,10 @@
         <groupId>com.cofire</groupId>
         <artifactId>cofire</artifactId>
         <version>0.0.1</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>dao</artifactId>
     <name>dao</name>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -22,10 +19,11 @@
         <dependency>
             <groupId>com.cofire</groupId>
             <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
     <build>
+        <finalName>dao</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -53,7 +51,7 @@
                     <dependency>
                         <groupId>com.cofire</groupId>
                         <artifactId>common</artifactId>
-                        <version>0.0.1-SNAPSHOT</version>
+                        <version>0.0.1</version>
                     </dependency>
                 </dependencies>
             </plugin>

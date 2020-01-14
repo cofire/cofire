@@ -144,7 +144,7 @@ org.apache.catalina.LifecycleException: Failed to start component [Connector[HTT
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:333)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1277)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1265)
-	at com.cofire.console.Application.main(Application.java:25)
+	at com.cofire.crawel.Application.main(Application.java:25)
 Caused by: org.apache.catalina.LifecycleException: Protocol handler start failed
 	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1020)
 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)

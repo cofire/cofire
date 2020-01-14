@@ -6,12 +6,10 @@
         <groupId>com.cofire</groupId>
         <artifactId>cofire</artifactId>
         <version>0.0.1</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>quartz</artifactId>
     <name>quartz</name>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
     <description>Demo project for Spring Boot</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,12 +24,10 @@
         <dependency>
             <groupId>com.cofire</groupId>
             <artifactId>dao</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.cofire</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>cofire-quartz</finalName>
+    </build>
 </project>

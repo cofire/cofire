@@ -1,7 +1,6 @@
 package com.cofire.console.config.log;
 
 import com.cofire.common.constant.Constants;
-import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 

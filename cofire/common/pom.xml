@@ -6,13 +6,10 @@
         <groupId>com.cofire</groupId>
         <artifactId>cofire</artifactId>
         <version>0.0.1</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>common</artifactId>
     <name>common</name>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -76,4 +73,7 @@
             <version>3.3.3</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>cofire-common</finalName>
+    </build>
 </project>

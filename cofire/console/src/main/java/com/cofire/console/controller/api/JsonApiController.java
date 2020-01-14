@@ -3,17 +3,11 @@ package com.cofire.console.controller.api;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.cofire.common.utils.context.HttpHelper;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cofire.common.result.Result;
-import com.cofire.common.utils.context.HttpContext;
 import com.cofire.console.config.log.BussinessLog;
 
 /**
