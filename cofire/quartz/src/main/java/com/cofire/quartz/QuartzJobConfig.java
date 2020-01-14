@@ -103,8 +103,10 @@ public class QuartzJobConfig {
         String cronExpression = null;
 
         // CronExpression格式：秒 分钟 小时 天数 月 星期 年份 详细说明 http://www.iteye.com/topic/582119
-        String flag = "*"; // 表示所有值 不适用表达星期
-        String replaceFlag = "?"; // ? 号只能用在日和周域上，但是不能在这两个域上同时使用。
+        // 表示所有值 不适用表达星期
+        String flag = "*";
+        // ? 号只能用在日和周域上，但是不能在这两个域上同时使用。
+        String replaceFlag = "?";
 
         String year = job.getYear();
         String month = job.getMonth();
@@ -113,10 +115,10 @@ public class QuartzJobConfig {
         String hour = job.getHour();
         String minute = job.getMinute();
         String second = job.getSecond();
-
+        // 替换星期字符域
         if (week == flag) {
             week = replaceFlag;
-        } // 替换星期字符域
+        }
 
         // 如果星期字符域有数据，日期字符域替换为replaceFlag"?"
         if (!(day == flag || day == replaceFlag)) {

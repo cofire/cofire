@@ -29,12 +29,10 @@ public class QuartzJobBusiness extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 
         // 判断一下本机ip是多少，只在测试服务器和开发服务器上运行quartzjob
-        InetAddress ia = null;
-        String localname = null;
         String localip = null;
         try {
-            ia = ia.getLocalHost();
-            localname = ia.getHostName();
+            InetAddress ia = InetAddress.getLocalHost();
+            String localname = ia.getHostName();
             localip = ia.getHostAddress();
             logger.info("本机名称是：" + localname);
             logger.info("本机的ip是 ：" + localip);

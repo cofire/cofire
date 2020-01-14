@@ -17,20 +17,20 @@ import com.cofire.shiro.service.IUserPermissionService;
 public class UserPermissionServiceImpl implements IUserPermissionService {
 
     @Autowired
-    private SysUserMapper c_userMapper;
+    private SysUserMapper userMapper;
     @Autowired
-    private UserPermissionCustomMapper c_userPermissionCustomMapper;
+    private UserPermissionCustomMapper userPermissionCustomMapper;
 
     /**
      * 验证用户的账户密码
      */
     @Override
-    public SysUser getUserByIdAndPwd(String p_id, String p_password) {
-        SysUserExample m_example = new SysUserExample();
-        SysUserExample.Criteria m_criteria = m_example.createCriteria();
-        m_criteria.andUserIdEqualTo(p_id);
-        m_criteria.andPassWordEqualTo(p_password);
-        List<SysUser> m_userList = c_userMapper.selectByExample(m_example);
+    public SysUser getUserByIdAndPwd(String id, String password) {
+        SysUserExample example = new SysUserExample();
+        SysUserExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(id);
+        criteria.andPassWordEqualTo(password);
+        List<SysUser> m_userList = userMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(m_userList)) {
             return m_userList.get(0);
         }
@@ -43,8 +43,8 @@ public class UserPermissionServiceImpl implements IUserPermissionService {
      * @Description:获取用户权限
      */
     @Override
-    public Set<String> getUserPermission(String p_userId) {
-        Set<String> userPermission = c_userPermissionCustomMapper.getUserPermission(p_userId);
+    public Set<String> getUserPermission(String userId) {
+        Set<String> userPermission = userPermissionCustomMapper.getUserPermission(userId);
         userPermission.remove(null);
         userPermission.remove("");
         return userPermission;

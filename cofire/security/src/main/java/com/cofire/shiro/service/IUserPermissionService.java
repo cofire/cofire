@@ -7,5 +7,5 @@ import com.cofire.dao.model.system.SysUser;
 public interface IUserPermissionService {
     SysUser getUserByIdAndPwd(String id, String password);
 
-    Set<String> getUserPermission(String p_userId);
+    Set<String> getUserPermission(String userId);
 }
