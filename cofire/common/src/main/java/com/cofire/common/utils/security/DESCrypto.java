@@ -487,6 +487,7 @@ public class DESCrypto {
         String key = "admin";
         String passwd = "393fe4caa7d797d48ba15dd4549cfba3";
         System.out.println("解密：" + JS3DESEncryption(key, passwd));
+        System.out.println("测试");
 
     }
 
