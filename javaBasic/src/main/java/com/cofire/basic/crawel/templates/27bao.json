@@ -1,0 +1,48 @@
+{
+  "title": "27报",
+  "baseUrl": "https://www.27bao.com/",
+  "remark": "采集所有图片信息",
+  "table": "",
+  "pageHref": {
+    "rule": ""
+  },
+  "parentCssPath": ".img li",
+  "templateFieldList": [
+    {
+      "templateField": "title",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "a",
+        "templateMethod": {
+          "name": "text",
+          "param": ""
+        }
+      }
+    },
+    {
+      "templateField": "href",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "a",
+        "templateMethod": {
+          "name": "attr",
+          "param": "href"
+        }
+      }
+    },
+    {
+      "templateField": "preview",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "img",
+        "templateMethod": {
+          "name": "attr",
+          "param": "src"
+        }
+      }
+    }
+  ]
+}

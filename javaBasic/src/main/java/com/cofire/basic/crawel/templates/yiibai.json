@@ -1,0 +1,43 @@
+{
+  "title": "易百教程",
+  "baseUrl": "https://www.yiibai.com/",
+  "remark": "采集所有课程信息",
+  "table": "",
+  "pageHref": {
+    "rule": ""
+  },
+  "parentCssPath": ".xoxo li",
+  "templateFieldList": [
+    {
+      "templateField": "title",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "a",
+        "templateMethod": {
+          "name": "text",
+          "param": ""
+        }
+      }
+    },
+    {
+      "templateField": "href",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "a",
+        "templateMethod": {
+          "name": "attr",
+          "param": "href"
+        }
+      }
+    },
+    {
+      "templateField": "preview",
+      "templateMethod": {
+        "type": "Element",
+        "name": "ownText"
+      }
+    }
+  ]
+}
