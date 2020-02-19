@@ -2,6 +2,7 @@
   "title": "妹子图",
   "baseUrl": "https://www.mzitu.com/",
   "startUrl": "https://www.mzitu.com/",
+  "basePath": "D:\\data\\spider",
   "remark": "采集所有图片信息",
   "table": "",
   "pageHref": {
@@ -12,7 +13,6 @@
     {
       "templateField": "title",
       "templateMethod": {
-        "type": "Elements",
         "name": "getElementsByTag",
         "param": "a",
         "templateMethod": {
@@ -24,7 +24,6 @@
     {
       "templateField": "href",
       "templateMethod": {
-        "type": "Elements",
         "name": "getElementsByTag",
         "param": "a",
         "templateMethod": {
@@ -36,7 +35,6 @@
     {
       "templateField": "preview",
       "templateMethod": {
-        "type": "Elements",
         "name": "getElementsByTag",
         "param": "img",
         "templateMethod": {
@@ -47,8 +45,8 @@
     },
     {
       "templateField": "path",
+      "fieldType": "file",
       "templateMethod": {
-        "type": "Elements",
         "name": "getElementsByTag",
         "param": "img",
         "templateMethod": {

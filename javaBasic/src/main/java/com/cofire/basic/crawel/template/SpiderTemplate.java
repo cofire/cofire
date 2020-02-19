@@ -13,7 +13,9 @@ public class SpiderTemplate {
     //    网站基础连接
     private String baseUrl;
     //   爬虫入口地址
-    private String StartUrl;
+    private String startUrl;
+    //  文件保存基础路径
+    private String basePath;
     //    备注说明
     private String remark;
     //    对应数据库表名
@@ -42,11 +44,19 @@ public class SpiderTemplate {
     }
 
     public String getStartUrl() {
-        return StartUrl;
+        return startUrl;
     }
 
     public void setStartUrl(String startUrl) {
-        StartUrl = startUrl;
+        this.startUrl = startUrl;
+    }
+
+    public String getBasePath() {
+        return basePath;
+    }
+
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
     }
 
     public String getRemark() {

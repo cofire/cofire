@@ -1,5 +1,6 @@
 package com.cofire.basic.crawel.core;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cofire.basic.crawel.template.SpiderTemplate;
 import com.cofire.basic.crawel.template.TemplateField;
 import org.jsoup.Jsoup;
@@ -34,15 +35,18 @@ public class SpiderEngine {
         try {
             Document document = Jsoup.connect(spiderTemplate.getStartUrl()).get();
             Elements contentList = document.select(spiderTemplate.getParentCssPath());
-            List<HashMap<String, String>> resultMap = new ArrayList<>();
+            List<HashMap<String, String>> resultMapList = new ArrayList<>();
+            HashMap resultMap = new HashMap();
             for (Element content : contentList) {
                 HashMap<String, String> map = new HashMap<>();
                 for (TemplateField field : spiderTemplate.getTemplateFieldList()) {
-                    map.put(field.getTemplateField(), DefaultParser.getElementValue(content, field.getTemplateMethod()));
+                    map.put(field.getTemplateField(), DefaultParser.getElementValue(content,
+                            field.getFieldType(), field.getTemplateMethod()));
                 }
-                resultMap.add(map);
+                resultMapList.add(map);
             }
-            System.out.println(resultMap);
+            resultMap.put("result", resultMapList);
+            System.out.println(new JSONObject(resultMap));
         } catch (IOException e) {
             e.printStackTrace();
         }

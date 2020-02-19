@@ -1,6 +1,8 @@
 {
   "title": "27报",
   "baseUrl": "https://www.27bao.com/",
+  "startUrl": "https://www.27bao.com/",
+  "basePath": "D:\\data\\spider",
   "remark": "采集所有图片信息",
   "table": "",
   "pageHref": {
@@ -34,6 +36,19 @@
     },
     {
       "templateField": "preview",
+      "templateMethod": {
+        "type": "Elements",
+        "name": "getElementsByTag",
+        "param": "img",
+        "templateMethod": {
+          "name": "attr",
+          "param": "src"
+        }
+      }
+    },
+    {
+      "templateField": "path",
+      "fieldType": "file",
       "templateMethod": {
         "type": "Elements",
         "name": "getElementsByTag",

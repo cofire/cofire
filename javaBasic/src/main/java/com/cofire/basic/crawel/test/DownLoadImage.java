@@ -14,12 +14,14 @@ import java.io.IOException;
  **/
 public class DownLoadImage {
     public static void main(String[] args) throws IOException {
-        String imageSrc = "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+        String imageSrc = "https://p3.pstatp.com/large/pgc-image/873fd02ea8304a8eb7549d1dd13afce0";
         Connection.Response response = Jsoup.connect(imageSrc).ignoreContentType(true).userAgent("Mozilla/5.0 " +
                 "(Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.15)").timeout(5000).execute();
-        ;
         byte[] img = response.bodyAsBytes();
         System.out.println(img.length);
-        FileCopyUtils.copy(img, new FileOutputStream("D:\\data\\test.png"));
+        System.out.println(response.contentType());
+        FileCopyUtils.copy(img, new FileOutputStream("D:\\data\\test"));
+
+
     }
 }

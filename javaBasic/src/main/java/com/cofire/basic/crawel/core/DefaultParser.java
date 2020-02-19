@@ -13,6 +13,20 @@ import java.lang.reflect.Method;
  **/
 public class DefaultParser {
 
+    /**
+     * 根据字段类型不同返回不一样的内容
+     * 字段类型为文件时，将返回文件下载后的相对路径
+     * 其他类型返回处理后的文本
+     **/
+    public static <T> String getElementValue(T element, String fieldType, TemplateMethod templateMethod) {
+        if (SpiderConstants.FieldTypeEnum.FILE.getCode().equalsIgnoreCase(fieldType)) {
+
+            String fileUrl = getElementValue(element, templateMethod);
+            return FileDownLoad.downLoad(fileUrl, "");
+        }
+        return getElementValue(element, templateMethod);
+    }
+
     //    获取元素的值
     public static <T> String getElementValue(T element, TemplateMethod templateMethod) {
         try {
