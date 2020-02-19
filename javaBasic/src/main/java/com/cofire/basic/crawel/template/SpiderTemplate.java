@@ -10,8 +10,10 @@ import java.util.List;
 public class SpiderTemplate {
     //    模板标题
     private String title;
-    //    起始连接
+    //    网站基础连接
     private String baseUrl;
+    //   爬虫入口地址
+    private String StartUrl;
     //    备注说明
     private String remark;
     //    对应数据库表名
@@ -37,6 +39,14 @@ public class SpiderTemplate {
 
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
+    }
+
+    public String getStartUrl() {
+        return StartUrl;
+    }
+
+    public void setStartUrl(String startUrl) {
+        StartUrl = startUrl;
     }
 
     public String getRemark() {

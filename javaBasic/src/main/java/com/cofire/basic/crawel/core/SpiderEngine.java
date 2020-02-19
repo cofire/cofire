@@ -32,7 +32,7 @@ public class SpiderEngine {
         log.info("开始爬取{}", spiderTemplate.getTitle());
         List<TemplateField> templateFieldList = spiderTemplate.getTemplateFieldList();
         try {
-            Document document = Jsoup.connect(spiderTemplate.getBaseUrl()).get();
+            Document document = Jsoup.connect(spiderTemplate.getStartUrl()).get();
             Elements contentList = document.select(spiderTemplate.getParentCssPath());
             List<HashMap<String, String>> resultMap = new ArrayList<>();
             for (Element content : contentList) {

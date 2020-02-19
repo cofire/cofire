@@ -11,7 +11,7 @@ import com.cofire.basic.crawel.template.SpiderTemplate;
  **/
 public class MzituSpider {
 
-    public static final String TEMPLATE_PATH = "src/main/java/com/cofire/basic/crawel/templates/yiibai.json";
+    public static final String TEMPLATE_PATH = "src/main/java/com/cofire/basic/crawel/templates/mzitu.json";
 
     public static void main(String[] args) {
         SpiderTemplate template = LoadTemplate.load(TEMPLATE_PATH);

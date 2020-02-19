@@ -1,5 +1,15 @@
 package com.cofire.common.utils.context;
 
+import com.alibaba.fastjson.JSON;
+import com.cofire.common.constant.Constants;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,19 +17,6 @@ import java.net.InetAddress;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.alibaba.fastjson.JSON;
-import com.cofire.common.constant.Constants;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 
 /**
  * @author ly
@@ -140,8 +137,11 @@ public class HttpContext {
         if (request == null) {
             return values;
         }
-        String contentType = request.getContentType().trim();
-        contentType = contentType.replace(" ", "");
+        String contentType = null;
+        if (StringUtils.isNotEmpty(contentType = request.getContentType())) {
+            contentType = contentType.trim();
+            contentType = contentType.replace(" ", "");
+        }
         if (StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_FORM)
                 || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_FORM_N)) {
             Enumeration<?> enums = request.getParameterNames();
