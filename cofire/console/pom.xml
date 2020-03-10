@@ -94,7 +94,7 @@
                 <version>2.2.2.RELEASE</version>
                 <configuration>
                     <!--    指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.cofire.crawel.Application</mainClass>
+                    <mainClass>com.cofire.console.Application</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
