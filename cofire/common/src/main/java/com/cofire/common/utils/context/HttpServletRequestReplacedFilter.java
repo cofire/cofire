@@ -22,7 +22,10 @@ public class HttpServletRequestReplacedFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         ServletRequest requestWrapper = null;
-        String contentType = request.getContentType().trim();
+        String contentType = "";
+        if (StringUtils.isNotEmpty(request.getContentType())) {
+            contentType = request.getContentType().trim();
+        }
         if (request instanceof HttpServletRequest) {
             if (StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_JSON)
                     || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_TEXT_JSON)

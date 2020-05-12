@@ -1,13 +1,7 @@
 package com.cofire.console.interceptor;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.Enumeration;
-
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.cofire.common.constant.Constants;
+import com.cofire.common.utils.context.HttpContext;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -17,8 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cofire.common.constant.Constants;
-import com.cofire.common.utils.context.HttpContext;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.Enumeration;
 
 /**
  * @ClassName CommonInterceptor
@@ -37,8 +35,10 @@ public class CommonInterceptor implements AsyncHandlerInterceptor {
 
         logger.info("请求ip:{}", HttpContext.getIp());
         StringBuilder sb = new StringBuilder("请求地址为：").append(request.getRequestURI()).append(" 请求参数为：");
-
-        String contentType = request.getContentType().trim();
+        String contentType = "";
+        if (StringUtils.isNotEmpty(request.getContentType())) {
+            contentType = request.getContentType().trim();
+        }
         contentType = contentType.replace(" ", "");
         if (StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_FORM)
                 || StringUtils.equalsIgnoreCase(contentType, Constants.CONTENT_TYPE_FORM_N)) {
@@ -70,6 +70,8 @@ public class CommonInterceptor implements AsyncHandlerInterceptor {
             } catch (IOException e) {
                 logger.error("获取请求异常，{}", e.getMessage(), e);
             }
+        } else if (StringUtils.isEmpty(contentType)) {
+            return true;
         } else {
             logger.error("请求content-type设置错误，{}", contentType);
             throw new Exception("请求content-type设置错误");

@@ -1,10 +1,5 @@
 package com.cofire.shiro.config;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.Filter;
-
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -19,6 +14,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
+
+import javax.servlet.Filter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author ly
@@ -100,6 +99,16 @@ public class ShiroConfiguration {
         // 页面访问入口和静态资源
         filterChainDefinitionMap.put("/console", "anon");
         filterChainDefinitionMap.put("/console/static/**", "anon");
+
+        // swagger-ui.html
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/swagger-ui.html/**", "anon");
+        filterChainDefinitionMap.put("/swagger-resources", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/configuration/security", "anon");
+        filterChainDefinitionMap.put("/swagger-resources/configuration/ui", "anon");
+        filterChainDefinitionMap.put("/swagger-resource/**", "anon");
+        filterChainDefinitionMap.put("/v2/api-docs", "anon");
+        filterChainDefinitionMap.put("/webjars/springfox-swagger-ui/**", "anon");
 
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

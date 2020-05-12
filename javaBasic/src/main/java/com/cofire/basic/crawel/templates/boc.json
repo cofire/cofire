@@ -1,8 +1,0 @@
-{
-  "title": "中国银行信用卡信息采集",
-  "baseUrl": "https://apply.mcard.boc.cn/apply/pc/product/familyHappy/family?rp=200&page=1",
-  "remark": "",
-  "table": "",
-  "fieldList": {
-  }
-}
